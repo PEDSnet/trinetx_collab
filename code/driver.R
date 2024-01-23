@@ -1,5 +1,5 @@
 # Vector of additional packages to load before executing the request
-config_append('extra_packages', c('stringr', 'tidyr'))
+config_append('extra_packages', c('stringr', 'tidyr', 'purrr'))
 
 #' Execute the request
 #'
@@ -17,38 +17,37 @@ config_append('extra_packages', c('stringr', 'tidyr'))
 .run  <- function() {
 
     setup_pkgs() # Load runtime packages as specified above
-
-
-  site_list <- c('chop', 'colorado', 'cchmc', 'seattle', 'stanford', 'nemours',
-                 'nationwide', 'lurie')
+  
+  site_list <- c('chop', 'cchmc', 'colorado', 'nemours', 'nationwide', 'national',
+                 'seattle', 'stanford', 'lurie', 'texas')
   
   ## Coverage Overlap
-  
-  for(i in 1:length(site_list)){
     
-    message(paste0('Starting ', site_list[[i]]))
+  overlap_output <- check_coverage_overlap(fact_tbls = cohort_tbls)
     
-    config('site_filter', site_list[[i]])
-    
-    output <- check_coverage_overlap(fact_tbls = cohort_tbls)
-    
-    #output_tbl_append(output, 'coverage_overlap')
-  }
+  #output_tbl(overlap_output, 'coverage_overlap')
   
   ## Case Mix
   
+  casemix_list <- list()
+  
   for(i in 1:length(site_list)){
     
     message(paste0('Starting ', site_list[[i]]))
     
     config('site_filter', site_list[[i]])
     
-    output <- compute_case_mix(dx_tbl = site_cdm_tbl('condition_occurrence'))
+    casemix_output <- compute_case_mix(dx_tbl = site_cdm_tbl('condition_occurrence'))
     
-    #output_tbl_append(output, 'case_mix')
-    
+    casemix_list[[i]] <- casemix_output
   }
   
+  casemix_reduce <- purrr:reduce(.x = casemix_list,
+                                 .f = dplyr::union)
+  
+  casemix_final <- casemix_reduce %>% casemix_pp()
+  
+  #output_tbl(casemix_final, 'case_mix')
   
 
   # Write step summary log to CSV and/or database,
