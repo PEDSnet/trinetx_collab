@@ -24,7 +24,9 @@ config_append('extra_packages', c('stringr', 'tidyr', 'purrr'))
   source(paste0(base_dir, '/code/coverage_overlap_execute.R')) 
   overlap_output <- check_coverage_overlap(fact_tbls = cohort_tbls)
   
-  overlap_final <- trinetx_check_pp(dat = overlap_output, group = 'fact_group')
+  overlap_final <- trinetx_check_pp(dat = overlap_output, group = 'fact_group') %>%
+    select(site, fact_group, n_pts_site, n_pts_all, prop_pts_site, prop_pts_all,
+           total_pts_site, total_pts_all)
   
     
   #output_tbl(overlap_final, 'coverage_overlap')
