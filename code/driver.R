@@ -49,8 +49,8 @@ config_append('extra_packages', c('stringr', 'tidyr', 'purrr'))
     casemix_list[[i]] <- casemix_output
   }
   
-  casemix_reduce <- purrr:reduce(.x = casemix_list,
-                                 .f = dplyr::union)
+  casemix_reduce <- purrr::reduce(.x = casemix_list,
+                                  .f = dplyr::union)
   
   casemix_final <- trinetx_check_pp(dat = casemix_reduce, group = 'icd_header')
   
