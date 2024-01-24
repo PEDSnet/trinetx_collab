@@ -97,9 +97,9 @@ trinetx_check_pp <- function(dat,
   
   all_site_total <- dat %>%
     ungroup() %>%
-    distinct(site, total_row_site, total_pts_site)
-  mutate(total_row_all = sum(total_row_site),
-         total_pts_all = sum(total_pts_site))
+    distinct(site, total_row_site, total_pts_site) %>%
+    mutate(total_row_all = sum(total_row_site),
+           total_pts_all = sum(total_pts_site))
   
   all_site_grp <- dat %>%
     group_by(!!sym(group)) %>%
@@ -109,7 +109,7 @@ trinetx_check_pp <- function(dat,
   all_site_final <- all_site_total %>%
     left_join(all_site_grp) %>%
     mutate(prop_row_all = round(as.numeric(n_row_all) / as.numeric(total_row_all), 2),
-           prop_pt_all = round(as.numeric(n_pts_all) / as.numeric(total_pts_all), 2))
+           prop_pts_all = round(as.numeric(n_pts_all) / as.numeric(total_pts_all), 2))
   
   return(all_site_final)
 }
