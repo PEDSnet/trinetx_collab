@@ -80,3 +80,36 @@ output_tbl_append <- function(data, name = NA, local = FALSE,
   
   
 }
+
+
+#' Post-processing of case-mix output
+#'
+#' @param dat table output by `compute_case_mix` or `check_coverage_overlap`
+#' @param group grouping variable for group-specific counts
+#'              `icd_header` for case mix results or `fact_group` for coverage overlap results
+#'
+#' @return one dataframe with additional columns that compute all-site counts & proportions to
+#'         supplement site specific counts and proportions
+#' 
+
+trinetx_check_pp <- function(dat,
+                             group){
+  
+  all_site_total <- dat %>%
+    ungroup() %>%
+    distinct(site, total_row_site, total_pts_site)
+  mutate(total_row_all = sum(total_row_site),
+         total_pts_all = sum(total_pts_site))
+  
+  all_site_grp <- dat %>%
+    group_by(!!sym(group)) %>%
+    mutate(n_row_all = sum(n_row_site),
+           n_pts_all = sum(n_pts_site))
+  
+  all_site_final <- all_site_total %>%
+    left_join(all_site_grp) %>%
+    mutate(prop_row_all = round(as.numeric(n_row_all) / as.numeric(total_row_all), 2),
+           prop_pt_all = round(as.numeric(n_pts_all) / as.numeric(total_pts_all), 2))
+  
+  return(all_site_final)
+}
