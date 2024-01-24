@@ -51,7 +51,7 @@ check_coverage_overlap <- function(fact_tbls,
   
   ## Site Group Counts
   summary_site <- grp_collapse %>%
-    group_by(site, group) %>%
+    group_by(site, fact_group) %>%
     summarise(n_pts_site = n()) 
   
   ## Final Summary Table
