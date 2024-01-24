@@ -17,18 +17,23 @@ config_append('extra_packages', c('stringr', 'tidyr', 'purrr'))
 .run  <- function() {
 
     setup_pkgs() # Load runtime packages as specified above
+
+  
+  #' `Coverage Overlap`
+  
+  source(paste0(base_dir, '/code/coverage_overlap_execute.R')) 
+  overlap_output <- check_coverage_overlap(fact_tbls = cohort_tbls)
+  
+  overlap_final <- trinetx_check_pp(dat = overlap_output, group = 'fact_group')
+  
+    
+  #output_tbl(overlap_final, 'coverage_overlap')
+  
+  
+  #' `Case Mix`
   
   site_list <- c('chop', 'cchmc', 'colorado', 'nemours', 'nationwide', 'national',
                  'seattle', 'stanford', 'lurie', 'texas')
-  
-  ## Coverage Overlap
-    
-  overlap_output <- check_coverage_overlap(fact_tbls = cohort_tbls)
-    
-  #output_tbl(overlap_output, 'coverage_overlap')
-  
-  ## Case Mix
-  
   casemix_list <- list()
   
   for(i in 1:length(site_list)){
@@ -45,7 +50,7 @@ config_append('extra_packages', c('stringr', 'tidyr', 'purrr'))
   casemix_reduce <- purrr:reduce(.x = casemix_list,
                                  .f = dplyr::union)
   
-  casemix_final <- casemix_reduce %>% casemix_pp()
+  casemix_final <- trinetx_check_pp(dat = casemix_reduce, group = 'icd_header')
   
   #output_tbl(casemix_final, 'case_mix')
   

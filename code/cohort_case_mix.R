@@ -70,33 +70,8 @@ compute_case_mix <- function(dx_tbl = site_cdm_tbl('condition_occurrence'),
   final_tbl <- summary_site %>%
       left_join(total_pts_site) %>%
       mutate(prop_row_site = round(as.numeric(n_row_site) / as.numeric(total_row_site), 2),
-             prop_pt_site = round(as.numeric(n_pts_site) / as.numeric(total_pts_site), 2)
-             ) %>%
+             prop_pt_site = round(as.numeric(n_pts_site) / as.numeric(total_pts_site), 2)) %>%
       collect_new()
   
   return(final_tbl)
-}
-
-
-#' Post-processing of case-mix output
-#'
-#' @param casemix_tbl table output by `compute_case_mix`
-#'
-#' @return one dataframe with additional columns that compute all-site counts & proportions to
-#'         supplement site specific counts and proportions
-#' 
-
-casemix_pp <- function(casemix_tbl){
-  
-  all_site_summ <- casemix_tbl %>%
-    ungroup() %>%
-    mutate(total_row_all = sum(total_row_site),
-           total_pts_all = sum(total_pts_site)) %>%
-    group_by(icd_header) %>%
-    mutate(n_row_all = sum(n_row_site),
-           n_pts_all = sum(n_pts_site),
-           prop_row_all = round(as.numeric(n_row_all) / as.numeric(total_row_all), 2),
-           prop_pt_all = round(as.numeric(n_pts_all) / as.numeric(total_pts_all), 2))
-  
-  return(all_site_summ)
 }

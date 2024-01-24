@@ -26,7 +26,7 @@ check_coverage_overlap <- function(fact_tbls,
     
     tbl_meta <- fact_tbls[[i]][[1]] %>% 
       distinct(site, person_id) %>% 
-      mutate(group = label) %>%
+      mutate(fact_group = label) %>%
       compute_new()
     
     grp_list[[i]] <- tbl_meta
@@ -35,37 +35,31 @@ check_coverage_overlap <- function(fact_tbls,
   grp_reduce <- purrr::reduce(.x = grp_list,
                               .f = dplyr::union)
   
-  ## Overall and Site Total Counts
-  total_pts <- grp_reduce %>% summarise(denom_total = n_distinct(person_id)) %>%
-    compute_new()
+  ## Site Total Counts
   
-  total_site_pts <- grp_reduce %>% group_by(site) %>% summarise(denom_site = n_distinct(person_id)) %>%
+  total_site_pts <- grp_reduce %>% group_by(site) %>% 
+    summarise(total_pts_site = n_distinct(person_id)) %>%
     compute_new()
   
   ## Collapse group labels per person_id
   grp_collapse <- grp_reduce %>% 
-    arrange(site, group) %>%
+    arrange(site, fact_group) %>%
     group_by(site, person_id) %>% 
-    summarise(group = str_flatten(group, collapse = '_')) %>%
+    summarise(fact_group = str_flatten(fact_group, collapse = '_')) %>%
     ungroup() %>%
     compute_new()
   
-  ## Overall and Site Group Counts
+  ## Site Group Counts
   summary_site <- grp_collapse %>%
     group_by(site, group) %>%
-    summarise(n_grp_site = n()) 
-  
-  summary_total <- grp_collapse %>%
-    group_by(group) %>%
-    summarise(n_grp_total = n())
+    summarise(n_pts_site = n()) 
   
   ## Final Summary Table
   final_tbl <- summary_site %>%
-    left_join(summary_total) %>%
     left_join(total_site_pts) %>%
-    left_join(total_pts) %>%
-    mutate(prop_pts = round(n_grp_site / denom_site, 2),
-           prop_total = round(n_grp_total / denom_total)) %>%
+    mutate(prop_pts = round(as.numeric(n_pts_site) / as.numeric(total_pts_site), 2),
+           total_row_site = 0,
+           n_row_site = 0) %>%
     collect_new()
     
   return(final_tbl)
