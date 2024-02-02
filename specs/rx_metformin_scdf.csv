@@ -1,0 +1,12 @@
+concept_id,concept_name,concept_code,vocabulary_id
+37496782,metformin Extended Release Suspension,2200517,RxNorm
+40063354,metformin Oral Tablet,372803,RxNorm
+40063350,metformin Extended Release Oral Tablet,372804,RxNorm
+40063352,metformin Oral Solution,406082,RxNorm
+42482049,Metformin Injectable Solution,OMOP417865,RxNorm Extension
+36879852,Metformin Delayed Release Oral Tablet,OMOP1000803,RxNorm Extension
+21022365,Metformin Oral Capsule,OMOP351010,RxNorm Extension
+42482050,Metformin Oral Suspension,OMOP417866,RxNorm Extension
+40733473,Metformin Oral Powder,OMOP4724093,RxNorm Extension
+43137749,Metformin Powder for Oral Solution,OMOP473230,RxNorm Extension
+43159875,Metformin Disintegrating Oral Tablet,OMOP473226,RxNorm Extension

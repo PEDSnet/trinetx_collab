@@ -7,8 +7,8 @@
 #' 
 
 cohort_tbls <- list(
-  'dx' = list(cdm_tbl('condition_occurrence'), 'dx'),
-  'px' = list(cdm_tbl('procedure_occurrence'), 'px'),
-  'med' = list(cdm_tbl('drug_exposure'), 'med'),
-  'lab' = list(cdm_tbl('measurement_labs'), 'lab')
+  'dx' = list(cdm_tbl('condition_occurrence'), 'condition_start_date', 'dx'),
+  'px' = list(cdm_tbl('procedure_occurrence'), 'procedure_date', 'px'),
+  'med' = list(cdm_tbl('drug_exposure'), 'drug_exposure_start_date','med'),
+  'lab' = list(cdm_tbl('measurement_labs'), 'measurement_date','lab')
 )

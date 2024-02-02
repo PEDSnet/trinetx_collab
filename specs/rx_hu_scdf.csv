@@ -1,0 +1,6 @@
+"concept_id","concept_name","concept_code","vocabulary_id"
+21093473,hydroxyurea Oral Suspension,OMOP395212,RxNorm Extension
+21122813,hydroxyurea Oral Solution,OMOP395210,RxNorm Extension
+40051647,hydroxyurea Oral Capsule,"370658",RxNorm
+40051650,hydroxyurea Oral Tablet,"370657",RxNorm
+43157095,hydroxyurea Delayed Release Oral Tablet,OMOP448276,RxNorm Extension

@@ -113,3 +113,63 @@ trinetx_check_pp <- function(dat,
   
   return(all_site_final)
 }
+
+
+#' output a list of tables to the database
+#'
+#' @param output_list list of tables to output
+#' @param append logical to determine if you want to append if the table exists
+#'
+#' @return tables output to the database; if
+#' table already exists, it will be appended
+#'
+
+output_list_to_db <- function(output_list,
+                              append=TRUE) {
+  
+  
+  if(append) {
+    
+    for(i in 1:length(output_list)) {
+      
+      output_tbl_append(data=output_list[[i]],
+                        name=names(output_list[i]))
+      
+    }
+    
+  } else {
+    
+    for(i in 1:length(output_list)) {
+      
+      output_tbl(data=output_list[[i]],
+                 name=names(output_list[i]))
+      
+    }
+    
+  }
+  
+}
+
+
+#' add check name, db version, and site name to a given table
+#' 
+#' @param tbl_meta the table to add meta information to 
+#' @param check_lib the name of the check
+#' @param version the version of the database; defaults to 
+#' `config('current_version')`;
+#' @param site_nm the name of the site; defaults to
+#' `config('site')`
+#' 
+
+add_meta <- function(tbl_meta,
+                     check_lib,
+                     version=config('current_version'),
+                     site_nm=config('site_filter')) {
+  
+  tbl_meta %>%
+    mutate(check_type = check_lib,
+           database_version=version,
+           site=site_nm) 
+  
+  
+}

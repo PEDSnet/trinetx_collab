@@ -17,45 +17,58 @@ config_append('extra_packages', c('stringr', 'tidyr', 'purrr'))
 .run  <- function() {
 
     setup_pkgs() # Load runtime packages as specified above
-
   
   #' `Coverage Overlap`
   
   source(paste0(base_dir, '/code/coverage_overlap_execute.R')) 
   overlap_output <- check_coverage_overlap(fact_tbls = cohort_tbls)
-  
-  overlap_final <- trinetx_check_pp(dat = overlap_output, group = 'fact_group') %>%
-    select(site, fact_group, n_pts_site, n_pts_all, prop_pts_site, prop_pts_all,
-           total_pts_site, total_pts_all)
-  
     
-  #output_tbl(overlap_final, 'coverage_overlap')
+  #output_tbl_append(overlap_output, 'coverage_overlap')
   
+  
+  config('site_filter', 'seattle')
   
   #' `Case Mix`
-  
-  site_list <- c('chop', 'cchmc', 'colorado', 'nemours', 'nationwide', 'national',
-                 'seattle', 'stanford', 'lurie', 'texas')
-  casemix_list <- list()
-  
-  for(i in 1:length(site_list)){
     
-    message(paste0('Starting ', site_list[[i]]))
+  casemix_output <- compute_case_mix(dx_tbl = site_cdm_tbl('condition_occurrence') %>%
+                                         filter(condition_start_date >= '2013-01-01' &
+                                                  condition_start_date <= '2023-12-31'))
+  
+  #output_tbl_append(casemix_output, 'case_mix')
+  
+  #' `FOT` 
+  
+  ## Core Function
     
-    config('site_filter', site_list[[i]])
+  source(paste0(base_dir, '/code/fot_execute.R'))
+  
+  num_mnths <- (interval(mdy(01012013), mdy(12312023)) %/% months(1)) + 1
+  
+  time_span_list_output <-
+    as.character(seq(as.Date('2013-02-01'), length = num_mnths, by='months')-1)
+  time_span <- c(time_span_list_output)
     
-    casemix_output <- compute_case_mix(dx_tbl = site_cdm_tbl('condition_occurrence'))
+  fot <- check_fot(time_tbls = fot_tbl_list,
+                   time_frame = time_span,
+                   visits_only = FALSE)
     
-    casemix_list[[i]] <- casemix_output
-  }
+  fot_reduce <- reduce(.x=fot,
+                       .f=dplyr::union)
   
-  casemix_reduce <- purrr::reduce(.x = casemix_list,
-                                  .f = dplyr::union)
+  #output_tbl_append(fot_reduce, 'fot_output')
   
-  casemix_final <- trinetx_check_pp(dat = casemix_reduce, group = 'icd_header')
+  #' `Domain Concordance`
   
-  #output_tbl(casemix_final, 'case_mix')
+  source(paste0(base_dir, '/code/dcon_execute.R'))
   
+  dcon_pts <- check_dcon(conc_tbls = dcon_pts_list,
+                         check_string = 'dcon_pts')
+  
+  dcon_reduce <- reduce(.x = dcon_pts,
+                        .f = dplyr::union)
+  
+  #output_tbl_append(dcon_pts, 'dcon_output')
+
 
   # Write step summary log to CSV and/or database,
   # as determined by configuration

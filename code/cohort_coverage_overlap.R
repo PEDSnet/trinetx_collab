@@ -22,9 +22,11 @@ check_coverage_overlap <- function(fact_tbls,
   ## Loop through fact tables to identify patient groups
   for(i in 1:length(fact_tbls)){
     
-    label <- fact_tbls[[i]][[2]]
+    label <- fact_tbls[[i]][[3]]
     
     tbl_meta <- fact_tbls[[i]][[1]] %>% 
+      filter(!!sym(fact_tbls[[i]][[2]]) >= '2013-01-01' & 
+               !!sym(fact_tbls[[i]][[2]]) <= '2023-12-31') %>%
       distinct(site, person_id) %>% 
       mutate(temp = label) %>%
       rename_with(~label, temp) %>%
