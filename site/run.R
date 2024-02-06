@@ -130,7 +130,7 @@ config('results_schema', 'trinetx_collab')
 #' more readable result.  Keep the tag short, given Oracle limits on
 #' table name length.
 #' @md
-config('results_name_tag', 'trinetx')
+config('results_name_tag', '_trinetx')
 config('local_name_tag', '_loc')
 
 #' Execution mode
