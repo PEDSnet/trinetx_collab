@@ -20,10 +20,10 @@ config_append('extra_packages', c('stringr', 'tidyr', 'purrr'))
   
   #' `Coverage Overlap`
   
-  source(paste0(base_dir, '/code/coverage_overlap_execute.R')) 
-  overlap_output <- check_coverage_overlap(fact_tbls = cohort_tbls)
-    
-  #output_tbl_append(overlap_output, 'coverage_overlap')
+  # source(paste0(base_dir, '/code/coverage_overlap_execute.R')) 
+  # overlap_output <- check_coverage_overlap(fact_tbls = cohort_tbls)
+  # 
+  # output_tbl_append(overlap_output, 'coverage_overlap')
   
   
   config('site_filter', 'seattle')
@@ -33,8 +33,6 @@ config_append('extra_packages', c('stringr', 'tidyr', 'purrr'))
   casemix_output <- compute_case_mix(dx_tbl = site_cdm_tbl('condition_occurrence') %>%
                                          filter(condition_start_date >= '2013-01-01' &
                                                   condition_start_date <= '2023-12-31'))
-  
-  #output_tbl_append(casemix_output, 'case_mix')
   
   #' `FOT` 
   
@@ -55,8 +53,6 @@ config_append('extra_packages', c('stringr', 'tidyr', 'purrr'))
   fot_reduce <- reduce(.x=fot,
                        .f=dplyr::union)
   
-  #output_tbl_append(fot_reduce, 'fot_output')
-  
   #' `Domain Concordance`
   
   source(paste0(base_dir, '/code/dcon_execute.R'))
@@ -67,9 +63,12 @@ config_append('extra_packages', c('stringr', 'tidyr', 'purrr'))
   dcon_reduce <- reduce(.x = dcon_pts,
                         .f = dplyr::union)
   
-  #output_tbl_append(dcon_pts, 'dcon_output')
-
-
+  #' *Swap db src beforehand*
+  # Output tables
+  output_tbl_append(casemix_output, 'case_mix')
+  output_tbl_append(fot_reduce, 'fot_output')
+  output_tbl_append(dcon_reduce, 'dcon_output')
+  
   # Write step summary log to CSV and/or database,
   # as determined by configuration
   output_sum()
