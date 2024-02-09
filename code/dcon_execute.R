@@ -49,7 +49,7 @@ dcon_pts_list <- list(
   'scd_dx_hydrox_rx' = list(site_cdm_tbl('condition_occurrence') %>% 
                               inner_join(load_codeset('dx_sickle_cell'), by = c('condition_concept_id' = 'concept_id')),
                             site_cdm_tbl('drug_exposure') %>%
-                              inner_join(load_codeset('rx_hu_scdf'), by = c('drug_concept_id' = 'concept_id')),
+                              inner_join(load_codeset('rx_hydroxyurea'), by = c('drug_concept_id' = 'concept_id')),
                             'scd_dx_hydrox_rx'),
   
   'ckd_dx_three_scr' = list(site_cdm_tbl('condition_occurrence') %>%
@@ -72,7 +72,7 @@ dcon_pts_list <- list(
   't2d_dx_metformin_rx' = list(site_cdm_tbl('condition_occurrence') %>%
                                   inner_join(load_codeset('T2D_SNOMED_codes'), by = c('condition_concept_id' = 'concept_id')),
                                 site_cdm_tbl('drug_exposure') %>%
-                                  inner_join(load_codeset('rx_metformin_scdf'), by = c('drug_concept_id' = 'concept_id')),
+                                  inner_join(load_codeset('metformin'), by = c('drug_concept_id' = 'concept_id')),
                                 't2d_dx_metformin_rx'),
 
   'anxiety_dx_depression_dx' = list(site_cdm_tbl('condition_occurrence') %>%
