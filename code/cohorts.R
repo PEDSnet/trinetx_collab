@@ -173,3 +173,20 @@ add_meta <- function(tbl_meta,
   
   
 }
+
+#' Site Anonymization
+#'
+#' @param df data frame with a site column that contains every site
+#'           that needs to be anonymized
+#'
+#' @return a data frame with the site's original name, its anonymized name, and
+#'         the number associated with the anonymized name
+#' 
+site_anon <- function(df){
+  
+  distinct_sites <- df %>%
+    distinct(site) %>% collect()
+  site_nums <- distinct_sites[sample(1:nrow(distinct_sites)),]%>%
+    mutate(sitenum=row_number(),
+           site_anon=paste0("site ", sitenum))
+}
