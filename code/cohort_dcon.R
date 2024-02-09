@@ -328,7 +328,8 @@ apply_dcon_pp <- function(dcon_tbl,
   dcon_tbl <- collect_new(dcon_tbl)
   if(byyr){
     dcon_overall <- dcon_tbl %>%
-      group_by(check_type, database_version, check_name, check_desc, yr, cohort)%>%
+      group_by(check_type, #database_version, 
+               check_name, check_desc, yr, cohort)%>%
       summarise(value_pts=sum(value_pts,na.rm=TRUE),
                 value_visits=sum(value_visits, na.rm=TRUE))%>%
       ungroup()%>%
@@ -343,7 +344,8 @@ apply_dcon_pp <- function(dcon_tbl,
              visits_prop=value_visits/tot_vis)
   }else{
     dcon_overall <- dcon_tbl %>%
-      group_by(check_type, database_version, check_name, check_desc, cohort) %>%
+      group_by(check_type, #database_version, 
+               check_name, check_desc, cohort) %>%
       summarise(value=sum(value,na.rm=TRUE))%>%
       ungroup()%>%
       mutate(site='total')

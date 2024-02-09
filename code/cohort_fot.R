@@ -202,13 +202,15 @@ fot_check <- function(target_col,
                       site_col='site',
                       time_col='month_end') {
   
-  cols_to_keep <- c('domain',eval(site_col),eval(check_col),eval(check_desc),eval(time_col),'check')
+  cols_to_keep <- c(#'domain',
+                    eval(site_col),eval(check_col),eval(check_desc),eval(time_col),'check')
   
   rv <- FALSE
   rv_agg <- FALSE
   
   #base tbl to make a network wide version of the check
-  agg_check <- tblx %>% group_by(domain, !!sym(time_col),!!sym(check_col), !!sym(check_desc)) %>%
+  agg_check <- tblx %>% group_by(#domain, 
+                                 !!sym(time_col),!!sym(check_col), !!sym(check_desc)) %>%
     summarise({{target_col}} := sum(!!sym(target_col))) %>%
     ungroup() %>%
     mutate({{site_col}}:='all') 
@@ -237,7 +239,8 @@ fot_check <- function(target_col,
   }
   
   # summarise the checks across sites
-  rv_summary <- rv %>% group_by(domain, !!sym(check_col), !!sym(site_col)) %>%
+  rv_summary <- rv %>% group_by(#domain, 
+                                !!sym(check_col), !!sym(site_col)) %>%
     summarise(std_dev = sd(check,na.rm=TRUE),
               pct_25 = quantile(check,.25),
               pct_75 = quantile(check,.75),
@@ -245,7 +248,8 @@ fot_check <- function(target_col,
               m = mean(check)) %>% ungroup() %>% collect()
   
   rv_summary_allsites <- rv_agg %>%
-    filter(site=='all') %>% group_by(domain, !!sym(check_col), !!sym(site_col)) %>%
+    filter(site=='all') %>% group_by(#domain, 
+                                     !!sym(check_col), !!sym(site_col)) %>%
     summarise(std_dev = sd(check,na.rm=TRUE),
               pct_25 = quantile(check,.25),
               pct_75 = quantile(check,.75),
@@ -288,7 +292,7 @@ check_fot_all_dist <- function(fot_check_output) {
     just_all %>%
     inner_join(
       fot_check_output,
-      by=c('domain',
+      by=c(#'domain',
            'check_name',
            'month_end',
            'check_desc')
