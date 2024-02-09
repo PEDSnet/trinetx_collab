@@ -1,0 +1,158 @@
+---
+title: "TriNetX Collaboration"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_collapsed: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+# Default taken from R notebook behavior: when knitting, wd will always be location of notebook
+base_dir <- '..'
+Sys.setenv(PEDSNET_SKIP_REQUEST_EXECUTION=1)
+tryCatch(source('../site/run.R'),
+         error = function (e) message(e)) # May not be able to make db connection
+
+# Set to "local" to read data from ../results, or another value to read from db
+data_source <- if_else(config('execution_mode') == 'distribution', 'local', 'not_local')
+
+source(paste0(base_dir, '/code/cohorts.R'))
+
+require(tidyr)
+require(knitr)
+require(kableExtra)
+require(stringr)
+require(tibble)
+require(ggplot2)
+require(eulerr)
+require(UpSetR)
+require(VennDiagram)
+
+get_results <- function(tbl_name) {
+  if (data_source == 'local') {
+    rslt <- read_csv(paste0('../results/', tbl_name, '.csv'))
+  }
+  else {
+    rslt <- results_tbl(tbl_name) %>% collect()
+  }
+rslt
+}
+
+prettify_kable <- function(data) {
+  rslt <- data %>% kable(digits = 4, format.args = list(big.mark = ','))
+  if (knitr::is_html_output()) rslt <- rslt %>%
+    kable_styling(bootstrap_options = c("striped", "hover")) %>%
+    column_spec(1, bold = T, border_right = T)
+  rslt
+}
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+
+sites <- get_results('coverage_overlap_pp') %>% site_anon()
+
+cvg <- get_results('coverage_overlap_pp') %>% left_join(sites)
+mix <- get_results('case_mix_pp') %>% left_join(sites)
+fot <- get_results('fot_output_distance') %>% left_join(sites)
+dcon <- get_results('dcon_output_pp') %>% left_join(sites)
+
+```
+
+## Coverage Overlap
+```{r cvg, include=FALSE}
+
+cvg_venn <- cvg %>%
+  mutate(fg_venn = case_when(fact_group == 'dx' ~ 'area1',
+                             fact_group == 'px' ~ 'area2',
+                             fact_group == 'med' ~ 'area3',
+                             fact_group == 'lab' ~ 'area4',
+                             fact_group == 'dx_lab' ~ 'n14',
+                             fact_group == 'dx_med' ~ 'n13',
+                             fact_group == 'dx_med_lab' ~ 'n134',
+                             fact_group == 'dx_px' ~ 'n12',
+                             fact_group == 'dx_px_lab' ~ 'n124',
+                             fact_group == 'dx_px_med' ~ 'n123',
+                             fact_group == 'dx_px_med_lab' ~ 'n1234',
+                             fact_group == 'med_lab' ~ 'n34',
+                             fact_group == 'px_lab' ~ 'n24',
+                             fact_group == 'px_med' ~ 'n23',
+                             fact_group == 'px_med_lab' ~ 'n234')) %>%
+  mutate(n_pts_all = prettyNum(n_pts_all, big.mark = ','),
+         prop_pts_pct = prop_pts_all * 100,
+         venn_display = paste0(n_pts_all, ' \n(', prop_pts_pct, '%)')) %>%
+  distinct(fg_venn, venn_display) %>%
+  pivot_wider(names_from = fg_venn, values_from = venn_display)
+
+png(filename = paste0(base_dir, '/results/', 'venn_diagram.png'),
+    height = 1000,
+    width = 1000)
+draw.quad.venn(direct.area = TRUE,
+               area.vector = c(cvg_venn$area3, cvg_venn$n34, cvg_venn$area4, cvg_venn$n13,
+                               cvg_venn$n134, cvg_venn$n1234, cvg_venn$n234, cvg_venn$n24,
+                               cvg_venn$area1, cvg_venn$n14, cvg_venn$n124, cvg_venn$n123,
+                               cvg_venn$n23, cvg_venn$area2, cvg_venn$n12),
+               category = c('Diagnoses', 'Procedures', 'Medications', 'Labs'),
+               fill = c('orange', 'red', 'green', 'blue'),
+               alpha = 0.3,
+               cex = c(2,2,2,2,2,2,2,2,2,2,2,2,2,2,2),
+               cat.cex = c(2, 2, 2, 2))
+dev.off()
+
+```
+
+```{r cvg_display}
+
+knitr::include_graphics(paste0(base_dir, '/results/venn_diagram.png'))
+
+```
+
+## Case-Mix
+```{r mix}
+
+mix %>%
+  pivot_longer(cols = c(prop_pts_all, prop_row_all)) %>%
+  distinct(icd_header, name, value) %>%
+  mutate(name = ifelse(name == 'prop_pts_all', 'Patient Proportion', 'Row Proportion')) %>%
+  ggplot(aes(x = icd_header, y = value, fill = name)) +
+  geom_col(position = 'dodge') +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)) +
+  labs(x = 'ICD10CM Top Branch',
+       y = '',
+       fill = '',
+       title = 'Representation of ICD10CM Branches')
+
+```
+
+## Concordance / Couplets
+```{r dcon, fig.height=7}
+
+dcon %>%
+  filter(site != 'total') %>%
+  ggplot() +
+  geom_bar(aes(x=site_anon,y=prop,fill=factor(cohort, levels = c('cohort_1_only', 'combined', 'cohort_2_only'))),
+           stat='identity') +
+  theme_bw()+
+  labs(x="Site (Anonymized)",
+       y="Proportion",
+       fill = '')+
+  facet_wrap(~check_name, ncol = 2)+
+  coord_flip()
+
+
+```
+
+## Stability of Facts Over Time
+```{r fot, fig.height=7}
+
+fot %>%
+  filter(site != 'all') %>%
+  ggplot() + 
+  geom_line(aes(x=month_end,y=distance,group=site_anon,color=site_anon)) +
+  facet_wrap(~check_desc, scales = 'free_y', ncol = 2)+
+  #scale_color_manual(values=site_colors)+
+  theme_bw()+
+  labs(x="Month/Year",
+       fill = 'Site (Anonymized)')
+
+```
