@@ -29,6 +29,9 @@ require(ggplot2)
 require(eulerr)
 require(UpSetR)
 require(VennDiagram)
+require(gt)
+require(gridExtra)
+require(plotly)
 
 get_results <- function(tbl_name) {
   if (data_source == 'local') {
@@ -52,9 +55,13 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
 sites <- get_results('coverage_overlap_pp') %>% site_anon()
 
-cvg <- get_results('coverage_overlap_pp') %>% left_join(sites)
+cvg <- get_results('coverage_overlap_pp') %>% 
+  add_row(site = 'stanford', fact_group = 'med_lab', total_pts_site = 817690,
+          total_pts_all = 12318401, n_pts_all = 2440) %>% 
+  mutate_all(~replace(., is.na(.), 0)) %>% left_join(sites)
 mix <- get_results('case_mix_pp') %>% left_join(sites)
 fot <- get_results('fot_output_distance') %>% left_join(sites)
+fot2 <- get_results('fot_heuristic') %>% left_join(sites)
 dcon <- get_results('dcon_output_pp') %>% left_join(sites)
 
 ```
@@ -105,34 +112,165 @@ dev.off()
 
 knitr::include_graphics(paste0(base_dir, '/results/venn_diagram.png'))
 
+#grid.arrange(gTree(children = venn_all), title = 'All Sites')
+
+```
+
+```{r cvg_site}
+
+site_list <- cvg %>% distinct(site_anon) %>% pull()
+
+for(i in 1:length(site_list)){
+
+cvg_venn1 <- cvg %>%
+  filter(site_anon == site_list[[i]]) %>%
+  mutate(fg_venn = case_when(fact_group == 'dx' ~ 'area1',
+                             fact_group == 'px' ~ 'area2',
+                             fact_group == 'med' ~ 'area3',
+                             fact_group == 'lab' ~ 'area4',
+                             fact_group == 'dx_lab' ~ 'n14',
+                             fact_group == 'dx_med' ~ 'n13',
+                             fact_group == 'dx_med_lab' ~ 'n134',
+                             fact_group == 'dx_px' ~ 'n12',
+                             fact_group == 'dx_px_lab' ~ 'n124',
+                             fact_group == 'dx_px_med' ~ 'n123',
+                             fact_group == 'dx_px_med_lab' ~ 'n1234',
+                             fact_group == 'med_lab' ~ 'n34',
+                             fact_group == 'px_lab' ~ 'n24',
+                             fact_group == 'px_med' ~ 'n23',
+                             fact_group == 'px_med_lab' ~ 'n234')) %>%
+  mutate(n_pts_site = ifelse(n_pts_site < 11, 0, n_pts_site)) %>%
+  mutate(n_pts_site = prettyNum(n_pts_site, big.mark = ','),
+         prop_pts_pct = prop_pts_site * 100,
+         venn_display = paste0(n_pts_site, ' \n(', prop_pts_pct, '%)')) %>%
+  distinct(fg_venn, venn_display) %>%
+  pivot_wider(names_from = fg_venn, values_from = venn_display)
+
+png(filename = paste0(base_dir, '/results/', 'venn_diagram_', site_list[[i]], '.png'),
+    height = 1000,
+    width = 1000)
+draw.quad.venn(direct.area = TRUE,
+               area.vector = c(cvg_venn1$area3, cvg_venn1$n34, cvg_venn1$area4, cvg_venn1$n13,
+                               cvg_venn1$n134, cvg_venn1$n1234, cvg_venn1$n234, cvg_venn1$n24,
+                               cvg_venn1$area1, cvg_venn1$n14, cvg_venn1$n124, cvg_venn1$n123,
+                               cvg_venn1$n23, cvg_venn1$area2, cvg_venn1$n12),
+               category = c('Diagnoses', 'Procedures', 'Medications', 'Labs'),
+               fill = c('orange', 'red', 'green', 'blue'),
+               alpha = 0.3,
+               cex = c(2,2,2,2,2,2,2,2,2,2,2,2,2,2,2),
+               cat.cex = c(2, 2, 2, 2))
+dev.off()
+
+}
+
+
+```
+
+#### Per Site
+
+A value of 0 can represent either a true 0 or a suppressed small cell with a raw count < 11
+
+```{r cvg_site_display}
+
+cat('\n##### Site 1 \n')
+knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 1.png'))
+cat('\n')
+
+cat('\n##### Site 2 \n')
+knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 2.png'))
+cat('\n')
+
+cat('\n##### Site 3 \n')
+knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 3.png'))
+cat('\n')
+
+cat('\n##### Site 4 \n')
+knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 4.png'))
+cat('\n')
+
+cat('\n##### Site 5 \n')
+knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 5.png'))
+cat('\n')
+
+cat('\n##### Site 6 \n')
+knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 6.png'))
+cat('\n')
+
+cat('\n##### Site 7 \n')
+knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 7.png'))
+cat('\n')
+
+cat('\n##### Site 8 \n')
+knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 8.png'))
+cat('\n')
+
+cat('\n##### Site 9 \n')
+knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 9.png'))
+cat('\n')
+
+cat('\n##### Site 10 \n')
+knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 10.png'))
+cat('\n')
 ```
 
 ## Case-Mix
 ```{r mix}
 
 mix %>%
-  pivot_longer(cols = c(prop_pts_all, prop_row_all)) %>%
-  distinct(icd_header, name, value) %>%
-  mutate(name = ifelse(name == 'prop_pts_all', 'Patient Proportion', 'Row Proportion')) %>%
-  ggplot(aes(x = icd_header, y = value, fill = name)) +
-  geom_col(position = 'dodge') +
+  distinct(icd_header, prop_pts_all) %>%
+  mutate(pct = paste0(prop_pts_all * 100, '%')) %>%
+  ggplot(aes(x = icd_header, y = prop_pts_all)) +
+  geom_col(fill = '#0c1f63') +
+  geom_text(aes(label = pct), vjust = -0.5, size = 3) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)) +
+  labs(x = 'ICD10CM Top Branch',
+       y = '',
+       fill = '',
+       title = 'Representation of ICD10CM Branches (All Site)')
+```
+
+```{r mix_site}
+
+site_list <- mix %>% arrange(sitenum) %>% distinct(site_anon) %>% pull()
+
+graph_list <- list()
+
+for(i in 1:length(site_list)){
+g <- mix %>%
+  filter(site_anon == site_list[[i]]) %>%
+  distinct(site_anon, icd_header, prop_pt_site) %>%
+  mutate(pct = paste0(prop_pt_site * 100, '%')) %>%
+  ggplot(aes(x = icd_header, y = prop_pt_site)) +
+  geom_col(fill = '#0c1f63', show.legend = FALSE) +
+  geom_text(aes(label = pct), vjust = -0.5, size = 3) +
+  facet_wrap(~site_anon, ncol = 1) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)) +
   labs(x = 'ICD10CM Top Branch',
        y = '',
        fill = '',
        title = 'Representation of ICD10CM Branches')
 
+graph_list[[i]] <- g
+}
+
+graph_list
+
 ```
 
 ## Concordance / Couplets
-```{r dcon, fig.height=7}
+```{r dcon, fig.height=9}
 
 dcon %>%
   filter(site != 'total') %>%
-  ggplot() +
-  geom_bar(aes(x=site_anon,y=prop,fill=factor(cohort, levels = c('cohort_1_only', 'combined', 'cohort_2_only'))),
+  mutate(pct = paste0(round(prop, 2) * 100, '%')) %>%
+  ggplot(aes(x=site_anon,y=prop,fill=factor(cohort, 
+                                            levels = c('cohort_2_only', 'combined', 'cohort_1_only'))),
            stat='identity') +
-  theme_bw()+
+  geom_col() +
+  geom_text(aes(label = pct), position = position_stack(vjust = 0.5), size = 2,
+            fontface = 'bold') +
+  scale_fill_brewer(palette = 'Dark2') +
+  theme_test()+
   labs(x="Site (Anonymized)",
        y="Proportion",
        fill = '')+
@@ -142,10 +280,33 @@ dcon %>%
 
 ```
 
+```{r dcon_desc}
+
+checks <- dcon %>% distinct(check_name) %>% pull()
+
+dcon_meta <- data.frame(check_name = checks,
+                        cohort_1 = c('Sickle Cell Disease diagnosis', 'Asthma diagnosis', 
+                                     'Type 2 Diabetes diagnosis', 'Anxiety diagnosis', 
+                                     'Edema diagnosis', 'Fracture diagnosis', 
+                                     'Type 1 Diabetes diagnosis'),
+                        cohort_2 = c('Hydroxyurea drug exposure', 'Bronchodilator drug exposure',
+                                     'Metformin drug exposure', 'Depression diagnosis',
+                                     'Loop Diuretic drug exposure', 'Radiologic imaging procedure',
+                                     'Insulin drug exposure'))
+
+dcon_meta %>%
+  gt::gt(rowname_col = 'check_name') %>%
+  opt_stylize(style = 2) %>%
+  tab_header(title = 'Couplet Types')
+
+```
+
 ## Stability of Facts Over Time
+
+#### Distance from All Site
 ```{r fot, fig.height=7}
 
-fot %>%
+p <- fot %>%
   filter(site != 'all') %>%
   ggplot() + 
   geom_line(aes(x=month_end,y=distance,group=site_anon,color=site_anon)) +
@@ -153,6 +314,86 @@ fot %>%
   #scale_color_manual(values=site_colors)+
   theme_bw()+
   labs(x="Month/Year",
-       fill = 'Site (Anonymized)')
+       y = 'Distance',
+       fill = 'Site (Anonymized)',
+       title = 'Distance from All Site Normalized Mean')
+
+ggplotly(p)
+```
+
+
+#### Raw Patient Counts w/ Smoothing
+```{r}
+site_list <- fot2 %>% filter(!is.na(site_anon)) %>% arrange(sitenum) %>% distinct(site_anon) %>% pull()
+
+graph_list <- list()
+
+for(i in 1:length(site_list)){
+
+g <- fot2 %>%
+  filter(site_anon == site_list[[i]]) %>%
+  ggplot(aes(x=month_end,y=row_pts,group=check_desc,color=check_desc)) +
+  geom_line() +
+  geom_smooth(color = 'blue', size = 0.25) +
+  #geom_line(aes(x=month_end,y=check), color = 'black', size = 0.5, linetype = 'dotted') +
+  facet_wrap(~check_desc, scales = 'free_y', ncol = 2)+
+  #scale_color_manual(values=site_colors)+
+  theme_bw()+
+  theme(legend.position = 'none') +
+  labs(x="Month/Year",
+       y = 'Patient Count',
+       color = 'Check',
+       title = paste0(site_list[[i]], ' Raw vs Normalized Patient Counts'))
+
+graph_list[[i]] <- ggplotly(g)
+}
+
+htmltools::tagList(graph_list)
+
+```
+
+#### Normalized vs Raw Patients
+
+```{r fot_double}
+
+domain_list <- fot2 %>% distinct(check_desc) %>% pull()
+
+final <- list()
+
+for(i in 1:length(site_list)){
+  
+  tbl <- fot2 %>%
+    filter(site_anon == site_list[[i]])
+  
+  temp <- list()
+  
+  for(k in 1:length(domain_list)){
+    
+    ay <- list(
+      tickfont = list(color = "red"),
+      overlaying = "y",
+      side = "right",
+      title = "Normalized Patients")
+
+  plt <- tbl %>%
+    filter(check_desc == domain_list[[k]]) %>%
+    plot_ly() %>%
+    add_lines(x = ~month_end, y = ~row_pts, yaxis = 'y1', name = 'Patients') %>%
+    add_lines(x = ~month_end, y = ~check, yaxis = 'y2', name = 'Normalized Patients',
+              line = list(color = 'navy', dash = 'dot')) %>%
+    layout(
+      title = paste0(site_list[[i]], ' ', domain_list[[k]]), 
+      yaxis2 = ay,
+      xaxis = list(title="Month End"),
+      yaxis = list(title="Patients"))
+  
+  temp[[k]] <- plt
+  
+  }
+  
+  final[[i]] <- temp
+}
+
+htmltools::tagList(final)
 
 ```
