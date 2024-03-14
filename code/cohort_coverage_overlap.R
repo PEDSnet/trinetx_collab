@@ -25,7 +25,7 @@ check_coverage_overlap <- function(fact_tbls,
     label <- fact_tbls[[i]][[3]]
     
     tbl_meta <- fact_tbls[[i]][[1]] %>% 
-      filter(!!sym(fact_tbls[[i]][[2]]) >= '2013-01-01' & 
+      filter(!!sym(fact_tbls[[i]][[2]]) >= '2014-01-01' & 
                !!sym(fact_tbls[[i]][[2]]) <= '2023-12-31') %>%
       distinct(site, person_id) %>% 
       mutate(temp = label) %>%

@@ -11,7 +11,7 @@
 #'         diagnoses are limited to ONLY ICD10CM -- other ICD flavors are excluded
 #'         
  
-compute_case_mix <- function(dx_tbl = site_cdm_tbl('condition_occurrence'),
+compute_case_mix <- function(dx_tbl = cdm_tbl('condition_occurrence'),
                              vocab_tbl = vocabulary_tbl('concept'),
                              check_string = 'mix'){
   
@@ -21,14 +21,14 @@ compute_case_mix <- function(dx_tbl = site_cdm_tbl('condition_occurrence'),
   
   icd_map <- dx_tbl %>%
     select(site, person_id, condition_source_concept_id, condition_source_value) %>%
-    inner_join(icd10cm, by = c('condition_source_concept_id' = 'concept_id')) %>%
-    compute_new()
+    inner_join(icd10cm, by = c('condition_source_concept_id' = 'concept_id')) #%>%
+    #compute_new()
   
   ## Site Total Counts
   total_pts_site <- icd_map %>% group_by(site) %>%
     summarise(total_row_site = n(),
               total_pts_site = n_distinct(person_id)) %>%
-    compute_new()
+    collect()
   
   ## Sort codes into header groups
   icd_cats <- icd_map %>%
@@ -58,13 +58,14 @@ compute_case_mix <- function(dx_tbl = site_cdm_tbl('condition_occurrence'),
                                   grepl('^V', concept_code) | grepl('^W', concept_code) | 
                                     grepl('^X', concept_code) | grepl('^Y', concept_code) ~ 'V00 - Y99',
                                   grepl('^Z', concept_code) ~ 'Z00 - Z99')) %>%
-    filter(!is.na(icd_header)) %>% compute_new()
+    filter(!is.na(icd_header)) #%>% compute_new()
   
   ## Site group counts
   summary_site <- icd_cats %>%
     group_by(site, icd_header) %>%
     summarise(n_pts_site = n_distinct(person_id),
-              n_row_site = n())
+              n_row_site = n()) %>%
+    collect()
     
   ## Final Summary Table
   final_tbl <- summary_site %>%

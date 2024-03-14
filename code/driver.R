@@ -1,5 +1,5 @@
 # Vector of additional packages to load before executing the request
-config_append('extra_packages', c('stringr', 'tidyr', 'purrr'))
+config_append('extra_packages', c('stringr', 'tidyr', 'purrr', 'lubridate'))
 
 #' Execute the request
 #'
@@ -20,54 +20,52 @@ config_append('extra_packages', c('stringr', 'tidyr', 'purrr'))
   
   #' `Coverage Overlap`
   
-  # source(paste0(base_dir, '/code/coverage_overlap_execute.R')) 
-  # overlap_output <- check_coverage_overlap(fact_tbls = cohort_tbls)
-  # 
-  # output_tbl_append(overlap_output, 'coverage_overlap')
-  
-  
-  config('site_filter', 'seattle')
+  source(paste0(base_dir, '/code/coverage_overlap_execute.R'))
+  overlap_output <- check_coverage_overlap(fact_tbls = cohort_tbls)
+
+  output_tbl(overlap_output, 'coverage_overlap')
   
   #' `Case Mix`
     
-  casemix_output <- compute_case_mix(dx_tbl = site_cdm_tbl('condition_occurrence') %>%
-                                         filter(condition_start_date >= '2013-01-01' &
+  casemix_output <- compute_case_mix(dx_tbl = cdm_tbl('condition_occurrence') %>%
+                                       filter(site == 'texas') %>%
+                                         filter(condition_start_date >= '2014-01-01' &
                                                   condition_start_date <= '2023-12-31'))
+  
+  output_tbl_append(casemix_output, 'case_mix_v2')
   
   #' `FOT` 
   
   ## Core Function
     
   source(paste0(base_dir, '/code/fot_execute.R'))
-  
+
   num_mnths <- (interval(mdy(01012013), mdy(12312023)) %/% months(1)) + 1
-  
+
   time_span_list_output <-
     as.character(seq(as.Date('2013-02-01'), length = num_mnths, by='months')-1)
   time_span <- c(time_span_list_output)
-    
+
   fot <- check_fot(time_tbls = fot_tbl_list,
                    time_frame = time_span,
                    visits_only = FALSE)
-    
+
   fot_reduce <- reduce(.x=fot,
                        .f=dplyr::union)
   
+  output_tbl_append(fot_reduce, 'fot_output')
+
   #' `Domain Concordance`
   
   source(paste0(base_dir, '/code/dcon_execute.R'))
   
-  dcon_pts <- check_dcon(conc_tbls = dcon_pts_list,
+  dcon_pts <- check_dcon(conc_tbls = dcon_pts_list[7],
                          check_string = 'dcon_pts')
   
   dcon_reduce <- reduce(.x = dcon_pts,
                         .f = dplyr::union)
   
-  #' *Swap db src beforehand*
-  # Output tables
-  output_tbl_append(casemix_output, 'case_mix')
-  output_tbl_append(fot_reduce, 'fot_output')
-  output_tbl_append(dcon_reduce, 'dcon_output')
+  output_tbl_append(dcon_reduce, 'dcon_output_v2')
   
   # Write step summary log to CSV and/or database,
   # as determined by configuration

@@ -203,7 +203,8 @@ fot_check <- function(target_col,
                       time_col='month_end') {
   
   cols_to_keep <- c(#'domain',
-                    eval(site_col),eval(check_col),eval(check_desc),eval(time_col),'check')
+                    eval(site_col),eval(check_col),eval(check_desc),eval(time_col),'check',
+                    'check_denom', eval(target_col))
   
   rv <- FALSE
   rv_agg <- FALSE
@@ -283,6 +284,7 @@ check_fot_all_dist <- function(fot_check_output) {
   just_all <-
     fot_check_output %>%
     filter(site=='all') %>%
+    select(-c(check_denom, row_pts)) %>%
     rename(centroid=check) %>%
     select(-c(site))
   
@@ -291,7 +293,7 @@ check_fot_all_dist <- function(fot_check_output) {
   combined <-
     just_all %>%
     inner_join(
-      fot_check_output,
+      fot_check_output %>% select(-c(check_denom, row_pts)),
       by=c(#'domain',
            'check_name',
            'month_end',

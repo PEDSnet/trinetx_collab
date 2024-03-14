@@ -1,0 +1,2285 @@
+concept_id,concept_code,concept_name,codeset
+4084437,281566005,Abdominothoracic neuroblastoma,cancer_dx
+4300558,403901001,Acantholytic squamous cell carcinoma,cancer_dx
+4112744,254654004,Acantholytic squamous cell carcinoma of skin,cancer_dx
+4187635,413389003,Accelerated phase chronic myeloid leukemia,cancer_dx
+37204852,783771003,Acinar cell carcinoma of pancreas,cancer_dx
+37311684,822969007,Acinar cell cystadenocarcinoma of lung,cancer_dx
+37311683,822970008,Acinar cell cystadenocarcinoma of prostate,cancer_dx
+35622697,764856008,Acquired cystic disease associated renal cell carcinoma,cancer_dx
+4110726,254732008,Acral lentiginous malignant melanoma of skin,cancer_dx
+4081867,278453007,Acute biphenotypic leukemia,cancer_dx
+4173970,277604002,Acute eosinophilic leukemia,cancer_dx
+138708,91855006,Acute leukemia,cancer_dx
+135496,91854005,Acute leukemia in remission,cancer_dx
+36715589,721308005,Acute leukemia of ambiguous lineage,cancer_dx
+4153344,371012000,"Acute lymphoblastic leukemia, transitional pre-B-cell",cancer_dx
+134305,91857003,Acute lymphoid leukemia,cancer_dx
+141816,91856007,Acute lymphoid leukemia in remission,cancer_dx
+36712834,1.2301E+13,Acute lymphoid leukemia relapse,cancer_dx
+4079686,277602003,Acute megakaryoblastic leukemia,cancer_dx
+4082485,277601005,Acute monoblastic leukemia,cancer_dx
+44784490,698646006,Acute monoblastic leukemia in remission,cancer_dx
+135768,413441006,Acute monocytic leukemia,cancer_dx
+140672,91858008,Acute monocytic leukemia in remission,cancer_dx
+4189938,413442004,Acute monocytic/monoblastic leukemia,cancer_dx
+44807009,8.15361E+14,Acute myeloid leukaemia with 11q23 abnormality,cancer_dx
+35623630,766045006,Acute myeloid leukemia and myelodysplastic syndrome related to alkylating agent,cancer_dx
+35623633,766048008,Acute myeloid leukemia and myelodysplastic syndrome related to radiation,cancer_dx
+35623631,766046007,Acute myeloid leukemia and myelodysplastic syndrome related to topoisomerase type 2 inhibitor,cancer_dx
+140352,91861009,"Acute myeloid leukemia, disease",cancer_dx
+36715587,721305008,Acute myeloid leukemia due to recurrent genetic abnormality,cancer_dx
+135762,91860005,Acute myeloid leukemia in remission,cancer_dx
+4233531,359631009,"Acute myeloid leukemia, minimal differentiation, FAB M0",cancer_dx
+764781,6.1311E+13,"Acute myeloid leukemia, minimal differentiation, FAB M0 in remission",cancer_dx
+35622696,764855007,Acute myeloid leukemia with CEBPA somatic mutations,cancer_dx
+42539431,734522002,Acute myeloid leukemia with FMS-like tyrosine kinase-3 mutation,cancer_dx
+3654662,838355002,Acute myeloid leukemia with inv(16)(p13.1q22) or t(16;16)(p13.1;q22) CBFB-MYH11,cancer_dx
+36683269,780844005,Acute myeloid leukemia with inv(3)(q21q26.2) or t(3;3)(q21;q26.2); RPN1-EVI1,cancer_dx
+4234749,359648001,"Acute myeloid leukemia with maturation, FAB M2",cancer_dx
+4138903,426124006,"Acute myeloid leukemia with maturation, FAB M2, in remission",cancer_dx
+40483761,445448008,Acute myeloid leukemia with myelodysplasia-related changes,cancer_dx
+35622003,763309005,Acute myeloid leukemia with NPM1 somatic mutation,cancer_dx
+4230253,359640008,"Acute myeloid leukemia without maturation, FAB M1",cancer_dx
+764782,6.1321E+13,"Acute myeloid leukemia without maturation, FAB M1 in remission",cancer_dx
+37116722,733598001,Acute myeloid leukemia with t(6;9)(p23;q34) translocation,cancer_dx
+37110870,725390002,Acute myeloid leukemia with t(8;16)(p11;p13) translocation,cancer_dx
+40481524,444911000,Acute myeloid leukemia with t(9:11)(p22;q23); MLLT3-MLL,cancer_dx
+4116880,285839005,Acute myelomonocytic leukemia - eosinophilic variant,cancer_dx
+4003187,110005000,"Acute myelomonocytic leukemia, FAB M4",cancer_dx
+4142105,427658007,"Acute myelomonocytic leukemia, FAB M4, in remission",cancer_dx
+4003184,109991003,Acute panmyelosis with myelofibrosis,cancer_dx
+4002497,110004001,"Acute promyelocytic leukemia, FAB M3",cancer_dx
+4137687,425869007,"Acute promyelocytic leukemia, FAB M3, in remission",cancer_dx
+4112803,285769009,Acute promyelocytic leukemia - hypogranular variant,cancer_dx
+4161912,433067002,Adamantinoma of femur,cancer_dx
+4144194,307609003,Adamantinoma of long bone,cancer_dx
+759810,1.01371E+14,Adamantinoma of long bone of lower limb,cancer_dx
+37016272,2.9421E+13,Adenocarcinoma in adenomatous polyp,cancer_dx
+765158,2.9431E+13,Adenocarcinoma in villous adenoma,cancer_dx
+4111028,255110003,Adenocarcinoma of bladder,cancer_dx
+3654656,838349007,Adenocarcinoma of Meckel diverticulum,cancer_dx
+4161028,399490008,Adenocarcinoma of prostate,cancer_dx
+35621807,763063001,Adenoid basal carcinoma of cervix uteri,cancer_dx
+35621808,763064007,Adenoid cystic carcinoma of cervix uteri,cancer_dx
+4114201,254987003,Adenoid cystic carcinoma of lacrimal gland,cancer_dx
+4308627,423318000,Adenoid cystic carcinoma of oropharynx,cancer_dx
+4313754,423615009,Adenoid cystic carcinoma of parotid gland,cancer_dx
+4309400,422833009,Adenoid cystic carcinoma of salivary gland,cancer_dx
+4307266,423189008,Adenoid cystic carcinoma of submandibular gland,cancer_dx
+4112736,254619006,Adenoid cystic carcinoma of trachea,cancer_dx
+4111932,254711000,Adenoid cystic eccrine carcinoma,cancer_dx
+35622692,764847000,Adenosarcoma of cervix uteri,cancer_dx
+35623401,765740002,Adenosarcoma of corpus uteri,cancer_dx
+40492386,447390000,Adenosarcoma of uterus,cancer_dx
+4116081,254888007,Adenosquamous carcinoma of cervix,cancer_dx
+4298029,403902008,Adenosquamous cell carcinoma,cancer_dx
+4298238,404067008,Adipocytic liposarcoma,cancer_dx
+4116230,255035007,Adrenal carcinoma,cancer_dx
+4085559,281562007,Adrenal neuroblastoma,cancer_dx
+4094550,188729005,Adult T-cell leukemia,cancer_dx
+4003188,110007008,Adult T-cell leukemia/lymphoma,cancer_dx
+36715966,721762007,Adult T-cell leukemia/lymphoma of skin,cancer_dx
+4345328,240531002,African Burkitt's lymphoma,cancer_dx
+4215390,397008008,Aggressive lymphadenopathic mastocytosis with eosinophilia,cancer_dx
+36717161,721310007,Aggressive natural killer-cell leukemia,cancer_dx
+4297355,404136008,Aggressive NK-cell leukemia involving skin,cancer_dx
+4121332,302856006,Aleukemic leukemia,cancer_dx
+4138466,426217000,Aleukemic leukemia in remission,cancer_dx
+4094549,188728002,Aleukemic lymphoid leukemia,cancer_dx
+4142254,426248008,Aleukemic lymphoid leukemia in remission,cancer_dx
+36674687,770402000,Aleukemic mast cell leukemia,cancer_dx
+4094553,188748009,Aleukemic monocytic leukemia,cancer_dx
+4097585,188741003,Aleukemic myeloid leukemia,cancer_dx
+760988,1.27961E+14,Aleukemic myeloid leukemia in relapse,cancer_dx
+37396219,715950008,ALK-positive large B-cell lymphoma,cancer_dx
+4003835,109982002,Alpha heavy chain disease (clinical),cancer_dx
+4049263,123313007,"Alpha heavy chain disease, enteric form",cancer_dx
+4095025,25050002,"Alpha heavy chain disease, respiratory form",cancer_dx
+4298235,404053004,Alveolar rhabdomyosarcoma,cancer_dx
+4301648,404056007,Alveolar soft part sarcoma,cancer_dx
+4080901,276751004,Amelanotic malignant melanoma of skin,cancer_dx
+4079553,277461004,Anaplastic astrocytoma of brain,cancer_dx
+37018609,8.2501E+13,Anaplastic astrocytoma of central nervous system,cancer_dx
+4158253,370987005,Anaplastic astrocytoma of spinal cord,cancer_dx
+4314458,424151006,Anaplastic glioma of brain,cancer_dx
+45766462,703626001,"Anaplastic large cell lymphoma, T/Null cell, primary systemic type",cancer_dx
+4299149,404134006,Anaplastic large T-cell systemic malignant lymphoma,cancer_dx
+3654297,830055006,Anaplastic lymphoma kinase fusion oncogene negative non-small cell lung cancer,cancer_dx
+3654352,830151004,Anaplastic lymphoma kinase fusion oncogene positive non-small cell lung cancer,cancer_dx
+4112985,255031003,Anaplastic thyroid carcinoma,cancer_dx
+4299150,404135007,Angiocentric NK/T-cell malignant lymphoma involving skin,cancer_dx
+4111027,255102004,Angioendotheliomatosis,cancer_dx
+4184976,413537009,Angioimmunoblastic T-cell lymphoma,cancer_dx
+35610166,1.09024E+15,Angioimmunoblastic T-cell lymphoma with dysproteinaemia,cancer_dx
+4294441,402910001,Anogenital verrucous carcinoma of Buschke-Löwenstein,cancer_dx
+4298128,403949007,Apocrine adenocarcinoma of skin,cancer_dx
+42538692,762457009,Astroblastoma of brain,cancer_dx
+4110884,254938000,Astrocytoma of brain,cancer_dx
+37016118,1.07581E+14,Astrocytoma of brain stem,cancer_dx
+37018667,9.9131E+13,Astrocytoma of cerebrum,cancer_dx
+4112963,254948003,Astrocytoma of spinal cord,cancer_dx
+4258135,440422002,Asymptomatic multiple myeloma,cancer_dx
+4079282,277589003,Atypical chronic myeloid leukemia,cancer_dx
+4139554,307341004,Atypical hairy cell leukemia,cancer_dx
+4300566,403922007,Balloon cell malignant melanoma,cancer_dx
+4299419,402525008,Basal cell carcinoma - adenoid,cancer_dx
+4297670,402526009,Basal cell carcinoma - follicular,cancer_dx
+4297671,402527000,Basal cell carcinoma - infiltrative,cancer_dx
+4291146,402528005,Basal cell carcinoma - keratotic,cancer_dx
+4223497,402529002,Basal cell carcinoma - micronodular,cancer_dx
+4222265,402500004,Basal cell carcinoma of ala nasi,cancer_dx
+4291145,402515003,Basal cell carcinoma of anterior chest,cancer_dx
+4307538,423463003,Basal cell carcinoma of back,cancer_dx
+4313634,423535002,Basal cell carcinoma of chest wall,cancer_dx
+4221981,402498000,Basal cell carcinoma of dorsum of nose,cancer_dx
+4308629,423325007,Basal cell carcinoma of external auditory canal,cancer_dx
+4223496,402499008,Basal cell carcinoma of lateral side wall of nose,cancer_dx
+4299416,402518001,Basal cell carcinoma of lower back,cancer_dx
+37016571,6.1471E+13,Basal cell carcinoma of naris,cancer_dx
+4292379,402503002,Basal cell carcinoma of nasal columella,cancer_dx
+4292380,402504008,Basal cell carcinoma of nasolabial groove,cancer_dx
+4291454,402818009,Basal cell carcinoma of nose,cancer_dx
+4224745,402497005,Basal cell carcinoma of root of nose,cancer_dx
+4222266,402501000,Basal cell carcinoma of supratip of nose,cancer_dx
+4221984,402502007,Basal cell carcinoma of tip of nose,cancer_dx
+4292383,402517006,Basal cell carcinoma of upper back,cancer_dx
+4299423,402536001,Basal cell carcinoma - primary,cancer_dx
+4110721,254710004,Basal cell carcinoma with eccrine differentiation,cancer_dx
+4291147,402530007,Basal cell carcinoma with matrical differentiation,cancer_dx
+4299421,402533009,Basal cell carcinoma with sebaceous differentiation,cancer_dx
+4144191,307592006,Basophilic leukemia,cancer_dx
+4115292,254702000,Basosquamous carcinoma of skin,cancer_dx
+4173963,277571004,B-cell acute lymphoblastic leukemia,cancer_dx
+4082311,277473004,B-cell chronic lymphocytic leukemia,cancer_dx
+4173824,277474005,B-cell chronic lymphocytic leukemia variant,cancer_dx
+434592,109979007,B-cell lymphoma (clinical),cancer_dx
+36684807,3.50951E+14,B-cell lymphoma of intra-abdominal lymph nodes,cancer_dx
+36684809,3.51211E+14,B-cell lymphoma of lymph nodes of multiple sites,cancer_dx
+36716774,722953004,B-cell lymphoma unclassifiable with features intermediate between Burkitt lymphoma and diffuse large B-cell lymphoma,cancer_dx
+36716775,722954005,B-cell lymphoma unclassifiable with features intermediate between classical Hodgkin lymphoma and diffuse large B-cell lymphoma,cancer_dx
+35610331,1.09192E+15,B-cell non-Hodgkin's lymphoma,cancer_dx
+4173974,277619001,B-cell prolymphocytic leukemia,cancer_dx
+37312023,788874003,B-cell prolymphocytic leukemia in remission,cancer_dx
+4211481,413656006,Blastic phase chronic myeloid leukemia,cancer_dx
+3654653,838346000,B lymphoblastic leukemia lymphoma with hyperdiploidy,cancer_dx
+3654651,838344002,B lymphoblastic leukemia lymphoma with hypodiploidy,cancer_dx
+3654650,838343008,B lymphoblastic leukemia lymphoma with t(1;19)(Q23;P13.3); E2A-PBX1 (TCF3/PBX1),cancer_dx
+3654649,838342003,B lymphoblastic leukemia lymphoma with t(12;21) (p13;q22); TEL/AML1 (ETV6-RUNX1),cancer_dx
+3654647,838340006,B lymphoblastic leukemia lymphoma with t(5;14)(q31;q32); IL3-IGH,cancer_dx
+37109936,723889003,B lymphoblastic leukemia lymphoma with t(9:22) (q34;q11.2); BCR-ABL 1,cancer_dx
+3654648,838341005,B lymphoblastic leukemia lymphoma with t(v;11q23); MLL rearranged,cancer_dx
+37204681,783541009,Breast implant-associated anaplastic large-cell lymphoma,cancer_dx
+4301663,404115006,Bullous mycosis fungoides,cancer_dx
+37017595,713897006,Burkitt lymphoma co-occurrent with human immunodeficiency virus infection,cancer_dx
+4041800,118617000,Burkitt's lymphoma (clinical),cancer_dx
+4097560,188512009,Burkitt's lymphoma of intra-abdominal lymph nodes,cancer_dx
+193428,188515006,Burkitt's lymphoma of intrapelvic lymph nodes,cancer_dx
+4091768,188511002,Burkitt's lymphoma of intrathoracic lymph nodes,cancer_dx
+4097561,188513004,Burkitt's lymphoma of lymph nodes of axilla and upper limb,cancer_dx
+196055,188514005,Burkitt's lymphoma of lymph nodes of inguinal region and lower limb,cancer_dx
+315481,188517003,Burkitt's lymphoma of lymph nodes of multiple sites,cancer_dx
+439293,188516007,Burkitt's lymphoma of spleen,cancer_dx
+435758,92516002,Burkitt's tumor of extranodal AND/OR solid organ site,cancer_dx
+433426,92511007,Burkitt's tumor of lymph nodes of axilla AND/OR upper limb,cancer_dx
+437504,92512000,"Burkitt's tumor of lymph nodes of head, face AND/OR neck",cancer_dx
+444442,92513005,Burkitt's tumor of lymph nodes of inguinal region AND/OR lower limb,cancer_dx
+4312395,423987006,"Cancer of vulva, disseminated",cancer_dx
+36680610,778066006,Carcinofibroma of corpus uteri,cancer_dx
+4173800,275395000,Carcinoma anterior 2/3 tongue ventrum,cancer_dx
+4117852,286896005,"Carcinoma breast - lower, outer quadrant",cancer_dx
+4116242,255086002,Carcinoma common bile duct,cancer_dx
+4116218,254989000,Carcinoma ex pleomorphic adenoma of lacrimal gland,cancer_dx
+4312798,425127006,Carcinoma ex pleomorphic adenoma of parotid gland,cancer_dx
+199744,286887005,Carcinoma liver and/or biliary system,cancer_dx
+4110569,254543002,Carcinoma of abdominal part of esophagus,cancer_dx
+4115272,254609000,Carcinoma of ampulla of Vater,cancer_dx
+4112143,285310000,Carcinoma of anal canal,cancer_dx
+4111654,254427006,Carcinoma of anterior part of floor of mouth,cancer_dx
+4170450,275396004,Carcinoma of anterior two-thirds of tongue - dorsal surface,cancer_dx
+4207182,312111009,Carcinoma of ascending colon,cancer_dx
+4171283,276876007,Carcinoma of Bartholin's gland,cancer_dx
+4158473,271943005,Carcinoma of base of tongue,cancer_dx
+4113110,255108000,Carcinoma of bladder,cancer_dx
+4181331,363368005,Carcinoma of body of pancreas,cancer_dx
+4115266,254557000,Carcinoma of body of stomach,cancer_dx
+4116234,255068000,"Carcinoma of bone, connective tissue, skin and breast",cancer_dx
+4113638,286897001,Carcinoma of breast - axillary tail,cancer_dx
+4113637,286894008,"Carcinoma of breast - lower, inner quadrant",cancer_dx
+4117850,286893002,"Carcinoma of breast - upper, inner quadrant",cancer_dx
+4117851,286895009,"Carcinoma of breast - upper, outer quadrant",cancer_dx
+4110570,254553001,Carcinoma of cardia,cancer_dx
+4116240,255081007,Carcinoma of cecum,cancer_dx
+4111799,254535007,Carcinoma of cervical part of esophagus,cancer_dx
+4112314,285432005,Carcinoma of cervix,cancer_dx
+4149847,269533000,Carcinoma of colon,cancer_dx
+4112456,254404003,Carcinoma of commissure of lip,cancer_dx
+4193165,312113007,Carcinoma of descending colon,cancer_dx
+4112610,254570009,Carcinoma of duodenum,cancer_dx
+4162134,372098004,Carcinoma of endocervix,cancer_dx
+4110585,254612002,Carcinoma of endocrine pancreas,cancer_dx
+3663216,840573001,Carcinoma of epididymis and spermatic cord,cancer_dx
+4157450,372100004,Carcinoma of exocervix,cancer_dx
+4162877,372101000,Carcinoma of extrahepatic bile duct,cancer_dx
+4174891,276870001,Carcinoma of fallopian tube,cancer_dx
+4110877,254909003,Carcinoma of foreskin,cancer_dx
+4112580,254417000,Carcinoma of frenum linguae,cancer_dx
+4111645,254393004,Carcinoma of frenum of lip,cancer_dx
+4112455,254402004,Carcinoma of frenum of lower lip,cancer_dx
+4112453,254398008,Carcinoma of frenum of upper lip,cancer_dx
+4110571,254555008,Carcinoma of fundus of stomach,cancer_dx
+4162998,372140005,Carcinoma of gallbladder,cancer_dx
+4120590,286899003,Carcinoma of genital organ,cancer_dx
+4111019,255066001,Carcinoma of genitourinary organ,cancer_dx
+4116088,254904008,Carcinoma of glans penis,cancer_dx
+4157451,372103002,Carcinoma of glottis,cancer_dx
+4112609,254567005,Carcinoma of greater curve of stomach,cancer_dx
+4111775,254434008,Carcinoma of hard palate,cancer_dx
+4209933,326072005,Carcinoma of head of pancreas,cancer_dx
+4207183,312114001,Carcinoma of hepatic flexure,cancer_dx
+4172359,276975007,Carcinoma of larynx,cancer_dx
+4110424,254431000,Carcinoma of lateral part of floor of mouth,cancer_dx
+4115267,254563009,Carcinoma of lesser curve of stomach,cancer_dx
+4112581,254423005,Carcinoma of lingual tonsil,cancer_dx
+4153887,269515006,Carcinoma of lip,cancer_dx
+4113107,255069008,"Carcinoma of lip, oral cavity and pharynx",cancer_dx
+4110428,254445006,Carcinoma of lower buccal sulcus,cancer_dx
+4110422,254425003,Carcinoma of lower gum,cancer_dx
+4115135,254454009,Carcinoma of lower labial sulcus,cancer_dx
+4120589,286890004,Carcinoma of lower limb bones,cancer_dx
+4155293,372111007,"Carcinoma of lower lobe, bronchus or lung",cancer_dx
+4112606,254551004,Carcinoma of lower third of esophagus,cancer_dx
+4162250,372120003,Carcinoma of main bronchus,cancer_dx
+4157448,372096000,Carcinoma of male breast,cancer_dx
+4162248,372113005,"Carcinoma of middle lobe, bronchus or lung",cancer_dx
+4115265,254549003,Carcinoma of middle third of esophagus,cancer_dx
+4173801,275397008,Carcinoma of midline of tongue,cancer_dx
+4157459,372142002,Carcinoma of pancreas,cancer_dx
+4115138,254462001,Carcinoma of parotid gland,cancer_dx
+4162249,372116002,"Carcinoma of pelvic bones, sacrum and coccyx",cancer_dx
+4162137,372106005,Carcinoma of penis,cancer_dx
+4116087,254900004,Carcinoma of prostate,cancer_dx
+4110572,254559002,Carcinoma of pyloric antrum,cancer_dx
+4112607,254561006,Carcinoma of pylorus,cancer_dx
+4111783,254457002,Carcinoma of retromolar area,cancer_dx
+4162992,372121004,Carcinoma of ribs and/or sternum and/or clavicle,cancer_dx
+37399542,716593008,Carcinoma of salivary gland type of breast,cancer_dx
+4115028,285312008,Carcinoma of sigmoid colon,cancer_dx
+4113636,286891000,Carcinoma of skin of head/neck,cancer_dx
+4155295,372125008,Carcinoma of skin of lower limb,cancer_dx
+4155296,372127000,Carcinoma of skin of trunk,cancer_dx
+4162995,372129002,Carcinoma of skin of upper limb,cancer_dx
+4115130,254435009,Carcinoma of soft palate,cancer_dx
+4193872,312115000,Carcinoma of splenic flexure,cancer_dx
+4155299,372143007,Carcinoma of stomach,cancer_dx
+4157452,372104008,Carcinoma of subglottis,cancer_dx
+4112585,254466003,Carcinoma of sublingual gland,cancer_dx
+4110432,254465004,Carcinoma of submandibular gland,cancer_dx
+4162136,372105009,Carcinoma of supraglottis,cancer_dx
+4178960,363369002,Carcinoma of tail of pancreas,cancer_dx
+4151260,269544008,Carcinoma of the rectosigmoid junction,cancer_dx
+4110568,254539001,Carcinoma of thoracic part of esophagus,cancer_dx
+4168069,275490009,Carcinoma of tongue base - dorsal surface,cancer_dx
+4193871,312112002,Carcinoma of transverse colon,cancer_dx
+4111777,254441002,Carcinoma of upper buccal sulcus,cancer_dx
+4111653,254424004,Carcinoma of upper gum,cancer_dx
+4110430,254450000,Carcinoma of upper labial sulcus,cancer_dx
+4120588,286889008,Carcinoma of upper limb bones/scapula,cancer_dx
+4162252,372136001,"Carcinoma of upper lobe, bronchus or lung",cancer_dx
+4112605,254547001,Carcinoma of upper third of esophagus,cancer_dx
+4310575,423973006,"Carcinoma of uterine cervix, invasive",cancer_dx
+4110425,254436005,Carcinoma of uvula,cancer_dx
+4110873,254893005,Carcinoma of vagina,cancer_dx
+4110417,254390001,Carcinoma of vermilion border of lower lip,cancer_dx
+4112451,254389005,Carcinoma of vermilion border of upper lip,cancer_dx
+4162999,372141009,Carcinoma of vocal cord,cancer_dx
+4173799,275394001,Carcinoma ventral surface of tongue,cancer_dx
+36687125,1.59309E+16,Carcinosarcoma of bilateral ovaries,cancer_dx
+35622770,764951002,Carcinosarcoma of cervix uteri,cancer_dx
+35622771,764952009,Carcinosarcoma of corpus uteri,cancer_dx
+36687123,1.59309E+16,Carcinosarcoma of left ovary,cancer_dx
+45765433,702368000,Carcinosarcoma of ovary,cancer_dx
+36687124,1.59309E+16,Carcinosarcoma of right ovary,cancer_dx
+4301655,404087009,Carcinosarcoma of skin,cancer_dx
+36716937,723173003,Carcinosarcoma of uterine adnexa,cancer_dx
+45773362,702369008,Carcinosarcoma of uterus,cancer_dx
+4299147,404129007,CD-30 negative anaplastic large T-cell cutaneous lymphoma,cancer_dx
+4297354,404128004,CD-30 negative cutaneous T-cell lymphoma,cancer_dx
+4300699,404130002,CD-30 negative pleomorphic large T-cell cutaneous lymphoma,cancer_dx
+4299148,404131003,CD-30 negative T-immunoblastic cutaneous lymphoma,cancer_dx
+4299145,404126000,CD-30 positive pleomorphic large T-cell cutaneous lymphoma,cancer_dx
+4299146,404127009,CD-30 positive T-immunoblastic cutaneous lymphoma,cancer_dx
+4300574,403951006,Ceruminous gland adenocarcinoma,cancer_dx
+4097582,188737002,Chloroma,cancer_dx
+4208660,312104005,Cholangiocarcinoma of biliary tract,cancer_dx
+3654361,830196006,Chordoma of cervical spine,cancer_dx
+40490343,446939001,Chordoma of clivus,cancer_dx
+761006,1.30891E+14,Chordoma of coccyx,cancer_dx
+3663201,833285007,Chordoma of lumbar spine,cancer_dx
+761007,1.30911E+14,Chordoma of pelvis,cancer_dx
+40486109,447730004,Chordoma of sacrum,cancer_dx
+3654418,833295000,Chordoma of thoracic spine,cancer_dx
+37116670,733471003,Chromophobe renal cell carcinoma,cancer_dx
+4091925,188733003,Chronic eosinophilic leukemia,cancer_dx
+140057,92812005,Chronic leukemia,cancer_dx
+760962,1.23781E+14,Chronic leukemia in relapse,cancer_dx
+134597,92811003,Chronic leukemia in remission,cancer_dx
+37110902,725437002,Chronic lymphocytic leukemia genetic mutation variant,cancer_dx
+4082338,277549009,Chronic lymphocytic prolymphocytic leukemia syndrome,cancer_dx
+138379,92814006,"Chronic lymphoid leukemia, disease",cancer_dx
+760935,1.22961E+14,Chronic lymphoid leukemia in relapse,cancer_dx
+133438,92813000,Chronic lymphoid leukemia in remission,cancer_dx
+136056,188745007,Chronic monocytic leukemia,cancer_dx
+760932,1.22881E+14,Chronic monocytic leukemia in relapse,cancer_dx
+134603,92818009,Chronic myeloid leukemia,cancer_dx
+4188973,413842007,Chronic myeloid leukemia in lymphoid blast crisis,cancer_dx
+4185301,413843002,Chronic myeloid leukemia in myeloid blast crisis,cancer_dx
+132572,92817004,Chronic myeloid leukemia in remission,cancer_dx
+4133599,127225006,Chronic myelomonocytic leukemia,cancer_dx
+4097581,188734009,Chronic neutrophilic leukemia,cancer_dx
+4188975,413847001,Chronic phase chronic myeloid leukemia,cancer_dx
+4297182,403910009,Circumscribed solid basal cell carcinoma,cancer_dx
+44783592,699704002,Classic medulloblastoma,cancer_dx
+35623049,765328000,Classic mycosis fungoides,cancer_dx
+35621826,763131005,Clear cell adenocarcinoma of ovary,cancer_dx
+4110880,254915003,Clear cell carcinoma of kidney,cancer_dx
+759940,1.08157E+15,Clear cell carcinoma of left kidney,cancer_dx
+759941,1.08158E+15,Clear cell carcinoma of right kidney,cancer_dx
+4298127,403940006,Clear cell eccrine hidradenocarcinoma,cancer_dx
+37116954,734015000,Clear cell papillary renal cell carcinoma,cancer_dx
+4112743,254652000,Clear cell squamous cell carcinoma of skin,cancer_dx
+44811227,8.63741E+14,Clinical stage A chronic lymphocytic leukaemia,cancer_dx
+44811228,8.63761E+14,Clinical stage B chronic lymphocytic leukaemia,cancer_dx
+44814026,8.63781E+14,Clinical stage C chronic lymphocytic leukaemia,cancer_dx
+37116669,733470002,Collecting duct carcinoma of kidney,cancer_dx
+4166154,274902006,Combined hepatocellular carcinoma and cholangiocarcinoma,cancer_dx
+4079280,277573001,Common acute lymphoblastic leukemia,cancer_dx
+4095897,190030009,Compound leukemias,cancer_dx
+45765495,702446006,Core binding factor acute myeloid leukemia,cancer_dx
+4110731,254748009,Cutaneous fibrosarcoma,cancer_dx
+4082487,277613000,Cutaneous/peripheral T-cell lymphoma,cancer_dx
+4112879,254916002,Cystadenocarcinoma of kidney,cancer_dx
+4198275,314191009,Cystadenocarcinoma of ovary,cancer_dx
+4340498,235966007,Cystadenocarcinoma of pancreas,cancer_dx
+45766268,703387000,Cytogenetically normal acute myeloid leukemia,cancer_dx
+4301652,404072004,Dedifferentiated liposarcoma,cancer_dx
+4068256,20224008,Delta heavy chain disease,cancer_dx
+4174440,276799004,Dermatofibrosarcoma protuberans,cancer_dx
+40488988,448296006,Dermatofibrosarcoma protuberans of skin of chest,cancer_dx
+40486088,447710003,Dermatofibrosarcoma protuberans of skin of shoulder,cancer_dx
+4298147,404010004,Dermatofibrosarcoma protuberans with giant cell fibroblastoma,cancer_dx
+4297331,404009009,Dermatofibrosarcoma protuberans with granular cell change,cancer_dx
+4298146,404008001,Dermatofibrosarcoma protuberans with myoid differentiation,cancer_dx
+4298034,403924008,Desmoplastic malignant melanoma,cancer_dx
+36676614,773537001,Differentiation syndrome due to and following chemotherapy co-occurrent with acute promyelocytic leukemia,cancer_dx
+40486171,449220000,Diffuse follicle center lymphoma,cancer_dx
+4082488,277626001,Diffuse high grade B-cell lymphoma,cancer_dx
+3656333,1.1471E+13,Diffuse intrinsic pontine glioma,cancer_dx
+44808122,8.47741E+14,Diffuse large B-cell lymphoma,cancer_dx
+37110401,724647003,Diffuse large B-cell lymphoma co-occurrent with chronic inflammation caused by Epstein-Barr virus,cancer_dx
+4300704,404148006,Diffuse large B-cell lymphoma (nodal/systemic with skin involvement),cancer_dx
+37116982,734066005,Diffuse large B-cell lymphoma of central nervous system,cancer_dx
+3654886,840423002,Diffuse large B-cell lymphoma of small intestine,cancer_dx
+3654887,840424008,Diffuse large B-cell lymphoma of stomach,cancer_dx
+4079691,277616008,Diffuse low grade B-cell lymphoma,cancer_dx
+4121330,302842009,Diffuse malignant lymphoma - centroblastic,cancer_dx
+4144199,307624007,Diffuse malignant lymphoma - centroblastic-centrocytic,cancer_dx
+4079293,277632006,Diffuse malignant lymphoma - centroblastic polymorphic,cancer_dx
+4173978,277628000,Diffuse malignant lymphoma - large cleaved cell,cancer_dx
+4079291,277629008,Diffuse malignant lymphoma - large non-cleaved cell,cancer_dx
+4094543,188674006,Diffuse malignant lymphoma - small non-cleaved cell,cancer_dx
+37017442,713718006,Diffuse non-Hodgkin immunoblastic lymphoma co-occurrent with human immunodeficiency virus infection,cancer_dx
+4003830,109962001,Diffuse non-Hodgkin's lymphoma,cancer_dx
+4003832,109966003,"Diffuse non-Hodgkin's lymphoma, immunoblastic (clinical)",cancer_dx
+432574,109969005,"Diffuse non-Hodgkin's lymphoma, large cell (clinical)",cancer_dx
+764839,6.8261E+13,Diffuse non-Hodgkin's lymphoma Lugano stage I,cancer_dx
+765741,6.8271E+13,Diffuse non-Hodgkin's lymphoma Lugano stage II,cancer_dx
+765717,4.56911E+14,Diffuse non-Hodgkin's lymphoma Lugano stage III,cancer_dx
+764840,6.8291E+13,Diffuse non-Hodgkin's lymphoma Lugano stage IV,cancer_dx
+4001328,109965004,"Diffuse non-Hodgkin's lymphoma, lymphoblastic (clinical)",cancer_dx
+40493518,449177007,Diffuse non-Hodgkin's lymphoma of bone,cancer_dx
+40486172,449221001,Diffuse non-Hodgkin's lymphoma of central nervous system,cancer_dx
+40490465,448560008,Diffuse non-Hodgkin's lymphoma of extranodal site,cancer_dx
+40493517,449176003,Diffuse non-Hodgkin's lymphoma of intestine,cancer_dx
+40492020,448867004,Diffuse non-Hodgkin's lymphoma of lung,cancer_dx
+40489409,448319002,Diffuse non-Hodgkin's lymphoma of nasopharynx,cancer_dx
+40493019,449065000,Diffuse non-Hodgkin's lymphoma of nose,cancer_dx
+40489963,448468003,Diffuse non-Hodgkin's lymphoma of oral cavity,cancer_dx
+40490520,448609001,Diffuse non-Hodgkin's lymphoma of ovary,cancer_dx
+40488897,448213004,Diffuse non-Hodgkin's lymphoma of prostate,cancer_dx
+40486167,449217008,Diffuse non-Hodgkin's lymphoma of skin,cancer_dx
+40486166,449216004,Diffuse non-Hodgkin's lymphoma of soft tissue,cancer_dx
+40490988,448663003,Diffuse non-Hodgkin's lymphoma of stomach,cancer_dx
+40489960,448465000,Diffuse non-Hodgkin's lymphoma of testis,cancer_dx
+40493514,449173006,Diffuse non-Hodgkin's lymphoma of tonsil,cancer_dx
+40490518,448607004,Diffuse non-Hodgkin's lymphoma of uterine cervix,cancer_dx
+4002356,109968002,"Diffuse non-Hodgkin's lymphoma, small cell (clinical)",cancer_dx
+4003180,109967007,"Diffuse non-Hodgkin's lymphoma, small cleaved cell (clinical)",cancer_dx
+4003831,109964000,"Diffuse non-Hodgkin's lymphoma, undifferentiated",cancer_dx
+4096969,188679001,Diffuse non-Hodgkin's lymphoma undifferentiated (diffuse),cancer_dx
+46270966,708971008,Diffuse sclerosing papillary thyroid carcinoma,cancer_dx
+4111931,254709009,Digital papillary eccrine carcinoma of skin,cancer_dx
+37018869,6.1301E+13,Disorder of central nervous system co-occurrent and due to acute lymphoid leukemia,cancer_dx
+37018868,6.1291E+13,Disorder of central nervous system co-occurrent and due to acute lymphoid leukemia in remission,cancer_dx
+438701,285645000,Disseminated malignancy of unknown primary,cancer_dx
+4116077,254874008,Dysgerminoma of ovary,cancer_dx
+4290984,400173004,Eccrine carcinoma of skin,cancer_dx
+4300570,403939009,Eccrine ductal carcinoma,cancer_dx
+4112753,254708001,Eccrine porocarcinoma,cancer_dx
+4300682,404051002,Embryonal rhabdomyosarcoma,cancer_dx
+37396736,716648006,Embryonal sarcoma of liver,cancer_dx
+37115735,732201008,Endometrial carcinosarcoma,cancer_dx
+44783285,699356008,Endometrial stromal sarcoma,cancer_dx
+4082919,278060005,Endometrioid carcinoma of prostate,cancer_dx
+4112857,254852002,Endometrioid carcinoma ovary,cancer_dx
+4082627,277654008,Enteropathy-associated T-cell lymphoma,cancer_dx
+37396184,715901002,Ependymoblastoma,cancer_dx
+4140471,427038005,Epidermal growth factor receptor negative non-small cell lung cancer,cancer_dx
+4143825,426964009,Epidermal growth factor receptor positive non-small cell lung cancer,cancer_dx
+4111949,254800003,Epithelioid cell sarcoma of skin,cancer_dx
+4298140,403981003,Epithelioid hemangioendothelioma,cancer_dx
+3655297,860831008,Epithelioid hemangioendothelioma of liver,cancer_dx
+4111807,254635004,Epithelioid hemangioendothelioma of lung,cancer_dx
+4298153,404038007,Epithelioid malignant nerve sheath tumor,cancer_dx
+37204279,782827000,Epithelioid sarcoma,cancer_dx
+43530969,609515005,Epithelioid trophoblastic tumor,cancer_dx
+4166588,275265005,Epithelioma basal cell,cancer_dx
+4263684,60620005,Epsilon heavy chain disease,cancer_dx
+37396688,716586009,Epstein-Barr virus associated gastric carcinoma,cancer_dx
+37399015,716788007,Epstein-Barr virus positive diffuse large B-cell lymphoma of elderly,cancer_dx
+4297351,404114005,Erythrodermic mycosis fungoides,cancer_dx
+138099,93451002,"Erythroleukemia, FAB M6",cancer_dx
+4139358,426642002,"Erythroleukemia, FAB M6 in remission",cancer_dx
+438383,109994006,Essential thrombocythemia,cancer_dx
+37018581,7.8411E+13,Ewing sarcoma of bone of pelvis,cancer_dx
+37018645,9.1041E+13,Ewing sarcoma of bone structure of upper limb,cancer_dx
+4144193,307608006,Ewing's sarcoma of bone,cancer_dx
+40487487,447951009,Ewing's sarcoma of soft tissue,cancer_dx
+36713366,6.83991E+14,Extensive stage primary small cell carcinoma of lung,cancer_dx
+4112758,254727007,Extramammary Paget's disease of skin,cancer_dx
+4094548,188718006,Extramedullary plasmacytoma,cancer_dx
+40482893,445269007,Extranodal marginal zone B-cell lymphoma of mucosa-associated lymphoid tissue (MALT-lymphoma),cancer_dx
+4212994,414166008,"Extranodal NK/T-cell lymphoma, nasal type",cancer_dx
+37396737,716649003,Extraovarian primary peritoneal carcinoma,cancer_dx
+4299132,404089007,Extrarenal rhabdoid tumor,cancer_dx
+4298240,404077005,Extraskeletal osteosarcoma,cancer_dx
+37206370,786038001,Familial nonmedullary thyroid carcinoma,cancer_dx
+37396743,716657000,Familial papillary thyroid carcinoma with renal papillary neoplasia syndrome,cancer_dx
+4131920,127066000,Familial polycythemia vera,cancer_dx
+36713420,717736007,Familial renal cell carcinoma,cancer_dx
+4115293,254703005,Fibroepithelioma of Pinkus,cancer_dx
+4099699,253018005,Fibrolamellar hepatocellular carcinoma,cancer_dx
+40488419,448139005,Fibrosarcoma of connective tissue,cancer_dx
+4095441,187822008,Fibrosarcoma of spleen,cancer_dx
+4111952,254820002,Follicular atrophoderma and basal cell epitheliomata,cancer_dx
+4299152,404147001,Follicular center B-cell lymphoma (nodal/systemic with skin involvement),cancer_dx
+764922,8.4811E+13,Follicular dendritic sarcoma of intraabdominal lymph node,cancer_dx
+764923,8.4831E+13,Follicular dendritic sarcoma of lymph nodes of multiple sites,cancer_dx
+4079288,277618009,Follicular low grade B-cell lymphoma,cancer_dx
+35610325,1.09186E+15,"Follicular lymphoma, cutaneous follicle centre",cancer_dx
+44808015,8.47481E+14,Follicular lymphoma grade 1,cancer_dx
+44814156,8.47631E+14,Follicular lymphoma grade 2,cancer_dx
+44808028,8.47651E+14,Follicular lymphoma grade 3,cancer_dx
+44808117,8.47691E+14,Follicular lymphoma grade 3a,cancer_dx
+44808118,8.47701E+14,Follicular lymphoma grade 3b,cancer_dx
+36715795,721555001,Follicular lymphoma of small intestine,cancer_dx
+4173977,277624003,Follicular malignant lymphoma - mixed cell type,cancer_dx
+4079289,277625002,Follicular malignant lymphoma - small cleaved cell,cancer_dx
+4301661,404109006,Follicular mucinosis type mycosis fungoides,cancer_dx
+4147411,308121000,Follicular non-Hodgkin's lymphoma,cancer_dx
+45765919,702977001,Follicular non-Hodgkin's lymphoma diffuse follicle center cell sub-type grade 2,cancer_dx
+45765770,702786004,Follicular non-Hodgkin's lymphoma diffuse follicle center sub-type grade 1,cancer_dx
+4003833,109972003,"Follicular non-Hodgkin's lymphoma, large cell (clinical)",cancer_dx
+4001329,109971005,"Follicular non-Hodgkin's lymphoma, mixed small cleaved cell and large cell (clinical)",cancer_dx
+40490991,448666006,Follicular non-Hodgkin's lymphoma of bone,cancer_dx
+40492940,448995000,Follicular non-Hodgkin's lymphoma of central nervous system,cancer_dx
+40490467,448561007,Follicular non-Hodgkin's lymphoma of extranodal site,cancer_dx
+40487142,449419008,Follicular non-Hodgkin's lymphoma of intestine,cancer_dx
+40490998,448672006,Follicular non-Hodgkin's lymphoma of lung,cancer_dx
+36684826,3.54851E+14,Follicular non-Hodgkin's lymphoma of lymph nodes of multiple sites,cancer_dx
+40486169,449219006,Follicular non-Hodgkin's lymphoma of nasopharynx,cancer_dx
+40488917,448231003,Follicular non-Hodgkin's lymphoma of nose,cancer_dx
+40493017,449063007,Follicular non-Hodgkin's lymphoma of oral cavity,cancer_dx
+40486654,449307001,Follicular non-Hodgkin's lymphoma of ovary,cancer_dx
+40488901,448217003,Follicular non-Hodgkin's lymphoma of prostate,cancer_dx
+40492018,448865007,Follicular non-Hodgkin's lymphoma of skin,cancer_dx
+40489407,448317000,Follicular non-Hodgkin's lymphoma of soft tissue,cancer_dx
+40486173,449222008,Follicular non-Hodgkin's lymphoma of stomach,cancer_dx
+40487141,449418000,Follicular non-Hodgkin's lymphoma of testis,cancer_dx
+40493011,449058008,Follicular non-Hodgkin's lymphoma of tonsil,cancer_dx
+40493012,449059000,Follicular non-Hodgkin's lymphoma of uterine cervix,cancer_dx
+4002357,109970006,"Follicular non-Hodgkin's lymphoma, small cleaved cell (clinical)",cancer_dx
+4097572,188672005,Follicular non-Hodgkin's mixed small cleaved and large cell lymphoma,cancer_dx
+4111010,255028004,Follicular thyroid carcinoma,cancer_dx
+4002360,109984001,Gamma heavy chain disease (clinical),cancer_dx
+37016149,1.16381E+14,Ganglioneuroblastoma,cancer_dx
+37116899,733926004,Ganglioneuroblastoma of central nervous system,cancer_dx
+3655294,860828007,Gastrointestinal stromal neoplasm of overlapping lesion of small intestine,cancer_dx
+3655296,860830009,Gastrointestinal stromal neoplasm of overlapping lesion of stomach,cancer_dx
+4300698,404121005,Generalized pagetoid reticulosis,cancer_dx
+35624616,767444009,"Germline BRCA-mutated, HER2-negative metastatic breast cancer",cancer_dx
+4110590,254631008,Giant cell carcinoma of lung,cancer_dx
+4301635,404016005,Giant cell malignant fibrous histiocytoma of skin,cancer_dx
+44783559,699659007,Glandular malignant peripheral nerve sheath tumor,cancer_dx
+35614875,766930002,Glassy cell carcinoma of cervix uteri,cancer_dx
+40571980,393563007,Glioblastoma multiforme,cancer_dx
+4174444,276828006,Glioblastoma multiforme of brain,cancer_dx
+37016197,1.47131E+14,Glioblastoma multiforme of central nervous system,cancer_dx
+4081049,276829003,Glioblastoma multiforme of spinal cord,cancer_dx
+37204210,782722002,"Global developmental delay, lung cysts, overgrowth, Wilms tumor syndrome",cancer_dx
+762782,4.31911E+14,Gnathic osteosarcoma,cancer_dx
+4287999,69408002,Gorlin syndrome,cancer_dx
+36684443,6.7771E+13,Grade 2 astrocytoma of brain,cancer_dx
+36684447,9.0831E+13,Grade 4 malignant glioma of brain,cancer_dx
+4301779,404155008,Granulocytic sarcoma affecting skin,cancer_dx
+4299140,404112009,Granulomatous mycosis fungoides,cancer_dx
+4112862,254863004,Granulosa cell tumor of ovary,cancer_dx
+4038845,118613001,Hairy cell leukemia (clinical),cancer_dx
+4245460,93151007,Hairy cell leukemia of spleen,cancer_dx
+4082459,277568007,Hairy cell leukemia variant,cancer_dx
+4288751,68979007,Heavy chain disease,cancer_dx
+4001172,109843000,Hepatoblastoma,cancer_dx
+44783557,699657009,Hepatosplenic gamma-delta cell lymphoma,cancer_dx
+40483374,445406001,Hepatosplenic T-cell lymphoma,cancer_dx
+35622779,764961009,Hereditary clear cell renal cell carcinoma,cancer_dx
+37396884,716859000,Hereditary diffuse carcinoma of stomach,cancer_dx
+36674976,771080008,Hereditary site-specific ovarian cancer syndrome,cancer_dx
+36684449,1.00721E+14,High grade astrocytoma of brain,cancer_dx
+4079692,277617004,High grade B-cell lymphoma,cancer_dx
+44783287,699358009,High grade endometrial stromal sarcoma,cancer_dx
+36676729,773775004,High-grade neuroendocrine carcinoma of cervix uteri,cancer_dx
+36676728,773774000,High-grade neuroendocrine carcinoma of corpus uteri,cancer_dx
+4079696,277643003,High grade T-cell lymphoma,cancer_dx
+4146032,307650006,Histiocytic medullary reticulosis,cancer_dx
+4002494,109988003,Histiocytic sarcoma (clinical),cancer_dx
+4198567,315058005,HNPCC - hereditary nonpolyposis colon cancer,cancer_dx
+4330242,431396003,Human epidermal growth factor 2 negative carcinoma of breast,cancer_dx
+4307263,423158009,Hurthle cell carcinoma of thyroid,cancer_dx
+40571991,393573009,Hypereosinophilic syndrome,cancer_dx
+4175688,278189009,Hypergranular promyelocytic leukemia,cancer_dx
+4299139,404110001,Hypomelanotic mycosis fungoides,cancer_dx
+4308623,423294001,Idiopathic hypereosinophilic syndrome,cancer_dx
+4111355,285420006,IgA myeloma,cancer_dx
+4112310,285422003,IgD myeloma,cancer_dx
+4111356,285421005,IgG myeloma,cancer_dx
+4003836,109985000,Immunoproliferative small intestinal disease (clinical),cancer_dx
+36715591,721313009,Indeterminate dendritic cell neoplasm,cancer_dx
+4259972,441313008,Indolent multiple myeloma,cancer_dx
+4300585,403996004,Infantile fibrosarcoma,cancer_dx
+37208322,1.08009E+15,Infiltrating ductal carcinoma of axillary tail of left female breast,cancer_dx
+37208326,1.08017E+15,Infiltrating ductal carcinoma of axillary tail of right female breast,cancer_dx
+36717260,1.08011E+15,Infiltrating ductal carcinoma of central portion of left female breast,cancer_dx
+36712721,1.08019E+15,Infiltrating ductal carcinoma of central portion of right female breast,cancer_dx
+37208324,1.08012E+15,Infiltrating ductal carcinoma of lower inner quadrant of left female breast,cancer_dx
+37208328,1.0802E+15,Infiltrating ductal carcinoma of lower inner quadrant of right female breast,cancer_dx
+37208325,1.08013E+15,Infiltrating ductal carcinoma of lower outer quadrant of left female breast,cancer_dx
+37208329,1.08021E+15,Infiltrating ductal carcinoma of lower outer quadrant of right female breast,cancer_dx
+36712719,1.08015E+15,Infiltrating ductal carcinoma of upper inner quadrant of left female breast,cancer_dx
+36712722,1.08023E+15,Infiltrating ductal carcinoma of upper inner quadrant of right female breast,cancer_dx
+36712720,1.08016E+15,Infiltrating ductal carcinoma of upper outer quadrant of left female breast,cancer_dx
+36712723,1.08024E+15,Infiltrating ductal carcinoma of upper outer quadrant of right female breast,cancer_dx
+761170,1.56358E+16,Infiltrating duct carcinoma of bilateral female breasts,cancer_dx
+4237178,408643008,Infiltrating duct carcinoma of breast,cancer_dx
+40492507,448952004,Infiltrating duct carcinoma of female breast,cancer_dx
+759932,1.0801E+15,Infiltrating duct carcinoma of left female breast,cancer_dx
+37311236,823017009,Infiltrating duct carcinoma of prostate,cancer_dx
+759933,1.08018E+15,Infiltrating duct carcinoma of right female breast,cancer_dx
+4080865,278054005,Infiltrating lobular carcinoma of breast,cancer_dx
+36712724,1.08026E+15,Infiltrating lobular carcinoma of left female breast,cancer_dx
+36712725,1.08034E+15,Infiltrating lobular carcinoma of right female breast,cancer_dx
+4112074,254840009,Inflammatory carcinoma of breast,cancer_dx
+4298149,404017001,Inflammatory malignant fibrous histiocytoma of skin,cancer_dx
+35622760,764940002,Inherited acute myeloid leukemia,cancer_dx
+37396006,715664005,Interdigitating dendritic cell sarcoma,cancer_dx
+4110167,285776004,Intermediate grade B-cell lymphoma,cancer_dx
+4001664,109842005,Intrahepatic bile duct carcinoma,cancer_dx
+37116830,733834006,Invasive carcinoma of uterine cervix co-occurrent with human immunodeficiency virus infection,cancer_dx
+36683250,780821007,Invasive intraductal papillary-mucinous carcinoma of pancreas,cancer_dx
+4309817,423829008,Invasive vulval Paget's disease,cancer_dx
+4082481,277587001,Juvenile chronic myeloid leukemia,cancer_dx
+40482847,445227008,Juvenile myelomonocytic leukemia,cancer_dx
+37311926,788972003,Juvenile myelomonocytic leukemia in remission,cancer_dx
+198085,109389001,Kaposi's sarcoma of gastrointestinal tract,cancer_dx
+140958,109388009,Kaposi's sarcoma of palate,cancer_dx
+258981,109386008,Kaposi's sarcoma of skin,cancer_dx
+4188299,414553000,Kappa light chain myeloma,cancer_dx
+44782582,698011002,Keratinizing squamous cell carcinoma of nasopharynx,cancer_dx
+4098954,253017000,Klatskin's tumor,cancer_dx
+4197600,313427003,Lambda light chain myeloma,cancer_dx
+4038846,118614007,"Langerhans cell histiocytosis, disseminated (clinical)",cancer_dx
+37110403,724649000,Langerhans cell sarcoma,cancer_dx
+3655629,866098005,Large B-cell lymphoma arising in HHV8-associated multicentric Castleman disease,cancer_dx
+45765769,702785000,Large cell anaplastic lymphoma T cell and Null cell type,cancer_dx
+36686537,1.22356E+16,Large cell carcinoma of left lung,cancer_dx
+4110589,254629004,Large cell carcinoma of lung,cancer_dx
+4314040,424938000,"Large cell carcinoma of lung, TNM stage 1",cancer_dx
+4307118,423050000,"Large cell carcinoma of lung, TNM stage 2",cancer_dx
+4312768,424970000,"Large cell carcinoma of lung, TNM stage 3",cancer_dx
+4313751,423600008,"Large cell carcinoma of lung, TNM stage 4",cancer_dx
+36686538,1.22356E+16,Large cell carcinoma of right lung,cancer_dx
+44784172,698200003,Large cell Ewing sarcoma of bone,cancer_dx
+4082460,277569004,Large granular lymphocytic leukemia,cancer_dx
+4116198,302837001,Lentigo maligna melanoma,cancer_dx
+133511,58961005,Lethal midline granuloma,cancer_dx
+439761,93141006,Letterer-Siwe disease of extranodal AND/OR solid organ site,cancer_dx
+444467,93133006,Letterer-Siwe disease of intra-abdominal lymph nodes,cancer_dx
+196363,93134000,Letterer-Siwe disease of intrapelvic lymph nodes,cancer_dx
+434595,93135004,Letterer-Siwe disease of intrathoracic lymph nodes,cancer_dx
+444466,93136003,Letterer-Siwe disease of lymph nodes of axilla AND/OR upper limb,cancer_dx
+436362,93137007,"Letterer-Siwe disease of lymph nodes of head, face AND/OR neck",cancer_dx
+444465,93138002,Letterer-Siwe disease of lymph nodes of inguinal region AND/OR lower limb,cancer_dx
+141814,93139005,Letterer-Siwe disease of lymph nodes of multiple sites,cancer_dx
+197816,93140007,Letterer-Siwe disease of spleen,cancer_dx
+317510,93143009,Leukemia,cancer_dx
+135766,93142004,Leukemia in remission,cancer_dx
+4300784,404152006,Leukemic infiltration of skin in acute myeloid leukemia,cancer_dx
+4299154,404153001,Leukemic infiltration of skin in chronic myeloid leukemia,cancer_dx
+4299151,404139001,Leukemic infiltration of skin in hairy-cell leukemia,cancer_dx
+4299155,404154007,Leukemic infiltration of skin in monocytic leukemia,cancer_dx
+4299153,404151004,Leukemic infiltration of skin in myeloid leukemia,cancer_dx
+132852,93152000,Leukemic reticuloendotheliosis of extranodal AND/OR solid organ site,cancer_dx
+193429,93144003,Leukemic reticuloendotheliosis of intra-abdominal lymph nodes,cancer_dx
+196650,93145002,Leukemic reticuloendotheliosis of intrapelvic lymph nodes,cancer_dx
+442095,93146001,Leukemic reticuloendotheliosis of intrathoracic lymph nodes,cancer_dx
+439269,188648000,Leukemic reticuloendotheliosis of lymph nodes of axilla and upper limb,cancer_dx
+132570,188645002,"Leukemic reticuloendotheliosis of lymph nodes of head, face and neck",cancer_dx
+439268,188649008,Leukemic reticuloendotheliosis of lymph nodes of inguinal region and lower limb,cancer_dx
+318989,93150008,Leukemic reticuloendotheliosis of lymph nodes of multiple sites,cancer_dx
+4082464,277579002,Light chain myeloma,cancer_dx
+36715854,721629005,Linitis plastica of stomach,cancer_dx
+4110857,254829001,Liposarcoma,cancer_dx
+40490459,448554008,Liposarcoma of connective tissue,cancer_dx
+4116219,254993006,Liposarcoma of orbit,cancer_dx
+4001171,109841003,Liver cell carcinoma,cancer_dx
+4112102,255191003,Localized malignant reticulohistiocytoma,cancer_dx
+4297352,404120006,Localized pagetoid reticulosis,cancer_dx
+4293714,403458008,Localized skin involvement by breast carcinoma,cancer_dx
+36684450,1.00731E+14,Low grade astrocytoma of brain,cancer_dx
+4173973,277615007,Low grade B-cell lymphoma,cancer_dx
+44783286,699357004,Low grade endometrial stromal sarcoma,cancer_dx
+36684446,9.0811E+13,Low grade malignant glioma of brain,cancer_dx
+37204365,783006001,Low-grade neuroendocrine neoplasm of corpus uteri,cancer_dx
+4082491,277642008,Low grade T-cell lymphoma,cancer_dx
+3655640,866109006,Lymphocytic hypereosinophilic syndrome,cancer_dx
+35622758,764938007,Lymphoepithelial carcinoma,cancer_dx
+4002358,109976000,Lymphoepithelioid lymphoma (clinical),cancer_dx
+132853,188725004,Lymphoid leukemia,cancer_dx
+760934,1.22951E+14,Lymphoid leukemia in relapse,cancer_dx
+134596,93169003,Lymphoid leukemia in remission,cancer_dx
+4030667,236513009,Lymphoma of kidney,cancer_dx
+4300696,404111002,Lymphomatoid papulosis-associated mycosis fungoides,cancer_dx
+4173962,277570003,Lymphoma with spill,cancer_dx
+4300783,404149003,"Lymphoplasmacytic B-cell lymphoma, nodal/systemic with skin involvement",cancer_dx
+440957,188487008,Lymphosarcoma and reticulosarcoma,cancer_dx
+197228,188502002,Lymphosarcoma of intra-abdominal lymph nodes,cancer_dx
+135194,188501009,Lymphosarcoma of intrathoracic lymph nodes,cancer_dx
+441803,188503007,Lymphosarcoma of lymph nodes of axilla and upper limb,cancer_dx
+438380,188500005,"Lymphosarcoma of lymph nodes of head, face and neck",cancer_dx
+318697,188507008,Lymphosarcoma of lymph nodes of multiple sites,cancer_dx
+195201,188506004,Lymphosarcoma of spleen,cancer_dx
+37017087,713290004,Malignant ameloblastoma of mandible,cancer_dx
+4112968,254973003,Malignant astrocytoma of optic nerve,cancer_dx
+4141249,307603002,Malignant blue nevus of skin,cancer_dx
+40482859,445238008,Malignant carcinoid tumor,cancer_dx
+761916,1.92681E+14,Malignant carcinoid tumor of appendix,cancer_dx
+760958,1.23721E+14,Malignant carcinoid tumor of ascending colon,cancer_dx
+37111619,726653000,Malignant carcinoid tumor of bronchus,cancer_dx
+760959,1.23731E+14,Malignant carcinoid tumor of cecum,cancer_dx
+37111620,726654006,Malignant carcinoid tumor of colon,cancer_dx
+760957,1.23701E+14,Malignant carcinoid tumor of descending colon,cancer_dx
+760961,1.23761E+14,Malignant carcinoid tumor of duodenum,cancer_dx
+761917,1.92701E+14,Malignant carcinoid tumor of ileum,cancer_dx
+760960,1.23751E+14,Malignant carcinoid tumor of jejunum,cancer_dx
+37017321,713574000,Malignant carcinoid tumor of kidney,cancer_dx
+765058,1.23741E+14,Malignant carcinoid tumor of large intestine,cancer_dx
+765056,1.23661E+14,Malignant carcinoid tumor of lung,cancer_dx
+765387,1.43401E+14,Malignant carcinoid tumor of pancreas,cancer_dx
+37018934,713573006,Malignant carcinoid tumor of rectum,cancer_dx
+46271402,709517003,Malignant carcinoid tumor of small intestine,cancer_dx
+46271647,709830006,Malignant carcinoid tumor of stomach,cancer_dx
+37111618,726652005,Malignant carcinoid tumor of thymus,cancer_dx
+4300571,403943008,Malignant chondroid syringoma,cancer_dx
+4297193,403942003,Malignant eccrine spiradenoma,cancer_dx
+40481499,443439001,Malignant fibrous histiocytoma,cancer_dx
+4116220,254996003,Malignant fibrous histiocytoma of orbit,cancer_dx
+4300670,404014008,Malignant fibrous histiocytoma of skin,cancer_dx
+4174443,276826005,Malignant glioma of brain,cancer_dx
+4308934,424276002,Malignant glioma of brainstem,cancer_dx
+37018641,8.7151E+13,Malignant glioma of central nervous system,cancer_dx
+37018640,8.7121E+13,Malignant glioma of cerebellum,cancer_dx
+37018638,8.7091E+13,Malignant glioma of cerebrum,cancer_dx
+37018884,2.34941E+14,Malignant glioma of eye,cancer_dx
+37018639,8.7111E+13,Malignant glioma of hypothalamus,cancer_dx
+4171275,276827001,Malignant glioma of spinal cord,cancer_dx
+4298154,404041003,Malignant granular cell tumor,cancer_dx
+45765460,702405001,Malignant granulosa cell tumor of testis,cancer_dx
+4112979,254995004,Malignant hemangiopericytoma of orbit,cancer_dx
+4110740,254797000,Malignant hemangiopericytoma of skin,cancer_dx
+4041104,118612006,Malignant histiocytosis (clinical),cancer_dx
+4300790,404169008,Malignant histiocytosis involving skin,cancer_dx
+436929,93190006,Malignant histiocytosis of extranodal AND/OR solid organ site,cancer_dx
+198098,93182006,Malignant histiocytosis of intra-abdominal lymph nodes,cancer_dx
+192270,93183001,Malignant histiocytosis of intrapelvic lymph nodes,cancer_dx
+441812,93184007,Malignant histiocytosis of intrathoracic lymph nodes,cancer_dx
+435200,93185008,Malignant histiocytosis of lymph nodes of axilla AND/OR upper limb,cancer_dx
+4097570,188641006,Malignant histiocytosis of lymph nodes of axilla and upper limb,cancer_dx
+441525,93186009,"Malignant histiocytosis of lymph nodes of head, face AND/OR neck",cancer_dx
+4096965,188642004,Malignant histiocytosis of lymph nodes of inguinal region and lower limb,cancer_dx
+197232,93187000,Malignant histiocytosis of lymph nodes of inguinal region AND/OR lower limb,cancer_dx
+321815,93188005,Malignant histiocytosis of lymph nodes of multiple sites,cancer_dx
+193721,93189002,Malignant histiocytosis of spleen,cancer_dx
+4003834,109980005,Malignant immunoproliferative disease (clinical),cancer_dx
+37017016,713189001,Malignant insulinoma,cancer_dx
+4175532,278055006,Malignant Leydig cell tumor of testis,cancer_dx
+4146630,307637005,"Malignant lymphoma, centroblastic-centrocytic, follicular",cancer_dx
+4141258,307647008,"Malignant lymphoma, centroblastic type, follicular",cancer_dx
+4146024,307625008,Malignant lymphoma - centrocytic,cancer_dx
+4116341,303017006,"Malignant lymphoma, convoluted cell type",cancer_dx
+4123298,303055001,"Malignant lymphoma, follicular center cell",cancer_dx
+4121853,303056000,"Malignant lymphoma, follicular center cell, cleaved",cancer_dx
+4121970,303057009,"Malignant lymphoma, follicular center cell, non-cleaved",cancer_dx
+4153374,371134001,"Malignant lymphoma, large cell, polymorphous, immunoblastic",cancer_dx
+440350,274905008,"Malignant lymphoma - lymphocytic, intermediate differentiation",cancer_dx
+4146031,307646004,"Malignant lymphoma, lymphocytic, poorly differentiated, nodular",cancer_dx
+4141255,307623001,Malignant lymphoma - lymphoplasmacytic,cancer_dx
+4146027,307636001,"Malignant lymphoma, mixed lymphocytic-histiocytic, nodular",cancer_dx
+4094544,188676008,Malignant lymphoma - mixed small and large cell,cancer_dx
+4091916,188675007,Malignant lymphoma - small cleaved cell,cancer_dx
+37312143,789689004,Malignant lymphomatoid granulomatosis,cancer_dx
+37312142,789690008,Malignant lymphomatoid granulomatosis of lung,cancer_dx
+4040379,118615008,Malignant mast cell tumor (clinical),cancer_dx
+4245916,93200005,Malignant mast cell tumor of intra-abdominal lymph nodes,cancer_dx
+200667,93201009,Malignant mast cell tumor of intrapelvic lymph nodes,cancer_dx
+434601,93202002,Malignant mast cell tumor of intrathoracic lymph nodes,cancer_dx
+441245,93203007,Malignant mast cell tumor of lymph nodes of axilla AND/OR upper limb,cancer_dx
+435495,93204001,"Malignant mast cell tumor of lymph nodes of head, face AND/OR neck",cancer_dx
+198705,93205000,Malignant mast cell tumor of lymph nodes of inguinal region AND/OR lower limb,cancer_dx
+4218170,416901002,Malignant medulloepithelioma of ciliary body,cancer_dx
+4110727,254733003,Malignant melanoma arising in intradermal nevus,cancer_dx
+3663221,866082003,Malignant melanoma of lacrimal drainage system,cancer_dx
+3655614,866079008,Malignant melanoma of lacrimal gland,cancer_dx
+3655608,866073009,Malignant melanoma of overlapping lesion of eye and adnexa,cancer_dx
+37017114,713327005,Malignant meningioma of meninges of brain,cancer_dx
+4112969,254975005,Malignant meningioma of optic nerve sheath,cancer_dx
+3655605,866070007,Malignant mesenchymal neoplasm of bile duct,cancer_dx
+3655606,866071006,Malignant mesenchymal neoplasm of gallbladder,cancer_dx
+4032870,109383000,Malignant mesothelioma of pericardium,cancer_dx
+4111917,254645002,Malignant mesothelioma of pleura,cancer_dx
+762802,4.32131E+14,Malignant mesothelioma of the tunica vaginalis,cancer_dx
+37312118,789721005,Malignant middle ear paraganglioma,cancer_dx
+4314314,425225007,Malignant mixed tumor of salivary gland,cancer_dx
+4311283,423691004,Malignant neoplasm of gum and contiguous sites,cancer_dx
+4091486,188256008,Malignant neoplasm of overlapping lesion of urinary organs,cancer_dx
+37018661,9.6981E+13,Malignant neoplasm of rectosigmoid junction metastatic to brain,cancer_dx
+4092513,188157005,"Malignant neoplasm, overlapping lesion of breast",cancer_dx
+4092515,188180002,"Malignant neoplasm, overlapping lesion of cervix uteri",cancer_dx
+4089661,187757001,"Malignant neoplasm, overlapping lesion of colon",cancer_dx
+439685,187824009,"Malignant neoplasm, overlapping lesion of digestive system",cancer_dx
+3655603,866068003,Malignant nerve sheath neoplasm of overlapping lesion of peripheral nerves and autonomic nervous system,cancer_dx
+3655604,866069006,Malignant nerve sheath neoplasm of peripheral nerve of abdomen,cancer_dx
+3655627,866096009,Malignant nerve sheath neoplasm of peripheral nerve of head and neck,cancer_dx
+3655625,866094007,Malignant nerve sheath neoplasm of peripheral nerve of pelvis,cancer_dx
+3655626,866095008,Malignant nerve sheath neoplasm of peripheral nerve of thorax,cancer_dx
+3655624,866093001,Malignant nerve sheath neoplasm of peripheral nerve of upper limb,cancer_dx
+37018875,1.33531E+14,Malignant neuroendocrine tumor,cancer_dx
+46271921,710195004,Malignant odontogenic neoplasm of lower jaw,cancer_dx
+46271922,710196003,Malignant odontogenic tumor of upper jaw,cancer_dx
+4229398,404664002,Malignant optic glioma,cancer_dx
+45766300,703429003,Malignant optic glioma of adulthood,cancer_dx
+42539510,761958009,Malignant perineurioma,cancer_dx
+4301642,404037002,Malignant peripheral nerve sheath tumor,cancer_dx
+37016244,2.1851E+13,Malignant pheochromocytoma,cancer_dx
+4112854,254844000,Malignant phyllodes tumor of breast,cancer_dx
+37311919,788979007,Malignant pilonidal cyst,cancer_dx
+37311849,816205008,Malignant pituitary blastoma,cancer_dx
+37018672,1.23631E+14,Malignant poorly differentiated neuroendocrine carcinoma,cancer_dx
+4116074,254860001,Malignant sex cord tumor of ovary,cancer_dx
+45763941,700488005,Malignant sex cord tumor of testis,cancer_dx
+40480205,444596001,Malignant thymoma,cancer_dx
+4300679,404040002,Malignant Triton tumor,cancer_dx
+4281034,369538008,Malignant tumor involving left broad ligament by metastasis from ovary,cancer_dx
+4289686,369540003,Malignant tumor involving right broad ligament by metastasis from ovary,cancer_dx
+4283877,369553000,Malignant tumor involving right fallopian tube by separate metastasis from endometrium,cancer_dx
+4289690,369554006,Malignant tumor involving right fallopian tube by separate metastasis from left fallopian tube,cancer_dx
+4289519,369555007,Malignant tumor involving right fallopian tube by separate metastasis from ovary,cancer_dx
+4281035,369556008,Malignant tumor involving right fallopian tube by separate metastasis from uterine cervix,cancer_dx
+4283878,369557004,Malignant tumor involving right fallopian tube by separate metastasis from uterus,cancer_dx
+4283879,369558009,Malignant tumor involving right fallopian tube by separate metastasis from vagina,cancer_dx
+4281160,369568004,Malignant tumor involving right ovary by separate metastasis from endometrium,cancer_dx
+4289824,369569007,Malignant tumor involving right ovary by separate metastasis from fallopian tube,cancer_dx
+4281161,369570008,Malignant tumor involving right ovary by separate metastasis from left ovary,cancer_dx
+4289825,369571007,Malignant tumor involving right ovary by separate metastasis from uterine cervix,cancer_dx
+4289826,369572000,Malignant tumor involving right ovary by separate metastasis from uterus,cancer_dx
+4289523,369573005,Malignant tumor involving right ovary by separate metastasis from vagina,cancer_dx
+4283888,369588000,Malignant tumor involving vulva by separate metastasis from endometrium,cancer_dx
+4183628,369589008,Malignant tumor involving vulva by separate metastasis from fallopian tube,cancer_dx
+4183335,369590004,Malignant tumor involving vulva by separate metastasis from ovary,cancer_dx
+4183629,369591000,Malignant tumor involving vulva by separate metastasis from uterine cervix,cancer_dx
+4183630,369592007,Malignant tumor involving vulva by separate metastasis from uterus,cancer_dx
+4183336,369593002,Malignant tumor involving vulva by separate metastasis from vagina,cancer_dx
+4301670,404150003,Mantle cell B-cell lymphoma (nodal/systemic with skin involvement),cancer_dx
+40481901,443487006,Mantle cell lymphoma,cancer_dx
+36684463,1.16871E+14,Mantle cell lymphoma of lymph nodes of multiple sites,cancer_dx
+40479608,441559006,Mantle cell lymphoma of spleen,cancer_dx
+40490918,447100004,Marginal zone lymphoma,cancer_dx
+764078,4.50521E+14,Marginal zone lymphoma of axillary lymph node,cancer_dx
+760724,1.16711E+14,Marginal zone lymphoma of inguinal lymph node,cancer_dx
+36684462,1.16841E+14,Marginal zone lymphoma of lymph nodes of multiple sites,cancer_dx
+36684461,1.16691E+14,Marginal zone lymphoma of spleen,cancer_dx
+760726,1.16741E+14,Marginal zone lymphoma of thoracic lymph node,cancer_dx
+4299273,404172001,Mast cell leukemia affecting skin,cancer_dx
+4002496,110002002,Mast cell leukemia (clinical),cancer_dx
+4264693,397009000,Mast cell malignancy,cancer_dx
+4264112,397011009,Mast cell malignancy of lymph nodes,cancer_dx
+4096967,188665009,Mast cell malignancy of lymph nodes of axilla and upper limb,cancer_dx
+4094540,188662007,"Mast cell malignancy of lymph nodes of head, face and neck",cancer_dx
+4094541,188666005,Mast cell malignancy of lymph nodes of inguinal region and lower limb,cancer_dx
+4096968,188669003,Mast cell malignancy of lymph nodes of multiple sites,cancer_dx
+4094542,188668006,Mast cell malignancy of spleen,cancer_dx
+4111011,255032005,Medullary thyroid carcinoma,cancer_dx
+40481031,443333004,Medulloblastoma,cancer_dx
+4079153,277505007,Medulloblastoma of cerebellum,cancer_dx
+37396186,715903004,Medulloepithelioma,cancer_dx
+37311758,818967003,Medulloepithelioma of central nervous system,cancer_dx
+35607963,763796007,Megakaryoblastic acute myeloid leukemia with t(1;22)(p13;q13),cancer_dx
+313159,188754005,Megakaryocytic leukemia,cancer_dx
+136930,94148006,Megakaryocytic leukemia in remission,cancer_dx
+4301643,404039004,Melanotic malignant nerve sheath tumor,cancer_dx
+36717231,722795004,Meningeal leukemia,cancer_dx
+4100425,253001006,Merkel cell carcinoma,cancer_dx
+765362,1.35931E+14,Merkel cell carcinoma of buttock,cancer_dx
+36684467,1.33841E+14,Merkel cell carcinoma of face,cancer_dx
+35617653,3.52071E+14,Merkel cell carcinoma of left lower limb,cancer_dx
+37016171,1.33881E+14,Merkel cell carcinoma of lower limb,cancer_dx
+761019,1.33851E+14,Merkel cell carcinoma of neck,cancer_dx
+35617090,3.51461E+14,Merkel cell carcinoma of right lower limb,cancer_dx
+761020,1.33861E+14,Merkel cell carcinoma of scalp,cancer_dx
+761021,1.33891E+14,Merkel cell carcinoma of trunk,cancer_dx
+37016170,1.33871E+14,Merkel cell carcinoma of upper limb,cancer_dx
+37311916,788982002,Mesothelial carcinoma of liver,cancer_dx
+4033891,109378008,"Mesothelioma (malignant, clinical disorder)",cancer_dx
+4003023,109856007,Mesothelioma of mesentery,cancer_dx
+4003024,109858008,Mesothelioma of omentum,cancer_dx
+4001667,109854005,Mesothelioma of parietal peritoneum,cancer_dx
+4001174,109855006,Mesothelioma of pelvic peritoneum,cancer_dx
+4001666,109853004,Mesothelioma of peritoneum,cancer_dx
+35622134,763479005,Metaplastic carcinoma of breast,cancer_dx
+43530696,1.661E+12,Metastasis to lung from adenocarcinoma,cancer_dx
+43531596,1.681E+12,Metastasis to lymph node from adenocarcinoma,cancer_dx
+43530697,1.671E+12,Metastasis to lymph node from squamous cell carcinoma,cancer_dx
+36684950,4.59411E+14,Metastatic collecting duct carcinoma,cancer_dx
+36684946,4.59371E+14,Metastatic gastroesophageal adenocarcinoma,cancer_dx
+36684949,4.59401E+14,Metastatic pancreatic endocrine carcinoma,cancer_dx
+36684951,4.59421E+14,Metastatic penile cancer,cancer_dx
+36684913,4.58321E+14,Metastatic urothelial carcinoma,cancer_dx
+4110722,254712007,Microcystic adnexal carcinoma,cancer_dx
+4297186,403920004,Minimal deviation malignant melanoma,cancer_dx
+35622644,764694005,MiT family translocation renal cell carcinoma,cancer_dx
+4314201,94686001,Mixed cell type lymphosarcoma of intra-abdominal lymph nodes,cancer_dx
+4313229,94688000,Mixed cell type lymphosarcoma of intrathoracic lymph nodes,cancer_dx
+4314501,94690004,"Mixed cell type lymphosarcoma of lymph nodes of head, face, and neck",cancer_dx
+40480215,444604002,Mixed ductal and lobular carcinoma of breast,cancer_dx
+3655588,866052009,Mixed ductal-neuroendocrine carcinoma of pancreas,cancer_dx
+4298130,403954003,Mixed eccrine/pilar adnexal carcinoma of skin,cancer_dx
+4116229,255030002,Mixed follicular and papillary thyroid carcinoma,cancer_dx
+3655586,866050001,Mixed germ cell neoplasm of central nervous system,cancer_dx
+40484129,443937008,Mixed glioma,cancer_dx
+37396735,716647001,Mixed oligoastrocytoma,cancer_dx
+4133189,278491007,Mixed seminoma teratoma of testis,cancer_dx
+4298129,403950007,Moll's gland adenocarcinoma,cancer_dx
+321526,188744006,Monocytic leukemia,cancer_dx
+4079693,277623009,Monocytoid B-cell lymphoma,cancer_dx
+4297183,403913006,Morpheic basal cell carcinoma,cancer_dx
+37018655,9.4291E+13,Mucinous adenocarcinoma of gastrointestinal tract,cancer_dx
+40480651,444712000,Mucinous carcinoma of breast,cancer_dx
+4112856,254851009,Mucinous cystadenocarcinoma of ovary,cancer_dx
+37206235,785879009,Mucinous cystadenocarcinoma of pancreas,cancer_dx
+3655584,866048009,Mucinous cystic neoplasm with invasive carcinoma of pancreas,cancer_dx
+4110723,254714008,Mucinous eccrine carcinoma,cancer_dx
+35622797,764990003,Mucinous tubular and spindle cell renal carcinoma,cancer_dx
+4308149,423793008,Mucoepidermoid carcinoma of parotid gland,cancer_dx
+4311287,423708008,Mucoepidermoid carcinoma of salivary gland,cancer_dx
+4111933,254713002,Mucoepidermoid carcinoma of skin,cancer_dx
+4310565,423424005,Mucoepidermoid carcinoma of submandibular gland,cancer_dx
+4189506,414780005,Mucosa-associated lymphoid tissue (MALT) lymphoma of orbit,cancer_dx
+40480206,444597005,Mucosa-associated lymphoid tissue (MALT) lymphoma of stomach,cancer_dx
+4173976,277622004,Mucosa-associated lymphoma,cancer_dx
+37311850,816204007,Mucosal nodular melanoma,cancer_dx
+4266390,61493004,Mu heavy chain disease,cancer_dx
+437233,109989006,Multiple myeloma,cancer_dx
+436059,94704006,Multiple myeloma in remission,cancer_dx
+4214660,414785000,Multiple solitary plasmacytomas,cancer_dx
+4040380,118618005,Mycosis fungoides (clinical),cancer_dx
+135204,94715001,Mycosis fungoides of extranodal AND/OR solid organ site,cancer_dx
+201813,94707004,Mycosis fungoides of intra-abdominal lymph nodes,cancer_dx
+442169,94708009,Mycosis fungoides of intrapelvic lymph nodes,cancer_dx
+134879,94709001,Mycosis fungoides of intrathoracic lymph nodes,cancer_dx
+141524,94710006,Mycosis fungoides of lymph nodes of axilla AND/OR upper limb,cancer_dx
+138377,94711005,"Mycosis fungoides of lymph nodes of head, face AND/OR neck",cancer_dx
+194593,94712003,Mycosis fungoides of lymph nodes of inguinal region AND/OR lower limb,cancer_dx
+135764,188627002,Mycosis fungoides of lymph nodes of multiple sites,cancer_dx
+442168,94714002,Mycosis fungoides of spleen,cancer_dx
+4299141,404116007,Mycosis fungoides with systemic infiltration,cancer_dx
+136950,277597005,Myelodysplastic syndrome with isolated del(5q),cancer_dx
+140666,188732008,Myeloid leukemia,cancer_dx
+37119145,724644005,Myeloid leukemia co-occurrent with Down syndrome,cancer_dx
+760933,1.22901E+14,Myeloid leukemia in relapse,cancer_dx
+132850,94716000,Myeloid leukemia in remission,cancer_dx
+140967,94719007,Myeloid sarcoma,cancer_dx
+132575,94718004,Myeloid sarcoma in remission,cancer_dx
+4097706,188768003,Myelomonocytic leukemia,cancer_dx
+140064,307651005,Myelosclerosis with myeloid metaplasia,cancer_dx
+4221977,400175006,Myxofibrosarcoma of skin,cancer_dx
+4102385,253042009,Myxoid dermatofibrosarcoma protuberans,cancer_dx
+4300686,404069006,Myxoid liposarcoma,cancer_dx
+40486201,449248000,Nasopharyngeal carcinoma,cancer_dx
+4120310,302849000,Nephroblastoma,cancer_dx
+37208346,1.08232E+15,Nephroblastoma of left kidney,cancer_dx
+37208347,1.08233E+15,Nephroblastoma of right kidney,cancer_dx
+4333766,432328008,Neuroblastoma,cancer_dx
+4083496,281560004,Neuroblastoma of brain,cancer_dx
+37118768,734099007,Neuroblastoma of central nervous system,cancer_dx
+4102373,253000007,Neuroendocrine carcinoma,cancer_dx
+3655878,870355006,Neuroendocrine carcinoma of anus,cancer_dx
+36713545,717916003,Neuroendocrine carcinoma of appendix,cancer_dx
+37396740,716653001,Neuroendocrine carcinoma of thymus,cancer_dx
+4300567,403925009,Neurotropic malignant melanoma,cancer_dx
+4146022,307617006,Neutrophilic leukemia,cancer_dx
+37118088,726721002,Nodal marginal zone B-cell lymphoma,cancer_dx
+37396458,716274007,Nodular basal cell carcinoma of skin,cancer_dx
+4079290,277627005,Nodular high grade B-cell lymphoma,cancer_dx
+4149840,269476000,Nodular lymphoma,cancer_dx
+194878,95194004,Nodular lymphoma of extranodal AND/OR solid organ site,cancer_dx
+200338,95186006,Nodular lymphoma of intra-abdominal lymph nodes,cancer_dx
+198088,95187002,Nodular lymphoma of intrapelvic lymph nodes,cancer_dx
+435492,95188007,Nodular lymphoma of intrathoracic lymph nodes,cancer_dx
+437505,188612002,Nodular lymphoma of lymph nodes of axilla and upper limb,cancer_dx
+435207,188609000,"Nodular lymphoma of lymph nodes of head, face and neck",cancer_dx
+198707,188613007,Nodular lymphoma of lymph nodes of inguinal region and lower limb,cancer_dx
+320347,95192000,Nodular lymphoma of lymph nodes of multiple sites,cancer_dx
+198374,95193005,Nodular lymphoma of spleen,cancer_dx
+4121331,302848008,"Nodular malignant lymphoma, lymphocytic - intermediate differentiation",cancer_dx
+4119131,302845006,"Nodular malignant lymphoma, lymphocytic - well differentiated",cancer_dx
+4112760,254731001,Nodular malignant melanoma of skin,cancer_dx
+40484012,442537007,Non-Hodgkin lymphoma associated with Human immunodeficiency virus infection,cancer_dx
+37016150,1.16811E+14,Non-Hodgkin lymphoma of central nervous system metastatic to lymph node of lower limb,cancer_dx
+37018877,1.16821E+14,Non-Hodgkin lymphoma of central nervous system metastatic to lymph node of upper limb,cancer_dx
+4038838,118601006,Non-Hodgkin's lymphoma (clinical),cancer_dx
+40488904,448220006,Non-Hodgkin's lymphoma of bone,cancer_dx
+40488942,448254007,Non-Hodgkin's lymphoma of central nervous system,cancer_dx
+40487528,447989004,Non-Hodgkin's lymphoma of extranodal site,cancer_dx
+40489448,448354009,Non-Hodgkin's lymphoma of intestine,cancer_dx
+40489468,448372003,Non-Hodgkin's lymphoma of lung,cancer_dx
+36684814,3.52791E+14,Non-Hodgkin's lymphoma of lymph nodes of multiple sites,cancer_dx
+40489467,448371005,Non-Hodgkin's lymphoma of nasopharynx,cancer_dx
+40489481,448384001,Non-Hodgkin's lymphoma of nose,cancer_dx
+40489483,448386004,Non-Hodgkin's lymphoma of oral cavity,cancer_dx
+40489472,448376000,Non-Hodgkin's lymphoma of ovary,cancer_dx
+40486666,449318001,Non-Hodgkin's lymphoma of prostate,cancer_dx
+40489940,448447004,Non-Hodgkin's lymphoma of skin,cancer_dx
+40491472,448738008,Non-Hodgkin's lymphoma of soft tissue,cancer_dx
+40491440,448709005,Non-Hodgkin's lymphoma of stomach,cancer_dx
+40489484,448387008,Non-Hodgkin's lymphoma of testis,cancer_dx
+40486637,449292003,Non-Hodgkin's lymphoma of tonsil,cancer_dx
+40491512,448774004,Non-Hodgkin's lymphoma of uterine cervix,cancer_dx
+45769123,707705008,Nonkeratinizing carcinoma of the nasopharynx,cancer_dx
+4079684,277580004,Non-secretory myeloma,cancer_dx
+37016122,1.07691E+14,Non-seminomatous germ cell neoplasm of testis,cancer_dx
+4310703,424132000,"Non-small cell carcinoma of lung, TNM stage 1",cancer_dx
+4314172,425048006,"Non-small cell carcinoma of lung, TNM stage 2",cancer_dx
+4311997,422968005,"Non-small cell carcinoma of lung, TNM stage 3",cancer_dx
+4308479,423121009,"Non-small cell carcinoma of lung, TNM stage 4",cancer_dx
+4115276,254637007,Non-small cell lung cancer,cancer_dx
+45766129,703228009,Non-small cell lung cancer with mutation in epidermal growth factor receptor,cancer_dx
+45766131,703230006,Non-small cell lung cancer without mutation in epidermal growth factor receptor,cancer_dx
+4208307,440173001,Nonsquamous nonsmall cell neoplasm of lung,cancer_dx
+4079281,277574007,Null cell acute lymphoblastic leukemia,cancer_dx
+4112739,254633006,Oat cell carcinoma of lung,cancer_dx
+4046873,134312002,Odontogenic ghost cell carcinoma,cancer_dx
+4306965,422886007,Olfactory neuroblastoma,cancer_dx
+40484128,443936004,Oligodendroglioma,cancer_dx
+4112961,254940005,Oligodendroglioma of brain,cancer_dx
+759902,1.07571E+14,Oligodendroglioma of brain stem,cancer_dx
+36684451,1.04981E+14,Oligodendroglioma of cerebrum,cancer_dx
+4112964,254950006,Oligodendroglioma of spinal cord,cancer_dx
+42538151,739301006,Osteoporosis co-occurrent and due to multiple myeloma,cancer_dx
+37116373,733064004,"Osteosarcoma, limb anomalies, erythroid macrocytosis syndrome",cancer_dx
+4146619,307576001,Osteosarcoma of bone,cancer_dx
+3655843,870318006,Osteosarcoma of bone of head,cancer_dx
+764913,8.2761E+13,Osteosarcoma of bone of upper limb,cancer_dx
+4137510,425657001,Osteosclerotic myeloma,cancer_dx
+4307838,422782004,"Ovarian cancer, disseminated",cancer_dx
+133419,109267002,Overlapping malignant melanoma of skin,cancer_dx
+253977,109366009,Overlapping malignant neoplasm of accessory sinuses,cancer_dx
+198695,109847004,Overlapping malignant neoplasm of biliary tract,cancer_dx
+198082,109879008,Overlapping malignant neoplasm of body of uterus,cancer_dx
+4033318,109348004,Overlapping malignant neoplasm of bone and articular cartilage of limbs,cancer_dx
+4003693,109912006,Overlapping malignant neoplasm of brain,cancer_dx
+372849,109911004,Overlapping malignant neoplasm of brain and other parts of the central nervous system,cancer_dx
+258375,109371002,Overlapping malignant neoplasm of bronchus and lung,cancer_dx
+79740,109838007,Overlapping malignant neoplasm of colon,cancer_dx
+37018659,9.6281E+13,Overlapping malignant neoplasm of colon and rectum,cancer_dx
+25748,109835005,Overlapping malignant neoplasm of esophagus,cancer_dx
+438095,109948008,Overlapping malignant neoplasm of eye and adnexa (primary),cancer_dx
+133711,109886000,Overlapping malignant neoplasm of female breast,cancer_dx
+196051,109878000,Overlapping malignant neoplasm of female genital organs,cancer_dx
+140955,109830000,Overlapping malignant neoplasm of floor of mouth,cancer_dx
+197227,109821008,Overlapping malignant neoplasm of gastrointestinal tract,cancer_dx
+440044,109368005,Overlapping malignant neoplasm of hypopharynx,cancer_dx
+22839,109369002,Overlapping malignant neoplasm of larynx,cancer_dx
+133710,109822001,Overlapping malignant neoplasm of lip,cancer_dx
+444224,109833003,"Overlapping malignant neoplasm of lip, oral cavity and pharynx",cancer_dx
+28356,109824000,Overlapping malignant neoplasm of major salivary gland,cancer_dx
+4003684,109887009,Overlapping malignant neoplasm of male breast,cancer_dx
+196645,109874003,Overlapping malignant neoplasm of male genital organs,cancer_dx
+432558,109367000,Overlapping malignant neoplasm of nasopharynx,cancer_dx
+438691,109832008,Overlapping malignant neoplasm of oropharynx,cancer_dx
+4001170,109831001,Overlapping malignant neoplasm of palate,cancer_dx
+192261,109848009,Overlapping malignant neoplasm of pancreas,cancer_dx
+4003027,109875002,Overlapping malignant neoplasm of penis,cancer_dx
+4002343,109919002,Overlapping malignant neoplasm of peripheral nerves and autonomic nervous system,cancer_dx
+438090,109839004,"Overlapping malignant neoplasm of rectum, anus and anal canal",cancer_dx
+198092,109851002,Overlapping malignant neoplasm of retroperitoneum and peritoneum,cancer_dx
+133974,109264009,Overlapping malignant neoplasm of skin,cancer_dx
+199747,109837002,Overlapping malignant neoplasm of small intestine,cancer_dx
+378081,109349007,Overlapping malignant neoplasm of soft tissues,cancer_dx
+197803,109836006,Overlapping malignant neoplasm of stomach,cancer_dx
+436043,109823006,Overlapping malignant neoplasm of tongue,cancer_dx
+4002498,110013004,Overlapping malignant neoplasm of tonsil,cancer_dx
+73720,109870007,Overlapping malignant neoplasm of urinary system,cancer_dx
+4003682,109880006,Overlapping malignant neoplasm of uterine cervix,cancer_dx
+4003029,109885001,Overlapping malignant neoplasm of vulva,cancer_dx
+35619952,3.54621E+14,Overlapping primary malignant neoplasm of bone and articular cartilage of left upper limb,cancer_dx
+37018865,3.53661E+14,Overlapping primary malignant neoplasm of bone and articular cartilage of lower limb,cancer_dx
+35619086,3.53671E+14,Overlapping primary malignant neoplasm of bone and articular cartilage of right upper limb,cancer_dx
+37016891,713038003,Overlapping primary malignant neoplasm of bone and articular cartilage of upper limb,cancer_dx
+45769059,707628004,Overlapping squamous cell carcinoma of hypopharynx,cancer_dx
+45768900,707430007,Overlapping squamous cell carcinoma of laryngeal cartilage,cancer_dx
+45768899,707429002,Overlapping squamous cell carcinoma of larynx,cancer_dx
+45768978,707529004,Overlapping squamous cell carcinoma of oropharynx,cancer_dx
+40480611,443261008,Oxyphilic adenocarcinoma,cancer_dx
+37395579,2.36811E+14,Paget disease of anal canal,cancer_dx
+4299142,404119000,Pagetoid reticulosis,cancer_dx
+4301516,403946000,Paget's disease of nipple,cancer_dx
+40486118,447738006,Paget's disease of skin of scrotum,cancer_dx
+4116086,254898001,Paget's disease of vulva,cancer_dx
+4166769,274084007,Palate carcinoma,cancer_dx
+4110706,254638002,Pancoast tumor,cancer_dx
+37311469,792907004,Pancreatic ductal adenocarcinoma,cancer_dx
+4110881,254917006,Papillary cystadenocarcinoma of kidney,cancer_dx
+37116731,733608000,Papillary renal cell carcinoma,cancer_dx
+3655852,870327007,Papillary squamous cell carcinoma of nasopharynx,cancer_dx
+4116228,255029007,Papillary thyroid carcinoma,cancer_dx
+36713418,717734005,Papillary thyroid carcinoma with renal papillary neoplasia,cancer_dx
+37311897,789004008,Parafollicular cell carcinoma,cancer_dx
+4085561,281565009,Paraspinal neuroblastoma,cancer_dx
+4116231,255037004,Parathyroid carcinoma,cancer_dx
+4300695,404107008,Patch/plaque stage mycosis fungoides,cancer_dx
+42537145,736322001,Pediatric follicular lymphoma,cancer_dx
+4083498,281564008,Pelvic neuroblastoma,cancer_dx
+4300215,402911002,Penile verrucous carcinoma of Buschke-Löwenstein,cancer_dx
+4301517,403947009,Perianal Paget's disease,cancer_dx
+3655520,865951006,Perihilar cholangiocarcinoma,cancer_dx
+46271363,709471005,Periodontitis co-occurrent with leukemia,cancer_dx
+45769780,708504008,Periosteal osteosarcoma of jaw,cancer_dx
+4100557,253096008,Peripheral neuroectodermal tumor,cancer_dx
+4110733,254764001,Peripheral neuroepithelioma,cancer_dx
+434881,109977009,Peripheral T-cell lymphoma (clinical),cancer_dx
+760729,1.17091E+14,Peripheral T-cell lymphoma of axillary lymph node,cancer_dx
+36684464,1.17211E+14,Peripheral T-cell lymphoma of lymph nodes of multiple sites,cancer_dx
+760728,1.17061E+14,Peripheral T-cell lymphoma of spleen,cancer_dx
+760730,1.17111E+14,Peripheral T-cell lymphoma of thoracic lymph node,cancer_dx
+4079700,277653002,Peripheral T-cell lymphoma - pleomorphic medium and large cell,cancer_dx
+4082493,277651000,Peripheral T-cell lymphoma - pleomorphic small cell,cancer_dx
+40486741,449386007,Philadelphia chromosome negative chronic myelogenous leukemia,cancer_dx
+37017893,714251006,Philadelphia chromosome-negative precursor B-cell acute lymphoblastic leukemia,cancer_dx
+4138008,425688002,Philadelphia chromosome-positive acute lymphoblastic leukemia,cancer_dx
+40493442,449108003,Philadelphia chromosome positive chronic myelogenous leukemia,cancer_dx
+4295626,403909004,Pigmented basal cell carcinoma,cancer_dx
+4162978,398670003,Pigmented dermatofibrosarcoma protuberans of skin,cancer_dx
+4141250,307610008,Pilomatrix carcinoma of skin,cancer_dx
+37396187,715904005,Pineal parenchymal tumor of intermediate differentiation,cancer_dx
+35614931,767448007,Pineoblastoma,cancer_dx
+4114193,254955001,Pituitary carcinoma,cancer_dx
+4110708,254655003,Plantar verrucous carcinoma,cancer_dx
+37110402,724648008,Plasmablastic lymphoma,cancer_dx
+133154,95210003,Plasma cell leukemia,cancer_dx
+760936,1.22981E+14,Plasma cell leukemia in relapse,cancer_dx
+133158,95209008,Plasma cell leukemia in remission,cancer_dx
+4190642,415110002,Plasma cell myeloma/plasmacytoma,cancer_dx
+4216139,415112005,Plasmacytoma,cancer_dx
+4300687,404071006,Pleomorphic liposarcoma,cancer_dx
+4220469,398903003,Pleomorphic malignant fibrous histiocytoma of skin,cancer_dx
+4301647,404054005,Pleomorphic rhabdomyosarcoma,cancer_dx
+45769094,707670009,Pleuropulmonary blastoma,cancer_dx
+45769095,707671008,Pleuropulmonary blastoma type I,cancer_dx
+45769096,707672001,Pleuropulmonary blastoma type II,cancer_dx
+45769097,707673006,Pleuropulmonary blastoma type III,cancer_dx
+4301660,404108003,Poikilodermatous mycosis fungoides,cancer_dx
+135214,109992005,Polycythemia vera (clinical),cancer_dx
+4312929,423038006,Polymorphous low grade adenocarcinoma of salivary gland,cancer_dx
+761025,1.34871E+14,Poorly differentiated malignant carcinoid tumor,cancer_dx
+36713549,717921000,Poorly-differentiated neuroendocrine carcinoma of thymus,cancer_dx
+4082461,277572006,Precursor B-cell acute lymphoblastic leukemia,cancer_dx
+4138752,425941003,Precursor B-cell acute lymphoblastic leukemia in remission,cancer_dx
+4300701,404137004,Precursor B-cell lymphoblastic lymphoma involving skin,cancer_dx
+4221907,420890002,Precursor T cell lymphoblastic leukemia/lymphoblastic lymphoma,cancer_dx
+4227963,421246008,Precursor T-cell lymphoblastic lymphoma,cancer_dx
+4079690,277614006,Prethymic and thymic T-cell lymphoma/leukemia,cancer_dx
+45768884,707409003,Primary acinar cell carcinoma of lung,cancer_dx
+45769030,707590006,Primary acinar cell carcinoma of oropharynx,cancer_dx
+45768863,707386008,Primary acinar cell carcinoma of trachea,cancer_dx
+45768824,707337006,Primary adenocarcinoma of accessory sinus,cancer_dx
+36715928,721718003,Primary adenocarcinoma of ampulla of Vater,cancer_dx
+37016237,1.84741E+14,Primary adenocarcinoma of anus,cancer_dx
+36713361,6.81601E+14,Primary adenocarcinoma of ascending colon,cancer_dx
+36715911,721695008,Primary adenocarcinoma of ascending colon and right flexure,cancer_dx
+37116592,733354000,Primary adenocarcinoma of biliary tract,cancer_dx
+36713362,6.81621E+14,Primary adenocarcinoma of body of pancreas,cancer_dx
+36717622,6.81631E+14,Primary adenocarcinoma of body of stomach,cancer_dx
+36717490,721630000,Primary adenocarcinoma of cardia of stomach,cancer_dx
+37016238,1.84781E+14,Primary adenocarcinoma of cervix uteri,cancer_dx
+37018650,9.1161E+13,Primary adenocarcinoma of chest wall,cancer_dx
+36715787,721546004,Primary adenocarcinoma of ciliary epithelium,cancer_dx
+42872396,1.701E+12,Primary adenocarcinoma of colon,cancer_dx
+36717173,721559007,Primary adenocarcinoma of common bile duct,cancer_dx
+36715798,721558004,Primary adenocarcinoma of cystic duct,cancer_dx
+37208245,6.81651E+14,Primary adenocarcinoma of descending colon,cancer_dx
+36717495,721699002,Primary adenocarcinoma of descending colon and splenic flexure,cancer_dx
+37117763,733355004,Primary adenocarcinoma of digestive organ,cancer_dx
+37016162,1.28041E+14,Primary adenocarcinoma of distal third of esophagus,cancer_dx
+37016242,2.08041E+14,Primary adenocarcinoma of endocervix,cancer_dx
+36715788,721547008,Primary adenocarcinoma of epithelium of iris,cancer_dx
+36717176,721628002,Primary adenocarcinoma of esophagogastric junction,cancer_dx
+45768828,707342003,Primary adenocarcinoma of ethmoidal sinus,cancer_dx
+37018972,9.9101E+13,Primary adenocarcinoma of fallopian tube,cancer_dx
+45768829,707343008,Primary adenocarcinoma of frontal sinus,cancer_dx
+37018657,9.541E+12,Primary adenocarcinoma of gallbladder,cancer_dx
+36713363,6.81721E+14,Primary adenocarcinoma of head of pancreas,cancer_dx
+45768871,707395000,Primary adenocarcinoma of hypopharynx,cancer_dx
+37117201,724536000,Primary adenocarcinoma of ileum,cancer_dx
+37018665,9.9111E+13,Primary adenocarcinoma of intestinal tract,cancer_dx
+37110321,724537009,Primary adenocarcinoma of jejunum,cancer_dx
+36715790,721549006,Primary adenocarcinoma of lacrimal apparatus,cancer_dx
+761906,1.84801E+14,Primary adenocarcinoma of lacrimal gland,cancer_dx
+36712707,1.07888E+15,Primary adenocarcinoma of lower lobe of left lung,cancer_dx
+36712709,1.07893E+15,Primary adenocarcinoma of lower lobe of right lung,cancer_dx
+36715844,721617001,Primary adenocarcinoma of lower third of esophagus due to Barrett esophagus,cancer_dx
+45768916,707451005,Primary adenocarcinoma of lung,cancer_dx
+45771012,707339009,Primary adenocarcinoma of maxillary sinus,cancer_dx
+36717484,721561003,Primary adenocarcinoma of middle ear,cancer_dx
+36715849,721623006,Primary adenocarcinoma of middle third of esophagus,cancer_dx
+36715799,721560002,Primary adenocarcinoma of nasal cavity,cancer_dx
+761907,1.84861E+14,Primary adenocarcinoma of nasopharynx,cancer_dx
+45768878,707402007,Primary adenocarcinoma of oropharynx,cancer_dx
+36715836,721606002,Primary adenocarcinoma of overlapping lesion of accessory sinuses,cancer_dx
+36715850,721624000,Primary adenocarcinoma of overlapping lesion of esophagus,cancer_dx
+36715887,721669006,Primary adenocarcinoma of overlapping lesion of small intestine,cancer_dx
+36715856,721633003,Primary adenocarcinoma of overlapping lesion of stomach,cancer_dx
+37109929,723879002,Primary adenocarcinoma of overlapping lesion of urinary organ,cancer_dx
+36715796,721556000,Primary adenocarcinoma of palate,cancer_dx
+42872399,1.651E+12,Primary adenocarcinoma of pancreas,cancer_dx
+36715802,721568009,Primary adenocarcinoma of parametrium,cancer_dx
+37116599,733362008,Primary adenocarcinoma of paraurethral gland,cancer_dx
+36715797,721557009,Primary adenocarcinoma of parotid gland,cancer_dx
+37018673,1.84871E+14,Primary adenocarcinoma of pelvis,cancer_dx
+36715933,721725005,Primary adenocarcinoma of peritoneum,cancer_dx
+36717177,721632008,Primary adenocarcinoma of pyloric antrum of stomach,cancer_dx
+37016239,1.84881E+14,Primary adenocarcinoma of rectosigmoid junction,cancer_dx
+37018963,7.9281E+13,Primary adenocarcinoma of skin,cancer_dx
+37016240,1.84891E+14,Primary adenocarcinoma of small intestine,cancer_dx
+45768830,707344002,Primary adenocarcinoma of sphenoidal sinus,cancer_dx
+45768940,707479004,Primary adenocarcinoma of subglottis,cancer_dx
+42537751,737308008,Primary adenocarcinoma of sublingual gland,cancer_dx
+42537752,737309000,Primary adenocarcinoma of submandibular gland,cancer_dx
+45768936,707475005,Primary adenocarcinoma of trachea,cancer_dx
+36715912,721696009,Primary adenocarcinoma of transverse colon,cancer_dx
+36712708,1.0789E+15,Primary adenocarcinoma of upper lobe of left lung,cancer_dx
+36717017,1.07896E+15,Primary adenocarcinoma of upper lobe of right lung,cancer_dx
+36715848,721622001,Primary adenocarcinoma of upper third of esophagus,cancer_dx
+37116429,733136006,Primary adenocarcinoma of urethra,cancer_dx
+36715803,721569001,Primary adenocarcinoma of uterine ligament,cancer_dx
+37018666,9.9121E+13,Primary adenocarcinoma of vagina,cancer_dx
+37018648,9.1131E+13,Primary adenocarcinoma of vulva,cancer_dx
+36715800,721562005,Primary adenocarcinoma overlapping lesion of retroperitoneum peritoneum and omentum,cancer_dx
+45768985,707539005,Primary adenoid cystic carcinoma of hypopharynx,cancer_dx
+45768928,707466008,Primary adenoid cystic carcinoma of lung,cancer_dx
+37018571,7.391E+12,Primary adenoid cystic carcinoma of nasopharynx,cancer_dx
+45768944,707484005,Primary adenoid squamous cell carcinoma of hypopharynx,cancer_dx
+45768896,707425008,Primary adenoid squamous cell carcinoma of larynx,cancer_dx
+37016125,1.07791E+14,Primary adenosquamous carcinoma of endometrium,cancer_dx
+45768945,707485006,Primary adenosquamous carcinoma of hypopharynx,cancer_dx
+45768881,707405009,Primary adenosquamous carcinoma of lung,cancer_dx
+45769024,707583001,Primary adenosquamous carcinoma of oropharynx,cancer_dx
+45768869,707393007,Primary adenosquamous carcinoma of trachea,cancer_dx
+45771018,707424007,Primary adenosquamous cell carcinoma of larynx,cancer_dx
+36715782,721540005,Primary adnexal carcinoma of skin,cancer_dx
+36676672,773624006,Primary ameloblastic carcinoma,cancer_dx
+36717175,721576006,Primary angiosarcoma of breast,cancer_dx
+36715808,721575005,Primary angiosarcoma of heart,cancer_dx
+45768873,707397008,Primary basal cell adenocarcinoma of oropharynx,cancer_dx
+36712712,1.0791E+15,Primary basal cell carcinoma of left ear,cancer_dx
+36712713,1.07911E+15,Primary basal cell carcinoma of left eyelid,cancer_dx
+36717018,1.07913E+15,Primary basal cell carcinoma of left lower limb,cancer_dx
+36712711,1.07909E+15,Primary basal cell carcinoma of left upper limb,cancer_dx
+36712714,1.07916E+15,Primary basal cell carcinoma of right ear,cancer_dx
+36712715,1.07917E+15,Primary basal cell carcinoma of right eyelid,cancer_dx
+36712716,1.07919E+15,Primary basal cell carcinoma of right lower limb,cancer_dx
+36717259,1.07915E+15,Primary basal cell carcinoma of right upper limb,cancer_dx
+45768946,707486007,Primary basaloid carcinoma of hypopharynx,cancer_dx
+45768895,707423001,Primary basaloid carcinoma of larynx,cancer_dx
+45769021,707580003,Primary basaloid carcinoma of oropharynx,cancer_dx
+45772941,707481002,Primary basaloid squamous cell carcinoma of hypopharynx,cancer_dx
+45769089,707662004,Primary basaloid squamous cell carcinoma of larynx,cancer_dx
+45768919,707454002,Primary basaloid squamous cell carcinoma of lung,cancer_dx
+45772951,707579001,Primary basaloid squamous cell carcinoma of oropharynx,cancer_dx
+45772932,707390005,Primary basaloid squamous cell carcinoma of trachea,cancer_dx
+35624275,766935007,Primary bone lymphoma,cancer_dx
+45769028,707587000,Primary carcinoma ex pleomorphic adenoma of oropharynx,cancer_dx
+45771013,707345001,Primary carcinoma of accessory sinus,cancer_dx
+45768831,707346000,Primary carcinoma of ethmoidal sinus,cancer_dx
+45768833,707349007,Primary carcinoma of frontal sinus,cancer_dx
+4094864,187769009,Primary carcinoma of liver,cancer_dx
+45768832,707347009,Primary carcinoma of maxillary sinus,cancer_dx
+45772927,707348004,Primary carcinoma of sphenoidal sinus,cancer_dx
+45769035,707596000,Primary carcinosarcoma of lung,cancer_dx
+36715927,721716004,Primary cholangiocarcinoma of intrahepatic biliary tract,cancer_dx
+42539037,735678002,Primary chondrosarcoma of articular cartilage,cancer_dx
+37109898,723844004,Primary chondrosarcoma of articular cartilage of limb,cancer_dx
+37109899,723845003,Primary chondrosarcoma of articular cartilage of pelvis,cancer_dx
+37109900,723847006,Primary chondrosarcoma of articular cartilage of rib,cancer_dx
+42539556,735679005,Primary chondrosarcoma of bone,cancer_dx
+37109897,723843005,Primary chondrosarcoma of bone of limb,cancer_dx
+37018647,9.1081E+13,Primary chondrosarcoma of bone of lower limb,cancer_dx
+37018646,9.1061E+13,Primary chondrosarcoma of bone of pelvis,cancer_dx
+37119229,723846002,Primary chondrosarcoma of bone of rib,cancer_dx
+37018644,9.1031E+13,Primary chondrosarcoma of bone of upper limb,cancer_dx
+46272955,711414003,Primary clear cell adenocarcinoma of lung,cancer_dx
+45768877,707401000,Primary clear cell adenocarcinoma of oropharynx,cancer_dx
+45768933,707471001,Primary clear cell adenocarcinoma of trachea,cancer_dx
+3655683,866176003,Primary clear cell peritoneal carcinoma,cancer_dx
+45768918,707453008,Primary clear cell squamous cell carcinoma of lung,cancer_dx
+45768866,707389001,Primary clear cell squamous cell carcinoma of trachea,cancer_dx
+36715921,721709000,Primary cloacogenic carcinoma of anal canal,cancer_dx
+4301669,404145009,Primary cutaneous anaplastic large cell B-cell lymphoma,cancer_dx
+36676804,773995001,Primary cutaneous anaplastic large cell lymphoma,cancer_dx
+4294435,402881008,Primary cutaneous B-cell lymphoma,cancer_dx
+4029188,128875000,Primary cutaneous CD30+ large T-cell lymphoma,cancer_dx
+35622904,765136002,Primary cutaneous CD8 positive aggressive epidermotropic cytotoxic T-cell lymphoma,cancer_dx
+4297358,404144008,Primary cutaneous diffuse large cell B-cell lymphoma,cancer_dx
+42539527,735332000,Primary cutaneous diffuse large cell B-cell lymphoma of lower extremity,cancer_dx
+4301668,404143002,Primary cutaneous follicular center B-cell lymphoma,cancer_dx
+37116745,733627006,Primary cutaneous gamma-delta-positive T-cell lymphoma,cancer_dx
+4297357,404141000,Primary cutaneous immunocytoma,cancer_dx
+4294434,402880009,Primary cutaneous large T-cell lymphoma,cancer_dx
+4266193,400001003,Primary cutaneous lymphoma,cancer_dx
+4297356,404140004,Primary cutaneous marginal zone B-cell lymphoma,cancer_dx
+4300702,404142007,Primary cutaneous plasmacytoma,cancer_dx
+4266805,400122007,Primary cutaneous T-cell lymphoma,cancer_dx
+45771025,707589002,Primary cystadenocarcinoma of oropharynx,cancer_dx
+36676291,772992009,Primary differentiated carcinoma of thyroid gland,cancer_dx
+37017270,713516007,Primary effusion lymphoma,cancer_dx
+37018062,714463003,Primary effusion lymphoma co-occurrent with infection caused by Human herpesvirus 8,cancer_dx
+36717487,721602000,Primary embryonal carcinoma of testis,cancer_dx
+42538693,762458004,Primary endometrioid carcinoma of endometrium of body of uterus,cancer_dx
+45769029,707588005,Primary epithelial-myoepithelial carcinoma of oropharynx,cancer_dx
+37109906,723854000,Primary Ewing sarcoma of articular cartilage of limb,cancer_dx
+37109907,723855004,Primary Ewing sarcoma of articular cartilage of pelvis,cancer_dx
+37109908,723856003,Primary Ewing sarcoma of articular cartilage of rib,cancer_dx
+37109905,723853006,Primary Ewing sarcoma of bone of limb,cancer_dx
+37118986,723887001,Primary Ewing sarcoma of bone of rib,cancer_dx
+764936,8.7131E+13,Primary extramedullary malignant tumor of spinal cord,cancer_dx
+45768879,707403002,Primary fetal adenocarcinoma of lung,cancer_dx
+37110404,724650000,Primary follicular dendritic cell sarcoma,cancer_dx
+42536762,735757008,Primary ganglioneuroblastoma of brain,cancer_dx
+45768947,707487003,Primary giant cell carcinoma of hypopharynx,cancer_dx
+45769087,707660007,Primary giant cell carcinoma of larynx,cancer_dx
+45768868,707392002,Primary giant cell carcinoma of trachea,cancer_dx
+36716438,722445001,Primary giant cell sarcoma of peritoneum,cancer_dx
+36716437,722444002,Primary giant cell sarcoma of retroperitoneum,cancer_dx
+36717624,6.84911E+14,Primary glioblastoma multiforme of frontal lobe,cancer_dx
+37399544,716652006,Primary hepatic neuroendocrine carcinoma,cancer_dx
+36716618,722685004,Primary high grade serous adenocarcinoma of ovary,cancer_dx
+45769032,707592003,Primary infiltrating duct carcinoma of oropharynx,cancer_dx
+4227209,420788006,Primary intraocular non-Hodgkin malignant lymphoma,cancer_dx
+37016439,4.5221E+13,Primary invasive malignant neoplasm of female breast,cancer_dx
+36716497,722524005,Primary invasive pleomorphic lobular carcinoma of breast,cancer_dx
+36716489,722514002,Primary leiomyosarcoma of peritoneum,cancer_dx
+36717566,722513008,Primary leiomyosarcoma of retroperitoneum,cancer_dx
+36715810,721578007,Primary liposarcoma of male genital organ,cancer_dx
+36716491,722516000,Primary liposarcoma of peritoneum,cancer_dx
+36716490,722515001,Primary liposarcoma of retroperitoneum,cancer_dx
+36715809,721577002,Primary liposarcoma of soft tissue of limb,cancer_dx
+36717228,722684000,Primary low grade serous adenocarcinoma of ovary,cancer_dx
+45768950,707491008,Primary lymphoepithelial carcinoma of hypopharynx,cancer_dx
+45772928,707360003,Primary lymphoepithelial carcinoma of larynx,cancer_dx
+45769025,707584007,Primary lymphoepithelial carcinoma of oropharynx,cancer_dx
+45768952,707493006,Primary lymphoepithelial carcinoma of trachea,cancer_dx
+35622133,763477007,Primary lymphoma of conjunctiva,cancer_dx
+37016196,1.47101E+14,Primary malignant astrocytoma of central nervous system,cancer_dx
+37016124,1.07771E+14,Primary malignant clear cell neoplasm of endometrium,cancer_dx
+37110334,724554001,Primary malignant epithelial neoplasm of endocrine gland,cancer_dx
+45769098,707674000,Primary malignant epithelial neoplasm of trachea,cancer_dx
+764935,8.7101E+13,Primary malignant glioma of brain,cancer_dx
+37018660,9.6291E+13,Primary malignant inflammatory neoplasm of female breast,cancer_dx
+36716512,722543005,Primary malignant melanoma of anal canal,cancer_dx
+36716975,723281005,Primary malignant melanoma of anus,cancer_dx
+36716605,722665003,Primary malignant melanoma of cornea,cancer_dx
+36717174,721563000,Primary malignant melanoma of vagina,cancer_dx
+36716634,722718001,Primary malignant meningioma,cancer_dx
+36715865,721643000,Primary malignant mesenchymal neoplasm of stomach,cancer_dx
+37016123,1.07751E+14,Primary malignant mixed Mullerian neoplasm of endometrium,cancer_dx
+439392,372087000,Primary malignant neoplasm,cancer_dx
+36684472,1.48911E+14,Primary malignant neoplasm of abdomen,cancer_dx
+193971,371962007,Primary malignant neoplasm of abdominal esophagus,cancer_dx
+4244491,93657007,Primary malignant neoplasm of abducens nerve,cancer_dx
+4247716,93658002,Primary malignant neoplasm of accessory nerve,cancer_dx
+259748,93659005,Primary malignant neoplasm of accessory sinus,cancer_dx
+4246013,93660000,Primary malignant neoplasm of acoustic nerve,cancer_dx
+4246014,93661001,Primary malignant neoplasm of acromion,cancer_dx
+4246793,93662008,Primary malignant neoplasm of adenoid,cancer_dx
+4246794,93663003,Primary malignant neoplasm of adnexa of skin,cancer_dx
+4162115,371963002,Primary malignant neoplasm of adrenal cortex,cancer_dx
+198104,93665005,Primary malignant neoplasm of adrenal gland,cancer_dx
+4162859,371966005,Primary malignant neoplasm of adrenal medulla,cancer_dx
+4246015,93667002,Primary malignant neoplasm of alveolar ridge mucosa,cancer_dx
+441225,371967001,Primary malignant neoplasm of ampulla of Vater,cancer_dx
+436348,93669004,Primary malignant neoplasm of anal canal,cancer_dx
+436643,93670003,Primary malignant neoplasm of anterior aspect of epiglottis,cancer_dx
+432844,93671004,Primary malignant neoplasm of anterior mediastinum,cancer_dx
+438982,93672006,Primary malignant neoplasm of anterior portion of floor of mouth,cancer_dx
+436042,371968006,Primary malignant neoplasm of anterior two-thirds of tongue,cancer_dx
+438080,93674007,Primary malignant neoplasm of anterior wall of nasopharynx,cancer_dx
+40649300,93675008,Primary malignant neoplasm of anterior wall of urinary bladder,cancer_dx
+80045,93676009,Primary malignant neoplasm of anus,cancer_dx
+25757,93677000,Primary malignant neoplasm of aortic body,cancer_dx
+4162117,371969003,Primary malignant neoplasm of apex of urinary bladder,cancer_dx
+433143,93679002,Primary malignant neoplasm of appendix,cancer_dx
+433148,93680004,Primary malignant neoplasm of areola of female breast,cancer_dx
+436050,93681000,Primary malignant neoplasm of areola of male breast,cancer_dx
+444203,128466006,Primary malignant neoplasm of articular cartilage,cancer_dx
+4247719,93683002,Primary malignant neoplasm of ascending colon,cancer_dx
+4246016,93684008,Primary malignant neoplasm of axilla,cancer_dx
+441513,372092003,Primary malignant neoplasm of axillary tail of breast,cancer_dx
+36684817,3.53421E+14,Primary malignant neoplasm of axillary tail of left female breast,cancer_dx
+36684820,3.53501E+14,Primary malignant neoplasm of axillary tail of right female breast,cancer_dx
+4246017,93686005,Primary malignant neoplasm of back,cancer_dx
+256633,93687001,Primary malignant neoplasm of base of tongue,cancer_dx
+36712934,1.56358E+16,Primary malignant neoplasm of bilateral female breasts,cancer_dx
+194589,371970002,Primary malignant neoplasm of biliary tract,cancer_dx
+196360,93689003,Primary malignant neoplasm of bladder,cancer_dx
+4246801,93714009,Primary malignant neoplasm of blood vessel,cancer_dx
+4247720,93690007,Primary malignant neoplasm of blood vessel of abdomen,cancer_dx
+4246018,93692004,Primary malignant neoplasm of blood vessel of axilla,cancer_dx
+4247227,93693009,Primary malignant neoplasm of blood vessel of buttock,cancer_dx
+4246019,93694003,Primary malignant neoplasm of blood vessel of face,cancer_dx
+4246796,93695002,Primary malignant neoplasm of blood vessel of finger,cancer_dx
+4246020,93696001,Primary malignant neoplasm of blood vessel of foot,cancer_dx
+4246797,93697005,Primary malignant neoplasm of blood vessel of forearm,cancer_dx
+4246021,93698000,Primary malignant neoplasm of blood vessel of hand,cancer_dx
+4246798,93699008,Primary malignant neoplasm of blood vessel of head,cancer_dx
+4246022,93700009,Primary malignant neoplasm of blood vessel of hip,cancer_dx
+4246023,93701008,Primary malignant neoplasm of blood vessel of inguinal region,cancer_dx
+4220184,400074007,Primary malignant neoplasm of blood vessel of lower leg,cancer_dx
+4247228,93703006,Primary malignant neoplasm of blood vessel of lower limb,cancer_dx
+4247723,93704000,Primary malignant neoplasm of blood vessel of neck,cancer_dx
+4246799,93705004,Primary malignant neoplasm of blood vessel of pelvis,cancer_dx
+4247229,93706003,Primary malignant neoplasm of blood vessel of perineum,cancer_dx
+4247724,93707007,Primary malignant neoplasm of blood vessel of popliteal space,cancer_dx
+4247230,93708002,Primary malignant neoplasm of blood vessel of shoulder,cancer_dx
+4246024,93709005,Primary malignant neoplasm of blood vessel of thigh,cancer_dx
+4247725,93710000,Primary malignant neoplasm of blood vessel of thorax,cancer_dx
+4246800,93711001,Primary malignant neoplasm of blood vessel of toe,cancer_dx
+4247232,93712008,Primary malignant neoplasm of blood vessel of trunk,cancer_dx
+4221964,399884001,Primary malignant neoplasm of blood vessel of upper arm,cancer_dx
+4247233,93713003,Primary malignant neoplasm of blood vessel of upper limb,cancer_dx
+434293,93715005,Primary malignant neoplasm of body of pancreas,cancer_dx
+79749,93716006,Primary malignant neoplasm of body of penis,cancer_dx
+193422,93717002,Primary malignant neoplasm of body of stomach,cancer_dx
+4162860,371971003,Primary malignant neoplasm of body of uterus,cancer_dx
+76914,93725000,Primary malignant neoplasm of bone,cancer_dx
+4247726,93720005,Primary malignant neoplasm of bone marrow,cancer_dx
+4246025,93721009,Primary malignant neoplasm of bone of face,cancer_dx
+35619980,3.54651E+14,Primary malignant neoplasm of bone of left lower limb,cancer_dx
+35619970,3.54641E+14,Primary malignant neoplasm of bone of left upper limb,cancer_dx
+4246026,93722002,Primary malignant neoplasm of bone of lower limb,cancer_dx
+35619990,3.54681E+14,Primary malignant neoplasm of bone of right lower limb,cancer_dx
+35619986,3.54671E+14,Primary malignant neoplasm of bone of right upper limb,cancer_dx
+4246802,93723007,Primary malignant neoplasm of bone of skull,cancer_dx
+4246803,93724001,Primary malignant neoplasm of bone of upper limb,cancer_dx
+4156114,371975007,Primary malignant neoplasm of border of tongue,cancer_dx
+36712933,1.56357E+16,Primary malignant neoplasm of both ovaries,cancer_dx
+380055,93727008,Primary malignant neoplasm of brain,cancer_dx
+441806,93726004,Primary malignant neoplasm of brain stem,cancer_dx
+4003674,109834009,Primary malignant neoplasm of branchial cleft,cancer_dx
+4162253,372137005,Primary malignant neoplasm of breast,cancer_dx
+4187851,373090000,Primary malignant neoplasm of breast lower inner quadrant,cancer_dx
+4188545,373091001,Primary malignant neoplasm of breast lower outer quadrant,cancer_dx
+4158563,373089009,Primary malignant neoplasm of breast upper inner quadrant,cancer_dx
+4187850,373088001,Primary malignant neoplasm of breast upper outer quadrant,cancer_dx
+3662037,1.0829E+15,Primary malignant neoplasm of breast with axillary lymph node invasion,cancer_dx
+432264,93728003,Primary malignant neoplasm of broad ligament,cancer_dx
+442139,93734005,Primary malignant neoplasm of bronchus,cancer_dx
+433973,93729006,Primary malignant neoplasm of bronchus of left lower lobe,cancer_dx
+4246027,93730001,Primary malignant neoplasm of bronchus of left upper lobe,cancer_dx
+4247727,93731002,Primary malignant neoplasm of bronchus of right lower lobe,cancer_dx
+4246804,93732009,Primary malignant neoplasm of bronchus of right middle lobe,cancer_dx
+4246805,93733004,Primary malignant neoplasm of bronchus of right upper lobe,cancer_dx
+134579,371976008,Primary malignant neoplasm of buccal mucosa,cancer_dx
+4247236,93737003,Primary malignant neoplasm of calcaneus,cancer_dx
+432838,93738008,Primary malignant neoplasm of cardia of stomach,cancer_dx
+4247821,93739000,Primary malignant neoplasm of carina,cancer_dx
+27235,93740003,Primary malignant neoplasm of carotid body,cancer_dx
+4246807,93741004,Primary malignant neoplasm of carpal bone,cancer_dx
+4246028,93742006,Primary malignant neoplasm of cartilage of nose,cancer_dx
+4246029,93743001,Primary malignant neoplasm of cauda equina,cancer_dx
+432837,371977004,Primary malignant neoplasm of cecum,cancer_dx
+4247822,93744007,Primary malignant neoplasm of central nervous system,cancer_dx
+432845,93745008,Primary malignant neoplasm of central portion of female breast,cancer_dx
+36684819,3.53441E+14,Primary malignant neoplasm of central portion of female left breast,cancer_dx
+36684821,3.53521E+14,Primary malignant neoplasm of central portion of female right breast,cancer_dx
+433149,93746009,Primary malignant neoplasm of cerebellum,cancer_dx
+436926,93747000,Primary malignant neoplasm of cerebral meninges,cancer_dx
+432848,93748005,Primary malignant neoplasm of cerebral ventricle,cancer_dx
+380661,93749002,Primary malignant neoplasm of cerebrum,cancer_dx
+441224,371978009,Primary malignant neoplasm of cervical esophagus,cancer_dx
+4246030,93751003,Primary malignant neoplasm of cervical vertebral column,cancer_dx
+4246031,93753000,Primary malignant neoplasm of cheek,cancer_dx
+4246032,93754006,Primary malignant neoplasm of chest wall,cancer_dx
+378696,93755007,Primary malignant neoplasm of choroid,cancer_dx
+4246808,93756008,Primary malignant neoplasm of ciliary body (primary),cancer_dx
+4247823,93757004,Primary malignant neoplasm of clavicle,cancer_dx
+197225,371980003,Primary malignant neoplasm of clitoris,cancer_dx
+4003675,109840002,Primary malignant neoplasm of cloacogenic zone,cancer_dx
+4246809,93759001,Primary malignant neoplasm of coccygeal body,cancer_dx
+4246033,93760006,Primary malignant neoplasm of coccyx,cancer_dx
+197500,93761005,Primary malignant neoplasm of colon,cancer_dx
+255192,371981004,Primary malignant neoplasm of commissure of lip,cancer_dx
+4246034,93763008,Primary malignant neoplasm of common bile duct,cancer_dx
+373151,93764002,Primary malignant neoplasm of conjunctiva (primary),cancer_dx
+375490,93766000,Primary malignant neoplasm of cornea (primary),cancer_dx
+433975,93767009,Primary malignant neoplasm of cranial nerve,cancer_dx
+442134,93768004,Primary malignant neoplasm of craniopharyngeal duct,cancer_dx
+4246035,93769007,Primary malignant neoplasm of cuboid,cancer_dx
+4247824,93770008,Primary malignant neoplasm of cystic duct,cancer_dx
+4003028,109876001,Primary malignant neoplasm of descended testis,cancer_dx
+441800,93771007,Primary malignant neoplasm of descending colon,cancer_dx
+4247825,93772000,Primary malignant neoplasm of diaphragm,cancer_dx
+40492416,447416008,Primary malignant neoplasm of distal bile duct,cancer_dx
+42709931,449803009,Primary malignant neoplasm of dome of urinary bladder,cancer_dx
+434587,93773005,Primary malignant neoplasm of dorsal surface of tongue,cancer_dx
+435752,93775003,Primary malignant neoplasm of duodenum,cancer_dx
+4216273,415177008,"Primary malignant neoplasm of ear, nose AND/OR throat",cancer_dx
+4246036,93776002,Primary malignant neoplasm of ectopic female breast tissue,cancer_dx
+4246810,93777006,Primary malignant neoplasm of ectopic male breast tissue,cancer_dx
+4247237,93778001,Primary malignant neoplasm of endocardium,cancer_dx
+441805,93779009,Primary malignant neoplasm of endocervix,cancer_dx
+133420,371983001,Primary malignant neoplasm of endocrine gland,cancer_dx
+4247238,93781006,Primary malignant neoplasm of endometrium,cancer_dx
+4247826,93782004,Primary malignant neoplasm of epicardium,cancer_dx
+80340,93783009,Primary malignant neoplasm of epididymis,cancer_dx
+4246922,93784003,Primary malignant neoplasm of epiglottis,cancer_dx
+36716505,722533007,Primary malignant neoplasm of esophagogastric junction,cancer_dx
+26638,371984007,Primary malignant neoplasm of esophagus,cancer_dx
+140046,93787005,Primary malignant neoplasm of ethmoidal sinus,cancer_dx
+4247239,93786001,Primary malignant neoplasm of ethmoid bone,cancer_dx
+4246037,93788000,Primary malignant neoplasm of eustachian tube,cancer_dx
+436358,93789008,Primary malignant neoplasm of exocervix,cancer_dx
+762368,3.3581E+13,Primary malignant neoplasm of extradural spinal cord,cancer_dx
+40486896,446189008,Primary malignant neoplasm of extrahepatic bile duct,cancer_dx
+374874,371986009,Primary malignant neoplasm of eye,cancer_dx
+442132,93792007,Primary malignant neoplasm of face,cancer_dx
+4246923,93793002,Primary malignant neoplasm of facial nerve,cancer_dx
+201801,371987000,Primary malignant neoplasm of fallopian tube,cancer_dx
+4155169,371988005,Primary malignant neoplasm of false vocal cord,cancer_dx
+137809,93796005,Primary malignant neoplasm of female breast,cancer_dx
+201238,93797001,Primary malignant neoplasm of female genital organ,cancer_dx
+36684818,3.53431E+14,Primary malignant neoplasm of female left breast,cancer_dx
+765123,3.53511E+14,Primary malignant neoplasm of female right breast,cancer_dx
+4246039,93798006,Primary malignant neoplasm of femur,cancer_dx
+4246924,93799003,Primary malignant neoplasm of fibula,cancer_dx
+4311474,93800004,Primary malignant neoplasm of first cuneiform bone of foot,cancer_dx
+4247241,93801000,Primary malignant neoplasm of flank,cancer_dx
+135750,93802007,Primary malignant neoplasm of floor of mouth,cancer_dx
+4247828,93803002,Primary malignant neoplasm of foot,cancer_dx
+4246040,93804008,Primary malignant neoplasm of forearm,cancer_dx
+4311475,93806005,Primary malignant neoplasm of frontal bone,cancer_dx
+441233,93807001,Primary malignant neoplasm of frontal lobe,cancer_dx
+132258,93808006,Primary malignant neoplasm of frontal sinus,cancer_dx
+435751,93809003,Primary malignant neoplasm of fundus of stomach,cancer_dx
+4003683,109882003,Primary malignant neoplasm of fundus uteri,cancer_dx
+197806,372139008,Primary malignant neoplasm of gallbladder,cancer_dx
+4179720,363745004,Primary malignant neoplasm of gastrointestinal tract,cancer_dx
+4311476,93812000,Primary malignant neoplasm of gingival mucosa,cancer_dx
+438370,371989002,Primary malignant neoplasm of glans penis,cancer_dx
+4247242,93814004,Primary malignant neoplasm of glomus jugulare,cancer_dx
+4246042,93815003,Primary malignant neoplasm of glossopharyngeal nerve,cancer_dx
+260336,93816002,Primary malignant neoplasm of glottis,cancer_dx
+437224,93818001,Primary malignant neoplasm of greater curvature of stomach,cancer_dx
+4311477,93817006,Primary malignant neoplasm of great vessels,cancer_dx
+140950,371990006,Primary malignant neoplasm of gum,cancer_dx
+4311478,93820003,Primary malignant neoplasm of hamate bone,cancer_dx
+4246120,93821004,Primary malignant neoplasm of hand,cancer_dx
+438694,371991005,Primary malignant neoplasm of hard palate,cancer_dx
+442131,93824007,Primary malignant neoplasm of head,cancer_dx
+440649,372119009,Primary malignant neoplasm of head of pancreas,cancer_dx
+316644,93825008,Primary malignant neoplasm of heart,cancer_dx
+438979,93826009,Primary malignant neoplasm of hepatic flexure of colon,cancer_dx
+4246121,93827000,Primary malignant neoplasm of hilus of lung,cancer_dx
+4247829,93828005,Primary malignant neoplasm of hypoglossal nerve,cancer_dx
+434577,93829002,Primary malignant neoplasm of hypopharyngeal aspect of aryepiglottic fold,cancer_dx
+4311479,93830007,Primary malignant neoplasm of hypopharyngeal aspect of interarytenoid fold,cancer_dx
+439746,93831006,Primary malignant neoplasm of hypopharynx,cancer_dx
+764981,9.8981E+13,Primary malignant neoplasm of ileocecal valve,cancer_dx
+4311480,93832004,Primary malignant neoplasm of ileum,cancer_dx
+4246122,93833009,Primary malignant neoplasm of ilium,cancer_dx
+435485,109357005,Primary malignant neoplasm of ill-defined site,cancer_dx
+4033890,109359008,Primary malignant neoplasm of independent multiple sites,cancer_dx
+4311481,93834003,Primary malignant neoplasm of inguinal region,cancer_dx
+132832,93835002,Primary malignant neoplasm of inner aspect of lip,cancer_dx
+137219,93836001,Primary malignant neoplasm of inner aspect of lower lip,cancer_dx
+138351,93837005,Primary malignant neoplasm of inner aspect of upper lip,cancer_dx
+195482,371992003,Primary malignant neoplasm of intestinal tract,cancer_dx
+197804,93839008,Primary malignant neoplasm of intra-abdominal organs,cancer_dx
+40490929,447109003,Primary malignant neoplasm of intrahepatic bile duct,cancer_dx
+4247331,93841009,Primary malignant neoplasm of intrathoracic organs,cancer_dx
+4247332,93842002,Primary malignant neoplasm of ischium,cancer_dx
+25486,93843007,Primary malignant neoplasm of islets of Langerhans,cancer_dx
+192847,93844001,Primary malignant neoplasm of isthmus of uterus,cancer_dx
+4246124,93845000,Primary malignant neoplasm of jaw,cancer_dx
+436913,93846004,Primary malignant neoplasm of jejunum,cancer_dx
+440036,93848003,Primary malignant neoplasm of junctional zone of tongue,cancer_dx
+198985,93849006,Primary malignant neoplasm of kidney,cancer_dx
+437501,93850006,Primary malignant neoplasm of labia majora,cancer_dx
+441802,93851005,Primary malignant neoplasm of labia minora,cancer_dx
+36715789,721548003,Primary malignant neoplasm of lacrimal apparatus,cancer_dx
+42539581,735918005,Primary malignant neoplasm of lacrimal caruncle,cancer_dx
+4313056,423195009,Primary malignant neoplasm of lacrimal drainage system,cancer_dx
+372567,371993008,Primary malignant neoplasm of lacrimal gland,cancer_dx
+4312004,423005002,Primary malignant neoplasm of lacrimal gland duct,cancer_dx
+4246125,93854002,Primary malignant neoplasm of large intestine,cancer_dx
+4155170,371994002,Primary malignant neoplasm of laryngeal aspect of aryepiglottic fold,cancer_dx
+436352,109370001,Primary malignant neoplasm of laryngeal cartilage,cancer_dx
+4247830,93857009,Primary malignant neoplasm of laryngeal commissure,cancer_dx
+4247831,93858004,Primary malignant neoplasm of laryngeal surface of epiglottis,cancer_dx
+26052,371995001,Primary malignant neoplasm of larynx,cancer_dx
+440344,93860002,Primary malignant neoplasm of lateral portion of floor of mouth,cancer_dx
+438692,93861003,Primary malignant neoplasm of lateral wall of nasopharynx,cancer_dx
+440345,93862005,Primary malignant neoplasm of lateral wall of oropharynx,cancer_dx
+40650072,93863000,Primary malignant neoplasm of lateral wall of urinary bladder,cancer_dx
+37208026,3.50921E+14,Primary malignant neoplasm of left adrenal gland,cancer_dx
+4289388,369513003,Primary malignant neoplasm of left fallopian tube,cancer_dx
+37109302,3.54351E+14,Primary malignant neoplasm of left kidney,cancer_dx
+762426,3.54701E+14,Primary malignant neoplasm of left lung,cancer_dx
+37208047,3.54491E+14,Primary malignant neoplasm of left male breast,cancer_dx
+4289681,369522002,Primary malignant neoplasm of left ovary,cancer_dx
+4246126,93865007,Primary malignant neoplasm of left upper lobe of lung,cancer_dx
+434292,93867004,Primary malignant neoplasm of lesser curvature of stomach,cancer_dx
+434289,93868009,Primary malignant neoplasm of lingual tonsil,cancer_dx
+4155171,371996000,Primary malignant neoplasm of lip,cancer_dx
+201519,95214007,Primary malignant neoplasm of liver,cancer_dx
+436640,93871001,Primary malignant neoplasm of long bone of lower limb,cancer_dx
+4246128,93872008,Primary malignant neoplasm of long bone of upper limb,cancer_dx
+440335,371997009,Primary malignant neoplasm of lower gum,cancer_dx
+432263,93874009,Primary malignant neoplasm of lower inner quadrant of female breast,cancer_dx
+42709763,449635006,Primary malignant neoplasm of lower leg,cancer_dx
+201518,93875005,Primary malignant neoplasm of lower limb,cancer_dx
+4157454,372110008,"Primary malignant neoplasm of lower lobe, bronchus or lung",cancer_dx
+4247832,93864006,Primary malignant neoplasm of lower lobe of left lung,cancer_dx
+441515,93876006,Primary malignant neoplasm of lower outer quadrant of female breast,cancer_dx
+193138,371998004,Primary malignant neoplasm of lower third of esophagus,cancer_dx
+4247834,93878007,Primary malignant neoplasm of lumbar vertebral column,cancer_dx
+4247835,93879004,Primary malignant neoplasm of lunate bone,cancer_dx
+258369,93880001,Primary malignant neoplasm of lung,cancer_dx
+257503,93882009,Primary malignant neoplasm of main bronchus,cancer_dx
+4247836,93883004,Primary malignant neoplasm of major salivary gland,cancer_dx
+135489,93884005,Primary malignant neoplasm of male breast,cancer_dx
+197507,93885006,Primary malignant neoplasm of male genital organ,cancer_dx
+379756,93886007,Primary malignant neoplasm of mandible,cancer_dx
+4311483,93887003,Primary malignant neoplasm of mastoid air cells,cancer_dx
+4246130,93888008,Primary malignant neoplasm of maxilla,cancer_dx
+137800,93889000,Primary malignant neoplasm of maxillary sinus,cancer_dx
+432256,93890009,Primary malignant neoplasm of Meckel's diverticulum,cancer_dx
+438693,93891008,Primary malignant neoplasm of mediastinum,cancer_dx
+4002340,109915008,Primary malignant neoplasm of meninges,cancer_dx
+4246131,93892001,Primary malignant neoplasm of metacarpal bone,cancer_dx
+4247335,93893006,Primary malignant neoplasm of metatarsal bone,cancer_dx
+4247336,93894000,Primary malignant neoplasm of middle ear,cancer_dx
+256646,372112000,"Primary malignant neoplasm of middle lobe, bronchus or lung",cancer_dx
+437805,371999007,Primary malignant neoplasm of middle third of esophagus,cancer_dx
+4162861,372000001,Primary malignant neoplasm of minor salivary gland,cancer_dx
+4247837,93898002,Primary malignant neoplasm of multiple endocrine glands,cancer_dx
+4311492,93913006,Primary malignant neoplasm of muscle,cancer_dx
+4311485,93899005,Primary malignant neoplasm of muscle of abdomen,cancer_dx
+4311486,93900000,Primary malignant neoplasm of muscle of buttock,cancer_dx
+4311487,93901001,Primary malignant neoplasm of muscle of face,cancer_dx
+4247838,93902008,Primary malignant neoplasm of muscle of head,cancer_dx
+4246133,93903003,Primary malignant neoplasm of muscle of hip,cancer_dx
+4246134,93904009,Primary malignant neoplasm of muscle of inguinal region,cancer_dx
+4311488,93905005,Primary malignant neoplasm of muscle of lower limb,cancer_dx
+4311489,93906006,Primary malignant neoplasm of muscle of neck,cancer_dx
+4311490,93907002,Primary malignant neoplasm of muscle of pelvis,cancer_dx
+4246135,93908007,Primary malignant neoplasm of muscle of perineum,cancer_dx
+4311491,93909004,Primary malignant neoplasm of muscle of shoulder,cancer_dx
+4247337,93910009,Primary malignant neoplasm of muscle of thorax,cancer_dx
+4247839,93911008,Primary malignant neoplasm of muscle of trunk,cancer_dx
+4247840,93912001,Primary malignant neoplasm of muscle of upper limb,cancer_dx
+4247841,93914000,Primary malignant neoplasm of myocardium,cancer_dx
+4247842,93915004,Primary malignant neoplasm of myometrium,cancer_dx
+4246136,93916003,Primary malignant neoplasm of nasal bone,cancer_dx
+438367,93917007,Primary malignant neoplasm of nasal cavity,cancer_dx
+4247843,93918002,Primary malignant neoplasm of nasal concha,cancer_dx
+36684473,2.26521E+14,Primary malignant neoplasm of nasopharynx,cancer_dx
+4247844,93920004,Primary malignant neoplasm of navicular bone of foot,cancer_dx
+30346,93922007,Primary malignant neoplasm of neck,cancer_dx
+376918,93923002,Primary malignant neoplasm of nervous system,cancer_dx
+442127,93924008,Primary malignant neoplasm of nipple of female breast,cancer_dx
+442126,93925009,Primary malignant neoplasm of nipple of male breast,cancer_dx
+4247338,93926005,Primary malignant neoplasm of nose,cancer_dx
+4247846,93927001,Primary malignant neoplasm of occipital bone,cancer_dx
+432559,93928006,Primary malignant neoplasm of occipital lobe,cancer_dx
+42536893,735917000,Primary malignant neoplasm of ocular adnexa,cancer_dx
+4311493,93929003,Primary malignant neoplasm of oculomotor nerve,cancer_dx
+4247847,93930008,Primary malignant neoplasm of olfactory nerve,cancer_dx
+4246241,94090003,Primary malignant neoplasm of omentum,cancer_dx
+4246137,93931007,Primary malignant neoplasm of optic nerve,cancer_dx
+439404,372001002,Primary malignant neoplasm of oral cavity,cancer_dx
+441809,93932000,Primary malignant neoplasm of orbit,cancer_dx
+432833,93933005,Primary malignant neoplasm of oropharynx,cancer_dx
+200051,93934004,Primary malignant neoplasm of ovary,cancer_dx
+134290,372002009,Primary malignant neoplasm of palate,cancer_dx
+4246138,93936002,Primary malignant neoplasm of palatine bone,cancer_dx
+199754,372003004,Primary malignant neoplasm of pancreas,cancer_dx
+433423,93939009,Primary malignant neoplasm of pancreatic duct,cancer_dx
+4246139,93940006,Primary malignant neoplasm of para-aortic body,cancer_dx
+442122,93941005,Primary malignant neoplasm of paraganglion,cancer_dx
+196047,93942003,Primary malignant neoplasm of parametrium,cancer_dx
+139753,93943008,Primary malignant neoplasm of parathyroid gland,cancer_dx
+200963,93944002,Primary malignant neoplasm of paraurethral glands,cancer_dx
+4247339,93945001,Primary malignant neoplasm of parietal bone,cancer_dx
+438086,93946000,Primary malignant neoplasm of parietal lobe,cancer_dx
+4246140,93947009,Primary malignant neoplasm of parietal peritoneum,cancer_dx
+441510,93948004,Primary malignant neoplasm of parietal pleura,cancer_dx
+434588,372004005,Primary malignant neoplasm of parotid gland,cancer_dx
+4247849,93950007,Primary malignant neoplasm of patella,cancer_dx
+4246141,93951006,Primary malignant neoplasm of pelvic bone,cancer_dx
+72566,372115003,"Primary malignant neoplasm of pelvic bones, sacrum and coccyx",cancer_dx
+4311496,93952004,Primary malignant neoplasm of pelvic peritoneum,cancer_dx
+198988,93953009,Primary malignant neoplasm of pelvis,cancer_dx
+195483,372005006,Primary malignant neoplasm of penis,cancer_dx
+4246142,93955002,Primary malignant neoplasm of periadrenal tissue,cancer_dx
+4311497,93956001,Primary malignant neoplasm of perianal skin,cancer_dx
+4247850,93957005,Primary malignant neoplasm of pericardium,cancer_dx
+40489795,446807009,Primary malignant neoplasm of perihilar bile duct,cancer_dx
+4307721,422736007,Primary malignant neoplasm of peripheral nerve,cancer_dx
+4003694,109921007,"Primary malignant neoplasm of peripheral nerve of head, face AND/OR neck",cancer_dx
+4002342,109918005,Primary malignant neoplasm of peripheral nerves and peripheral autonomic nervous system,cancer_dx
+4001321,109943004,Primary malignant neoplasm of peripheral nerves of abdomen,cancer_dx
+4003173,109925003,Primary malignant neoplasm of peripheral nerves of face,cancer_dx
+4002345,109923005,Primary malignant neoplasm of peripheral nerves of head,cancer_dx
+4001320,109939003,Primary malignant neoplasm of peripheral nerves of hip,cancer_dx
+4001319,109937001,Primary malignant neoplasm of peripheral nerves of lower limb,cancer_dx
+4001318,109927006,Primary malignant neoplasm of peripheral nerves of neck,cancer_dx
+4002353,109945006,Primary malignant neoplasm of peripheral nerves of pelvis,cancer_dx
+4002348,109933002,Primary malignant neoplasm of peripheral nerves of shoulder,cancer_dx
+4002352,109941002,Primary malignant neoplasm of peripheral nerves of thorax,cancer_dx
+4003179,109947003,Primary malignant neoplasm of peripheral nerves of trunk,cancer_dx
+4003175,109931000,Primary malignant neoplasm of peripheral nerves of upper limb,cancer_dx
+4246143,93958000,Primary malignant neoplasm of perirenal tissue,cancer_dx
+4247851,93959008,Primary malignant neoplasm of phalanx of foot,cancer_dx
+4246144,93960003,Primary malignant neoplasm of phalanx of hand,cancer_dx
+28083,93961004,Primary malignant neoplasm of pharynx,cancer_dx
+26361,93962006,Primary malignant neoplasm of pineal gland,cancer_dx
+4312565,93963001,Primary malignant neoplasm of pisiform bone of hand,cancer_dx
+24296,93964007,Primary malignant neoplasm of pituitary gland,cancer_dx
+36715801,721567004,Primary malignant neoplasm of placenta,cancer_dx
+78093,93966009,Primary malignant neoplasm of pleura,cancer_dx
+436922,93967000,Primary malignant neoplasm of postcricoid region,cancer_dx
+435474,93968005,Primary malignant neoplasm of posterior hypopharyngeal wall,cancer_dx
+435487,93969002,Primary malignant neoplasm of posterior mediastinum,cancer_dx
+436344,93970001,Primary malignant neoplasm of posterior wall of nasopharynx,cancer_dx
+439739,93971002,Primary malignant neoplasm of posterior wall of oropharynx,cancer_dx
+40650479,93972009,Primary malignant neoplasm of posterior wall of urinary bladder,cancer_dx
+440339,372006007,Primary malignant neoplasm of prepuce,cancer_dx
+4247340,93973004,Primary malignant neoplasm of presacral region,cancer_dx
+200962,93974005,Primary malignant neoplasm of prostate,cancer_dx
+4247341,93975006,Primary malignant neoplasm of pubis,cancer_dx
+438089,93976007,Primary malignant neoplasm of pyloric antrum,cancer_dx
+192255,93977003,Primary malignant neoplasm of pylorus,cancer_dx
+435190,93978008,Primary malignant neoplasm of pyriform sinus,cancer_dx
+4246146,93979000,Primary malignant neoplasm of radius,cancer_dx
+438699,93980002,Primary malignant neoplasm of rectosigmoid junction,cancer_dx
+4311498,93981003,Primary malignant neoplasm of rectouterine pouch,cancer_dx
+4246147,93982005,Primary malignant neoplasm of rectovaginal septum,cancer_dx
+4312566,93983000,Primary malignant neoplasm of rectovesical septum,cancer_dx
+74582,93984006,Primary malignant neoplasm of rectum,cancer_dx
+195480,93985007,Primary malignant neoplasm of renal pelvis,cancer_dx
+4311499,93986008,Primary malignant neoplasm of respiratory tract,cancer_dx
+377811,93987004,Primary malignant neoplasm of retina (primary),cancer_dx
+4155172,372007003,Primary malignant neoplasm of retrocecal tissue,cancer_dx
+433704,93989001,Primary malignant neoplasm of retromolar area,cancer_dx
+198091,94092006,Primary malignant neoplasm of retroperitoneum,cancer_dx
+4311500,93990005,Primary malignant neoplasm of rib,cancer_dx
+438977,372107001,Primary malignant neoplasm of ribs and/or sternum and/or clavicle,cancer_dx
+37208025,3.50861E+14,Primary malignant neoplasm of right adrenal gland,cancer_dx
+4283748,369520005,Primary malignant neoplasm of right fallopian tube,cancer_dx
+37109303,3.54361E+14,Primary malignant neoplasm of right kidney,cancer_dx
+4246148,93991009,Primary malignant neoplasm of right lower lobe of lung,cancer_dx
+762427,3.54741E+14,Primary malignant neoplasm of right lung,cancer_dx
+37208048,3.54591E+14,Primary malignant neoplasm of right male breast,cancer_dx
+4311501,93992002,Primary malignant neoplasm of right middle lobe of lung,cancer_dx
+4289392,369529006,Primary malignant neoplasm of right ovary,cancer_dx
+441520,93994001,Primary malignant neoplasm of round ligament of uterus,cancer_dx
+4312675,93995000,Primary malignant neoplasm of sacrococcygeal region,cancer_dx
+4312676,93996004,Primary malignant neoplasm of sacrum,cancer_dx
+439745,109828002,Primary malignant neoplasm of salivary gland duct,cancer_dx
+4162119,372008008,Primary malignant neoplasm of scaphoid bone,cancer_dx
+4311502,93997008,Primary malignant neoplasm of scapula,cancer_dx
+4312677,93998003,Primary malignant neoplasm of sclera (primary),cancer_dx
+79758,372009000,Primary malignant neoplasm of scrotum,cancer_dx
+4311612,94000008,Primary malignant neoplasm of sebaceous gland,cancer_dx
+4246224,94001007,Primary malignant neoplasm of second cuneiform bone of foot,cancer_dx
+4281019,369487007,Primary malignant neoplasm of seminal vesicle,cancer_dx
+4246225,94002000,Primary malignant neoplasm of septum of nose,cancer_dx
+434880,94003005,Primary malignant neoplasm of short bone of lower limb,cancer_dx
+435493,94004004,Primary malignant neoplasm of short bone of upper limb,cancer_dx
+4246226,94005003,Primary malignant neoplasm of shoulder,cancer_dx
+436635,94006002,Primary malignant neoplasm of sigmoid colon,cancer_dx
+139750,94047004,Primary malignant neoplasm of skin,cancer_dx
+37110584,724866001,Primary malignant neoplasm of skin due to and following radiotherapy caused by ionizing radiation,cancer_dx
+4157456,372123001,Primary malignant neoplasm of skin head and neck,cancer_dx
+4247345,94007006,Primary malignant neoplasm of skin of abdomen,cancer_dx
+4247346,94008001,Primary malignant neoplasm of skin of ankle,cancer_dx
+4312680,94010004,Primary malignant neoplasm of skin of axilla,cancer_dx
+4247347,94011000,Primary malignant neoplasm of skin of back,cancer_dx
+4247348,94012007,Primary malignant neoplasm of skin of breast,cancer_dx
+4247349,94013002,Primary malignant neoplasm of skin of buttock,cancer_dx
+4246227,94014008,Primary malignant neoplasm of skin of cheek,cancer_dx
+4312681,94015009,Primary malignant neoplasm of skin of chest,cancer_dx
+4246228,94016005,Primary malignant neoplasm of skin of chin,cancer_dx
+4247350,94017001,Primary malignant neoplasm of skin of ear,cancer_dx
+4246229,94018006,Primary malignant neoplasm of skin of elbow,cancer_dx
+136916,94019003,Primary malignant neoplasm of skin of external auditory canal,cancer_dx
+4246230,94020009,Primary malignant neoplasm of skin of eyebrow,cancer_dx
+435755,94021008,Primary malignant neoplasm of skin of eyelid,cancer_dx
+136917,94022001,Primary malignant neoplasm of skin of face,cancer_dx
+4247351,94023006,Primary malignant neoplasm of skin of finger,cancer_dx
+4312682,94024000,Primary malignant neoplasm of skin of foot,cancer_dx
+4312683,94025004,Primary malignant neoplasm of skin of forearm,cancer_dx
+4246231,94026003,Primary malignant neoplasm of skin of forehead,cancer_dx
+4312684,94027007,Primary malignant neoplasm of skin of groin,cancer_dx
+4246232,94028002,Primary malignant neoplasm of skin of hand,cancer_dx
+4311614,94029005,Primary malignant neoplasm of skin of hip,cancer_dx
+4247352,94030000,Primary malignant neoplasm of skin of knee,cancer_dx
+136915,94032008,Primary malignant neoplasm of skin of lip,cancer_dx
+42709762,449634005,Primary malignant neoplasm of skin of lower leg,cancer_dx
+4312685,94033003,Primary malignant neoplasm of skin of lower limb,cancer_dx
+434291,94034009,Primary malignant neoplasm of skin of neck,cancer_dx
+4311617,94035005,Primary malignant neoplasm of skin of nose,cancer_dx
+4246233,94036006,Primary malignant neoplasm of skin of perineum,cancer_dx
+4312686,94037002,Primary malignant neoplasm of skin of popliteal area,cancer_dx
+4312687,94038007,Primary malignant neoplasm of skin of scalp,cancer_dx
+4247353,94039004,Primary malignant neoplasm of skin of shoulder,cancer_dx
+4247354,94040002,Primary malignant neoplasm of skin of temporal region,cancer_dx
+4312688,94041003,Primary malignant neoplasm of skin of thigh,cancer_dx
+4246234,94042005,Primary malignant neoplasm of skin of toe,cancer_dx
+133147,94043000,Primary malignant neoplasm of skin of trunk,cancer_dx
+4311618,94044006,Primary malignant neoplasm of skin of umbilicus,cancer_dx
+440658,94045007,Primary malignant neoplasm of skin of upper limb,cancer_dx
+4247355,94046008,Primary malignant neoplasm of skin of wrist,cancer_dx
+192836,94048009,Primary malignant neoplasm of small intestine,cancer_dx
+254282,94049001,Primary malignant neoplasm of soft palate,cancer_dx
+35617893,3.52321E+14,Primary malignant neoplasm of soft tissue of left lower limb,cancer_dx
+35617803,3.52231E+14,Primary malignant neoplasm of soft tissue of left upper extremity,cancer_dx
+35617882,3.52311E+14,Primary malignant neoplasm of soft tissue of right lower extremity,cancer_dx
+35617871,3.52301E+14,Primary malignant neoplasm of soft tissue of right upper extremity,cancer_dx
+376647,372010005,Primary malignant neoplasm of soft tissues,cancer_dx
+197807,94050001,Primary malignant neoplasm of soft tissues of abdomen,cancer_dx
+4247356,94051002,Primary malignant neoplasm of soft tissues of axilla,cancer_dx
+4312689,94052009,Primary malignant neoplasm of soft tissues of buttock,cancer_dx
+4311619,94053004,Primary malignant neoplasm of soft tissues of face,cancer_dx
+4247357,94054005,Primary malignant neoplasm of soft tissues of head,cancer_dx
+442123,94055006,Primary malignant neoplasm of soft tissues of hip,cancer_dx
+4311620,94056007,Primary malignant neoplasm of soft tissues of inguinal region,cancer_dx
+438094,94057003,Primary malignant neoplasm of soft tissues of lower limb,cancer_dx
+4246235,94058008,Primary malignant neoplasm of soft tissues of neck,cancer_dx
+4247358,94059000,Primary malignant neoplasm of soft tissues of pelvis,cancer_dx
+4312690,94060005,Primary malignant neoplasm of soft tissues of perineum,cancer_dx
+4311621,94061009,Primary malignant neoplasm of soft tissues of shoulder,cancer_dx
+317801,94062002,Primary malignant neoplasm of soft tissues of thorax,cancer_dx
+197808,94063007,Primary malignant neoplasm of soft tissues of trunk,cancer_dx
+436357,372012002,Primary malignant neoplasm of soft tissues of upper limb,cancer_dx
+193719,372013007,Primary malignant neoplasm of spermatic cord,cancer_dx
+136639,94067008,Primary malignant neoplasm of sphenoidal sinus,cancer_dx
+4246236,94066004,Primary malignant neoplasm of sphenoid bone,cancer_dx
+135491,94068003,Primary malignant neoplasm of spinal cord,cancer_dx
+134295,94069006,Primary malignant neoplasm of spinal meninges,cancer_dx
+193418,94071006,Primary malignant neoplasm of spleen,cancer_dx
+437798,94072004,Primary malignant neoplasm of splenic flexure of colon,cancer_dx
+4246237,94073009,Primary malignant neoplasm of sternum,cancer_dx
+196044,372014001,Primary malignant neoplasm of stomach,cancer_dx
+259755,94075002,Primary malignant neoplasm of subglottis,cancer_dx
+439738,94076001,Primary malignant neoplasm of sublingual gland,cancer_dx
+4312691,94077005,Primary malignant neoplasm of submaxillary gland,cancer_dx
+441223,94078000,Primary malignant neoplasm of superior wall of nasopharynx,cancer_dx
+4312692,94079008,Primary malignant neoplasm of supraclavicular region,cancer_dx
+261514,94080006,Primary malignant neoplasm of supraglottis,cancer_dx
+4246238,94081005,Primary malignant neoplasm of sweat gland,cancer_dx
+432843,94082003,Primary malignant neoplasm of tail of pancreas,cancer_dx
+4246239,94083008,Primary malignant neoplasm of talus,cancer_dx
+4246240,94084002,Primary malignant neoplasm of tarsal bone,cancer_dx
+4312693,94085001,Primary malignant neoplasm of temporal bone,cancer_dx
+433976,94086000,Primary malignant neoplasm of temporal lobe,cancer_dx
+433716,94087009,Primary malignant neoplasm of testis,cancer_dx
+4162120,372015000,Primary malignant neoplasm of the mesentery,cancer_dx
+4247360,94089007,Primary malignant neoplasm of the mesocolon,cancer_dx
+197799,372016004,Primary malignant neoplasm of the peritoneum,cancer_dx
+4312694,94093001,Primary malignant neoplasm of thigh,cancer_dx
+4247361,94094007,Primary malignant neoplasm of third cuneiform bone of foot,cancer_dx
+135476,372017008,Primary malignant neoplasm of thoracic esophagus,cancer_dx
+4162862,372019006,Primary malignant neoplasm of thoracic vertebral column,cancer_dx
+438368,94096009,Primary malignant neoplasm of thymus,cancer_dx
+4246243,94097000,Primary malignant neoplasm of thyroglossal duct,cancer_dx
+133424,94098005,Primary malignant neoplasm of thyroid gland,cancer_dx
+4312695,94099002,Primary malignant neoplasm of tibia,cancer_dx
+437498,94101009,Primary malignant neoplasm of tongue,cancer_dx
+31509,372020000,Primary malignant neoplasm of tonsil,cancer_dx
+433709,94102002,Primary malignant neoplasm of tonsillar fossa,cancer_dx
+440047,94103007,Primary malignant neoplasm of tonsillar pillar,cancer_dx
+432262,94104001,Primary malignant neoplasm of trachea,cancer_dx
+432257,94105000,Primary malignant neoplasm of transverse colon,cancer_dx
+4157320,372021001,Primary malignant neoplasm of trapezium,cancer_dx
+4246245,94107008,Primary malignant neoplasm of trapezoid bone,cancer_dx
+4311625,94108003,Primary malignant neoplasm of trigeminal nerve,cancer_dx
+435484,94109006,Primary malignant neoplasm of trigone of urinary bladder,cancer_dx
+4246246,94110001,Primary malignant neoplasm of trochlear nerve,cancer_dx
+4312698,94111002,Primary malignant neoplasm of trunk,cancer_dx
+4311626,94112009,Primary malignant neoplasm of ulna,cancer_dx
+436054,94113004,Primary malignant neoplasm of undescended testis,cancer_dx
+4149322,310504009,Primary malignant neoplasm of unknown site,cancer_dx
+436919,109356001,Primary malignant neoplasm of unspecified site (clinical),cancer_dx
+4246795,93682007,Primary malignant neoplasm of upper arm,cancer_dx
+435478,372022008,Primary malignant neoplasm of upper gum,cancer_dx
+440956,94115006,Primary malignant neoplasm of upper inner quadrant of female breast,cancer_dx
+81239,94116007,Primary malignant neoplasm of upper limb,cancer_dx
+81237,372133009,Primary malignant neoplasm of upper limb bones and scapula,cancer_dx
+261236,372135002,"Primary malignant neoplasm of upper lobe, bronchus or lung",cancer_dx
+4312567,93993007,Primary malignant neoplasm of upper lobe of right lung,cancer_dx
+436353,94117003,Primary malignant neoplasm of upper outer quadrant of female breast,cancer_dx
+252840,94118008,Primary malignant neoplasm of upper respiratory tract,cancer_dx
+432260,372023003,Primary malignant neoplasm of upper third of esophagus,cancer_dx
+201517,94120006,Primary malignant neoplasm of urachus,cancer_dx
+200054,94121005,Primary malignant neoplasm of ureter,cancer_dx
+76924,94122003,Primary malignant neoplasm of ureteric orifice of urinary bladder,cancer_dx
+196049,94123008,Primary malignant neoplasm of urethra,cancer_dx
+436923,94124002,Primary malignant neoplasm of urinary bladder neck,cancer_dx
+76349,94125001,Primary malignant neoplasm of urinary system,cancer_dx
+200052,94126000,Primary malignant neoplasm of uterine adnexa,cancer_dx
+196359,372024009,Primary malignant neoplasm of uterine cervix,cancer_dx
+45770892,1.07085E+16,Primary malignant neoplasm of uterus,cancer_dx
+4311627,94128004,Primary malignant neoplasm of uveal tract (primary),cancer_dx
+434285,94129007,Primary malignant neoplasm of uvula,cancer_dx
+196048,372025005,Primary malignant neoplasm of vagina,cancer_dx
+4246248,94131003,Primary malignant neoplasm of vagus nerve,cancer_dx
+438360,94132005,Primary malignant neoplasm of vallecula,cancer_dx
+4311628,94133000,Primary malignant neoplasm of vas deferens,cancer_dx
+437220,94134006,Primary malignant neoplasm of ventral surface of tongue,cancer_dx
+133969,94135007,Primary malignant neoplasm of vermilion border of lip,cancer_dx
+132565,372026006,Primary malignant neoplasm of vermilion border of lower lip,cancer_dx
+138074,372027002,Primary malignant neoplasm of vermilion border of upper lip,cancer_dx
+75488,372028007,Primary malignant neoplasm of vertebral column,cancer_dx
+261808,94138009,Primary malignant neoplasm of vestibule of mouth,cancer_dx
+4312032,94139001,Primary malignant neoplasm of vestibule of nose,cancer_dx
+441230,94140004,Primary malignant neoplasm of visceral pleura,cancer_dx
+4162122,372030009,Primary malignant neoplasm of vocal cord,cancer_dx
+4312033,94142007,Primary malignant neoplasm of vomer,cancer_dx
+195197,94143002,Primary malignant neoplasm of vulva,cancer_dx
+432254,94144008,Primary malignant neoplasm of Waldeyer's ring,cancer_dx
+4246249,94145009,Primary malignant neoplasm of zygomatic bone,cancer_dx
+36716493,722518004,Primary malignant nerve sheath neoplasm of autonomic nerve,cancer_dx
+36716492,722517009,Primary malignant nerve sheath neoplasm of peripheral nervous system structure,cancer_dx
+37116589,733351008,Primary malignant neuroendocrine neoplasm of ampulla of Vater,cancer_dx
+37116449,733163007,Primary malignant neuroendocrine neoplasm of anal canal,cancer_dx
+37116448,733162002,Primary malignant neuroendocrine neoplasm of anus,cancer_dx
+36715891,721673009,Primary malignant neuroendocrine neoplasm of appendix,cancer_dx
+761001,1.30381E+14,Primary malignant neuroendocrine neoplasm of ascending colon,cancer_dx
+37116591,733353006,Primary malignant neuroendocrine neoplasm of biliary tract,cancer_dx
+36715859,721636006,Primary malignant neuroendocrine neoplasm of body of stomach,cancer_dx
+36716499,722527003,Primary malignant neuroendocrine neoplasm of bronchus,cancer_dx
+36715858,721635005,Primary malignant neuroendocrine neoplasm of cardia of stomach,cancer_dx
+761000,1.30371E+14,Primary malignant neuroendocrine neoplasm of cecum,cancer_dx
+36715913,721698005,Primary malignant neuroendocrine neoplasm of colon,cancer_dx
+37116586,733348001,Primary malignant neuroendocrine neoplasm of cystic duct,cancer_dx
+36717179,721644006,Primary malignant neuroendocrine neoplasm of duodenum,cancer_dx
+36715852,721626003,Primary malignant neuroendocrine neoplasm of esophagus,cancer_dx
+42537755,737313007,Primary malignant neuroendocrine neoplasm of ileum,cancer_dx
+42537754,737312002,Primary malignant neuroendocrine neoplasm of jejunum,cancer_dx
+760999,1.30351E+14,Primary malignant neuroendocrine neoplasm of large intestine,cancer_dx
+36716500,722528008,Primary malignant neuroendocrine neoplasm of lung,cancer_dx
+42536743,735735001,Primary malignant neuroendocrine neoplasm of pancreas,cancer_dx
+42538835,762665002,Primary malignant neuroendocrine neoplasm of perihilar bile duct,cancer_dx
+36715860,721637002,Primary malignant neuroendocrine neoplasm of pyloric antrum of stomach,cancer_dx
+36715914,721700001,Primary malignant neuroendocrine neoplasm of rectum,cancer_dx
+36715888,721670007,Primary malignant neuroendocrine neoplasm of small intestine,cancer_dx
+36715857,721634009,Primary malignant neuroendocrine neoplasm of stomach,cancer_dx
+37116588,733350009,Primary malignant neuroendocrine of distal bile duct,cancer_dx
+42536895,735920008,Primary malignant neuroepithelial neoplasm of ciliary body,cancer_dx
+42536894,735919002,Primary malignant neuroepithelial neoplasm of iris,cancer_dx
+42536896,735921007,Primary malignant neuroepithelial neoplasm of orbit,cancer_dx
+42536892,735916009,Primary malignant neuroepithelial neoplasm of retina,cancer_dx
+37110538,724806004,Primary malignant neuroepitheliomatous neoplasm of autonomic nervous system,cancer_dx
+42536528,735450006,Primary malignant neuroepitheliomatous neoplasm of nasal cavity,cancer_dx
+37110537,724805000,Primary malignant neuroepitheliomatous neoplasm of peripheral nerve,cancer_dx
+36715783,721541009,Primary malignant sarcoma of skin,cancer_dx
+40481522,444910004,Primary mediastinal (thymic) large B-cell lymphoma,cancer_dx
+36716612,722677008,Primary mesothelioma overlapping lesion of retroperitoneum peritoneum and omentum,cancer_dx
+36716615,722681008,Primary mixed adenocarcinoma of endometrium,cancer_dx
+45768930,707468009,Primary mixed mucinous and non-mucinous bronchiolo-alveolar carcinoma of lung,cancer_dx
+45768880,707404008,Primary mixed subtype adenocarcinoma of lung,cancer_dx
+36715890,721672004,Primary mucinous adenocarcinoma of appendix,cancer_dx
+36716614,722679006,Primary mucinous adenocarcinoma of endometrium,cancer_dx
+45768917,707452003,Primary mucinous adenocarcinoma of lung,cancer_dx
+45768876,707400004,Primary mucinous adenocarcinoma of oropharynx,cancer_dx
+37116598,733361001,Primary mucinous adenocarcinoma of ovary,cancer_dx
+45768935,707473003,Primary mucinous adenocarcinoma of trachea,cancer_dx
+45768932,707470000,Primary mucinous bronchiolo-alveolar carcinoma of lung,cancer_dx
+37116593,733356003,Primary mucinous carcinoma of digestive organ,cancer_dx
+36716619,722687007,Primary mucinous carcinoma of uterine adnexa,cancer_dx
+45769034,707595001,Primary mucinous cystadenocarcinoma of lung,cancer_dx
+45768860,707383000,Primary mucinous cystadenocarcinoma of trachea,cancer_dx
+37116590,733352001,Primary mucinous cystic neoplasm with associated invasive carcinoma of biliary tract,cancer_dx
+37118669,733347006,Primary mucinous cystic neoplasm with associated invasive carcinoma of cystic duct,cancer_dx
+37116587,733349009,Primary mucinous cystic neoplasm with associated invasive carcinoma of distal bile duct,cancer_dx
+37116585,733346002,Primary mucinous cystic neoplasm with associated invasive carcinoma of perihilar bile duct,cancer_dx
+45768882,707406005,Primary mucoepidermoid carcinoma of hypopharynx,cancer_dx
+36716633,722714004,Primary mucoepidermoid carcinoma of lacrimal apparatus,cancer_dx
+45772939,707465007,Primary mucoepidermoid carcinoma of lung,cancer_dx
+45769031,707591005,Primary mucoepidermoid carcinoma of oropharynx,cancer_dx
+45768857,707379000,Primary mucoepidermoid carcinoma of trachea,cancer_dx
+45768927,707464006,Primary myoepithelial carcinoma of lung,cancer_dx
+45769027,707586009,Primary myoepithelial carcinoma of oropharynx,cancer_dx
+45768856,707378008,Primary myoepithelial carcinoma of trachea,cancer_dx
+36715812,721580001,Primary myosarcoma of omentum,cancer_dx
+36716856,723077004,Primary myosarcoma of uterus,cancer_dx
+36716855,723076008,Primary myxofibrosarcoma,cancer_dx
+36715862,721640002,Primary neuroendocrine carcinoma of body of stomach,cancer_dx
+36717178,721639004,Primary neuroendocrine carcinoma of cardia of stomach,cancer_dx
+36716617,722683006,Primary neuroendocrine carcinoma of cervix uteri,cancer_dx
+36717181,721697000,Primary neuroendocrine carcinoma of colon,cancer_dx
+36715866,721645007,Primary neuroendocrine carcinoma of duodenum,cancer_dx
+36715851,721625004,Primary neuroendocrine carcinoma of esophagus,cancer_dx
+36715864,721642005,Primary neuroendocrine carcinoma of overlapping lesion of stomach,cancer_dx
+36715863,721641003,Primary neuroendocrine carcinoma of pyloric antrum of stomach,cancer_dx
+36717182,721701002,Primary neuroendocrine carcinoma of rectum,cancer_dx
+36715889,721671006,Primary neuroendocrine carcinoma of small intestine,cancer_dx
+36715861,721638007,Primary neuroendocrine carcinoma of stomach,cancer_dx
+45768931,707469001,Primary non-mucinous bronchiolo-alveolar carcinoma of lung,cancer_dx
+42536723,735680008,Primary osteosarcoma,cancer_dx
+37109902,723849009,Primary osteosarcoma of articular cartilage of jaw,cancer_dx
+37109904,723851008,Primary osteosarcoma of articular cartilage of limb,cancer_dx
+3655363,860923004,Primary osteosarcoma of articular cartilage of lower limb,cancer_dx
+37118983,723852001,Primary osteosarcoma of articular cartilage of pelvis,cancer_dx
+37109901,723848001,Primary osteosarcoma of bone of jaw,cancer_dx
+37109903,723850009,Primary osteosarcoma of bone of limb,cancer_dx
+4206830,440397000,Primary osteosarcoma of pelvis,cancer_dx
+45768872,707396004,Primary oxyphilic adenocarcinoma of oropharynx,cancer_dx
+45768886,707411007,Primary papillary adenocarcinoma of lung,cancer_dx
+45768875,707399006,Primary papillary adenocarcinoma of oropharynx,cancer_dx
+45768934,707472008,Primary papillary adenocarcinoma of trachea,cancer_dx
+45768942,707482009,Primary papillary squamous cell carcinoma of hypopharynx,cancer_dx
+45768897,707426009,Primary papillary squamous cell carcinoma of larynx,cancer_dx
+45772938,707455001,Primary papillary squamous cell carcinoma of lung,cancer_dx
+45769022,707581004,Primary papillary squamous cell carcinoma of oropharynx,cancer_dx
+45768867,707391009,Primary papillary squamous cell carcinoma of trachea,cancer_dx
+45768922,707458004,Primary pleomorphic carcinoma of lung,cancer_dx
+45768874,707398003,Primary polymorphous low grade adenocarcinoma of oropharynx,cancer_dx
+37110332,724552002,Primary poorly differentiated carcinoma of thyroid gland,cancer_dx
+45768923,707460002,Primary pseudosarcomatous carcinoma of lung,cancer_dx
+36716488,722512003,Primary rhabdomyosarcoma of intrathoracic organ,cancer_dx
+36717485,721574009,Primary rhabdomyosarcoma of male genital organ,cancer_dx
+36716485,722509001,Primary rhabdomyosarcoma of oral cavity,cancer_dx
+36716486,722510006,Primary rhabdomyosarcoma of pharynx,cancer_dx
+36716487,722511005,Primary rhabdomyosarcoma of respiratory organ,cancer_dx
+45769058,707627009,Primary salivary gland type carcinoma of hypopharynx,cancer_dx
+45768929,707467004,Primary salivary gland type carcinoma of lung,cancer_dx
+45768858,707380002,Primary salivary gland type carcinoma of trachea,cancer_dx
+45771026,707593008,Primary salivary gland-type tumor of oropharynx,cancer_dx
+36712740,1.08171E+15,Primary sarcoma of left lower limb,cancer_dx
+36716494,722519007,Primary sarcoma of peritoneum,cancer_dx
+36717542,722229001,Primary sarcoma of retroperitoneum,cancer_dx
+36712741,1.08175E+15,Primary sarcoma of right lower limb,cancer_dx
+4310135,424849005,Primary sarcoma of tongue,cancer_dx
+36712742,1.08178E+15,Primary seminoma of left testis,cancer_dx
+36712743,1.08181E+15,Primary seminoma of right testis,cancer_dx
+36717227,722680009,Primary serous adenocarcinoma of endometrium,cancer_dx
+36717579,722686003,Primary serous carcinoma of uterine adnexa,cancer_dx
+45772933,707407001,Primary signet ring cell carcinoma of lung,cancer_dx
+4173353,276738009,Primary signet ring cell carcinoma of skin,cancer_dx
+45768855,707377003,Primary signet ring cell carcinoma of trachea,cancer_dx
+36716616,722682001,Primary small cell carcinoma of endometrium,cancer_dx
+37395648,6.7811E+13,"Primary small cell malignant neoplasm of lung, TNM stage 1",cancer_dx
+37395649,6.7821E+13,"Primary small cell malignant neoplasm of lung, TNM stage 2",cancer_dx
+37395650,6.7831E+13,"Primary small cell malignant neoplasm of lung, TNM stage 3",cancer_dx
+37395651,6.7841E+13,"Primary small cell malignant neoplasm of lung, TNM stage 4",cancer_dx
+4234784,440525003,Primary small cell neoplasm of thymus,cancer_dx
+45768883,707408006,Primary small cell non-keratinizing squamous cell carcinoma of lung,cancer_dx
+45768885,707410008,Primary solid carcinoma of lung,cancer_dx
+45768861,707384006,Primary solid carcinoma of trachea,cancer_dx
+36717587,722832009,Primary solid papillary carcinoma with invasion of breast,cancer_dx
+45768921,707457009,Primary spindle cell carcinoma of lung,cancer_dx
+45768870,707394001,Primary spindle cell carcinoma of trachea,cancer_dx
+765651,9.1141E+13,Primary spindle cell carcinoma of urinary bladder,cancer_dx
+45768948,707489000,Primary spindle cell squamous cell carcinoma of hypopharynx,cancer_dx
+45768894,707422006,Primary spindle cell squamous cell carcinoma of larynx,cancer_dx
+45769023,707582006,Primary spindle cell squamous cell carcinoma of oropharynx,cancer_dx
+45768953,707495004,Primary squamous cell adenoid carcinoma of trachea,cancer_dx
+45768836,707353009,Primary squamous cell carcinoma of accessory sinus,cancer_dx
+36716511,722542000,Primary squamous cell carcinoma of anal canal,cancer_dx
+45768984,707537007,Primary squamous cell carcinoma of anterior surface of epiglottis,cancer_dx
+36716972,723265000,Primary squamous cell carcinoma of anus,cancer_dx
+36716610,722672002,Primary squamous cell carcinoma of base of tongue,cancer_dx
+45768979,707531008,Primary squamous cell carcinoma of branchial cleft,cancer_dx
+37018649,9.1151E+13,Primary squamous cell carcinoma of chest wall,cancer_dx
+36716193,722112006,Primary squamous cell carcinoma of ear,cancer_dx
+37116596,733359005,Primary squamous cell carcinoma of endometrium,cancer_dx
+45773563,707359008,Primary squamous cell carcinoma of ethmoidal sinus,cancer_dx
+45768838,707356001,Primary squamous cell carcinoma of frontal sinus,cancer_dx
+45769091,707664003,Primary squamous cell carcinoma of glottis,cancer_dx
+45771033,707697002,Primary squamous cell carcinoma of hypopharyngeal aspect of aryepiglottic fold,cancer_dx
+45768951,707492001,Primary squamous cell carcinoma of hypopharynx,cancer_dx
+37116594,733357007,Primary squamous cell carcinoma of intrathoracic organ,cancer_dx
+36716606,722666002,Primary squamous cell carcinoma of lacrimal apparatus,cancer_dx
+45768839,707357005,Primary squamous cell carcinoma of laryngeal cartilage,cancer_dx
+45768840,707358000,Primary squamous cell carcinoma of larynx,cancer_dx
+45768982,707535004,Primary squamous cell carcinoma of lateral wall of oropharynx,cancer_dx
+36712744,1.08207E+15,Primary squamous cell carcinoma of left ear,cancer_dx
+36717352,722673007,Primary squamous cell carcinoma of lingual tonsil,cancer_dx
+37116584,733344004,Primary squamous cell carcinoma of lip,cancer_dx
+36715846,721620009,Primary squamous cell carcinoma of lower third of esophagus,cancer_dx
+45771015,707354003,Primary squamous cell carcinoma of maxillary sinus,cancer_dx
+36717578,722676004,Primary squamous cell carcinoma of middle ear,cancer_dx
+36717489,721619003,Primary squamous cell carcinoma of middle third of esophagus,cancer_dx
+4258703,440527006,Primary squamous cell carcinoma of naris,cancer_dx
+36716941,723182009,Primary squamous cell carcinoma of nasal cavity,cancer_dx
+45768977,707528007,Primary squamous cell carcinoma of nasopharynx,cancer_dx
+37116583,733343005,Primary squamous cell carcinoma of oral cavity,cancer_dx
+45769026,707585008,Primary squamous cell carcinoma of oropharynx,cancer_dx
+36715835,721605003,Primary squamous cell carcinoma of overlapping lesion of accessory sinuses,cancer_dx
+36715847,721621008,Primary squamous cell carcinoma of overlapping lesion of esophagus,cancer_dx
+36715834,721604004,Primary squamous cell carcinoma of overlapping lesion of male genital organ,cancer_dx
+37110269,724467001,Primary squamous cell carcinoma of overlapping lesion of urinary organs,cancer_dx
+37018947,1.8121E+13,Primary squamous cell carcinoma of palatine tonsil,cancer_dx
+37118651,733134009,Primary squamous cell carcinoma of paraurethral gland,cancer_dx
+36717226,722674001,Primary squamous cell carcinoma of parotid gland,cancer_dx
+36716502,722530005,Primary squamous cell carcinoma of pharyngeal tonsil,cancer_dx
+37117762,733345003,Primary squamous cell carcinoma of pharynx,cancer_dx
+45769121,707703001,Primary squamous cell carcinoma of postcricoid region,cancer_dx
+45769108,707686002,Primary squamous cell carcinoma of posterior wall of hypopharynx,cancer_dx
+45768980,707532001,Primary squamous cell carcinoma of posterior wall of oropharynx,cancer_dx
+45769122,707704007,Primary squamous cell carcinoma of pyriform sinus,cancer_dx
+37116595,733358002,Primary squamous cell carcinoma of respiratory system,cancer_dx
+36712746,1.08219E+15,Primary squamous cell carcinoma of right ear,cancer_dx
+36712745,1.0821E+15,Primary squamous cell carcinoma of skin of left lower limb,cancer_dx
+36717261,1.08222E+15,Primary squamous cell carcinoma of skin of right lower limb,cancer_dx
+45768837,707355002,Primary squamous cell carcinoma of sphenoidal sinus,cancer_dx
+45769018,707576008,Primary squamous cell carcinoma of subglottis,cancer_dx
+42539700,737311009,Primary squamous cell carcinoma of sublingual gland,cancer_dx
+42537753,737310005,Primary squamous cell carcinoma of submandibular gland,cancer_dx
+45769017,707575007,Primary squamous cell carcinoma of supraglottis,cancer_dx
+37016103,1.05111E+14,Primary squamous cell carcinoma of thymus,cancer_dx
+45768865,707388009,Primary squamous cell carcinoma of trachea,cancer_dx
+37018872,2.4111E+13,Primary squamous cell carcinoma of upper limb,cancer_dx
+36715845,721618006,Primary squamous cell carcinoma of upper third of esophagus,cancer_dx
+37016119,1.07591E+14,Primary squamous cell carcinoma of urethra,cancer_dx
+36716613,722678003,Primary squamous cell carcinoma of vagina,cancer_dx
+45773564,707538002,Primary squamous cell carcinoma of vallecula,cancer_dx
+37018880,2.42951E+14,Primary squamous cell carcinoma of vermilion border of lip,cancer_dx
+36716678,722828003,Primary synovial sarcoma of intrathoracic organ,cancer_dx
+36716677,722827008,Primary synovial sarcoma of respiratory organ,cancer_dx
+36715811,721579004,Primary synovial sarcoma of soft tissue of limb,cancer_dx
+36717225,722670005,Primary thymic carcinoma,cancer_dx
+37016120,1.07601E+14,Primary transitional cell carcinoma of urethra,cancer_dx
+37116597,733360000,Primary undifferentiated carcinoma of endometrium,cancer_dx
+45768943,707483004,Primary undifferentiated carcinoma of hypopharynx,cancer_dx
+45768893,707421004,Primary undifferentiated carcinoma of larynx,cancer_dx
+45768920,707456000,Primary undifferentiated carcinoma of lung,cancer_dx
+36715837,721607006,Primary undifferentiated carcinoma of oropharynx,cancer_dx
+37110333,724553007,Primary undifferentiated carcinoma of thyroid gland,cancer_dx
+45768862,707385007,Primary undifferentiated carcinoma of trachea,cancer_dx
+764958,9.1421E+13,Primary undifferentiated large cell carcinoma,cancer_dx
+37018651,9.1171E+13,Primary undifferentiated large cell malignancy of chest wall,cancer_dx
+37110270,724468006,Primary urothelial carcinoma of overlapping lesion of urinary organ,cancer_dx
+37116428,733135005,Primary urothelial carcinoma of paraurethral gland,cancer_dx
+45768949,707490009,Primary verrucous carcinoma of hypopharynx,cancer_dx
+45768898,707427000,Primary verrucous carcinoma of larynx,cancer_dx
+45772942,707494000,Primary verrucous carcinoma of trachea,cancer_dx
+44782609,699028006,Primitive neuroectodermal tumor,cancer_dx
+35623819,766248004,Primitive neuroectodermal tumor of cervix uteri,cancer_dx
+35623818,766247009,Primitive neuroectodermal tumor of corpus uteri,cancer_dx
+4116063,254792006,Proliferating angioendotheliomatosis,cancer_dx
+4001331,110006004,Prolymphocytic leukemia (clinical),cancer_dx
+4144198,307622006,Prolymphocytic lymphosarcoma,cancer_dx
+37016740,712849003,Prostate cancer metastatic to bone,cancer_dx
+40391740,189815007,Pulmonary blastoma,cancer_dx
+4299996,403712008,PUVA therapy-associated basal cell carcinoma,cancer_dx
+4300096,403714009,PUVA therapy-associated malignant melanoma,cancer_dx
+4301282,403711001,PUVA therapy-associated skin malignancy,cancer_dx
+4301283,403713003,PUVA therapy-associated squamous cell carcinoma,cancer_dx
+3654301,830060005,Reactive oxygen species 1 negative non-small cell lung cancer,cancer_dx
+36716426,722425009,Reactive oxygen species 1 positive non-small cell lung cancer,cancer_dx
+36712738,1.08155E+15,Recurrent primary malignant neoplasm of left female breast,cancer_dx
+36712739,1.08156E+15,Recurrent primary malignant neoplasm of right female breast,cancer_dx
+45769825,7.1111E+13,Recurrent primary malignant neoplasm of vulva,cancer_dx
+36712835,1.2311E+13,Refractory acute lymphoid leukemia,cancer_dx
+3572256,1.2291E+13,Refractory acute myeloid leukemia,cancer_dx
+4112877,254912000,Regressed malignant testicular tumor,cancer_dx
+764229,4.52291E+14,Relapse multiple myeloma,cancer_dx
+3572249,1.2281E+13,Relapsing acute myeloid leukemia,cancer_dx
+443719,415287001,Relapsing chronic myeloid leukemia,cancer_dx
+45765451,702391001,Renal cell carcinoma,cancer_dx
+761184,1.5637E+16,Renal cell carcinoma of bilateral kidneys,cancer_dx
+36713419,717735006,Renal cell carcinoma of kidney except renal pelvis,cancer_dx
+35612355,765095002,Renal medullary carcinoma,cancer_dx
+436920,373168002,Reticulosarcoma,cancer_dx
+4226388,420302007,Reticulosarcoma associated with AIDS,cancer_dx
+37017243,713483007,Reticulosarcoma co-occurrent with human immunodeficiency virus infection,cancer_dx
+200659,95224004,Reticulosarcoma of intra-abdominal lymph nodes,cancer_dx
+192265,95225003,Reticulosarcoma of intrapelvic lymph nodes,cancer_dx
+435193,95226002,Reticulosarcoma of intrathoracic lymph nodes,cancer_dx
+441241,188492005,Reticulosarcoma of lymph nodes of axilla and upper limb,cancer_dx
+438106,188489006,"Reticulosarcoma of lymph nodes of head, face and neck",cancer_dx
+200660,188493000,Reticulosarcoma of lymph nodes of inguinal region and lower limb,cancer_dx
+139759,95230004,Reticulosarcoma of lymph nodes of multiple sites,cancer_dx
+442128,95231000,Reticulosarcoma of spleen,cancer_dx
+4196112,312949007,Retinal pigment epithelial adenocarcinoma,cancer_dx
+4158977,370967009,Retinoblastoma,cancer_dx
+4139395,307219002,Retroperitoneal sarcoma,cancer_dx
+4173956,277550009,Richter's syndrome,cancer_dx
+4297342,404070007,Round cell liposarcoma,cancer_dx
+37204513,783183009,Salivary gland type carcinoma of esophagus,cancer_dx
+4112073,254839007,Scirrhous carcinoma of breast,cancer_dx
+4297341,404068003,Sclerosing liposarcoma,cancer_dx
+4141248,307599002,Sebaceous adenocarcinoma,cancer_dx
+4335884,231833004,Sebaceous adenocarcinoma of eyelid,cancer_dx
+36712980,1.59562E+16,Secondary adenocarcinoma of bilateral lungs,cancer_dx
+36717298,1.33514E+16,Secondary malignant neoplasm of lymph nodes of neck from thyroid,cancer_dx
+761027,1.35091E+14,Secondary neuroendocrine carcinoma of peritoneum,cancer_dx
+37204808,783706007,Serous cystadenocarcinoma of pancreas,cancer_dx
+4112855,254850005,Serous papillary cystadenocarcinoma ovary,cancer_dx
+4116245,255101006,Sézary disease of skin,cancer_dx
+4041799,118611004,Sézary's disease (clinical),cancer_dx
+135759,95264000,Sézary's disease of extranodal AND/OR solid organ site,cancer_dx
+439267,188632001,Sézary's disease of intra-abdominal lymph nodes,cancer_dx
+439270,188635004,Sézary's disease of intrapelvic lymph nodes,cancer_dx
+439265,188631008,Sézary's disease of intrathoracic lymph nodes,cancer_dx
+138378,188633006,Sézary's disease of lymph nodes of axilla AND/OR upper limb,cancer_dx
+135765,95260009,"Sézary's disease of lymph nodes of head, face AND/OR neck",cancer_dx
+439266,188634000,Sézary's disease of lymph nodes of inguinal region and lower limb,cancer_dx
+199762,95261008,Sézary's disease of lymph nodes of inguinal region AND/OR lower limb,cancer_dx
+140664,188637007,Sézary's disease of lymph nodes of multiple sites,cancer_dx
+195760,95263006,Sézary's disease of spleen,cancer_dx
+36712771,1.10105E+16,Small cell carcinoma,cancer_dx
+4110591,254632001,Small cell carcinoma of lung,cancer_dx
+36674767,770601003,Small cell carcinoma of ovary,cancer_dx
+4288534,396198006,Small cell carcinoma of prostate,cancer_dx
+4300572,403944002,Small cell eccrine carcinoma,cancer_dx
+36713671,718604008,Small cell neuroendocrine carcinoma of bladder,cancer_dx
+36684812,3.52251E+14,Small lymphocytic B-cell lymphoma of lymph nodes of multiple sites,cancer_dx
+4326339,430338009,Smoldering chronic lymphocytic leukemia,cancer_dx
+4184985,413587002,Smoldering myeloma,cancer_dx
+37206612,786710002,Solid neoplasm with neurotrophic receptor tyrosine kinase gene fusion,cancer_dx
+37204187,782697005,Solid pseudopapillary carcinoma of pancreas,cancer_dx
+4145040,426336007,Solitary osseous myeloma,cancer_dx
+4297343,404073009,Spindle cell liposarcoma,cancer_dx
+4301511,403923002,Spindle cell malignant melanoma,cancer_dx
+4297338,404055006,Spindle cell rhabdomyosarcoma,cancer_dx
+4111922,254653005,Spindle cell squamous carcinoma of skin,cancer_dx
+4301428,403900000,Spindle cell squamous cell carcinoma,cancer_dx
+35622400,763884007,Splenic diffuse red pulp small B-cell lymphoma,cancer_dx
+4173957,277551008,Splenic lymphoma with villous lymphocytes,cancer_dx
+35622279,763666008,Splenic marginal zone B-cell lymphoma,cancer_dx
+4301664,404117003,Spongiotic mycosis fungoides,cancer_dx
+4111805,254622008,Squamous cell carcinoma of bronchus,cancer_dx
+4196724,313353007,Squamous cell carcinoma of bronchus in left lower lobe,cancer_dx
+4197581,313354001,Squamous cell carcinoma of bronchus in left upper lobe,cancer_dx
+4196725,313355000,Squamous cell carcinoma of bronchus in right lower lobe,cancer_dx
+4197582,313356004,Squamous cell carcinoma of bronchus in right middle lobe,cancer_dx
+4197583,313357008,Squamous cell carcinoma of bronchus in right upper lobe,cancer_dx
+35624316,766981007,Squamous cell carcinoma of colon,cancer_dx
+35624313,766978002,Squamous cell carcinoma of gallbladder and extrahepatic biliary tract,cancer_dx
+36712815,1.2241E+16,Squamous cell carcinoma of left lung,cancer_dx
+36674831,770684008,Squamous cell carcinoma of liver and intrahepatic biliary tract,cancer_dx
+4110705,254634000,Squamous cell carcinoma of lung,cancer_dx
+4310448,423295000,"Squamous cell carcinoma of lung, TNM stage 1",cancer_dx
+4313200,423468007,"Squamous cell carcinoma of lung, TNM stage 2",cancer_dx
+4322387,425230006,"Squamous cell carcinoma of lung, TNM stage 3",cancer_dx
+4312274,425376008,"Squamous cell carcinoma of lung, TNM stage 4",cancer_dx
+35624314,766979005,Squamous cell carcinoma of rectum,cancer_dx
+36712816,1.2241E+16,Squamous cell carcinoma of right lung,cancer_dx
+35608090,764735002,Squamous cell carcinoma of small intestine,cancer_dx
+35624315,766980008,Squamous cell carcinoma of stomach,cancer_dx
+37109576,723301009,Squamous non-small cell lung cancer,cancer_dx
+315497,302855005,Subacute leukemia,cancer_dx
+4143848,427056005,Subacute leukemia in remission,cancer_dx
+136656,188726003,Subacute lymphoid leukemia,cancer_dx
+4139054,426370008,Subacute lymphoid leukemia in remission,cancer_dx
+313430,188746008,Subacute monocytic leukemia,cancer_dx
+135499,188736006,Subacute myeloid leukemia,cancer_dx
+4143382,425749006,Subacute myeloid leukemia in remission,cancer_dx
+4097707,188770007,Subacute myelomonocytic leukemia,cancer_dx
+4301666,404133000,Subcutaneous panniculitis-like T-cell lymphoma,cancer_dx
+4300564,403914000,Superficial basal cell carcinoma,cancer_dx
+4301538,404015009,Superficial malignant fibrous histiocytoma of skin,cancer_dx
+4110725,254730000,Superficial spreading malignant melanoma of skin,cancer_dx
+44782471,699318007,Supratentorial primitive neuroectodermal tumor,cancer_dx
+4116202,302851001,Synovial sarcoma,cancer_dx
+4300697,404118008,Syringotropic mycosis fungoides,cancer_dx
+36715590,721311006,Systemic Epstein-Barr virus positive T-cell lymphoproliferative disease of childhood,cancer_dx
+4264694,397015000,Systemic mastocytosis with associated clonal hematological non-mast cell lineage disease,cancer_dx
+4082462,277575008,T-cell acute lymphoblastic leukemia,cancer_dx
+4143997,427642009,T-cell acute lymphoblastic leukemia in remission,cancer_dx
+4173955,277545003,T-cell chronic lymphocytic leukemia,cancer_dx
+37110400,724645006,T-cell histiocyte rich large B-cell lymphoma,cancer_dx
+44783718,699818003,T-cell large granular lymphocytic leukemia,cancer_dx
+4003183,109978004,T-cell lymphoma (clinical),cancer_dx
+4079683,277567002,T-cell prolymphocytic leukemia,cancer_dx
+37396882,716855006,Theca steroid producing cell malignant neoplasm of ovary,cancer_dx
+36717461,721306009,Therapy related acute myeloid leukemia and myelodysplastic syndrome,cancer_dx
+42538579,762315004,Therapy related acute myeloid leukemia due to and following administration of antineoplastic agent,cancer_dx
+45771284,702476004,Therapy-related myelodysplastic syndrome,cancer_dx
+4085560,281563002,Thoracic neuroblastoma,cancer_dx
+4312667,424887002,Thyroid cancer metastatic to bone,cancer_dx
+4085076,281702006,Tibial adamantinoma,cancer_dx
+4149844,269516007,Tongue carcinoma,cancer_dx
+4158909,274085008,Tonsil carcinoma,cancer_dx
+761035,1.36641E+14,Torré-Muir syndrome co-occurrent with malignant sebaceous neoplasm,cancer_dx
+4113111,255109008,Transitional cell carcinoma of bladder,cancer_dx
+37203941,785807007,Transitional cell carcinoma of corpus uteri,cancer_dx
+4256774,408642003,Transitional cell carcinoma of kidney,cancer_dx
+37209430,1.59591E+16,Transitional cell carcinoma of left kidney,cancer_dx
+36712747,1.08228E+15,Transitional cell carcinoma of left renal pelvis,cancer_dx
+42534922,1.08229E+15,Transitional cell carcinoma of left ureter,cancer_dx
+37209431,1.59591E+16,Transitional cell carcinoma of right kidney,cancer_dx
+36712748,1.0823E+15,Transitional cell carcinoma of right renal pelvis,cancer_dx
+36712749,1.08231E+15,Transitional cell carcinoma of right ureter,cancer_dx
+4102133,300988009,Transitional cell carcinoma of ureter,cancer_dx
+4301512,403929003,Trichilemmal carcinoma,cancer_dx
+45768522,706970001,Triple-negative breast cancer,cancer_dx
+37116726,733603009,Tubulocystic renal cell carcinoma,cancer_dx
+4301662,404113004,Tumor stage mycosis fungoides,cancer_dx
+4003182,109975001,T-zone lymphoma (clinical),cancer_dx
+4297195,403955002,Undifferentiated adnexal carcinoma of skin,cancer_dx
+35624158,766758001,Undifferentiated carcinoma of corpus uteri,cancer_dx
+37204806,783704005,Undifferentiated carcinoma of esophagus,cancer_dx
+36674832,770685009,Undifferentiated carcinoma of liver and intrahepatic biliary tract,cancer_dx
+44783808,697993003,Undifferentiated carcinoma of nasal sinus,cancer_dx
+4306501,422541001,Undifferentiated carcinoma of nasopharynx,cancer_dx
+4110863,254856004,Undifferentiated carcinoma of ovary,cancer_dx
+35624157,766757006,Undifferentiated carcinoma of stomach,cancer_dx
+44783851,698048006,Undifferentiated nonkeratinizing carcinoma of nasopharynx,cancer_dx
+4153657,370511006,Vaccine-induced fibrosarcoma,cancer_dx
+4300554,403889000,Verrucous carcinoma of oral cavity,cancer_dx
+4298030,403904009,Verrucous squamous cell carcinoma,cancer_dx
+4291603,402912009,Vulval verrucous carcinoma of Buschke-Löwenstein,cancer_dx
+4098597,190818004,Waldenström macroglobulinemia,cancer_dx
+36717048,717922007,Well-differentiated neuroendocrine carcinoma of thymus,cancer_dx

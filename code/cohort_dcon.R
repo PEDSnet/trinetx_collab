@@ -194,10 +194,12 @@ check_dcon<- function(conc_tbls,
     } else{col_nm <- sym('person_id')}
     
     combined <- 
-      cohort_1 %>% select(all_of(col_nm)) %>% 
+      cohort_1 %>% select(site, all_of(col_nm), date1) %>% 
       inner_join(
-        select(cohort_2, all_of(col_nm))
-      )
+        select(cohort_2, site, all_of(col_nm), date2)
+      ) %>%
+      mutate(date_diff = abs((date1 - date2)/365.25)) %>%
+      filter(date_diff <= 2) #%>% compute_new()
     
     cohort_list <- list('cohort_1' = cohort_1,
                         'cohort_2' = cohort_2,
@@ -209,6 +211,7 @@ check_dcon<- function(conc_tbls,
       string_nm <- names(cohort_list[i])
       
       final_cts <- cohort_list[[i]] %>% 
+        group_by(site) %>%
         summarise(value=n_distinct(col_nm)) %>% 
         collect() %>% 
         mutate(cohort = string_nm)
@@ -221,8 +224,9 @@ check_dcon<- function(conc_tbls,
       reduce(.x=cohort_list_cts,
              .f=dplyr::union) %>% 
       #mutate(yr=9999) %>% 
-      add_meta(check_lib = check_string) %>%
-      mutate(check_name=conc_tbls[[k]][[3]]) %>%
+      # add_meta(check_lib = check_string) %>%
+      mutate(check_name=conc_tbls[[k]][[3]],
+             check_type = check_string) %>%
       mutate(check_desc=names(conc_tbls[k]))
     
     final[[k]] <- final_tbls
