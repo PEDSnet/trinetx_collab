@@ -2,7 +2,7 @@
 
 #' `Case Mix`
 
-casemix_final <- trinetx_check_pp(dat = results_tbl('case_mix_v2'), group = 'icd_header')
+casemix_final <- trinetx_check_pp(dat = results_tbl('case_mix'), group = 'icd_header')
 
 output_tbl(casemix_final, 'case_mix_pp')
 
@@ -25,8 +25,16 @@ output_tbl(fot_output_distance,
            indexes=list('check_name'))
 
 #' `Domain Concordance`
-dcon_output_pp <- apply_dcon_pp(dcon_tbl=results_tbl('dcon_output_v2'),
-                                byyr=FALSE)
+dcon_output_pp <- apply_dcon_pp(dcon_tbl=results_tbl('dcon_output'),
+                                byyr=FALSE,
+                                strict = FALSE)
 output_tbl(dcon_output_pp,
            name='dcon_output_pp')
+
+#' `Domain Concordance --- Conservative`
+dcon_output_cons_pp <- apply_dcon_pp(dcon_tbl=results_tbl('dcon_output_strict'),
+                                byyr=FALSE,
+                                strict = TRUE)
+output_tbl(dcon_output_cons_pp,
+           name='dcon_output_strict_pp')
 

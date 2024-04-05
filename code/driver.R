@@ -27,12 +27,11 @@ config_append('extra_packages', c('stringr', 'tidyr', 'purrr', 'lubridate'))
   
   #' `Case Mix`
     
-  casemix_output <- compute_case_mix(dx_tbl = cdm_tbl('condition_occurrence') %>%
-                                       filter(site == 'texas') %>%
+  casemix_output <- compute_case_mix(dx_tbl = cdm_tbl('condition_occurrence')  %>%
                                          filter(condition_start_date >= '2014-01-01' &
                                                   condition_start_date <= '2023-12-31'))
   
-  output_tbl_append(casemix_output, 'case_mix_v2')
+  output_tbl(casemix_output, 'case_mix_v2')
   
   #' `FOT` 
   
@@ -59,13 +58,25 @@ config_append('extra_packages', c('stringr', 'tidyr', 'purrr', 'lubridate'))
   
   source(paste0(base_dir, '/code/dcon_execute.R'))
   
-  dcon_pts <- check_dcon(conc_tbls = dcon_pts_list[7],
+  dcon_pts <- check_dcon(conc_tbls = dcon_pts_list,
                          check_string = 'dcon_pts')
   
   dcon_reduce <- reduce(.x = dcon_pts,
                         .f = dplyr::union)
   
-  output_tbl_append(dcon_reduce, 'dcon_output_v2')
+  output_tbl(dcon_reduce, 'dcon_output')
+  
+  #' `Domain Concordance -- Conservative`
+  
+  source(paste0(base_dir, '/code/dcon_execute.R'))
+  
+  dcon_pts_cons <- check_dcon_cons(conc_tbls = dcon_pts_list,
+                              check_string = 'dcon_pts')
+  
+  dcon_reduce_cons <- reduce(.x = dcon_pts,
+                        .f = dplyr::union)
+  
+  output_tbl(dcon_reduce_cons, 'dcon_output_cons')
   
   # Write step summary log to CSV and/or database,
   # as determined by configuration

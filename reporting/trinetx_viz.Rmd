@@ -32,6 +32,7 @@ require(VennDiagram)
 require(gt)
 require(gridExtra)
 require(plotly)
+require(patchwork)
 
 get_results <- function(tbl_name) {
   if (data_source == 'local') {
@@ -58,11 +59,20 @@ sites <- get_results('coverage_overlap_pp') %>% site_anon()
 cvg <- get_results('coverage_overlap_pp') %>% 
   add_row(site = 'stanford', fact_group = 'med_lab', total_pts_site = 817690,
           total_pts_all = 12318401, n_pts_all = 2440) %>% 
-  mutate_all(~replace(., is.na(.), 0)) %>% left_join(sites)
-mix <- get_results('case_mix_pp') %>% left_join(sites)
-fot <- get_results('fot_output_distance') %>% left_join(sites)
-fot2 <- get_results('fot_heuristic') %>% left_join(sites)
-dcon <- get_results('dcon_output_pp') %>% left_join(sites)
+  mutate_all(~replace(., is.na(.), 0)) %>% left_join(sites) 
+output_tbl(cvg, 'coverage_overlap', file = TRUE)
+mix <- get_results('case_mix_pp') %>% left_join(sites) 
+output_tbl(mix, 'case_mix', file = TRUE)
+fot <- get_results('fot_output_distance') %>% left_join(sites) 
+output_tbl(fot, 'factsovertime_distance', file = TRUE)
+fot2 <- get_results('fot_heuristic') %>% left_join(sites) 
+output_tbl(fot2, 'factsovertime_normalized', file = TRUE)
+fot3 <- get_results('fot_output') %>% left_join(sites) 
+output_tbl(fot2, 'factsovertime_rawcts', file = TRUE)
+dcon <- get_results('dcon_output_pp') %>% left_join(sites) 
+output_tbl(dcon, 'couplets_og', file = TRUE)
+dcon_strict <- get_results('dcon_output_strict_pp') %>% left_join(sites) 
+output_tbl(dcon_strict, 'couplets_strict', file = TRUE)
 
 ```
 
@@ -71,19 +81,19 @@ dcon <- get_results('dcon_output_pp') %>% left_join(sites)
 
 cvg_venn <- cvg %>%
   mutate(fg_venn = case_when(fact_group == 'dx' ~ 'area1',
-                             fact_group == 'px' ~ 'area2',
+                             fact_group == 'lab' ~ 'area2',
                              fact_group == 'med' ~ 'area3',
-                             fact_group == 'lab' ~ 'area4',
-                             fact_group == 'dx_lab' ~ 'n14',
+                             fact_group == 'px' ~ 'area4',
+                             fact_group == 'dx_lab' ~ 'n12',
                              fact_group == 'dx_med' ~ 'n13',
-                             fact_group == 'dx_med_lab' ~ 'n134',
-                             fact_group == 'dx_px' ~ 'n12',
+                             fact_group == 'dx_med_lab' ~ 'n123',
+                             fact_group == 'dx_px' ~ 'n14',
                              fact_group == 'dx_px_lab' ~ 'n124',
-                             fact_group == 'dx_px_med' ~ 'n123',
+                             fact_group == 'dx_px_med' ~ 'n134',
                              fact_group == 'dx_px_med_lab' ~ 'n1234',
-                             fact_group == 'med_lab' ~ 'n34',
+                             fact_group == 'med_lab' ~ 'n23',
                              fact_group == 'px_lab' ~ 'n24',
-                             fact_group == 'px_med' ~ 'n23',
+                             fact_group == 'px_med' ~ 'n34',
                              fact_group == 'px_med_lab' ~ 'n234')) %>%
   mutate(n_pts_all = prettyNum(n_pts_all, big.mark = ','),
          prop_pts_pct = prop_pts_all * 100,
@@ -99,7 +109,7 @@ draw.quad.venn(direct.area = TRUE,
                                cvg_venn$n134, cvg_venn$n1234, cvg_venn$n234, cvg_venn$n24,
                                cvg_venn$area1, cvg_venn$n14, cvg_venn$n124, cvg_venn$n123,
                                cvg_venn$n23, cvg_venn$area2, cvg_venn$n12),
-               category = c('Diagnoses', 'Procedures', 'Medications', 'Labs'),
+               category = c('Diagnoses', 'Labs', 'Medications', 'Procedures'),
                fill = c('orange', 'red', 'green', 'blue'),
                alpha = 0.3,
                cex = c(2,2,2,2,2,2,2,2,2,2,2,2,2,2,2),
@@ -125,19 +135,19 @@ for(i in 1:length(site_list)){
 cvg_venn1 <- cvg %>%
   filter(site_anon == site_list[[i]]) %>%
   mutate(fg_venn = case_when(fact_group == 'dx' ~ 'area1',
-                             fact_group == 'px' ~ 'area2',
+                             fact_group == 'lab' ~ 'area2',
                              fact_group == 'med' ~ 'area3',
-                             fact_group == 'lab' ~ 'area4',
-                             fact_group == 'dx_lab' ~ 'n14',
+                             fact_group == 'px' ~ 'area4',
+                             fact_group == 'dx_lab' ~ 'n12',
                              fact_group == 'dx_med' ~ 'n13',
-                             fact_group == 'dx_med_lab' ~ 'n134',
-                             fact_group == 'dx_px' ~ 'n12',
+                             fact_group == 'dx_med_lab' ~ 'n123',
+                             fact_group == 'dx_px' ~ 'n14',
                              fact_group == 'dx_px_lab' ~ 'n124',
-                             fact_group == 'dx_px_med' ~ 'n123',
+                             fact_group == 'dx_px_med' ~ 'n134',
                              fact_group == 'dx_px_med_lab' ~ 'n1234',
-                             fact_group == 'med_lab' ~ 'n34',
+                             fact_group == 'med_lab' ~ 'n23',
                              fact_group == 'px_lab' ~ 'n24',
-                             fact_group == 'px_med' ~ 'n23',
+                             fact_group == 'px_med' ~ 'n34',
                              fact_group == 'px_med_lab' ~ 'n234')) %>%
   mutate(n_pts_site = ifelse(n_pts_site < 11, 0, n_pts_site)) %>%
   mutate(n_pts_site = prettyNum(n_pts_site, big.mark = ','),
@@ -154,7 +164,7 @@ draw.quad.venn(direct.area = TRUE,
                                cvg_venn1$n134, cvg_venn1$n1234, cvg_venn1$n234, cvg_venn1$n24,
                                cvg_venn1$area1, cvg_venn1$n14, cvg_venn1$n124, cvg_venn1$n123,
                                cvg_venn1$n23, cvg_venn1$area2, cvg_venn1$n12),
-               category = c('Diagnoses', 'Procedures', 'Medications', 'Labs'),
+               category = c('Diagnoses', 'Labs', 'Medications', 'Procedures'),
                fill = c('orange', 'red', 'green', 'blue'),
                alpha = 0.3,
                cex = c(2,2,2,2,2,2,2,2,2,2,2,2,2,2,2),
@@ -258,9 +268,27 @@ graph_list
 ```
 
 ## Concordance / Couplets
-```{r dcon, fig.height=9}
+```{r dcon, fig.height=9, fig.width=9}
 
-dcon %>%
+p1 <- dcon %>%
+  filter(site != 'total') %>%
+  mutate(pct = paste0(round(prop, 2) * 100, '%')) %>%
+  ggplot(aes(x=site_anon,y=prop,fill=factor(cohort, 
+                                            levels = c('cohort_2_only', 'combined', 'cohort_1_only'))),
+           stat='identity') +
+  geom_col(show.legend = FALSE) +
+  geom_text(aes(label = pct), position = position_stack(vjust = 0.5), size = 2,
+            fontface = 'bold') +
+  scale_fill_brewer(palette = 'Dark2') +
+  theme_test()+
+  labs(x="Site (Anonymized)",
+       y="Proportion",
+       fill = '',
+       title = 'Standard Algorithm')+
+  facet_wrap(~check_name, ncol = 2)+
+  coord_flip()
+
+p2 <- dcon_strict %>%
   filter(site != 'total') %>%
   mutate(pct = paste0(round(prop, 2) * 100, '%')) %>%
   ggplot(aes(x=site_anon,y=prop,fill=factor(cohort, 
@@ -273,10 +301,12 @@ dcon %>%
   theme_test()+
   labs(x="Site (Anonymized)",
        y="Proportion",
-       fill = '')+
+       fill = '',
+       title = 'Stricter Algorithm')+
   facet_wrap(~check_name, ncol = 2)+
   coord_flip()
 
+p1 + p2
 
 ```
 
@@ -343,7 +373,7 @@ g <- fot2 %>%
   labs(x="Month/Year",
        y = 'Patient Count',
        color = 'Check',
-       title = paste0(site_list[[i]], ' Raw vs Normalized Patient Counts'))
+       title = paste0(site_list[[i]], ' Raw Patient Counts w/ Smoothing'))
 
 graph_list[[i]] <- ggplotly(g)
 }
