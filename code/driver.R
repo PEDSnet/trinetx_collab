@@ -26,12 +26,23 @@ config_append('extra_packages', c('stringr', 'tidyr', 'purrr', 'lubridate'))
   output_tbl(overlap_output, 'coverage_overlap')
   
   #' `Case Mix`
-    
-  casemix_output <- compute_case_mix(dx_tbl = cdm_tbl('condition_occurrence')  %>%
-                                         filter(condition_start_date >= '2014-01-01' &
-                                                  condition_start_date <= '2023-12-31'))
   
-  output_tbl(casemix_output, 'case_mix_v2')
+  site_list <- c('seattle', 'stanford', 'lurie', 'nemours', 'national',
+                 'nationwide', 'chop', 'colorado', 'cchmc', 'texas')
+    
+  for(i in 1:length(site_list)){
+    
+    message('Starting ', site_list[i])
+    
+    site_nm <- site_list[i]
+    
+  casemix_output <- compute_case_mix(dx_tbl = cdm_tbl('condition_occurrence') %>%
+                                       filter(site == site_nm))
+  
+  output_tbl_append(casemix_output, 'case_mix_full')
+  
+  }
+  
   
   #' `FOT` 
   

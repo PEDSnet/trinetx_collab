@@ -2,9 +2,9 @@
 
 #' `Case Mix`
 
-casemix_final <- trinetx_check_pp(dat = results_tbl('case_mix'), group = 'icd_header')
+casemix_final <- trinetx_check_pp(dat = results_tbl('case_mix_full'), group = 'icd_header')
 
-output_tbl(casemix_final, 'case_mix_pp')
+output_tbl(casemix_final, 'case_mix_full_pp')
 
 #' `Coverage Overlap`
 

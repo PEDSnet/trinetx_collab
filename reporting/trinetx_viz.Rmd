@@ -62,7 +62,9 @@ cvg <- get_results('coverage_overlap_pp') %>%
   mutate_all(~replace(., is.na(.), 0)) %>% left_join(sites) 
 output_tbl(cvg, 'coverage_overlap', file = TRUE)
 mix <- get_results('case_mix_pp') %>% left_join(sites) 
-output_tbl(mix, 'case_mix', file = TRUE)
+output_tbl(mix, 'case_mix_10yr', file = TRUE)
+mix_full <- get_results('case_mix_full_pp') %>% left_join(sites) 
+output_tbl(mix, 'case_mix_alltime', file = TRUE)
 fot <- get_results('fot_output_distance') %>% left_join(sites) 
 output_tbl(fot, 'factsovertime_distance', file = TRUE)
 fot2 <- get_results('fot_heuristic') %>% left_join(sites) 
@@ -226,7 +228,7 @@ cat('\n')
 ## Case-Mix
 ```{r mix}
 
-mix %>%
+mix_full %>%
   distinct(icd_header, prop_pts_all) %>%
   mutate(pct = paste0(prop_pts_all * 100, '%')) %>%
   ggplot(aes(x = icd_header, y = prop_pts_all)) +
@@ -241,12 +243,12 @@ mix %>%
 
 ```{r mix_site}
 
-site_list <- mix %>% arrange(sitenum) %>% distinct(site_anon) %>% pull()
+site_list <- mix_full %>% arrange(sitenum) %>% distinct(site_anon) %>% pull()
 
 graph_list <- list()
 
 for(i in 1:length(site_list)){
-g <- mix %>%
+g <- mix_full %>%
   filter(site_anon == site_list[[i]]) %>%
   distinct(site_anon, icd_header, prop_pt_site) %>%
   mutate(pct = paste0(prop_pt_site * 100, '%')) %>%
