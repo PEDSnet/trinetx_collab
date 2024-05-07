@@ -1,6 +1,6 @@
 library(ggplot2)
 library(scales)
-library(ggpubr)
+#library(ggpubr)
 # tutorial: https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2
 #' Function to extract colors as hex codes
 #'

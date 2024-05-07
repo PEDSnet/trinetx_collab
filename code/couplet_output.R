@@ -1,4 +1,6 @@
 
+#' Libraries used
+
 library(dplyr)
 library(ggplot2)
 library(hotspots)
@@ -7,12 +9,17 @@ library(stringr)
 library(tidyr)
 library(ggiraph)
 
+#' Set working directory to point to files
+
 setwd("/Users/razzaghih/one_offs/trinetx")
 
+#' Name of Files
+#' 
 couplets_chop <- read_csv('couplets_chop.csv')
 couplets_trinetx <- read_csv('couplets_trinetx.csv')
 
-trinetx_cleaned <- 
+#' Trinetx cleaning to be more standardized
+trinetx_cleaned_structure <- 
   couplets_trinetx %>% 
   mutate(check_desc_new=
            case_when(str_detect(check_desc, 'Sickle cell') ~ 'scd_dx_hydrox_rx',
@@ -36,12 +43,28 @@ trinetx_cleaned <-
                values_to = 'value') %>% 
   mutate(prop=
            case_when(value >= 1.001 ~ round(value/tot_pats, 2),
-                     TRUE ~ value))
+                     TRUE ~ value)) 
 
+#' Trinetx fix cohort order eof procedure and fracture
+#'
+trinetx_cleaned <- 
+  trinetx_cleaned_structure %>% 
+  mutate(cohort = 
+           case_when(couplet_name == 'Imaging procedure + fracture' & cohort == 'cohort_1' ~ 'cohort_2',
+                     couplet_name == 'Imaging procedure + fracture' & cohort == 'cohort_1_only' ~ 'cohort_2_only',
+                     couplet_name == 'Imaging procedure + fracture' & cohort == 'cohort_2' ~ 'cohort_1',
+                     couplet_name == 'Imaging procedure + fracture' & cohort == 'cohort_2_only' ~ 'cohort_1_only',
+                     TRUE ~ cohort)) %>% 
+  mutate(couplet_name = 
+           case_when(couplet_name == 'Imaging procedure + fracture' ~ 'Fracture + imaging procedure',
+                     TRUE ~ couplet_name))
+
+#' Using Trinetx check descriptions
 check_desc_lookup <- 
   trinetx_cleaned %>% select(couplet_name,
                              check_desc) %>% distinct()
 
+#' Cleaning CHOP data
 chop_cleaned <- 
   couplets_chop %>% 
   select(-c(prop, sitenum)) %>% 
@@ -60,20 +83,24 @@ chop_cleaned <-
   inner_join(check_desc_lookup) %>% 
   select(-c('check_name','check_type'))
 
+#' Combined CHOP and Trinetx data
 couplets_combined <- dplyr::union(trinetx_cleaned,
                                   chop_cleaned)
 
+#' Cohort Overlap of Both Cohorts
 couplets_prop_combined <- 
   ms_exp_nt(couplets_combined %>% filter(cohort=='combined') %>% 
               filter(! str_detect(site_anon,'all|ALL')), 'prop') +
   ggtitle('Proportion of Combined Over Total in Both')
 
+#' Proportion of Patients in Cohort 2 who are in Cohort 1
 couplets_prop_cohort_1 <- 
   ms_exp_nt(couplets_combined %>% filter(cohort=='cohort_1_denom_prop') %>% 
               filter(! str_detect(site_anon,'all|ALL')), 'prop') +
   ggtitle('Proportion of Cohort 2 in Cohort 1')
 
 
+#' Setting up for Anomaly Detection
 couplet_anomaly_cohort_1 <- compute_dist_anomalies(df_tbl=couplets_combined %>% filter(cohort=='cohort_1_denom_prop') %>% 
                                                       filter(! str_detect(site_anon,'all|ALL')) %>% 
                                                       select(site_anon,couplet_name,check_desc,prop) %>% 
@@ -81,10 +108,11 @@ couplet_anomaly_cohort_1 <- compute_dist_anomalies(df_tbl=couplets_combined %>% 
                                                   grp_vars=c('couplet_name','check_desc'),
                                                   var_col='prop')
 
-couplet_anomaly_final_cohort_1 <- detect_outliers(test,
+#' Detection of outliers
+couplet_anomaly_final_cohort_1 <- detect_outliers(couplet_anomaly_cohort_1,
                                                   column_analysis='prop',
                                                   column_variable = 'couplet_name')
-  
+#' Visualization  
 couplet_anomaly_plot_trinetx <- ms_anom_nt(process_output=couplet_anomaly_final_cohort_1 %>% 
                                              filter(site %in% c('HCO1','HCO2','HCO3',
                                                                 'HCO4','HCO5','HCO6',
