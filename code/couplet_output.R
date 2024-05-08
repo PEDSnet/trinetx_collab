@@ -15,8 +15,8 @@ setwd("/Users/razzaghih/one_offs/trinetx")
 
 #' Name of Files
 #' 
-couplets_chop <- read_csv('couplets_chop.csv')
-couplets_trinetx <- read_csv('couplets_trinetx.csv')
+couplets_chop <- read_csv('results/couplets_chop.csv')
+couplets_trinetx <- read_csv('results/couplets_trinetx.csv')
 
 #' Trinetx cleaning to be more standardized
 trinetx_cleaned_structure <- 
@@ -87,6 +87,8 @@ chop_cleaned <-
 couplets_combined <- dplyr::union(trinetx_cleaned,
                                   chop_cleaned)
 
+write.csv(couplets_combined, file = 'results/COMBINED_couplets.csv')
+
 #' Cohort Overlap of Both Cohorts
 couplets_prop_combined <- 
   ms_exp_nt(couplets_combined %>% filter(cohort=='combined') %>% 
@@ -112,6 +114,9 @@ couplet_anomaly_cohort_1 <- compute_dist_anomalies(df_tbl=couplets_combined %>% 
 couplet_anomaly_final_cohort_1 <- detect_outliers(couplet_anomaly_cohort_1,
                                                   column_analysis='prop',
                                                   column_variable = 'couplet_name')
+
+write.csv(couplet_anomaly_final_cohort_1, file = 'results/COMBINED_couplets_anom.csv')
+
 #' Visualization  
 couplet_anomaly_plot_trinetx <- ms_anom_nt(process_output=couplet_anomaly_final_cohort_1 %>% 
                                              filter(site %in% c('HCO1','HCO2','HCO3',

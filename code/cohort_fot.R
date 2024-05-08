@@ -161,13 +161,13 @@ check_fot <- function(time_tbls,
 
 fot_check_calc <- function(tblx, site_col,time_col, target_col) {
   tblx %>%
-    window_order(!!sym(site_col),!!sym(time_col)) %>%
+    arrange(!!sym(site_col),!!sym(time_col)) %>%
     mutate(
       lag_1 = lag(!!sym(target_col)),
-      lag_1_plus = lag(!!sym(target_col),-1),
+      lag_1_plus = lead(!!sym(target_col)),
       lag_12 = lag(!!sym(target_col),12),
       check_denom = (lag(!!sym(target_col))*.25 +
-                              lag(!!sym(target_col),-1)*.25 +
+                              lead(!!sym(target_col))*.25 +
                               lag(!!sym(target_col),12)*.5)) %>%
     filter(check_denom!=0) %>%
     mutate(check = !!sym(target_col)/check_denom-1)
