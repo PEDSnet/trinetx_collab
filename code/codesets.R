@@ -103,19 +103,23 @@ load_codeset <- function(name,
 #' @return A tbl containing the expanded codeset, with the standard 4 columns
 #'   (see above), indexed on `concept_id`.
 #' @md
-get_descendants <- function(codeset, table_name = NA) {
-  if (is.na(table_name)) {
-    table_name <- dbplyr:::tbl_desc(codeset)
-    table_name <- unlist(regmatches(table_name,
-                                    regexec('(\\w+)>', table_name,
-                                            perl = TRUE)))[2]
-    table_name <- paste0(table_name, '_exp')
+get_descendants <- function(codeset, table_name = NULL) {
+  if (is.null(table_name)) {
+    if (any(class(codeset) == 'tbl_dbi')) {
+      table_name <- remote_name(codeset)
+      if (! is.null(table_name)) table_name <- paste0(table_name, '_exp')
+    }
+    if (is.null(table_name))
+      table_name <- hash(remote_query(codeset) %||%
+                           paste0(sample(letters, 12), collapse = ''))
   }
-
- if (is.null(config('_codesets'))) config('_codesets', list())
-  cache <- config('_codesets')
-  if (! is.null(cache[[table_name]])) return(cache[[table_name]])
-
+  
+  if (config('cache_enabled')) {
+    if (is.null(config('_codesets'))) config('_codesets', list())
+    cache <- config('_codesets')
+    if (! is.null(cache[[table_name]])) return(cache[[table_name]])
+  }
+  
   codes <- vocabulary_tbl('concept_ancestor') %>%
     inner_join(codeset, by = c('ancestor_concept_id' = 'concept_id')) %>%
     select(descendant_concept_id) %>%
@@ -125,7 +129,11 @@ get_descendants <- function(codeset, table_name = NA) {
            vocabulary_id) %>%
     distinct() %>%
     compute_new(indexes = list('concept_id'), name = table_name)
-  cache[[table_name]] <- codes
-  config('_codesets', cache)
+  
+  if (config('cache_enabled')) {
+    cache[[table_name]] <- codes
+    config('_codesets', cache)
+  }
+  
   codes
 }
