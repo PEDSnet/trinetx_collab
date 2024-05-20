@@ -1,21 +1,21 @@
 
 
-dx_anxiety <- load_codeset('mhcc_codes_v4') %>%
-  filter(cluster == 'Anxiety Disorder') %>% compute_new()
-
-op_proc <- site_cdm_tbl('visit_occurrence') %>%
-  select(site, person_id, visit_occurrence_id, visit_concept_id) %>%
-  filter(visit_concept_id == 9202L) %>%
-  inner_join(select(site_cdm_tbl('procedure_occurrence'), site, person_id, visit_occurrence_id,
-                    procedure_date)) %>%
-  compute_new()
-
-ed_vital <- site_cdm_tbl('visit_occurrence') %>%
-  select(site, person_id, visit_occurrence_id, visit_concept_id) %>%
-  filter(visit_concept_id == 9203L) %>%
-  inner_join(select(site_cdm_tbl('measurement_vitals'), site, person_id, visit_occurrence_id, 
-                    measurement_date)) %>%
-  compute_new()
+# dx_anxiety <- load_codeset('mhcc_codes_v4') %>%
+#   filter(cluster == 'Anxiety Disorder') %>% compute_new()
+# 
+# op_proc <- site_cdm_tbl('visit_occurrence') %>%
+#   select(site, person_id, visit_occurrence_id, visit_concept_id) %>%
+#   filter(visit_concept_id == 9202L) %>%
+#   inner_join(select(site_cdm_tbl('procedure_occurrence'), site, person_id, visit_occurrence_id,
+#                     procedure_date)) %>%
+#   compute_new()
+# 
+# ed_vital <- site_cdm_tbl('visit_occurrence') %>%
+#   select(site, person_id, visit_occurrence_id, visit_concept_id) %>%
+#   filter(visit_concept_id == 9203L) %>%
+#   inner_join(select(site_cdm_tbl('measurement_vitals'), site, person_id, visit_occurrence_id, 
+#                     measurement_date)) %>%
+#   compute_new()
 
 
 fot_tbl_list <- list(
@@ -44,3 +44,11 @@ fot_tbl_list <- list(
                                    by = c('condition_concept_id' = 'concept_id')),
                       'respiratory_infection')
 )
+
+
+
+
+
+
+
+

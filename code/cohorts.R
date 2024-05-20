@@ -408,6 +408,35 @@ compute_dist_mean_median <- function(tbl,
 ms_exp_nt2 <- function(process_output,
                        check_string = 'Branch',
                        y_col = 'branch',
+                       descriptor_col = 'description',
+                       x_col = 'prop_pts'){
+  
+  data_format <- process_output %>%
+    mutate(text = paste0('Site: ', site_anon,
+                         '\n', check_string, ': ', !!sym(descriptor_col),
+                         '\nProportion: ', !!sym(x_col)))
+  
+  r <- ggplot(data_format, 
+              aes(y=!!sym(y_col),x=!!sym(x_col), colour=site_anon))+
+    geom_point_interactive(aes(tooltip = text), size=3)+
+    geom_point(aes(y=!!sym(y_col), x=allsite_median), shape=8, size=4, color="black")+
+    scale_color_ssdqa(discrete = TRUE) +
+    scale_y_discrete(limits=rev) +
+    #facet_wrap((facet), scales="free_x", ncol=2)+
+    theme_minimal() + 
+    labs(y = check_string,
+         x = 'Proportion Patients',
+         color = 'Site',
+         title = paste0('Proportion of Patients with Each ', check_string),
+         subtitle = 'Star represents All-Site Median')
+  
+  girafe(ggobj = r)
+  
+}
+
+ms_exp_nt2_facet <- function(process_output,
+                       check_string = 'Branch',
+                       y_col = 'branch',
                        descriptor_col = 'description'){
   
   data_format <- process_output %>%
@@ -427,7 +456,8 @@ ms_exp_nt2 <- function(process_output,
          x = 'Proportion Patients',
          color = 'Site',
          title = paste0('Proportion of Patients with Each ', check_string),
-         subtitle = 'Star represents All-Site Median')
+         subtitle = 'Star represents All-Site Median') +
+    facet_wrap(~ site_category)
   
   girafe(ggobj = r)
   
@@ -438,19 +468,37 @@ ms_exp_nt2 <- function(process_output,
 euclidean_output <- function(process_output,
                              output_var,
                              filter_variable) {
+
+  if (! is.null(filter_variable)) {
+    filt_op <- process_output %>% filter(check_desc == filter_variable) %>%
+      mutate(prop_col = !!sym(output_var))
+    
+    allsites <- 
+      filt_op %>% 
+      select(time_start,check_desc,mean_allsiteprop) %>% distinct() %>% 
+      rename(prop_col=mean_allsiteprop) %>% 
+      mutate(site_anon='all site average') %>% 
+      mutate(text_smooth=paste0("Site: ", site_anon,
+                                "\n","Proportion: ",prop_col),
+             text_raw=paste0("Site: ", site_anon,
+                             "\n","Proportion: ",prop_col)) 
+    
+  } else {
+    filt_op <- process_output %>% 
+      mutate(prop_col = !!sym(output_var))
+    
+    allsites <- 
+      filt_op %>% 
+      select(time_start,mean_allsiteprop) %>% distinct() %>% 
+      rename(prop_col=mean_allsiteprop) %>% 
+      mutate(site_anon='all site average') %>% 
+      mutate(text_smooth=paste0("Site: ", site_anon,
+                                "\n","Proportion: ",prop_col),
+             text_raw=paste0("Site: ", site_anon,
+                             "\n","Proportion: ",prop_col)) 
+  }
   
-  filt_op <- process_output %>% filter(check_desc == filter_variable) %>%
-    mutate(prop_col = !!sym(output_var))
   
-  allsites <- 
-    filt_op %>% 
-    select(time_start,check_desc,mean_allsiteprop) %>% distinct() %>% 
-    rename(prop_col=mean_allsiteprop) %>% 
-    mutate(site_anon='all site average') %>% 
-    mutate(text_smooth=paste0("Site: ", site_anon,
-                              "\n","Proportion: ",prop_col),
-           text_raw=paste0("Site: ", site_anon,
-                           "\n","Proportion: ",prop_col)) 
   
   dat_to_plot <- 
     filt_op %>% 

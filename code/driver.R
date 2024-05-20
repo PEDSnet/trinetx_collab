@@ -1,5 +1,5 @@
 # Vector of additional packages to load before executing the request
-config_append('extra_packages', c('stringr', 'tidyr', 'purrr', 'lubridate'))
+config_append('extra_packages', c('stringr', 'tidyr', 'purrr', 'lubridate','plotly','ggiraph'))
 
 #' Execute the request
 #'
@@ -43,6 +43,99 @@ config_append('extra_packages', c('stringr', 'tidyr', 'purrr', 'lubridate'))
   
   }
   
+  ### CASE MIX SCD
+  scd_codes <- load_codeset('dx_sickle_cell')
+  scd_full <- list()
+  
+  for(i in 1:length(site_list)){
+    
+    message('Starting ', site_list[i])
+    
+    site_nm <- site_list[i]
+    
+    scd_pts <- cdm_tbl('condition_occurrence') %>% 
+      filter(site == site_nm) %>% 
+      inner_join(select(scd_codes,
+                        concept_id),
+                 by=c('condition_concept_id'='concept_id')) %>% 
+      distinct(person_id) %>% compute_new()
+    
+    casemix_output <- compute_case_mix(cohort = scd_pts,
+                                       dx_tbl = cdm_tbl('condition_occurrence') %>%
+                                         filter(site == site_nm))
+    
+    scd_full[[i]] <- casemix_output
+    #output_tbl_append(casemix_output, 'case_mix_scd')
+    
+  }
+  
+  scd_full_reduce <- reduce(.x=scd_full,
+                            .f=dplyr::union)
+  
+  output_tbl(scd_full_reduce, 'case_mix_scd')
+  
+  ### CASE MIX SCD DEEP DIVE
+  scd_codes <- load_codeset('dx_sickle_cell')
+  scd_full_p <- list()
+  
+  for(i in 1:length(site_list)){
+    
+    message('Starting ', site_list[i])
+    
+    site_nm <- site_list[i]
+    
+    scd_pts <- cdm_tbl('condition_occurrence') %>% 
+      filter(site == site_nm) %>% 
+      inner_join(select(scd_codes,
+                        concept_id),
+                 by=c('condition_concept_id'='concept_id')) %>% 
+      distinct(person_id) %>% compute_new()
+    
+    casemix_output <- compute_case_mix_p_deep_dive(cohort = scd_pts,
+                                                   dx_tbl = cdm_tbl('condition_occurrence') %>%
+                                                     filter(site == site_nm))
+    
+    scd_full_p[[i]] <- casemix_output
+    #output_tbl_append(casemix_output, 'case_mix_scd')
+    
+  }
+  
+  scd_full_p_reduce <- reduce(.x=scd_full_p,
+                              .f=dplyr::union)
+  
+  output_tbl(scd_full_p_reduce, 'case_mix_scd_p')
+  
+  ### CASE MIX METFORMIN
+  metformin_codes_scdf <- load_codeset('rx_metformin_scdf')
+  metformin_codes <- get_descendants(metformin_codes_scdf)
+  metformin_full <- list()
+  
+  for(i in 1:length(site_list)){
+    
+    message('Starting ', site_list[i])
+    
+    site_nm <- site_list[i]
+    
+    metformin_pts <- cdm_tbl('drug_exposure') %>% 
+      filter(site == site_nm) %>% 
+      inner_join(select(metformin_codes,
+                        concept_id),
+                 by=c('drug_concept_id'='concept_id')) %>% 
+      distinct(person_id) %>% compute_new()
+    
+    casemix_output <- compute_case_mix(cohort = metformin_pts,
+                                       dx_tbl = cdm_tbl('condition_occurrence') %>%
+                                         filter(site == site_nm))
+    
+    metformin_full[[i]] <- casemix_output
+    #output_tbl_append(casemix_output, 'case_mix_scd')
+    
+  }
+  
+  metformin_full_reduce <- reduce(.x=metformin_full,
+                                  .f=dplyr::union)
+  
+  output_tbl(metformin_full_reduce, 'case_mix_metformin')
   
   #' `FOT` 
   
@@ -55,15 +148,61 @@ config_append('extra_packages', c('stringr', 'tidyr', 'purrr', 'lubridate'))
   time_span_list_output <-
     as.character(seq(as.Date('2013-02-01'), length = num_mnths, by='months')-1)
   time_span <- c(time_span_list_output)
-
+  
   fot <- check_fot(time_tbls = fot_tbl_list,
                    time_frame = time_span,
                    visits_only = FALSE)
-
-  fot_reduce <- reduce(.x=fot,
-                       .f=dplyr::union)
   
-  output_tbl_append(fot_reduce, 'fot_output')
+  fot_additional <- list()
+  
+  for(i in 1:length(site_list)){
+    
+    message('Starting ', site_list[i])
+    
+    site_nm <- site_list[i]
+    
+    fot_tbl_list_additional <- list(
+      'fot_all_visits' = list(site_cdm_tbl('visit_occurrence') %>% filter(site==site_nm), 'all_visits'),
+      'fot_asthma_ip' = list(site_cdm_tbl('condition_occurrence') %>% filter(site==site_nm) %>% 
+                               inner_join(load_codeset('dx_asthma'), by=c('condition_concept_id'='concept_id')) %>% 
+                               inner_join(select(site_cdm_tbl('visit_occurrence'), visit_occurrence_id, visit_concept_id) %>% 
+                                            filter(visit_concept_id %in% c(9201L,2000000048L,2000000088L))), 'asthma_inpatient')
+    )
+    
+    fot_output <- check_fot(time_tbls = fot_tbl_list_additional,
+                            time_frame = time_span,
+                            visits_only = FALSE)
+    
+    fot_output_reduce <- reduce(.x=fot_output,
+                                .f=dplyr::union)
+    
+    fot_additional[[i]] <- fot_output_reduce %>% mutate(site=site_nm)
+    
+    #output_tbl_append(fot_output, 'fot_output_additional')
+    
+  }
+  
+  # fot_additional_test <- 
+  #   list(fot_additional[[1]] %>%  mutate(site='seattle'),
+  #        fot_additional[[2]] %>%  mutate(site='stanford'),
+  #        fot_additional[[3]] %>%  mutate(site='lurie'),
+  #        fot_additional[[4]] %>%  mutate(site='nemours'),
+  #        fot_additional[[5]] %>%  mutate(site='national'),
+  #        fot_additional[[6]] %>%  mutate(site='nationwide'),
+  #        fot_additional[[7]] %>%  mutate(site='chop'),
+  #        fot_additional[[8]] %>%  mutate(site='colorado'),
+  #        fot_additional[[9]] %>%  mutate(site='cchmc'),
+  #        fot_additional[[10]] %>%  mutate(site='texas'))
+  
+  fot_reduce_new <- reduce(.x=fot_additional,
+                           .f=dplyr::union)
+  
+  fot_combined <- dplyr::union(results_tbl('fot_output') %>% collect(),
+                               fot_reduce_new)
+  
+  output_tbl(fot_combined, 'fot_output_new')
+  
+ #output_tbl_append(fot_reduce, 'fot_output')
 
   #' `Domain Concordance`
   

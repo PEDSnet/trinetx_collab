@@ -12,36 +12,127 @@
 ################### CASE MIX ##################################
 
 # Read in & clean data
-mix_trinetx <- read_csv('results/case_mix_trinetx.csv')
-mix_chop <- read_csv('results/case_mix_alltime.csv')
+mix_trinetx <- read_csv('results/case_mix_trinetx.csv') %>% mutate(cohort='full')
+mix_chop <- read_csv('results/case_mix_alltime.csv') %>% mutate(cohort='full')
+mix_chop_scd <- read_csv('results/case_mix_chop_scd.csv') %>% 
+  select(site_anon,icd_header,prop_pt_site) %>% mutate(cohort='scd')
+mix_chop_metformin <- read_csv('results/case_mix_chop_metformin.csv') %>% 
+  select(site_anon,icd_header,prop_pt_site) %>% mutate(cohort='metformin')
 
 mix_trinetx_clean <- mix_trinetx %>%
   mutate(prop_pts = pct_pts/100) %>%
   select(-c(description, pct_pts))
 
 mix_chop_clean <- mix_chop %>%
-  select(site_anon, icd_header, prop_pt_site) %>%
+  select(site_anon, icd_header, prop_pt_site,cohort) %>%
+  dplyr::union(mix_chop_scd) %>% 
+  dplyr::union(mix_chop_metformin) %>% 
   rename(prop_pts = prop_pt_site,
          branch = icd_header) %>%
   mutate(branch = str_replace_all(branch, ' ', ''))
 
 mix_final <- mix_trinetx_clean %>%
   union(mix_chop_clean) %>%
-  group_by(branch) %>%
+  group_by(cohort,
+           branch) %>%
   filter(site_anon != 'All HCOs') %>%
   mutate(allsite_median = median(prop_pts)) %>%
   left_join(mix_trinetx %>% distinct(branch, description)) %>%
   mutate(description = ifelse(grepl('U', branch), 'Codes for special purposes', description))
 
 write.csv(mix_final, file = 'results/COMBINED_case_mix.csv')
+  
 
-## Output graph
-casemix_output <- ms_exp_nt2(process_output = mix_final,
+## MULTI SITE EXPLORATORY Output graph
+casemix_output <- ms_exp_nt2(process_output = mix_final %>% ungroup() %>%  filter(cohort=='full'),
                              check_string = 'Branch',
                              y_col = 'branch',
                              descriptor_col = 'description')
 
 casemix_output
+
+casemix_output_scd <- ms_exp_nt2(process_output = mix_final %>% filter(cohort=='scd'),
+                             check_string = 'Branch',
+                             y_col = 'branch',
+                             descriptor_col = 'description')
+
+casemix_output_metformin <- ms_exp_nt2(process_output = mix_final %>% filter(cohort=='metformin'),
+                                 check_string = 'Branch',
+                                 y_col = 'branch',
+                                 descriptor_col = 'description')
+
+
+
+  ### Exploratory of PEDSnet vs Trinetx
+  casemix_twosites_tbl <- mix_final %>% 
+                          mutate(site_assignment = 
+                                   case_when(
+                                     site_anon %in% c('HCO1','HCO2','HCO3',
+                                                      'HCO4','HCO5','HCO6',
+                                                      'HCO7','HCO8','HCO9',
+                                                      'HCO10','HCO11','HCO12','HCO13') ~ 'Trinetx',
+                                     TRUE ~ 'PEDSnet'
+                                   )) %>% 
+                           rename(site_original=site_anon,
+                                  site_anon=site_assignment)
+  
+  casemix_output_twosites <- ms_exp_nt2(process_output=casemix_twosites_tbl,
+                                        check_string = 'Branch',
+                                        y_col = 'branch',
+                                        descriptor_col = 'description')
+  
+  casemix_twocats_tbl <- casemix_twosites_tbl %>% 
+                         rename(site_category=site_anon,
+                                site_anon=site_original)
+  
+  casemix_output_twocats <- ms_exp_nt2_facet(process_output=casemix_twocats_tbl,
+                                       check_string = 'Branch',
+                                       y_col = 'branch',
+                                       descriptor_col = 'description') 
+  ### Multisite Exploratory of Rows
+  mix_chop_clean_rows <- 
+    mix_chop %>% select(site_anon, icd_header, prop_row_site) %>% 
+    rename(prop_rows = prop_row_site,
+           branch = icd_header) %>%
+    mutate(branch = str_replace_all(branch, ' ', '')) %>% 
+    group_by(branch) %>%
+    filter(site_anon != 'All HCOs') %>%
+    mutate(allsite_median = median(prop_rows)) 
+  
+  casemix_output_rows <- ms_exp_nt2(process_output = mix_chop_clean_rows,
+                                    check_string = 'Branch',
+                                    y_col = 'branch',
+                                    descriptor_col = 'branch',
+                                    x_col = 'prop_rows')
+  
+
+## MULTI SITE ANOMALY Output graph
+
+#' Setting up for Anomaly Detection
+casemix_anomaly_cohort <- compute_dist_anomalies(df_tbl=mix_final %>% 
+                                                     rename(site=site_anon), 
+                                                   grp_vars=c('branch','description','allsite_median'),
+                                                   var_col='prop_pts')
+casemix_anomaly_final_cohort <- detect_outliers(casemix_anomaly_cohort,
+                                                  column_analysis='prop_pts',
+                                                  column_variable = 'branch')
+
+casemix_anomaly_plot_combined <- ms_anom_nt(process_output=casemix_anomaly_final_cohort,comparison_col='prop_pts',variable='branch')
+
+#' PEDSnet Only 
+#' 
+casemix_anomaly_cohort_pedsnet <- compute_dist_anomalies(df_tbl=casemix_twocats_tbl %>% filter(site_category == 'PEDSnet') %>% 
+                                                   rename(site=site_anon), 
+                                                 grp_vars=c('branch','description','allsite_median'),
+                                                 var_col='prop_pts')
+
+casemix_anomaly_final_cohort_pedsnet <- detect_outliers(casemix_anomaly_cohort_pedsnet,
+                                                column_analysis='prop_pts',
+                                                column_variable = 'branch')
+
+casemix_anomaly_plot_combined_pedsnet <- ms_anom_nt(process_output=casemix_anomaly_final_cohort_pedsnet,comparison_col='prop_pts',variable='branch')
+
+
 
 ###################COVERAGE OVERLAP#####################################
 
@@ -85,6 +176,7 @@ fot_trinetx <- read_csv('results/factsovertime_trinetx.csv')
 fot_chop <- read_csv('results/factsovertime_rawcts.csv') %>%
   left_join(read_csv('results/factsovertime_normalized.csv')) %>%
   left_join(read_csv('results/factsovertime_distance.csv'))
+fot_chop_additional <- read_csv('results/fot_output_new_chop.csv')
 
 ## Clean trinetx data
 fot_trinetx_clean <- fot_trinetx %>%
@@ -102,6 +194,8 @@ fot_trinetx_clean <- fot_trinetx %>%
                                 grepl('meds', check_desc) ~ 'inpatient_administration',
                                 grepl('outpatients', check_desc) ~ 'outpatient_visits',
                                 grepl('procedures', check_desc) ~ 'outpatient_procedure'))
+
+
 
 ## Rerun heuristic based on patient counts to make sure both sets of output are aligned
 fot_trinetx_new <- compute_at_cross_join(cj_tbl = fot_trinetx_clean %>% 
@@ -126,6 +220,7 @@ fot_chop_clean <- fot_chop %>%
 fot_final <- fot_trinetx_final %>%
   union(fot_chop_clean) %>%
   filter(site_anon != 'All HCOs' & site_anon != 'all')
+
 
 ## Run eucildean distance on CHOP, TriNetX, and combined data
 ## Using normalized patient count (i.e. weighted average value) - those values are centered on or around 0
@@ -162,7 +257,7 @@ write.csv(norm_pts_euc_all, file = 'results/FOT_combined.csv')
 
 check_type <- 'inpatient_administration'
 
-fot_all <- euclidean_output(process_output = norm_pts_euc_all,
+fot_all_output <- euclidean_output(process_output = norm_pts_euc_all,
                          output_var = 'check',
                          filter_variable = check_type)
 
@@ -171,7 +266,7 @@ fot_all[[2]]
 fot_all[[3]]
 
 
-fot_chop <- euclidean_output(process_output = norm_pts_euc_c,
+fot_chop_output <- euclidean_output(process_output = norm_pts_euc_c,
                        output_var = 'check',
                        filter_variable = check_type)
 
@@ -180,10 +275,95 @@ fot_chop[[2]]
 fot_chop[[3]]
 
 
-fot_tnx <- euclidean_output(process_output = norm_pts_euc_t,
+fot_tnx_output <- euclidean_output(process_output = norm_pts_euc_t,
                        output_var = 'check',
                        filter_variable = check_type)
 
 fot_tnx[[1]]
 fot_tnx[[2]]
 fot_tnx[[3]]
+
+## Outpatient Visits as a Proportion of all Visits 
+
+fot_chop_trinetx_rawcts <- 
+  dplyr::union(fot_trinetx_new %>% select(site_anon,month_end,check_desc,row_pts) %>% mutate(cohort='trinetx'),
+               fot_chop_additional %>% select(site_anon,month_end,check_desc,row_pts) %>% 
+                 mutate(month_end=mdy(month_end),
+                        cohort='pedsnet'))
+
+fot_compute_proportions <- function(fot_tbl = fot_chop_trinetx_rawcts %>% filter(cohort=='pedsnet'),
+                                    denom_groups = c('all_visits'),
+                                    num_groups = c('outpatient_visits')) {
+  
+  denom_pts <- 
+    fot_tbl %>% 
+    filter(check_desc %in% denom_groups) %>% 
+    group_by(site_anon,
+             month_end) %>% summarise(pts_denom=sum(row_pts)) 
+   
+  
+  num_pts <- 
+    fot_tbl %>% 
+    filter(check_desc %in% num_groups) %>% 
+    group_by(site_anon,
+             month_end) %>% summarise(pts_num=sum(row_pts)) 
+  
+  num_denom_prop <- 
+    denom_pts %>% 
+    left_join(
+      num_pts
+    ) %>% 
+    mutate(prop=round(pts_num/pts_denom, 2))
+  
+  
+}
+
+test <- fot_compute_proportions()
+
+  
+test2 <- compute_dist_mean_median(test,
+                                  c('month_end'),
+                                  c('prop'),
+                                  num_sd=2,
+                                  num_mad=2)
+
+outpt_visits_euclidean <- ms_anom_euclidean(fot_input_tbl = test2 %>% mutate(time_start = month_end,
+                                                                         time_increment = 'month'),
+                                    grp_vars = c('site_anon'),
+                                    var_col = 'prop')
+
+fot_outpatient_output <- euclidean_output(process_output = outpt_visits_euclidean,
+                                          output_var = 'prop',
+                                          filter_variable = NULL)
+
+fot_outpatient_output[[1]]
+fot_outpatient_output[[2]]
+fot_outpatient_output[[3]]
+
+## Asthma Inpatients as a Proportion of All Inpatients
+
+
+ip_asthma_all <- fot_compute_proportions(fot_tbl = fot_chop_trinetx_rawcts %>% filter(cohort=='pedsnet'),
+                                         denom_groups = c('inpatient_visits'),
+                                         num_groups = c('asthma_inpatient'))
+
+
+asthma_ip_medians <- compute_dist_mean_median(ip_asthma_all,
+                                  c('month_end'),
+                                  c('prop'),
+                                  num_sd=2,
+                                  num_mad=2)
+
+asthma_ip_euclidean <- ms_anom_euclidean(fot_input_tbl = asthma_ip_medians %>% mutate(time_start = month_end,
+                                                                             time_increment = 'month'),
+                                            grp_vars = c('site_anon'),
+                                            var_col = 'prop')
+
+fot_asthma_ip_output <- euclidean_output(process_output = asthma_ip_euclidean,
+                                          output_var = 'prop',
+                                          filter_variable = NULL)
+
+fot_asthma_ip_output[[1]]
+fot_asthma_ip_output[[2]]
+fot_asthma_ip_output[[3]]
+
