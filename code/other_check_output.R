@@ -74,7 +74,7 @@ casemix_output_metformin <- ms_exp_nt2(process_output = mix_final %>% filter(coh
                                      TRUE ~ 'PEDSnet'
                                    )) %>% 
                            rename(site_original=site_anon,
-                                  site_anon=site_assignment)
+                                  site_anon=site_assignment) %>% filter(cohort == 'full')
   
   casemix_output_twosites <- ms_exp_nt2(process_output=casemix_twosites_tbl,
                                         check_string = 'Branch',
@@ -110,7 +110,7 @@ casemix_output_metformin <- ms_exp_nt2(process_output = mix_final %>% filter(coh
 
 #' Setting up for Anomaly Detection
 casemix_anomaly_cohort <- compute_dist_anomalies(df_tbl=mix_final %>% 
-                                                     rename(site=site_anon), 
+                                                     rename(site=site_anon) %>% filter(cohort == 'full'), 
                                                    grp_vars=c('branch','description','allsite_median'),
                                                    var_col='prop_pts')
 casemix_anomaly_final_cohort <- detect_outliers(casemix_anomaly_cohort,
@@ -168,6 +168,18 @@ cvg_output <- ms_exp_nt2(process_output = cvg_final,
                          descriptor_col = 'fact_long')
 
 cvg_output
+
+cvg_overlap_anom_tbl <- compute_dist_anomalies(df_tbl=cvg_final %>% rename(site=site_anon), 
+                                               grp_vars=c('fact_group','fact_long', 'allsite_median'),
+                                               var_col='prop_pts')
+
+cvg_overlap_anom_tbl2 <- detect_outliers(cvg_overlap_anom_tbl,
+                                         column_analysis='prop_pts',
+                                         column_variable = 'fact_group')
+
+cvg_overlap_anom_plot <- ms_anom_nt(process_output=cvg_overlap_anom_tbl2,
+                                    comparison_col='prop_pts',
+                                    variable='fact_group')
 
 #############################################################
 
@@ -261,27 +273,27 @@ fot_all_output <- euclidean_output(process_output = norm_pts_euc_all,
                          output_var = 'check',
                          filter_variable = check_type)
 
-fot_all[[1]]
-fot_all[[2]]
-fot_all[[3]]
+fot_all_output[[1]]
+fot_all_output[[2]]
+fot_all_output[[3]]
 
 
 fot_chop_output <- euclidean_output(process_output = norm_pts_euc_c,
                        output_var = 'check',
                        filter_variable = check_type)
 
-fot_chop[[1]]
-fot_chop[[2]]
-fot_chop[[3]]
+fot_chop_output[[1]]
+fot_chop_output[[2]]
+fot_chop_output[[3]]
 
 
 fot_tnx_output <- euclidean_output(process_output = norm_pts_euc_t,
                        output_var = 'check',
                        filter_variable = check_type)
 
-fot_tnx[[1]]
-fot_tnx[[2]]
-fot_tnx[[3]]
+fot_tnx_output[[1]]
+fot_tnx_output[[2]]
+fot_tnx_output[[3]]
 
 ## Outpatient Visits as a Proportion of all Visits 
 
@@ -367,3 +379,54 @@ fot_asthma_ip_output[[1]]
 fot_asthma_ip_output[[2]]
 fot_asthma_ip_output[[3]]
 
+
+## Single Site Anom
+
+# raw cts -- trinetx
+anomalize_hco9_raw <- anomalize_ss_anom_at(fot_input_tbl = fot_chop_trinetx_rawcts %>% 
+                                    mutate(time_increment = 'month', 
+                                           time_start = month_end) %>% 
+                                    filter(site_anon == 'HCO9'), 
+                                  grp_vars = 'check_desc', 
+                                  time_var = 'time_start', 
+                                  var_col = 'row_pts')
+
+anomalize_hco9_output <- ss_anom_at(process_output = anomalize_hco9_raw,
+                                    filtered_var = 'emergency_visits',
+                                    var_col = 'check_desc')
+
+anomalize_hco9_output
+
+# Asthma -- pedsnet
+anomalize_asthma <- anomalize_ss_anom_at(fot_input_tbl = ip_asthma_all %>% 
+                                             mutate(time_increment = 'month', 
+                                                    time_start = month_end,
+                                                    check_desc = 'inpatient_asthma') %>% 
+                                             filter(site_anon == 'chop'), 
+                                           grp_vars = 'check_desc', 
+                                           time_var = 'time_start', 
+                                           var_col = 'prop')
+
+anomalize_asthma_output <- ss_anom_at(process_output = anomalize_asthma,
+                                    filtered_var = 'inpatient_asthma',
+                                    var_col = 'check_desc')
+
+anomalize_asthma_output
+
+
+# outpatient -- pedsnet
+
+anomalize_op <- anomalize_ss_anom_at(fot_input_tbl = test %>% 
+                                           mutate(time_increment = 'month', 
+                                                  time_start = month_end,
+                                                  check_desc = 'outpatient_visits') %>% 
+                                           filter(site_anon == 'chop'), 
+                                         grp_vars = 'check_desc', 
+                                         time_var = 'time_start', 
+                                         var_col = 'prop')
+
+anomalize_op_output <- ss_anom_at(process_output = anomalize_op,
+                                      filtered_var = 'outpatient_visits',
+                                      var_col = 'check_desc')
+
+anomalize_op_output
