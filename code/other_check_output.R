@@ -298,12 +298,14 @@ fot_tnx_output[[3]]
 ## Outpatient Visits as a Proportion of all Visits 
 
 fot_chop_trinetx_rawcts <- 
-  dplyr::union(fot_trinetx_new %>% select(site_anon,month_end,check_desc,row_pts) %>% mutate(cohort='trinetx'),
-               fot_chop_additional %>% select(site_anon,month_end,check_desc,row_pts) %>% 
+  dplyr::union(fot_trinetx_new %>% select(site_anon,month_end,check_desc,row_pts) %>% mutate(cohort='trinetx',
+                                                                                             row_visits=0),
+               fot_chop_additional %>% select(site_anon,month_end,check_desc,row_pts,row_visits) %>% 
                  mutate(month_end=mdy(month_end),
                         cohort='pedsnet'))
 
 fot_compute_proportions <- function(fot_tbl = fot_chop_trinetx_rawcts %>% filter(cohort=='pedsnet'),
+                                    var_col = 'row_visits',
                                     denom_groups = c('all_visits'),
                                     num_groups = c('outpatient_visits')) {
   
@@ -311,26 +313,26 @@ fot_compute_proportions <- function(fot_tbl = fot_chop_trinetx_rawcts %>% filter
     fot_tbl %>% 
     filter(check_desc %in% denom_groups) %>% 
     group_by(site_anon,
-             month_end) %>% summarise(pts_denom=sum(row_pts)) 
+             month_end) %>% summarise(var_denom=sum(!!sym(var_col))) 
    
   
   num_pts <- 
     fot_tbl %>% 
     filter(check_desc %in% num_groups) %>% 
     group_by(site_anon,
-             month_end) %>% summarise(pts_num=sum(row_pts)) 
+             month_end) %>% summarise(var_num=sum(!!sym(var_col))) 
   
   num_denom_prop <- 
     denom_pts %>% 
     left_join(
       num_pts
     ) %>% 
-    mutate(prop=round(pts_num/pts_denom, 2))
+    mutate(prop=round(var_num/var_denom, 2))
   
   
 }
 
-test <- fot_compute_proportions()
+test <- fot_compute_proportions(var_col = 'row_visits')
 
   
 test2 <- compute_dist_mean_median(test,
@@ -356,6 +358,7 @@ fot_outpatient_output[[3]]
 
 
 ip_asthma_all <- fot_compute_proportions(fot_tbl = fot_chop_trinetx_rawcts %>% filter(cohort=='pedsnet'),
+                                         var_col = 'row_visits',
                                          denom_groups = c('inpatient_visits'),
                                          num_groups = c('asthma_inpatient'))
 
