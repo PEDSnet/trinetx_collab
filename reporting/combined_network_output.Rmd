@@ -157,7 +157,7 @@ casemix_output_scd_p <- ms_exp_nt2(process_output = case_mix_df %>% filter(cohor
                                    check_string = 'Branch',
                                    y_col = 'branch',
                                    descriptor_col = 'description')
-
+casemix_output_scd_p
 ```
 
 ### Metformin
