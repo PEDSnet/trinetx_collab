@@ -48,6 +48,8 @@ prettify_kable <- function(data) {
   rslt
 }
 
+case_mix_df <- read_csv(file = '../results/COMBINED_case_mix.csv')
+
 opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
 ```
@@ -100,7 +102,7 @@ casemix_output <- ms_exp_nt2(process_output = read_csv(file = '../results/COMBIN
                              y_col = 'branch',
                              descriptor_col = 'description')
 
-casemix_output
+casemix_output 
 
 ```
 
@@ -133,8 +135,55 @@ casemix_output
                                        check_string = 'Branch',
                                        y_col = 'branch',
                                        descriptor_col = 'description') 
+  casemix_output_twocats
 
 ```
+
+### SCD
+``` {r mix_scd}
+
+casemix_output_scd <- ms_exp_nt2(process_output = case_mix_df %>% filter(cohort=='scd'),
+                             check_string = 'Branch',
+                             y_col = 'branch',
+                             descriptor_col = 'description')
+casemix_output_scd
+```
+
+### SCD P-Chapter
+
+``` {r mix_scd_p_graph}
+
+casemix_output_scd_p <- ms_exp_nt2(process_output = case_mix_df %>% filter(cohort=='scd_p'),
+                                   check_string = 'Branch',
+                                   y_col = 'branch',
+                                   descriptor_col = 'description')
+
+```
+
+### Metformin
+
+``` {r mix_metformin}
+casemix_output_metformin <- ms_exp_nt2(process_output = case_mix_df %>% filter(cohort=='metformin'),
+                                 check_string = 'Branch',
+                                 y_col = 'branch',
+                                 descriptor_col = 'description')
+
+casemix_output_metformin
+
+```
+
+### SCD and Metformin
+``` {r mix_scd_metformin}
+casemix_output_scd_metformin <- ms_exp_nt2_facet(process_output=case_mix_df %>% filter(cohort %in% c('scd','metformin')),
+                                                 check_string = 'Branch',
+                                                 y_col = 'branch',
+                                                 descriptor_col = 'description',
+                                                 facet_wrap_var = 'cohort') 
+casemix_output_scd_metformin
+
+```
+
+
 
 ### PEDSnet Anomaly Detection
 
