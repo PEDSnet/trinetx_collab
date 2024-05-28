@@ -18,6 +18,8 @@ mix_chop_scd <- read_csv('results/case_mix_chop_scd.csv') %>%
   select(site_anon,icd_header,prop_pt_site) %>% mutate(cohort='scd')
 mix_chop_metformin <- read_csv('results/case_mix_chop_metformin.csv') %>% 
   select(site_anon,icd_header,prop_pt_site) %>% mutate(cohort='metformin')
+mix_chop_scd_p <- read_csv('results/case_mix_chop_scd_p.csv') %>% 
+  select(site_anon,icd_header,prop_pt_site) %>% mutate(cohort='scd_p')
 
 mix_trinetx_clean <- mix_trinetx %>%
   mutate(prop_pts = pct_pts/100) %>%
@@ -27,6 +29,7 @@ mix_chop_clean <- mix_chop %>%
   select(site_anon, icd_header, prop_pt_site,cohort) %>%
   dplyr::union(mix_chop_scd) %>% 
   dplyr::union(mix_chop_metformin) %>% 
+  dplyr::union(mix_chop_scd_p) %>% 
   rename(prop_pts = prop_pt_site,
          branch = icd_header) %>%
   mutate(branch = str_replace_all(branch, ' ', ''))
@@ -56,12 +59,21 @@ casemix_output_scd <- ms_exp_nt2(process_output = mix_final %>% filter(cohort=='
                              y_col = 'branch',
                              descriptor_col = 'description')
 
+casemix_output_scd_p <- ms_exp_nt2(process_output = mix_final %>% filter(cohort=='scd_p'),
+                                   check_string = 'Branch',
+                                   y_col = 'branch',
+                                   descriptor_col = 'description')
+
 casemix_output_metformin <- ms_exp_nt2(process_output = mix_final %>% filter(cohort=='metformin'),
                                  check_string = 'Branch',
                                  y_col = 'branch',
                                  descriptor_col = 'description')
 
-
+casemix_output_scd_metformin <- ms_exp_nt2_facet(process_output=mix_final %>% filter(cohort %in% c('scd','metformin')),
+                                                 check_string = 'Branch',
+                                                 y_col = 'branch',
+                                                 descriptor_col = 'description',
+                                                 facet_wrap_var = 'cohort') 
 
   ### Exploratory of PEDSnet vs Trinetx
   casemix_twosites_tbl <- mix_final %>% 
@@ -104,6 +116,7 @@ casemix_output_metformin <- ms_exp_nt2(process_output = mix_final %>% filter(coh
                                     y_col = 'branch',
                                     descriptor_col = 'branch',
                                     x_col = 'prop_rows')
+  
   
 
 ## MULTI SITE ANOMALY Output graph

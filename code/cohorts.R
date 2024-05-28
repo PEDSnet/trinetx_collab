@@ -437,12 +437,14 @@ ms_exp_nt2 <- function(process_output,
 ms_exp_nt2_facet <- function(process_output,
                        check_string = 'Branch',
                        y_col = 'branch',
-                       descriptor_col = 'description'){
+                       descriptor_col = 'description',
+                       facet_wrap_var='site_category'){
   
   data_format <- process_output %>%
     mutate(text = paste0('Site: ', site_anon,
                          '\n', check_string, ': ', !!sym(descriptor_col),
                          '\nProportion: ', prop_pts))
+  x = sym(facet_wrap_var)
   
   r <- ggplot(data_format, 
               aes(y=!!sym(y_col),x=prop_pts, colour=site_anon))+
@@ -457,7 +459,7 @@ ms_exp_nt2_facet <- function(process_output,
          color = 'Site',
          title = paste0('Proportion of Patients with Each ', check_string),
          subtitle = 'Star represents All-Site Median') +
-    facet_wrap(~ site_category)
+    facet_wrap(x)
   
   girafe(ggobj = r)
   
