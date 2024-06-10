@@ -2,9 +2,9 @@
 
 #' `Case Mix`
 
-casemix_final <- trinetx_check_pp(dat = results_tbl('case_mix_full'), group = 'icd_header')
+casemix_final <- trinetx_check_pp(dat = results_tbl('case_mix_10yr'), group = 'icd_header')
 
-output_tbl(casemix_final, 'case_mix_full_pp')
+output_tbl(casemix_final, 'case_mix_10yr_pp')
 
 #' `Coverage Overlap`
 
@@ -32,9 +32,9 @@ output_tbl(dcon_output_pp,
            name='dcon_output_pp')
 
 #' `Domain Concordance --- Conservative`
-dcon_output_cons_pp <- apply_dcon_pp(dcon_tbl=results_tbl('dcon_output_strict'),
-                                byyr=FALSE,
-                                strict = TRUE)
-output_tbl(dcon_output_cons_pp,
-           name='dcon_output_strict_pp')
+# dcon_output_cons_pp <- apply_dcon_pp(dcon_tbl=results_tbl('dcon_output_strict'),
+#                                 byyr=FALSE,
+#                                 strict = TRUE)
+# output_tbl(dcon_output_cons_pp,
+#            name='dcon_output_strict_pp')
 

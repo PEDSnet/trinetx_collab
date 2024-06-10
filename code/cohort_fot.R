@@ -48,6 +48,12 @@ check_fot <- function(time_tbls,
     
     message(paste0('Starting ',i))
     
+    total_cts <- time_tbls[[i]][[1]] %>%
+      group_by(site) %>%
+      summarise(total_pt = n_distinct(person_id),
+                total_visit = n_distinct(visit_occurrence_id),
+                total_row = n())
+    
     temp_results <- list()
     
     for(k in time_frame) {
@@ -125,7 +131,8 @@ check_fot <- function(time_tbls,
       
     }
     
-    final_results[[paste0(check_string, '_', names(time_tbls[i]))]] = reduce(.x=temp_results, .f=union)
+    final_results[[paste0(check_string, '_', names(time_tbls[i]))]] = reduce(.x=temp_results, .f=union) %>% 
+      left_join(total_cts, copy = TRUE)
     
   }
   

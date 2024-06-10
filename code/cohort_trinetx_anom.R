@@ -36,3 +36,52 @@ trinetx_anom_detect <- function(dat,
   
   
 }
+
+
+
+trinetx_anom_viz <- function(dat,
+                             var_col,
+                             grp_col){
+  
+  dat_to_plot <- dat %>%
+    mutate(text=paste("Variable: ",!!sym(grp_col),
+                      "\nSite: ",site_anon,
+                      "\nProportion: ",round(!!sym(var_col),2),
+                      "\nSeverity Score: ", round(severity_score, 4),
+                      "\nSite Outlier Score: ", round(site_score,4)))
+  
+  
+  #mid<-(max(dat_to_plot[[comparison_col]],na.rm=TRUE)+min(dat_to_plot[[comparison_col]],na.rm=TRUE))/2
+  
+  plt<-ggplot(dat_to_plot, aes(x=site_anon, y=!!sym(grp_col), text=text, color=!!sym(var_col),shape = anomaly_yn))+
+    geom_point_interactive(data = dat_to_plot %>% filter(anomaly_yn == 'not outlier'), aes(size = iqr_val)) + 
+    geom_point_interactive(data = dat_to_plot %>% filter(anomaly_yn != 'not outlier'), aes(size = severity_score)) + 
+    scale_color_ssdqa(palette = 'diverging', discrete = FALSE) +
+    scale_shape_manual(values=c('upper outlier' = 24,
+                                'not outlier' = 20,
+                                'lower outlier' = 25))+
+    #scale_y_discrete(labels = function(x) str_wrap(x, width = text_wrapping_char)) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle=60)) +
+    labs(title = paste0('Anomaly Detection per ', grp_col)) +
+    guides(color = guide_colorbar(title = 'Proportion'),
+           shape = guide_legend(title = 'Anomaly'),
+           size = 'none')
+  
+  gplot <- girafe(ggobj = plt)
+  
+  tbl <- dat %>%
+    ungroup() %>%
+    distinct(site_anon, site_score) %>%
+    mutate(site_score = round(site_score, 4)) %>%
+    gt::gt() %>%
+    opt_interactive() %>%
+    tab_header('Site Outlier Scores') %>%
+    cols_label(site_anon = 'Site (Anonymized)',
+               site_score = 'Site Outlier Score')
+  
+  otpt <- list(gplot, tbl)
+  
+  return(otpt)
+  
+}

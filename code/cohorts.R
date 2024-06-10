@@ -295,8 +295,8 @@ compute_euclidean <- function(ms_tbl,
   
   overall_reduce <- reduce(.x=overall,
                            .f=dplyr::union) %>% as_tibble() %>% 
-    mutate(dist_eucl_mean=round(dist_eucl_mean,2),
-           site_loess=round(site_loess,2)) %>%
+    mutate(dist_eucl_mean=dist_eucl_mean,
+           site_loess=site_loess) %>%
     select(-facet_col)
   
 }
@@ -469,7 +469,8 @@ ms_exp_nt2_facet <- function(process_output,
 
 euclidean_output <- function(process_output,
                              output_var,
-                             filter_variable) {
+                             filter_variable,
+                             title) {
 
   if (! is.null(filter_variable)) {
     filt_op <- process_output %>% filter(check_desc == filter_variable) %>%
@@ -501,7 +502,6 @@ euclidean_output <- function(process_output,
   }
   
   
-  
   dat_to_plot <- 
     filt_op %>% 
     mutate(text_smooth=paste0("Site: ", site_anon,
@@ -511,16 +511,21 @@ euclidean_output <- function(process_output,
                            "\n","Site Smoothed Proportion: ",site_loess,
                            "\n","Euclidean Distance from All-Site Mean: ",dist_eucl_mean)) 
   
+  lvls <- stringr::str_sort(unique(dat_to_plot$site_anon), numeric = TRUE, decreasing = TRUE)
+  dat_to_plot$site_anon <- factor(dat_to_plot$site_anon, levels = lvls)
+  
   p <- dat_to_plot %>%
     ggplot(aes(y = prop_col, x = time_start, color = site_anon, group = site_anon, text = text_smooth)) +
     geom_line(data=allsites, linewidth=1.1) +
     geom_smooth(se=TRUE,alpha=0.1,linewidth=0.5, formula = y ~ x) +
     theme_minimal() +
-    theme(axis.text.x = element_text(angle = 30, vjust = 1, hjust=1)) +
+    theme(axis.text.x = element_text(angle = 30, vjust = 1, hjust=1),
+          #text = element_text(size = 25),
+          legend.position = 'none') +
     scale_color_ssdqa() +
     labs(y = 'Proportion (Loess)',
          x = 'Time',
-         title = paste0('Smoothed Proportion of ', filter_variable, ' Across Time'))
+         title = title)
   
   q <- dat_to_plot %>%
     ggplot(aes(y = prop_col, x = time_start, color = site_anon,
@@ -528,11 +533,13 @@ euclidean_output <- function(process_output,
     geom_line(data=allsites,linewidth=1.1) +
     geom_line(linewidth=0.2) +
     theme_minimal() +
-    theme(axis.text.x = element_text(angle = 30, vjust = 1, hjust=1)) +
+    theme(axis.text.x = element_text(angle = 30, vjust = 1, hjust=1),
+          #text = element_text(size = 25),
+          legend.position = 'none') +
     scale_color_ssdqa() +
     labs(x = 'Time',
          y = 'Proportion',
-         title = paste0('Proportion of ', filter_variable, ' Across Time'))
+         title = title)
   
   t <- dat_to_plot %>% 
     distinct(site_anon, dist_eucl_mean, site_loess) %>% 
@@ -540,19 +547,20 @@ euclidean_output <- function(process_output,
     summarise(mean_site_loess = mean(site_loess)) %>%
     ggplot(aes(x = site_anon, y = dist_eucl_mean, fill = mean_site_loess)) + 
     geom_col() + 
-    geom_text(aes(label = dist_eucl_mean), vjust = 2, size = 3,
-              show.legend = FALSE) +
+    # geom_text(aes(label = dist_eucl_mean), vjust = 2, size = 3,
+    #           show.legend = FALSE) +
     coord_radial(r_axis_inside = FALSE, rotate_angle = TRUE) + 
     guides(theta = guide_axis_theta(angle = 0)) +
     theme_minimal() + 
     scale_fill_ssdqa(palette = 'diverging', discrete = FALSE) +
-    theme(legend.position = 'bottom',
+    theme(legend.position = 'none',
           legend.text = element_text(angle = 45, vjust = 0.9, hjust = 1),
-          axis.text.x = element_text(face = 'bold')) + 
-    labs(fill = 'Avg. Proportion \n(Loess)', 
-         y ='Euclidean Distance', 
-         x = '', 
-         title = paste0('Euclidean Distance for ', filter_variable))
+          axis.text.x = element_text(face = 'bold'),
+          #text = element_text(size = 20)
+          ) + 
+    labs(y ='Euclidean Distance', 
+         x = '',
+         title = title)
   
   plotly_p <- ggplotly(p,tooltip="text")
   plotly_q <- ggplotly(q,tooltip="text")

@@ -81,7 +81,7 @@ chop_cleaned <-
            case_when(value >= 1.001 ~ round(value/tot_pats, 2),
                      TRUE ~ value)) %>% 
   inner_join(check_desc_lookup) %>% 
-  select(-c('check_name','check_type'))
+  select(-c('check_name','check_type', 'site'))
 
 #' Combined CHOP and Trinetx data
 couplets_combined <- dplyr::union(trinetx_cleaned,

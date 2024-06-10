@@ -13,7 +13,7 @@
 
 # Read in & clean data
 mix_trinetx <- read_csv('results/case_mix_trinetx.csv') %>% mutate(cohort='full')
-mix_chop <- read_csv('results/case_mix_alltime.csv') %>% mutate(cohort='full')
+mix_chop <- read_csv('results/case_mix_chop.csv') %>% mutate(cohort='full')
 mix_chop_scd <- read_csv('results/case_mix_chop_scd.csv') %>% 
   select(site_anon,icd_header,prop_pt_site) %>% mutate(cohort='scd')
 mix_chop_metformin <- read_csv('results/case_mix_chop_metformin.csv') %>% 
@@ -151,7 +151,7 @@ casemix_anomaly_plot_combined_pedsnet <- ms_anom_nt(process_output=casemix_anoma
 
 ## Read in and clean data
 cvg_trinetx <- read_csv('results/coverage_trinetx.csv')
-cvg_chop <- read_csv('results/coverage_overlap.csv')
+cvg_chop <- read_csv('results/coverage_overlap_chop.csv')
 
 cvg_trinetx_clean <- cvg_trinetx %>%
   pivot_longer(cols = !site_anon,
@@ -238,7 +238,8 @@ fot_trinetx_final <- fot_list_trinetx$fot_heuristic %>%
 
 ## Clean trinetx data
 fot_chop_clean <- fot_chop %>%
-  select(site_anon, month_end, check_desc, row_pts, check) %>%
+  select(site_anon, month_end, check_desc, row_pts, row_visits) %>%
+  union(fot_chop_additional %>% select(site_anon, month_end, check_desc, row_pts, row_visits)) %>%
   mutate(month_end = as.Date(month_end, format = '%m/%d/%y'))
 
 ## combined
@@ -313,8 +314,8 @@ fot_tnx_output[[3]]
 fot_chop_trinetx_rawcts <- 
   dplyr::union(fot_trinetx_new %>% select(site_anon,month_end,check_desc,row_pts) %>% mutate(cohort='trinetx',
                                                                                              row_visits=0),
-               fot_chop_additional %>% select(site_anon,month_end,check_desc,row_pts,row_visits) %>% 
-                 mutate(month_end=mdy(month_end),
+               fot_chop_clean %>% select(site_anon,month_end,check_desc,row_pts,row_visits) %>%
+                 mutate(#month_end=mdy(month_end),
                         cohort='pedsnet'))
 
 fot_compute_proportions <- function(fot_tbl = fot_chop_trinetx_rawcts %>% filter(cohort=='pedsnet'),
@@ -369,7 +370,6 @@ fot_outpatient_output[[3]]
 
 ## Asthma Inpatients as a Proportion of All Inpatients
 
-
 ip_asthma_all <- fot_compute_proportions(fot_tbl = fot_chop_trinetx_rawcts %>% filter(cohort=='pedsnet'),
                                          var_col = 'row_visits',
                                          denom_groups = c('inpatient_visits'),
@@ -395,6 +395,14 @@ fot_asthma_ip_output[[1]]
 fot_asthma_ip_output[[2]]
 fot_asthma_ip_output[[3]]
 
+ggsave(filename = paste0(base_dir, '/results/smoothed_asthma_euclidean.png'),
+       plot = fot_asthma_ip_output[[1]])
+ggsave(filename = paste0(base_dir, '/results/raw_asthma_euclidean.png'),
+       plot = fot_asthma_ip_output[[2]])
+ggsave(filename = paste0(base_dir, '/results/radial_asthma_euclidean.png'),
+       plot = fot_asthma_ip_output[[3]],
+       width = 8,
+       height = 8)
 
 ## Single Site Anom
 
