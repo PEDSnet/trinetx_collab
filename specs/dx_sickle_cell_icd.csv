@@ -1,0 +1,39 @@
+concept_id,concept_name,concept_code,vocabulary_id
+725233,Sickle-cell thalassemia beta plus with cerebral vascular involvement,D57.453,ICD10CM
+1567847,Sickle-cell thalassemia,D57.4,ICD10CM
+1567844,Sickle-cell disorders,D57,ICD10CM
+725232,Sickle-cell thalassemia beta plus with splenic sequestration,D57.452,ICD10CM
+725229,Sickle-cell thalassemia beta plus without crisis,D57.44,ICD10CM
+725218,Sickle-cell/Hb-C disease with cerebral vascular involvement,D57.213,ICD10CM
+45561925,Sickle-cell thalassemia without crisis,D57.40,ICD10CM
+725234,Sickle-cell thalassemia beta plus with crisis with other specified complication,D57.458,ICD10CM
+725231,Sickle-cell thalassemia beta plus with acute chest syndrome,D57.451,ICD10CM
+725219,Sickle-cell/Hb-C disease with crisis with other specified complication,D57.218,ICD10CM
+45586115,"Sickle-cell thalassemia, unspecified, with acute chest syndrome",D57.411,ICD10CM
+725223,Sickle-cell thalassemia beta zero with crisis,D57.43,ICD10CM
+45755365,Sickle-cell disorders,D57,ICD10
+1567846,Sickle-cell/Hb-C disease,D57.2,ICD10CM
+725226,Sickle-cell thalassemia beta zero with cerebral vascular involvement,D57.433,ICD10CM
+45571635,Sickle-cell/Hb-C disease with splenic sequestration,D57.212,ICD10CM
+45542711,Sickle-cell/Hb-C disease with crisis,D57.21,ICD10CM
+45561926,"Sickle-cell thalassemia, unspecified, with splenic sequestration",D57.412,ICD10CM
+725221,"Sickle-cell thalassemia, unspecified, with crisis with other specified complication",D57.418,ICD10CM
+45576406,Sickle-cell/Hb-C disease with acute chest syndrome,D57.211,ICD10CM
+1567848,"Sickle-cell thalassemia, unspecified, with crisis",D57.41,ICD10CM
+45600606,Other sickle-cell disorders with splenic sequestration,D57.812,ICD10CM
+725222,Sickle-cell thalassemia beta zero without crisis,D57.42,ICD10CM
+45542710,Sickle-cell/Hb-C disease without crisis,D57.20,ICD10CM
+725235,"Sickle-cell thalassemia beta plus with crisis, unspecified",D57.459,ICD10CM
+725228,"Sickle-cell thalassemia beta zero with crisis, unspecified",D57.439,ICD10CM
+45595766,Other sickle-cell disorders with acute chest syndrome,D57.811,ICD10CM
+45561924,"Sickle-cell/Hb-C disease with crisis, unspecified",D57.219,ICD10CM
+725224,Sickle-cell thalassemia beta zero with acute chest syndrome,D57.431,ICD10CM
+45542708,Hb-SS disease with acute chest syndrome,D57.01,ICD10CM
+725230,Sickle-cell thalassemia beta plus with crisis,D57.45,ICD10CM
+725217,Hb-SS disease with crisis with other specified complication,D57.09,ICD10CM
+725220,"Sickle-cell thalassemia, unspecified, with cerebral vascular involvement",D57.413,ICD10CM
+45566702,"Sickle-cell thalassemia, unspecified, with crisis",D57.419,ICD10CM
+725225,Sickle-cell thalassemia beta zero with splenic sequestration,D57.432,ICD10CM
+45561923,Hb-SS disease with splenic sequestration,D57.02,ICD10CM
+725227,Sickle-cell thalassemia beta zero with crisis with other specified complication,D57.438,ICD10CM
+45566700,Double heterozygous sickling disorders,D57.2,ICD10
