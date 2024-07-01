@@ -53,7 +53,7 @@ trinetx_anom_viz <- function(dat,
   
   #mid<-(max(dat_to_plot[[comparison_col]],na.rm=TRUE)+min(dat_to_plot[[comparison_col]],na.rm=TRUE))/2
   
-  plt<-ggplot(dat_to_plot, aes(x=site_anon, y=!!sym(grp_col), text=text, color=!!sym(var_col),shape = anomaly_yn))+
+  plt<-ggplot(dat_to_plot, aes(x=site_anon, y=!!sym(grp_col), tooltip=text, color=!!sym(var_col),shape = anomaly_yn))+
     geom_point_interactive(data = dat_to_plot %>% filter(anomaly_yn == 'not outlier'), aes(size = iqr_val)) + 
     geom_point_interactive(data = dat_to_plot %>% filter(anomaly_yn != 'not outlier'), aes(size = severity_score)) + 
     scale_color_ssdqa(palette = 'diverging', discrete = FALSE) +
@@ -64,7 +64,7 @@ trinetx_anom_viz <- function(dat,
     theme_minimal() +
     theme(axis.text.x = element_text(angle=60)) +
     labs(title = paste0('Anomaly Detection per ', grp_col)) +
-    guides(color = guide_colorbar(title = 'Proportion'),
+    guides(color = guide_colorbar(title = 'Percent'),
            shape = guide_legend(title = 'Anomaly'),
            size = 'none')
   

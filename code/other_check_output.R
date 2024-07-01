@@ -170,7 +170,8 @@ cvg_final <- cvg_trinetx_clean %>%
   group_by(fact_group) %>%
   mutate(allsite_median = median(prop_pts)) %>% ungroup() %>%
   mutate(fact_long = str_replace_all(fact_group, c(dx='Diagnosis', px = 'Procedure',
-                                                   lab = 'Lab', med = 'Medication', '_' = ' and ')))
+                                                   lab = 'Lab', med = 'Medication', '_' = ' and ')),
+         fact_long = ifelse(!grepl('and', fact_long), paste0(fact_long, ' Only'), fact_long))
 
 write.csv(cvg_final, file = 'results/COMBINED_cvg_overlap.csv')
 

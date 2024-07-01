@@ -1,5 +1,6 @@
 # Vector of additional packages to load before executing the request
-config_append('extra_packages', c('stringr', 'tidyr', 'purrr', 'lubridate','plotly','ggiraph'))
+config_append('extra_packages', c('stringr', 'tidyr', 'purrr', 'lubridate',
+                                  'plotly','ggiraph'))
 
 #' Execute the request
 #'

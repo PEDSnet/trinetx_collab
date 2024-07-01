@@ -112,7 +112,7 @@ In these graphs, if the point is an outlier, the shape is a triangle (indicating
 ```{r cplt_anom}
 
 cplt_anom <- trinetx_anom_detect(dat = read_csv(file = '../results/COMBINED_couplets.csv') %>%
-                                   filter(cohort == 'combined') %>% filter(! str_detect(site_anon,'all|ALL')),
+                                   filter(cohort == 'combined') %>% filter(! str_detect(site_anon,'all|ALL')) %>% mutate(prop = prop * 100, network = ifelse(grepl('HCO', site_anon), 'trinetx', 'pedsnet')),
                                  var_col = 'prop',
                                  grp_vars = c('couplet_name'))
 
@@ -127,10 +127,14 @@ combo[[2]]
 
 #### Proportion of Cohort 2 in Cohort 1
 
+##### Computing for both networks as one group
+
 ```{r cplt_anom2}
 cplt_anom2 <- trinetx_anom_detect(dat = read_csv(file = '../results/COMBINED_couplets.csv') %>%
-                                   filter(cohort == 'cohort_1_denom_prop') %>% filter(! str_detect(site_anon,'all|ALL')) %>%
-                                    mutate(prop = ifelse(is.na(prop), 0, prop)),
+                                   filter(cohort == 'cohort_1_denom_prop') %>% filter(! str_detect(site_anon,'all|ALL'), !is.na(prop)) %>%
+                                    mutate(prop = prop * 100,
+                                           network = ifelse(grepl('HCO', site_anon),
+                                                            'trinetx', 'pedsnet')),
                                  var_col = 'prop',
                                  grp_vars = c('couplet_name'))
 
@@ -143,6 +147,54 @@ c1_denom[[2]]
 
 ```
 
+##### Computing for both networks individually
+
+```{r cplt_anom2.1}
+cplt_anom2 <- trinetx_anom_detect(dat = read_csv(file = '../results/COMBINED_couplets.csv') %>%
+                                   filter(cohort == 'cohort_1_denom_prop') %>% filter(! str_detect(site_anon,'all|ALL'), !is.na(prop)) %>%
+                                    mutate(prop = prop * 100,
+                                           network = ifelse(grepl('HCO', site_anon),
+                                                            'trinetx', 'pedsnet')),
+                                 var_col = 'prop',
+                                 grp_vars = c('couplet_name', 'network'))
+
+c1_denom <- trinetx_anom_viz(dat = cplt_anom2,
+                 var_col = 'prop',
+                 grp_col = 'couplet_name')
+
+c1_denom[[1]]
+c1_denom[[2]]
+
+```
+
+##### PEDSnet Method -- computing for both networks as one group
+
+```{r test}
+
+couplet_anomaly_plot_trinetx <- ms_anom_nt(process_output=
+                                             read_csv(file  = '../results/COMBINED_couplets_anom.csv'),
+                                           comparison_col='prop',
+                                           variable='couplet_name')
+
+couplet_anomaly_plot_trinetx
+
+
+```
+
+##### PEDSnet Method -- computing for both networks individually
+
+```{r test2}
+
+couplet_anomaly_plot_trinetx <- ms_anom_nt(process_output=
+                                             read_csv(file  = '../results/TRINETX_couplets_anom.csv') %>% union(read_csv(file  = '../results/PEDSNET_couplets_anom.csv')),
+                                           comparison_col='prop',
+                                           variable='couplet_name')
+
+couplet_anomaly_plot_trinetx
+
+
+```
+
 ## Coverage Overlap
 
 ### Exploratory
@@ -150,7 +202,7 @@ c1_denom[[2]]
 
 cvg_output <- ms_exp_nt2(process_output = read_csv(file = '../results/COMBINED_cvg_overlap.csv'),
                              check_string = 'Fact Group',
-                             y_col = 'fact_group',
+                             y_col = 'fact_long',
                              descriptor_col = 'fact_long')
 
 cvg_output
@@ -160,9 +212,12 @@ cvg_output
 ### Outlier Detection
 ```{r cvg_anom}
 
-cvg_anom <- trinetx_anom_detect(dat = read_csv(file = '../results/COMBINED_cvg_overlap.csv'),
+cvg_anom <- trinetx_anom_detect(dat = read_csv(file = '../results/COMBINED_cvg_overlap.csv') %>%
+                                  mutate(prop_pts = prop_pts * 100,
+                                           network = ifelse(grepl('HCO', site_anon),
+                                                            'trinetx', 'pedsnet')),
                                 var_col = 'prop_pts',
-                                grp_vars = 'fact_group')
+                                grp_vars = c('fact_group'))
 
 cvg_anom_grph <- trinetx_anom_viz(dat = cvg_anom,
                                   var_col = 'prop_pts',
@@ -251,9 +306,13 @@ casemix_output_scd_p
 ```{r mix_anom}
 
 mix_anon_combo <- trinetx_anom_detect(dat = read_csv(file = '../results/COMBINED_case_mix.csv') %>%
-                                              filter(cohort == 'full'),
+                                              filter(cohort == 'full',
+                                                     !grepl('U', branch)) %>%
+                                        mutate(prop_pts = prop_pts * 100,
+                                           network = ifelse(grepl('HCO', site_anon),
+                                                            'trinetx', 'pedsnet')),
                                       var_col = 'prop_pts',
-                                      grp_vars = 'branch')
+                                      grp_vars = c('branch'))
 
 mix_anon_graph <- trinetx_anom_viz(dat = mix_anon_combo,
                                    var_col = 'prop_pts',
@@ -267,7 +326,8 @@ mix_anon_graph[[2]]
 #### SCD
 ```{r mix_anom_scd}
 
-mix_anon_combo <- trinetx_anom_detect(dat = case_mix_df %>% filter(cohort=='scd'),
+mix_anon_combo <- trinetx_anom_detect(dat = case_mix_df %>% filter(cohort=='scd') %>%
+                                        mutate(prop_pts = prop_pts * 100),
                                       var_col = 'prop_pts',
                                       grp_vars = 'branch')
 
@@ -287,8 +347,8 @@ mix_anon_graph[[2]]
 ## Read in data
 fot_trinetx <- read_csv('../results/factsovertime_trinetx.csv')
 fot_chop <- read_csv('../results/factsovertime_rawcts.csv') %>%
-  left_join(read_csv('../results/factsovertime_normalized.csv')) %>%
-  left_join(read_csv('../results/factsovertime_distance.csv'))
+  left_join(read_csv('../results/factsovertime_normalized.csv')) #%>%
+  #left_join(read_csv('../results/factsovertime_distance.csv'))
 fot_chop_additional <- read_csv('../results/fot_output_new_chop.csv')
 
 ## Clean trinetx data
@@ -327,8 +387,8 @@ fot_trinetx_final <- fot_list_trinetx$fot_heuristic %>%
 ## Clean trinetx data
 fot_chop_clean <- fot_chop %>%
   select(site_anon, month_end, check_desc, row_pts, row_visits) %>%
-  union(fot_chop_additional %>% select(site_anon, month_end, check_desc, row_pts, row_visits)) %>%
-  mutate(month_end = as.Date(month_end, format = '%m/%d/%y'))
+   mutate(month_end = as.Date(month_end, format = '%m/%d/%y')) %>%
+  union(fot_chop_additional %>% select(site_anon, month_end, check_desc, row_pts, row_visits))
 
 
 fot_chop_trinetx_rawcts <- 
@@ -346,9 +406,12 @@ fot_chop_trinetx_rawcts <-
 
 ```{r fot_exp}
 
-fot_norm <- read_csv('../results/factsovertime_normalized.csv')
+fot_norm <- read_csv('../results/factsovertime_normalized.csv') %>%
+  mutate(month_end = as.Date(month_end, format = '%m/%d/%y'))
+  
 
-fot_combo <- fot_norm %>%
+fot_combo <- fot_chop %>%
+  mutate(month_end = as.Date(month_end, format = '%m/%d/%y')) %>%
   left_join(read_csv('../results/site_mapping.csv')) %>%
   select(site_anon, month_end, check_desc, row_pts, check) %>%
   union(fot_trinetx_final)
@@ -500,7 +563,7 @@ fot_combo_anom %>%
   scale_shape_manual(values=c('upper outlier' = 24,
                               'not outlier' = 20,
                               'lower outlier' = 25)) +
-  scale_color_ssdqa(discrete = FALSE) +
+  scale_color_ssdqa(discrete = FALSE, palette = 'diverging') +
   theme_minimal() +
   guides(color = guide_colorbar(title = 'Patient Count'),
          shape = guide_legend(title = 'Anomaly'),

@@ -42,7 +42,13 @@ fot_tbl_list <- list(
   'fot_resp' = list(site_cdm_tbl('condition_occurrence') %>% 
                         inner_join(load_codeset('dx_respiratory_infections'), 
                                    by = c('condition_concept_id' = 'concept_id')),
-                      'respiratory_infection')
+                      'respiratory_infection'),
+  'fot_all_visits' = list(site_cdm_tbl('visit_occurrence'), 'all_visits'),
+  'fot_asthma_ip' = list(site_cdm_tbl('condition_occurrence') %>% 
+                           inner_join(load_codeset('dx_asthma'), by=c('condition_concept_id'='concept_id')) %>% 
+                           inner_join(select(site_cdm_tbl('visit_occurrence'), visit_occurrence_id, visit_concept_id) %>% 
+                                        filter(visit_concept_id %in% c(9201L,2000000048L,2000000088L))), 
+                         'asthma_inpatient')
 )
 
 
