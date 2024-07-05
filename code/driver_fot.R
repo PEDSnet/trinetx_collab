@@ -44,8 +44,9 @@
   ## Read in data from both networks
   fot_trinetx <- read_csv('results/factsovertime_trinetx.csv')
   fot_chop <- read_csv('results/factsovertime_rawcts.csv') %>%
-    left_join(read_csv('results/factsovertime_normalized.csv')) %>%
-    left_join(read_csv('results/factsovertime_distance.csv'))
+    left_join(read_csv('results/factsovertime_normalized.csv') %>%
+                mutate(month_end = as.Date(month_end, format = '%m/%d/%y'))) #%>%
+    #left_join(read_csv('results/factsovertime_distance.csv'))
   
   
   ## Clean data and apply common structure
@@ -53,12 +54,12 @@
     rename(check_desc = query,
            month_end = date,
            row_pts = patients) %>%
-    mutate(month_end = as.Date(month_end, format = '%d %b %Y')) %>%
+    mutate(month_end = as.Date(month_end, format = '%m/%d/%y')) %>%
     mutate(check_desc = case_when(grepl('anxiety', check_desc) ~ 'anxiety',
                                   grepl('asthma', check_desc) ~ 'asthma',
                                   grepl('hypertension', check_desc) ~ 'hypertension',
                                   grepl('resp', check_desc) ~ 'respiratory_infection',
-                                  grepl('emergency', check_desc) ~ 'emergency_visits',
+                                  grepl('emergency$', check_desc) ~ 'emergency_visits',
                                   grepl('emergency vitals', check_desc) ~ 'emergency_visit_vitals',
                                   grepl('inpatients', check_desc) ~ 'inpatient_visits',
                                   grepl('meds', check_desc) ~ 'inpatient_administration',
@@ -77,11 +78,12 @@
   
   fot_trinetx_final <- fot_list_trinetx$fot_heuristic %>% 
     rename(site_anon = site) %>%
-    select(site_anon, month_end, check_desc, row_pts, check)
+    mutate(row_visits = 0) %>%
+    select(site_anon, month_end, check_desc, row_pts, row_visits, check)
   
   ## Clean trinetx data
   fot_chop_clean <- fot_chop %>%
-    select(site_anon, month_end, check_desc, row_pts, row_visits) %>%
+    select(site_anon, month_end, check_desc, row_pts, row_visits, check) %>%
     mutate(month_end = as.Date(month_end, format = '%m/%d/%y'))
   
   ## combined
@@ -89,6 +91,37 @@
     union(fot_chop_clean) %>%
     filter(site_anon != 'All HCOs' & site_anon != 'all')
   
+  write.csv(fot_final, file = 'results/COMBINED_fot.csv')
   
+  ##' *Euclidean Distance*
+  
+  euclidean_tntx <- ms_anom_euclidean(fot_input_tbl = fot_final %>% mutate(time_start = month_end,
+                                                                           time_increment = 'month') %>%
+                                        filter(site_anon %in% c('HCO1','HCO2','HCO3',
+                                                                'HCO4','HCO5','HCO6',
+                                                                'HCO7','HCO8','HCO9',
+                                                                'HCO10','HCO11','HCO12','HCO13')),
+                                      grp_vars = c('site_anon', 'check_desc'),
+                                      var_col = 'check')
+  
+  write.csv(euclidean_tntx, file = 'results/euclidean_trinetx.csv')
+  
+  euclidean_chop <- ms_anom_euclidean(fot_input_tbl = fot_final %>% mutate(time_start = month_end,
+                                                                           time_increment = 'month') %>%
+                                        filter(! site_anon %in% c('HCO1','HCO2','HCO3',
+                                                                  'HCO4','HCO5','HCO6',
+                                                                  'HCO7','HCO8','HCO9',
+                                                                  'HCO10','HCO11','HCO12','HCO13')),
+                                      grp_vars = c('site_anon', 'check_desc'),
+                                      var_col = 'check')
+  
+  write.csv(euclidean_chop, file = 'results/euclidean_chop.csv')
+  
+  euclidean_all <- ms_anom_euclidean(fot_input_tbl = fot_final %>% mutate(time_start = month_end,
+                                                                             time_increment = 'month'),
+                                        grp_vars = c('site_anon', 'check_desc'),
+                                        var_col = 'check')
+  
+  write.csv(euclidean_all, file = 'results/euclidean_combined.csv')
   
 }

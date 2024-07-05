@@ -1,4 +1,4 @@
-.run{
+.run <- function(){
   
   #' `Execute Function`
   
@@ -148,7 +148,9 @@
     select(site_anon,icd_header,prop_pt_site) %>% mutate(cohort='scd_p')
   
   mix_trinetx_clean <- mix_trinetx %>%
-    mutate(prop_pts = pct_pts/100) %>%
+    mutate(pct_pts = str_remove(pct_pts, '%'),
+           pct_pts = as.numeric(pct_pts),
+           prop_pts = pct_pts/100) %>%
     select(-c(description, pct_pts))
   
   mix_chop_clean <- mix_chop %>%

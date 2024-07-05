@@ -62,7 +62,8 @@ trinetx_anom_viz <- function(dat,
                                 'lower outlier' = 25))+
     #scale_y_discrete(labels = function(x) str_wrap(x, width = text_wrapping_char)) +
     theme_minimal() +
-    theme(axis.text.x = element_text(angle=60)) +
+    theme(axis.text.x = element_text(angle=90, hjust = 1, vjust = 1)) +
+    scale_y_discrete(labels = label_wrap_gen()) +
     labs(title = paste0('Anomaly Detection per ', grp_col)) +
     guides(color = guide_colorbar(title = 'Percent'),
            shape = guide_legend(title = 'Anomaly'),

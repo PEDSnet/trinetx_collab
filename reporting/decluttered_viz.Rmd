@@ -86,16 +86,16 @@ fot_compute_proportions <- function(fot_tbl = fot_chop_trinetx_rawcts %>% filter
 ```{r cplt_exp}
 
 #' Cohort Overlap of Both Cohorts
-couplets_prop_combined <- 
-  ms_exp_nt(read_csv(file = '../results/COMBINED_couplets.csv') %>% filter(cohort=='combined') %>% 
-              filter(! str_detect(site_anon,'all|ALL')), 'prop') +
-  ggtitle('Proportion of Combined Over Total in Both')
-
-couplets_prop_combined
+# couplets_prop_combined <- 
+#   couplet_viz(read_csv(file = '../results/COMBINED_couplets.csv') %>% filter(cohort=='combined') %>% 
+#               filter(! str_detect(site_anon,'all|ALL')), 'prop') +
+#   ggtitle('Proportion of Combined Over Total in Both')
+# 
+# couplets_prop_combined
 
 #' Proportion of Patients in Cohort 2 who are in Cohort 1
 couplets_prop_cohort_1 <- 
-  ms_exp_nt(read_csv(file = '../results/COMBINED_couplets.csv') %>% filter(cohort=='cohort_1_denom_prop') %>% 
+  couplets_viz(read_csv(file = '../results/COMBINED_couplets.csv') %>% filter(cohort=='cohort_1_denom_prop') %>% mutate(prop = round(prop, 2)) %>%
               filter(! str_detect(site_anon,'all|ALL')), 'prop') +
   ggtitle('Proportion of Cohort 2 in Cohort 1')
 
@@ -107,9 +107,8 @@ couplets_prop_cohort_1
 
 In these graphs, if the point is an outlier, the shape is a triangle (indicating directionality of the outlier) and the size indicates the severity of the outlier. If the point is NOT an outlier, the shape is a circle and the size represents the IQR value for that group. The color in all cases represents the raw proportion.
 
-#### Proportion in Both Cohorts
 
-```{r cplt_anom}
+```{r cplt_anom, include=FALSE}
 
 cplt_anom <- trinetx_anom_detect(dat = read_csv(file = '../results/COMBINED_couplets.csv') %>%
                                    filter(cohort == 'combined') %>% filter(! str_detect(site_anon,'all|ALL')) %>% mutate(prop = prop * 100, network = ifelse(grepl('HCO', site_anon), 'trinetx', 'pedsnet')),
@@ -167,9 +166,8 @@ c1_denom[[2]]
 
 ```
 
-##### PEDSnet Method -- computing for both networks as one group
 
-```{r test}
+```{r test, include=FALSE}
 
 couplet_anomaly_plot_trinetx <- ms_anom_nt(process_output=
                                              read_csv(file  = '../results/COMBINED_couplets_anom.csv'),
@@ -181,9 +179,8 @@ couplet_anomaly_plot_trinetx
 
 ```
 
-##### PEDSnet Method -- computing for both networks individually
 
-```{r test2}
+```{r test2, include=FALSE}
 
 couplet_anomaly_plot_trinetx <- ms_anom_nt(process_output=
                                              read_csv(file  = '../results/TRINETX_couplets_anom.csv') %>% union(read_csv(file  = '../results/PEDSNET_couplets_anom.csv')),
@@ -198,12 +195,10 @@ couplet_anomaly_plot_trinetx
 ## Coverage Overlap
 
 ### Exploratory
-```{r cvg_exp}
+```{r cvg_exp, fig.height=7}
 
-cvg_output <- ms_exp_nt2(process_output = read_csv(file = '../results/COMBINED_cvg_overlap.csv'),
-                             check_string = 'Fact Group',
-                             y_col = 'fact_long',
-                             descriptor_col = 'fact_long')
+cvg_output <- coverage_overlap_viz(process_output = 
+                                     read_csv(file = '../results/COMBINED_cvg_overlap.csv'))
 
 cvg_output
 
@@ -217,11 +212,11 @@ cvg_anom <- trinetx_anom_detect(dat = read_csv(file = '../results/COMBINED_cvg_o
                                            network = ifelse(grepl('HCO', site_anon),
                                                             'trinetx', 'pedsnet')),
                                 var_col = 'prop_pts',
-                                grp_vars = c('fact_group'))
+                                grp_vars = c('fact_long', 'network'))
 
 cvg_anom_grph <- trinetx_anom_viz(dat = cvg_anom,
                                   var_col = 'prop_pts',
-                                  grp_col = 'fact_group')
+                                  grp_col = 'fact_long')
 
 cvg_anom_grph[[1]]
 cvg_anom_grph[[2]]
@@ -234,70 +229,76 @@ cvg_anom_grph[[2]]
 
 #### Overall
 
-```{r mix}
+```{r mix, fig.height=10}
 
-casemix_output <- ms_exp_nt2(process_output = read_csv(file = '../results/COMBINED_case_mix.csv') %>%
-                               filter(cohort == 'full'),
-                             check_string = 'Branch',
-                             y_col = 'branch',
-                             descriptor_col = 'description')
+# casemix_output <- ms_exp_nt2(process_output = read_csv(file = '../results/COMBINED_case_mix.csv') %>%
+#                                filter(cohort == 'full'),
+#                              check_string = 'Branch',
+#                              y_col = 'branch',
+#                              descriptor_col = 'description')
+# 
+# casemix_output 
 
-casemix_output 
+mix_output <- case_mix_viz(process_output = 
+                             read_csv(file = '../results/COMBINED_case_mix.csv') %>%
+                                filter(cohort == 'full'))
+
+mix_output
 
 ```
 
-#### Comparing Both Networks
 
-```{r mix2}
 
-  casemix_twosites_tbl <- read_csv(file = '../results/COMBINED_case_mix.csv') %>% 
-                          mutate(site_assignment = 
-                                   case_when(
-                                     site_anon %in% c('HCO1','HCO2','HCO3',
-                                                      'HCO4','HCO5','HCO6',
-                                                      'HCO7','HCO8','HCO9',
-                                                      'HCO10','HCO11','HCO12','HCO13') ~ 'Trinetx',
-                                     TRUE ~ 'PEDSnet'
-                                   )) %>% 
-                           rename(site_original=site_anon,
-                                  site_anon=site_assignment) %>% filter(cohort == 'full')
-  
-  casemix_output_twosites <- ms_exp_nt2(process_output=casemix_twosites_tbl,
-                                        check_string = 'Branch',
-                                        y_col = 'branch',
-                                        descriptor_col = 'description')
-  
-  casemix_twocats_tbl <- casemix_twosites_tbl %>% 
-                         rename(site_category=site_anon,
-                                site_anon=site_original)
-  
-  casemix_output_twocats <- ms_exp_nt2_facet(process_output=casemix_twocats_tbl,
-                                       check_string = 'Branch',
-                                       y_col = 'branch',
-                                       descriptor_col = 'description') 
-  casemix_output_twocats
+```{r mix2_compare, include=FALSE}
+
+  # casemix_twosites_tbl <- read_csv(file = '../results/COMBINED_case_mix.csv') %>% 
+  #                         mutate(site_assignment = 
+  #                                  case_when(
+  #                                    site_anon %in% c('HCO1','HCO2','HCO3',
+  #                                                     'HCO4','HCO5','HCO6',
+  #                                                     'HCO7','HCO8','HCO9',
+  #                                                     'HCO10','HCO11','HCO12','HCO13') ~ 'Trinetx',
+  #                                    TRUE ~ 'PEDSnet'
+  #                                  )) %>% 
+  #                          rename(site_original=site_anon,
+  #                                 site_anon=site_assignment) %>% filter(cohort == 'full')
+  # 
+  # casemix_output_twosites <- ms_exp_nt2(process_output=casemix_twosites_tbl,
+  #                                       check_string = 'Branch',
+  #                                       y_col = 'branch',
+  #                                       descriptor_col = 'description')
+  # 
+  # casemix_twocats_tbl <- casemix_twosites_tbl %>% 
+  #                        rename(site_category=site_anon,
+  #                               site_anon=site_original)
+  # 
+  # casemix_output_twocats <- ms_exp_nt2_facet(process_output=casemix_twocats_tbl,
+  #                                      check_string = 'Branch',
+  #                                      y_col = 'branch',
+  #                                      descriptor_col = 'description') 
+  # casemix_output_twocats
 
 ```
 
 #### SCD
-``` {r mix_scd}
+``` {r mix_scd, fig.height = 10}
 
-casemix_output_scd <- ms_exp_nt2(process_output = case_mix_df %>% filter(cohort=='scd'),
-                             check_string = 'Branch',
-                             y_col = 'branch',
-                             descriptor_col = 'description')
-casemix_output_scd
+mix_output_scd <- case_mix_viz(process_output = 
+                             read_csv(file = '../results/COMBINED_case_mix.csv') %>%
+                                filter(cohort == 'scd'))
+
+mix_output_scd
 ```
 
 #### SCD: P Sub-Branch
 
-``` {r mix_scd_p_graph}
+``` {r mix_scd_p_graph, fig.height = 9}
 
-casemix_output_scd_p <- ms_exp_nt2(process_output = case_mix_df %>% filter(cohort=='scd_p'),
-                                   check_string = 'Branch',
-                                   y_col = 'branch',
-                                   descriptor_col = 'description')
-casemix_output_scd_p
+mix_output_scdp <- case_mix_viz(process_output = 
+                             read_csv(file = '../results/COMBINED_case_mix.csv') %>%
+                                filter(cohort == 'scd_p'))
+
+mix_output_scdp
 ```
 
 ### Outlier Detection
@@ -312,7 +313,7 @@ mix_anon_combo <- trinetx_anom_detect(dat = read_csv(file = '../results/COMBINED
                                            network = ifelse(grepl('HCO', site_anon),
                                                             'trinetx', 'pedsnet')),
                                       var_col = 'prop_pts',
-                                      grp_vars = c('branch'))
+                                      grp_vars = c('branch', 'network'))
 
 mix_anon_graph <- trinetx_anom_viz(dat = mix_anon_combo,
                                    var_col = 'prop_pts',
@@ -344,59 +345,59 @@ mix_anon_graph[[2]]
 
 ```{r fot_setup, include=FALSE}
 
-## Read in data
-fot_trinetx <- read_csv('../results/factsovertime_trinetx.csv')
-fot_chop <- read_csv('../results/factsovertime_rawcts.csv') %>%
-  left_join(read_csv('../results/factsovertime_normalized.csv')) #%>%
-  #left_join(read_csv('../results/factsovertime_distance.csv'))
-fot_chop_additional <- read_csv('../results/fot_output_new_chop.csv')
-
-## Clean trinetx data
-fot_trinetx_clean <- fot_trinetx %>%
-  rename(check_desc = query,
-         month_end = date,
-         row_pts = patients) %>%
-  mutate(month_end = as.Date(month_end, format = '%d %b %Y')) %>%
-  mutate(check_desc = case_when(grepl('anxiety', check_desc) ~ 'anxiety',
-                                grepl('asthma', check_desc) ~ 'asthma',
-                                grepl('hypertension', check_desc) ~ 'hypertension',
-                                grepl('resp', check_desc) ~ 'respiratory_infection',
-                                grepl('emergency', check_desc) ~ 'emergency_visits',
-                                grepl('emergency vitals', check_desc) ~ 'emergency_visit_vitals',
-                                grepl('inpatients', check_desc) ~ 'inpatient_visits',
-                                grepl('meds', check_desc) ~ 'inpatient_administration',
-                                grepl('outpatients', check_desc) ~ 'outpatient_visits',
-                                grepl('procedures', check_desc) ~ 'outpatient_procedure'))
-
-
-
-## Rerun heuristic based on patient counts to make sure both sets of output are aligned
-fot_trinetx_new <- compute_at_cross_join(cj_tbl = fot_trinetx_clean %>% 
-                                           mutate(time_start = month_end, time_increment = 'month'), 
-                                         cj_var_names = c('site_anon', 'check_desc'))
-
-fot_list_trinetx <- fot_check('row_pts',
-                              tblx= fot_trinetx_new %>% 
-                                filter(site_anon != 'All HCOs') %>% 
-                                mutate(check_name = check_desc, site = site_anon))
-
-fot_trinetx_final <- fot_list_trinetx$fot_heuristic %>% 
-  rename(site_anon = site) %>%
-  select(site_anon, month_end, check_desc, row_pts, check)
-
-## Clean trinetx data
-fot_chop_clean <- fot_chop %>%
-  select(site_anon, month_end, check_desc, row_pts, row_visits) %>%
-   mutate(month_end = as.Date(month_end, format = '%m/%d/%y')) %>%
-  union(fot_chop_additional %>% select(site_anon, month_end, check_desc, row_pts, row_visits))
-
-
-fot_chop_trinetx_rawcts <- 
-  dplyr::union(fot_trinetx_new %>% select(site_anon,month_end,check_desc,row_pts) %>%
-                 mutate(cohort='trinetx', row_visits=0),
-               fot_chop_clean %>% select(site_anon,month_end,check_desc,row_pts,row_visits) %>% 
-                 mutate(#month_end=mdy(month_end),
-                        cohort='pedsnet'))
+# ## Read in data
+# fot_trinetx <- read_csv('../results/factsovertime_trinetx.csv')
+# fot_chop <- read_csv('../results/factsovertime_rawcts.csv') %>%
+#   left_join(read_csv('../results/factsovertime_normalized.csv')) #%>%
+#   #left_join(read_csv('../results/factsovertime_distance.csv'))
+# fot_chop_additional <- read_csv('../results/fot_output_new_chop.csv')
+# 
+# ## Clean trinetx data
+# fot_trinetx_clean <- fot_trinetx %>%
+#   rename(check_desc = query,
+#          month_end = date,
+#          row_pts = patients) %>%
+#   mutate(month_end = as.Date(month_end, format = '%d %b %Y')) %>%
+#   mutate(check_desc = case_when(grepl('anxiety', check_desc) ~ 'anxiety',
+#                                 grepl('asthma', check_desc) ~ 'asthma',
+#                                 grepl('hypertension', check_desc) ~ 'hypertension',
+#                                 grepl('resp', check_desc) ~ 'respiratory_infection',
+#                                 grepl('emergency', check_desc) ~ 'emergency_visits',
+#                                 grepl('emergency vitals', check_desc) ~ 'emergency_visit_vitals',
+#                                 grepl('inpatients', check_desc) ~ 'inpatient_visits',
+#                                 grepl('meds', check_desc) ~ 'inpatient_administration',
+#                                 grepl('outpatients', check_desc) ~ 'outpatient_visits',
+#                                 grepl('procedures', check_desc) ~ 'outpatient_procedure'))
+# 
+# 
+# 
+# ## Rerun heuristic based on patient counts to make sure both sets of output are aligned
+# fot_trinetx_new <- compute_at_cross_join(cj_tbl = fot_trinetx_clean %>% 
+#                                            mutate(time_start = month_end, time_increment = 'month'), 
+#                                          cj_var_names = c('site_anon', 'check_desc'))
+# 
+# fot_list_trinetx <- fot_check('row_pts',
+#                               tblx= fot_trinetx_new %>% 
+#                                 filter(site_anon != 'All HCOs') %>% 
+#                                 mutate(check_name = check_desc, site = site_anon))
+# 
+# fot_trinetx_final <- fot_list_trinetx$fot_heuristic %>% 
+#   rename(site_anon = site) %>%
+#   select(site_anon, month_end, check_desc, row_pts, check)
+# 
+# ## Clean trinetx data
+# fot_chop_clean <- fot_chop %>%
+#   select(site_anon, month_end, check_desc, row_pts, row_visits) %>%
+#    mutate(month_end = as.Date(month_end, format = '%m/%d/%y')) %>%
+#   union(fot_chop_additional %>% select(site_anon, month_end, check_desc, row_pts, row_visits))
+# 
+# 
+# fot_chop_trinetx_rawcts <- 
+#   dplyr::union(fot_trinetx_new %>% select(site_anon,month_end,check_desc,row_pts) %>%
+#                  mutate(cohort='trinetx', row_visits=0),
+#                fot_chop_clean %>% select(site_anon,month_end,check_desc,row_pts,row_visits) %>% 
+#                  mutate(#month_end=mdy(month_end),
+#                         cohort='pedsnet'))
 
 ```
 
@@ -406,15 +407,17 @@ fot_chop_trinetx_rawcts <-
 
 ```{r fot_exp}
 
-fot_norm <- read_csv('../results/factsovertime_normalized.csv') %>%
-  mutate(month_end = as.Date(month_end, format = '%m/%d/%y'))
-  
+# fot_norm <- read_csv('../results/factsovertime_normalized.csv') %>%
+#   mutate(month_end = as.Date(month_end, format = '%m/%d/%y'))
 
-fot_combo <- fot_chop %>%
-  mutate(month_end = as.Date(month_end, format = '%m/%d/%y')) %>%
-  left_join(read_csv('../results/site_mapping.csv')) %>%
-  select(site_anon, month_end, check_desc, row_pts, check) %>%
-  union(fot_trinetx_final)
+fot_combo <- read_csv('../results/COMBINED_fot.csv') %>%
+  mutate(cohort = ifelse(grepl('site', site_anon), 'pedsnet', 'trinetx'))
+
+# fot_combo <- fot_chop %>%
+#   mutate(month_end = as.Date(month_end, format = '%m/%d/%y')) %>%
+#   left_join(read_csv('../results/site_mapping.csv')) %>%
+#   select(site_anon, month_end, check_desc, row_pts, check) %>%
+#   union(fot_trinetx_final)
 
 domain_list <- fot_combo %>% distinct(check_desc) %>% pull()
 site_list <- fot_combo %>% filter(!is.na(site_anon), site_anon != 'all') %>% distinct(site_anon) %>% pull()
@@ -456,7 +459,7 @@ for(i in 1:length(site_list)){
 }
 
 final[[1]][[5]]
-final[[12]][[4]]
+final[[22]][[10]]
 final[[7]][[10]]
 
 ```
@@ -470,7 +473,7 @@ fot_combo_rates <- fot_combo %>%
   mutate(new_cases = row_pts) %>%
   left_join(fot_denoms) %>%
   filter(!is.na(total_pt)) %>%
-  mutate(incidence_rate = new_cases / (total_pt * 10000))
+  mutate(incidence_rate = (new_cases / total_pt) * 10000)
 
 
 ggplot(fot_combo_rates, aes(y = incidence_rate, x = month_end, color = site_anon)) +
@@ -488,7 +491,7 @@ ggplot(fot_combo_rates, aes(y = incidence_rate, x = month_end, color = site_anon
 
 ```{r fot_anom1}
 
-ip_asthma_all_visit <- fot_compute_proportions(fot_tbl = fot_chop_trinetx_rawcts %>% filter(cohort=='pedsnet'),
+ip_asthma_all_visit <- fot_compute_proportions(fot_tbl = fot_combo %>% filter(cohort=='pedsnet'),
                                          var_col = 'row_visits',
                                          denom_groups = c('inpatient_visits'),
                                          num_groups = c('asthma_inpatient'))
@@ -500,15 +503,16 @@ asthma_ip_medians <- compute_dist_mean_median(ip_asthma_all_visit,
                                   num_sd=2,
                                   num_mad=2)
 
-asthma_ip_euclidean <- ms_anom_euclidean(fot_input_tbl = asthma_ip_medians %>% mutate(time_start = month_end,
-                                                                             time_increment = 'month'),
+asthma_ip_euclidean <- ms_anom_euclidean(fot_input_tbl = asthma_ip_medians %>% 
+                                           mutate(time_start = month_end,
+                                                  time_increment = 'month'),
                                             grp_vars = c('site_anon'),
                                             var_col = 'prop')
 
-fot_asthma_ip_output <- euclidean_output(process_output = asthma_ip_euclidean,
-                                          output_var = 'prop',
-                                          filter_variable = NULL,
-                                         title = 'Inpatient Asthma Over Time')
+fot_asthma_ip_output <- fot_euclidean_viz(process_output = asthma_ip_euclidean,
+                                             output_var = 'prop',
+                                             filter_variable = NULL,
+                                             title = 'Inpatient Asthma Over Time')
 
 fot_asthma_ip_output[[1]]
 fot_asthma_ip_output[[2]]
@@ -526,12 +530,13 @@ fot_asthma_ip_output[[3]]
 #                                         num_sd=2,
 #                                         num_mad=2)
 
-rate_euclidean <- ms_anom_euclidean(fot_input_tbl = fot_combo_rates %>% mutate(time_start = month_end,
-                                                                               time_increment = 'month'),
+rate_euclidean <- ms_anom_euclidean(fot_input_tbl = fot_combo_rates %>% 
+                                      mutate(time_start = month_end,
+                                             time_increment = 'month'),
                                             grp_vars = c('site_anon', 'check_desc'),
                                             var_col = 'incidence_rate')
 
-rate_output <- euclidean_output(process_output = rate_euclidean,
+rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
                                 output_var = 'incidence_rate',
                                 filter_variable = 'hypertension',
                                 title = 'Rate per 10,000 Patients for Hypertension Over Time')
@@ -549,17 +554,17 @@ rate_output[[3]]
 ```{r fot_ss_anom}
 
 fot_combo_anom <- trinetx_anom_detect(dat = fot_combo_rates,
-                                      var_col = 'row_pts',
+                                      var_col = 'incidence_rate',
                                       grp_vars = c('site_anon', 'check_desc')) %>%
-  inner_join(fot_combo) %>%
+  inner_join(fot_combo_rates) %>%
   distinct() %>%
-  filter(site_anon == 'site 9', check_desc == 'inpatient_visits')
+  filter(site_anon == 'site 10', check_desc == 'respiratory_infection')
 
 fot_combo_anom %>%
-  ggplot(aes(x = month_end, y = row_pts)) +
+  ggplot(aes(x = month_end, y = incidence_rate)) +
   geom_line(color = 'gray') +
-  geom_point(data = fot_combo_anom %>% filter(anomaly_yn == 'not outlier'), aes(colour = row_pts, shape = anomaly_yn)) + 
-  geom_point(data = fot_combo_anom %>% filter(anomaly_yn != 'not outlier'), aes(size = severity_score, colour = row_pts, shape = anomaly_yn)) +
+  geom_point(data = fot_combo_anom %>% filter(anomaly_yn == 'not outlier'), aes(colour = incidence_rate, shape = anomaly_yn)) + 
+  geom_point(data = fot_combo_anom %>% filter(anomaly_yn != 'not outlier'), aes(size = severity_score, colour = incidence_rate, shape = anomaly_yn)) +
   scale_shape_manual(values=c('upper outlier' = 24,
                               'not outlier' = 20,
                               'lower outlier' = 25)) +
@@ -569,7 +574,7 @@ fot_combo_anom %>%
          shape = guide_legend(title = 'Anomaly'),
          size = 'none') +
   labs(title = 'Anomalous Patient Counts Over Time',
-       subtitle = 'Site 9; Inpatient Visits')
+       subtitle = 'Site 10; Respiratory Infections')
 
 
 ```
@@ -581,13 +586,13 @@ fot_combo_anom %>%
 anomalize_stl <- anomalize_ss_anom_at(fot_input_tbl = fot_combo_rates %>% 
                                              mutate(time_increment = 'month', 
                                                     time_start = month_end) %>% 
-                                             filter(site_anon == 'site 9', check_desc == 'inpatient_visits') %>% distinct(), 
+                                             filter(site_anon == 'site 10', check_desc == 'respiratory_infection') %>% distinct(), 
                                            grp_vars = 'check_desc', 
                                            time_var = 'time_start', 
                                            var_col = 'incidence_rate')
 
 anomalize_stl_output <- ss_anom_at(process_output = anomalize_stl,
-                                    filtered_var = 'inpatient_visits',
+                                    filtered_var = 'respiratory_infection',
                                     var_col = 'check_desc')
 
 anomalize_stl_output[[1]]

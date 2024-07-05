@@ -30,7 +30,9 @@
     pivot_longer(cols = !site_anon,
                  names_to = 'fact_group',
                  values_to = 'pct_pts') %>%
-    mutate(prop_pts = pct_pts / 100) %>%
+    mutate(pct_pts = str_remove(pct_pts, '%'),
+           pct_pts = as.numeric(pct_pts),
+           prop_pts = pct_pts/100) %>%
     select(-pct_pts)
   
   cvg_chop_clean <- cvg_chop %>%
