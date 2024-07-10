@@ -1,5 +1,30 @@
 
 
+#' TriNetX Anomaly Detection Method
+#' 
+#' The IQR is used to compute upper (`Q3 + (1.5*IQR)`) and lower (`Q3 + (1.5*IQR)`) 
+#' limits. Any value that is greater than the upper limit or lesser than the lower limit
+#' is considered an outlier.
+#' 
+#' The severity of an outlier is determined by dividing the value's distance from the 
+#' nearest limit by the range between the upper and lower limits
+#' `severity_score = (value - upper/lower limit) / (upper limit - lower limit)`
+#' 
+#' An overall site severity score is also computed to provide a single value for each
+#' site in the input data. To compute this, each outlier severity score is multiplied
+#' by the mean for the group - `severity_score * (mean / 100)`. All these scores are then
+#' summed to determine the overall `site_score`
+#'
+#' @param dat input data from either the case-mix, coverage overlap, or couplets
+#'            checks
+#' @param var_col the target numerical column for the analysis; typically is a patient
+#'                count or percentage
+#' @param grp_vars variables to group by when computing anomalies
+#'
+#' @return one data frame with the var_col, each of the grp_vars, the IQR, upper and
+#'         lower limits, severity score, weighted severity score, site score, and a
+#'         flag indicating whether the value qualifies as an anomaly
+#' 
 trinetx_anom_detect <- function(dat,
                                 var_col,
                                 grp_vars = c('site')){
@@ -34,55 +59,5 @@ trinetx_anom_detect <- function(dat,
     select(!!!syms(grp_vars), !!sym(var_col), iqr_val, upper_lim, lower_lim, anomaly_yn,
            severity_score, weighted_score, site_score)
   
-  
-}
-
-
-
-trinetx_anom_viz <- function(dat,
-                             var_col,
-                             grp_col){
-  
-  dat_to_plot <- dat %>%
-    mutate(text=paste("Variable: ",!!sym(grp_col),
-                      "\nSite: ",site_anon,
-                      "\nProportion: ",round(!!sym(var_col),2),
-                      "\nSeverity Score: ", round(severity_score, 4),
-                      "\nSite Outlier Score: ", round(site_score,4)))
-  
-  
-  #mid<-(max(dat_to_plot[[comparison_col]],na.rm=TRUE)+min(dat_to_plot[[comparison_col]],na.rm=TRUE))/2
-  
-  plt<-ggplot(dat_to_plot, aes(x=site_anon, y=!!sym(grp_col), tooltip=text, color=!!sym(var_col),shape = anomaly_yn))+
-    geom_point_interactive(data = dat_to_plot %>% filter(anomaly_yn == 'not outlier'), aes(size = iqr_val)) + 
-    geom_point_interactive(data = dat_to_plot %>% filter(anomaly_yn != 'not outlier'), aes(size = severity_score)) + 
-    scale_color_ssdqa(palette = 'diverging', discrete = FALSE) +
-    scale_shape_manual(values=c('upper outlier' = 24,
-                                'not outlier' = 20,
-                                'lower outlier' = 25))+
-    #scale_y_discrete(labels = function(x) str_wrap(x, width = text_wrapping_char)) +
-    theme_minimal() +
-    theme(axis.text.x = element_text(angle=90, hjust = 1, vjust = 1)) +
-    scale_y_discrete(labels = label_wrap_gen()) +
-    labs(title = paste0('Anomaly Detection per ', grp_col)) +
-    guides(color = guide_colorbar(title = 'Percent'),
-           shape = guide_legend(title = 'Anomaly'),
-           size = 'none')
-  
-  gplot <- girafe(ggobj = plt)
-  
-  tbl <- dat %>%
-    ungroup() %>%
-    distinct(site_anon, site_score) %>%
-    mutate(site_score = round(site_score, 4)) %>%
-    gt::gt() %>%
-    opt_interactive() %>%
-    tab_header('Site Outlier Scores') %>%
-    cols_label(site_anon = 'Site (Anonymized)',
-               site_score = 'Site Outlier Score')
-  
-  otpt <- list(gplot, tbl)
-  
-  return(otpt)
   
 }

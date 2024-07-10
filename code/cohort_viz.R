@@ -1,5 +1,84 @@
 
+#' TriNetX Anomaly Detection Visualization
+#'
+#' @param dat the output from `trinetx_anom_detect`
+#' @param var_col the target numerical column used as input to `trinetx_anom_detect`
+#' @param grp_col the grouping column used as input to `trinetx_anom_detect` that should
+#'                be used as the y axis value
+#'
+#' @return a dot plot with the grp_col along the y axis and the site along the x axis.
+#' 
+#'         the shape of each icon represents the anomaly type: circle is not an outlier,
+#'         triangle pointing up is an upper outlier, and triangle pointing down is a 
+#'         lower outlier. 
+#'         
+#'         the color of each icon represents the value of var_col.
+#'         
+#'         the size of each circle represents the IQR value for that row, while the
+#'         size of each triangle represents the severity score of the outlier
+#'         
+#' @return an html table with the site severity scores returned by trinetx_anom_detect
+#' 
+trinetx_anom_viz <- function(dat,
+                             var_col,
+                             grp_col){
+  
+  dat_to_plot <- dat %>%
+    mutate(text=paste("Variable: ",!!sym(grp_col),
+                      "\nSite: ",site_anon,
+                      "\nProportion: ",round(!!sym(var_col),2),
+                      "\nSeverity Score: ", round(severity_score, 4),
+                      "\nSite Outlier Score: ", round(site_score,4)))
+  
+  
+  #mid<-(max(dat_to_plot[[comparison_col]],na.rm=TRUE)+min(dat_to_plot[[comparison_col]],na.rm=TRUE))/2
+  
+  plt<-ggplot(dat_to_plot, aes(x=site_anon, y=!!sym(grp_col), tooltip=text, color=!!sym(var_col),shape = anomaly_yn))+
+    geom_point_interactive(data = dat_to_plot %>% filter(anomaly_yn == 'not outlier'), aes(size = iqr_val)) + 
+    geom_point_interactive(data = dat_to_plot %>% filter(anomaly_yn != 'not outlier'), aes(size = severity_score,
+                                                                                           tooltip = text)) + 
+    scale_color_ssdqa(palette = 'diverging', discrete = FALSE) +
+    scale_shape_manual(values=c('upper outlier' = 24,
+                                'not outlier' = 20,
+                                'lower outlier' = 25))+
+    #scale_y_discrete(labels = function(x) str_wrap(x, width = text_wrapping_char)) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle=90, hjust = 1, vjust = 1)) +
+    scale_y_discrete(labels = label_wrap_gen()) +
+    labs(title = paste0('Anomaly Detection per ', grp_col)) +
+    guides(color = guide_colorbar(title = 'Percent'),
+           shape = guide_legend(title = 'Anomaly'),
+           size = 'none')
+  
+  gplot <- girafe(ggobj = plt)
+  
+  tbl <- dat %>%
+    ungroup() %>%
+    distinct(site_anon, site_score) %>%
+    mutate(site_score = round(site_score, 4)) %>%
+    gt::gt() %>%
+    opt_interactive() %>%
+    tab_header('Site Outlier Scores') %>%
+    cols_label(site_anon = 'Site (Anonymized)',
+               site_score = 'Site Outlier Score')
+  
+  otpt <- list(gplot, tbl)
+  
+  return(otpt)
+  
+}
 
+
+
+#' Couplets Exploratory Visualization
+#'
+#' @param process_output the cleaned, combined output of the couplets
+#'                       check
+#' @param output_col the name of the target numerical column 
+#'
+#' @return a heat map with site along the y axis and couplet type along the x axis; the
+#'         color of each section of the heat map represents the value of output_col
+#' 
 couplets_viz <- function(process_output,
                          output_col){
   
@@ -21,11 +100,19 @@ couplets_viz <- function(process_output,
 }
 
 
+#' Case Mix Exploratory Visualization - Multi Site
+#'
+#' @param process_output the cleaned, combined output of the case mix check
+#'
+#' @return a bar plot with site along the x axis and patient proportion along the y axis, 
+#'         facetting by the ICD10CM branch. A dotted line represents the all site median
+#'         for each branch
+#' 
 case_mix_viz <- function(process_output){
   
   data_format <- process_output %>%
     mutate(text = paste0('Site: ', site_anon,
-                         '\nBranch: ', branch,
+                         '\nBranch: ', description,
                          '\nProportion: ', prop_pts))
   
   r <- ggplot(data_format, aes(y=prop_pts,x=site_anon, fill=site_anon))+
@@ -34,14 +121,14 @@ case_mix_viz <- function(process_output){
     #geom_point(aes(y=!!sym(y_col), x=allsite_median), shape=8, size=4, color="black")+
     scale_fill_ssdqa(discrete = TRUE) +
     #scale_y_discrete(limits=rev) +
-    facet_wrap(~branch, scales="free_y", ncol = 2)+
+    facet_wrap(~branch, #scales="free_y", 
+               ncol = 2)+
     theme_minimal() + 
     theme(legend.position = 'none',
           axis.text.x = element_text(angle = 90)) +
     labs(y = 'Proportion Patients',
-         x = 'ICD10CM Branch',
-         color = 'Site',
-         title = paste0('Proportion of Patients with Each Fact'),
+         x = 'Site',
+         title = paste0('Proportion of Patients with Each Branch'),
          subtitle = 'Dotted line represents All-Site Median')
   
   girafe(ggobj = r)
@@ -49,6 +136,66 @@ case_mix_viz <- function(process_output){
 }
 
 
+#' Case Mix Exploratory Visualization - Summary / Single Site
+#'
+#' @param process_output the cleaned, combined output from the case mix
+#'                       check
+#' @param site_filter the single site that is the target of the analysis
+#'
+#' @return a bar graph with the ICD10CM branch along the x axis and patient 
+#'         proportion along the y axis. Two dots are placed on each bar representing
+#'         the all site mean (pink) and all site median (brown) proportion
+#'         for each ICD branch
+#' 
+case_mix_summ_viz <- function(process_output,
+                              site_filter){
+  
+  dat_to_plot <- process_output %>%
+    group_by(cohort, branch) %>%
+    mutate(allsite_mean = mean(prop_pts)) %>%
+    ungroup()
+  
+  data_format <- dat_to_plot %>%
+    filter(site_anon %in% site_filter) %>%
+    mutate(text = paste0('Site: ', site_anon,
+                         '\nBranch: ', description,
+                         '\nProportion: ', prop_pts))
+  
+  r <- ggplot(data_format, aes(y=prop_pts,x=branch))+
+    geom_col_interactive(aes(tooltip = text), fill = ssdqa_colors_standard[[7]])+
+    geom_point_interactive(aes(y = allsite_mean, tooltip = paste0('All Site Mean: ', 
+                                                                  round(allsite_mean, 3))),
+                           color = ssdqa_colors_standard[[1]]) +
+    geom_point_interactive(aes(y = allsite_median, tooltip = paste0('All Site Median: ', 
+                                                                  round(allsite_median, 3))),
+                           color = ssdqa_colors_standard[[8]]) +
+    # geom_hline(aes(yintercept = allsite_median), linetype = 'dotted') +
+    facet_wrap(~site_anon, #scales="free_y", 
+               ncol = 2)+
+    theme_minimal() + 
+    theme(legend.position = 'none',
+          axis.text.x = element_text(angle = 90)) +
+    labs(y = 'Proportion Patients',
+         x = 'ICD10CM Branch',
+         color = 'Site',
+         title = paste0('Proportion of Patients per Branch'),
+         subtitle = 'Dots represent all-site mean (pink) and median (brown)')
+  
+  girafe(ggobj = r)
+  
+}
+
+
+#' Stability Over Time - Raw vs Normalized Patients
+#'
+#' @param process_output the cleaned, combined output of the stability
+#'                       over time check
+#' @param site_filter the target site for the analysis
+#' @param domain_filter the target domain for the analysis
+#'
+#' @return line plot with time along the x axis, raw patient count along the
+#'         left y axis, and normalized patient count along the right y axis
+#' 
 fot_raw_norm_viz <- function(process_output,
                              site_filter,
                              domain_filter){
@@ -76,12 +223,26 @@ fot_raw_norm_viz <- function(process_output,
   
 }
 
-#' Euclidean distance function for testing
-
+#' Stability Over Time - Euclidean Distance
+#'
+#' @param process_output the cleaned, combined output from `ms_anom_euclidean`
+#' @param output_var the target numerical column for the analysis
+#' @param filter_variable the target domain for the analysis
+#' @param title user provided title for the graph
+#' 
+#' @return returns 3 graphs:
+#'            
+#'            1. smoothed line graph applying Loess regression to the output_var 
+#'               with one line per site
+#'            2. line graph of the raw value of the output_var with one line per
+#'               site
+#'            3. radial bar plot with the euclidean distance values for each site
+#'               where color represents the average loess value per site
+#' 
 fot_euclidean_viz <- function(process_output,
-                                 output_var,
-                                 filter_variable,
-                                 title) {
+                              output_var,
+                              filter_variable,
+                              title) {
   
   if (! is.null(filter_variable)) {
     filt_op <- process_output %>% filter(check_desc == filter_variable) %>%
@@ -185,6 +346,15 @@ fot_euclidean_viz <- function(process_output,
 }
 
 
+#' Coverage Overlap Exploratory Visualization
+#'
+#' @param process_output the cleaned, combined output from the coverage
+#'                       overlap check
+#'
+#' @return a dot plot with fact group along the y axis and patient proportion
+#'         along the x axis. each dot represents a site, and the star icon
+#'         in each row represents the all site median
+#' 
 coverage_overlap_viz <- function(process_output){
   
   data_format <- process_output %>%

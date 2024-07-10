@@ -1,13 +1,4 @@
 
-#' *Normalization of Stability Over Time results*
-#' 
-#' Our full 3-function process is included below for full visibility into how we execute this check.
-#' We run the normalization formula for the site-specific counts, run it again for the OVERALL patient count
-#' for a given month/check application (i.e. network wide, ignoring site specificity), then use the 
-#' final function  `check_fot_all_dist` to check the distance between the site specific normalized value 
-#' and the overall normalized value
-#' 
-
 #' Function that iterates through a list, computing monthly visits
 #' 
 #' @param time_tbls a list with the following requirements:

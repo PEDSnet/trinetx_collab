@@ -31,10 +31,3 @@ dcon_output_pp <- apply_dcon_pp(dcon_tbl=results_tbl('dcon_output'),
 output_tbl(dcon_output_pp,
            name='dcon_output_pp')
 
-#' `Domain Concordance --- Conservative`
-# dcon_output_cons_pp <- apply_dcon_pp(dcon_tbl=results_tbl('dcon_output_strict'),
-#                                 byyr=FALSE,
-#                                 strict = TRUE)
-# output_tbl(dcon_output_cons_pp,
-#            name='dcon_output_strict_pp')
-

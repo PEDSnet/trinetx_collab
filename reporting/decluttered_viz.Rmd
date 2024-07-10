@@ -227,6 +227,20 @@ cvg_anom_grph[[2]]
 
 ### Exploratory
 
+#### Single Site Summary
+
+```{r mix_summ}
+
+mix_summ <- case_mix_summ_viz(process_output = 
+                                read_csv(file = '../results/COMBINED_case_mix.csv') %>%
+                                filter(cohort == 'full'),
+                              site_filter = 'site 2')
+
+mix_summ
+
+
+```
+
 #### Overall
 
 ```{r mix, fig.height=10}
@@ -299,6 +313,48 @@ mix_output_scdp <- case_mix_viz(process_output =
                                 filter(cohort == 'scd_p'))
 
 mix_output_scdp
+```
+
+#### With Visit Counts
+
+```{r mix_visits, fig.height=10}
+
+mix_pts <- read_csv(file = '../results/COMBINED_case_mix.csv') %>% filter(cohort == 'full') %>%
+  filter(grepl('site', site_anon)) %>% pivot_longer(cols = 'prop_pts',
+                                                    names_to = 'prop_type',
+                                                    values_to = 'prop') %>%
+  select(site_anon, branch, description, prop, prop_type)
+
+descs <- mix_pts %>% distinct(branch, description)
+
+mix_visits <- read_csv(file = '../results/case_mix_visits_chop.csv') %>%
+  filter(grepl('site', site_anon)) %>% pivot_longer(cols = 'prop_visit_site',
+                                                    names_to = 'prop_type',
+                                                    values_to = 'prop') %>%
+  rename('branch' = icd_header) %>%
+  mutate(branch = str_replace_all(branch, ' ', '')) %>%
+  select(site_anon, branch, prop, prop_type) %>%
+  left_join(descs)
+
+mix_both <- mix_pts %>% union(mix_visits)
+
+cmvis <- mix_both %>%
+  mutate(prop_type = ifelse(grepl('pts', prop_type), 'Patients', 'Visits')) %>%
+  ggplot(aes(x = site_anon, y = prop, fill = prop_type)) +
+  geom_col_interactive(aes(tooltip = paste0('Site: ', site_anon, '\nBranch: ', 
+                                            description, '\nProportion: ', prop)),
+                       position = position_dodge()) +
+  facet_wrap(~branch, ncol = 2) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  scale_fill_manual(values = c(ssdqa_colors_standard[[2]], ssdqa_colors_standard[[4]])) +
+  labs(fill = 'Proportion Type',
+       y = 'Proportion',
+       x = 'Site',
+       title = 'Proportion of Patients & Visits per Branch')
+
+girafe(ggobj = cmvis)
+
 ```
 
 ### Outlier Detection
@@ -467,7 +523,9 @@ final[[7]][[10]]
 #### Incidence Rate (per 10,000 patients)
 ```{r fot_exp2}
 
-fot_denoms <- read_csv('../results/factsovertime_rawcts.csv') %>% distinct(site_anon, check_desc, total_pt)
+fot_denoms <- fot_combo %>% 
+  filter(check_desc == 'all_visits') %>% distinct(site_anon, month_end, row_pts) %>% 
+  rename('total_pt' = row_pts)
 
 fot_combo_rates <- fot_combo %>%
   mutate(new_cases = row_pts) %>%
