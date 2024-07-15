@@ -336,24 +336,10 @@ mix_visits <- read_csv(file = '../results/case_mix_visits_chop.csv') %>%
   select(site_anon, branch, prop, prop_type) %>%
   left_join(descs)
 
-mix_both <- mix_pts %>% union(mix_visits)
+mix_both <- mix_pts %>% union(mix_visits)%>% mutate(prop_type = ifelse(grepl('pts', prop_type), 
+                                                                       'Patients', 'Visits'))
 
-cmvis <- mix_both %>%
-  mutate(prop_type = ifelse(grepl('pts', prop_type), 'Patients', 'Visits')) %>%
-  ggplot(aes(x = site_anon, y = prop, fill = prop_type)) +
-  geom_col_interactive(aes(tooltip = paste0('Site: ', site_anon, '\nBranch: ', 
-                                            description, '\nProportion: ', prop)),
-                       position = position_dodge()) +
-  facet_wrap(~branch, ncol = 2) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  scale_fill_manual(values = c(ssdqa_colors_standard[[2]], ssdqa_colors_standard[[4]])) +
-  labs(fill = 'Proportion Type',
-       y = 'Proportion',
-       x = 'Site',
-       title = 'Proportion of Patients & Visits per Branch')
-
-girafe(ggobj = cmvis)
+case_mix_visits_viz(process_output = mix_both)
 
 ```
 
@@ -384,9 +370,11 @@ mix_anon_graph[[2]]
 ```{r mix_anom_scd}
 
 mix_anon_combo <- trinetx_anom_detect(dat = case_mix_df %>% filter(cohort=='scd') %>%
-                                        mutate(prop_pts = prop_pts * 100),
+                                        mutate(prop_pts = prop_pts * 100,
+                                               network = ifelse(grepl('HCO', site_anon),
+                                                            'trinetx', 'pedsnet')),
                                       var_col = 'prop_pts',
-                                      grp_vars = 'branch')
+                                      grp_vars = c('branch', 'network'))
 
 mix_anon_graph <- trinetx_anom_viz(dat = mix_anon_combo,
                                    var_col = 'prop_pts',
