@@ -186,6 +186,37 @@ case_mix_summ_viz <- function(process_output,
 }
 
 
+
+#' Case Mix Exploratory Visualization -- Visit and Patient Proportions
+#'
+#' @param process_output cleaned output with both visit and patient proportions; should at least
+#'                       have the columns site_anon, prop, prop_type (indicated pt vs visit),
+#'                       branch, and description
+#'
+#' @return a dodged bar graph with two bars per branch: yellow for visit proportions, blue
+#'         for patient proportions
+#' 
+case_mix_visits_viz <- function(process_output){
+  
+  
+  cmvis <- ggplot(process_output, aes(x = site_anon, y = prop, fill = prop_type)) +
+    geom_col_interactive(aes(tooltip = paste0('Site: ', site_anon, '\nBranch: ', 
+                                              description, '\nProportion: ', prop)),
+                         position = position_dodge()) +
+    facet_wrap(~branch, ncol = 2) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    scale_fill_manual(values = c(ssdqa_colors_standard[[2]], ssdqa_colors_standard[[4]])) +
+    labs(fill = 'Proportion Type',
+         y = 'Proportion',
+         x = 'Site',
+         title = 'Proportion of Patients & Visits per Branch')
+  
+  girafe(ggobj = cmvis)
+  
+  
+}
+
 #' Stability Over Time - Raw vs Normalized Patients
 #'
 #' @param process_output the cleaned, combined output of the stability

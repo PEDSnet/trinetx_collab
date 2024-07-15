@@ -139,6 +139,7 @@
   #' `Combined Data Cleaning`
   
   mix_trinetx <- read_csv('results/case_mix_trinetx.csv') %>% mutate(cohort='full')
+  mix_trinetx_scd <- read_csv('results/case_mix_trinetx_scd.csv') %>% mutate(cohort='scd')
   mix_chop <- read_csv('results/case_mix_chop.csv') %>% mutate(cohort='full')
   mix_chop_scd <- read_csv('results/case_mix_chop_scd.csv') %>% 
     select(site_anon,icd_header,prop_pt_site) %>% mutate(cohort='scd')
@@ -148,6 +149,7 @@
     select(site_anon,icd_header,prop_pt_site) %>% mutate(cohort='scd_p')
   
   mix_trinetx_clean <- mix_trinetx %>%
+    union(mix_trinetx_scd) %>%
     mutate(pct_pts = str_remove(pct_pts, '%'),
            pct_pts = as.numeric(pct_pts),
            prop_pts = pct_pts/100) %>%
