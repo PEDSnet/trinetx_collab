@@ -1,0 +1,464 @@
+---
+title: "TriNetX and PEDSnet: Stability Over Time"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_collapsed: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+# Default taken from R notebook behavior: when knitting, wd will always be location of notebook
+base_dir <- '..'
+Sys.setenv(PEDSNET_SKIP_REQUEST_EXECUTION=1)
+tryCatch(source('../site/run.R'),
+         error = function (e) message(e)) # May not be able to make db connection
+
+# Set to "local" to read data from ../results, or another value to read from db
+data_source <- if_else(config('execution_mode') == 'distribution', 'local', 'not_local')
+
+require(tidyr)
+require(knitr)
+require(kableExtra)
+require(stringr)
+require(tibble)
+require(ggplot2)
+
+get_results <- function(tbl_name) {
+  if (data_source == 'local') {
+    rslt <- read_csv(paste0('../results/', tbl_name, '.csv'))
+  }
+  else {
+    rslt <- results_tbl(tbl_name) %>% collect()
+  }
+rslt
+}
+
+prettify_kable <- function(data) {
+  rslt <- data %>% kable(digits = 4, format.args = list(big.mark = ','))
+  if (knitr::is_html_output()) rslt <- rslt %>%
+    kable_styling(bootstrap_options = c("striped", "hover")) %>%
+    column_spec(1, bold = T, border_right = T)
+  rslt
+}
+
+
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+
+```
+
+# Single Site Exploratory Output
+
+# Single Site Exploratory {.tabset .tabset-pills}
+
+```{r cvg_prep}
+
+domain_list <- read_csv('../results/COMBINED_fot.csv') %>% distinct(check_desc) %>% 
+  filter(check_desc != 'all_visits', check_desc != 'asthma_inpatient') %>% pull()
+site_list <- read_csv('../results/COMBINED_fot.csv') %>% 
+  filter(!is.na(site_anon), site_anon != 'all') %>% 
+  distinct(site_anon) %>% pull()
+
+final <- list()
+
+for(i in site_list){
+  
+  temp <- list()
+  
+  for(k in domain_list){
+    
+    dm_otpt <- fot_raw_norm_viz(process_output = read_csv('../results/COMBINED_fot.csv') %>%
+                                  filter(check_desc != 'all_visits',
+                                         check_desc != 'asthma_inpatient'),
+                                site_filter = i,
+                                domain_filter = k)
+    
+    temp[[k]] <- dm_otpt
+  }
+  
+  final[[i]] <- temp
+  
+}
+
+
+```
+
+## Site 1
+
+```{r}
+
+htmltools::tagList(final[[22]])
+
+```
+
+## Site 2
+
+```{r}
+htmltools::tagList(final[[15]])
+```
+
+## Site 3
+
+```{r}
+htmltools::tagList(final[[17]])
+```
+
+## Site 4
+
+```{r}
+htmltools::tagList(final[[23]])
+```
+
+## Site 5
+
+```{r}
+htmltools::tagList(final[[18]])
+```
+
+## Site 6
+
+```{r}
+htmltools::tagList(final[[14]])
+```
+
+## Site 7
+
+```{r}
+htmltools::tagList(final[[21]])
+```
+
+## Site 8
+
+```{r}
+htmltools::tagList(final[[19]])
+```
+
+## Site 9
+
+```{r}
+htmltools::tagList(final[[20]])
+```
+
+## Site 10
+```{r}
+htmltools::tagList(final[[16]])
+```
+
+## HCO1
+```{r}
+htmltools::tagList(final[[1]])
+```
+
+## HCO2
+```{r}
+htmltools::tagList(final[[6]])
+```
+
+## HCO3
+```{r}
+htmltools::tagList(final[[7]])
+```
+
+## HCO4
+```{r}
+htmltools::tagList(final[[8]])
+```
+
+## HCO5
+```{r}
+htmltools::tagList(final[[9]])
+```
+
+## HCO6
+```{r}
+htmltools::tagList(final[[10]])
+```
+
+## HCO7
+```{r}
+htmltools::tagList(final[[11]])
+```
+
+## HCO8
+```{r}
+htmltools::tagList(final[[12]])
+```
+
+## HCO9
+```{r}
+htmltools::tagList(final[[13]])
+```
+
+## HCO10
+```{r}
+htmltools::tagList(final[[2]])
+```
+
+## HCO11
+```{r}
+htmltools::tagList(final[[3]])
+```
+
+## HCO12
+```{r}
+htmltools::tagList(final[[4]])
+```
+
+## HCO13
+```{r}
+htmltools::tagList(final[[5]])
+```
+
+# {-}
+
+# Multi Site Exploratory (Incidence Rate per 10,000 Patients)
+```{r}
+
+fot_denoms <- read_csv('../results/COMBINED_fot.csv') %>% 
+  filter(check_desc == 'all_visits') %>% distinct(site_anon, month_end, row_pts) %>% 
+  rename('total_pt' = row_pts)
+
+fot_tnx <- read_csv('../results/factsovertime_trinetx.csv') %>%
+  select(site_anon, date, query, normalized_patients) %>%
+  rename(check_desc = query,
+         month_end = date) %>%
+  mutate(month_end = as.Date(month_end, format = '%m/%d/%y')) %>%
+  mutate(check_desc = case_when(grepl('anxiety', check_desc) ~ 'anxiety',
+                                grepl('asthma', check_desc) ~ 'asthma',
+                                grepl('hypertension', check_desc) ~ 'hypertension',
+                                grepl('resp', check_desc) ~ 'respiratory_infection',
+                                grepl('emergency$', check_desc) ~ 'emergency_visits',
+                                grepl('emergency vitals', check_desc) ~
+                                  'emergency_visit_vitals',
+                                grepl('inpatients', check_desc) ~ 'inpatient_visits',
+                                grepl('meds', check_desc) ~ 'inpatient_administration',
+                                grepl('outpatients', check_desc) ~ 'outpatient_visits',
+                                grepl('procedures', check_desc) ~ 'outpatient_procedure')) %>%
+  mutate(incidence_rate = normalized_patients * 10000) %>%
+  select(-normalized_patients)
+
+fot_combo_rates <- read_csv('../results/COMBINED_fot.csv') %>%
+  mutate(new_cases = row_pts) %>%
+  left_join(fot_denoms) %>%
+  filter(!is.na(total_pt)) %>%
+  mutate(incidence_rate = (new_cases / total_pt) * 10000) %>%
+  select(site_anon, check_desc, month_end, incidence_rate) %>%
+  union(fot_tnx)
+
+
+plt_list <- list()
+
+for(p in domain_list){
+
+    g <- ggplot(fot_combo_rates %>% filter(check_desc == p), 
+           aes(y = incidence_rate, x = month_end, color = site_anon)) +
+      geom_line() +
+      facet_wrap(~check_desc, scales = 'free_y', ncol = 2) +
+      theme_minimal() +
+      scale_color_ssdqa()
+    
+    plt_list[[p]] <- ggplotly(g)
+  
+}
+
+htmltools::tagList(plt_list)
+
+```
+
+# Anomaly Detection (Euclidean Distance using Incidence Rate) {.tabset .tabset-pills}
+
+## Anxiety
+```{r}
+
+rate_euclidean <- ms_anom_euclidean(fot_input_tbl = fot_combo_rates %>% 
+                                      mutate(time_start = month_end,
+                                             time_increment = 'month'),
+                                            grp_vars = c('site_anon', 'check_desc'),
+                                            var_col = 'incidence_rate')
+
+rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
+                                output_var = 'incidence_rate',
+                                filter_variable = 'anxiety',
+                                title = '')
+
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Anxiety Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+
+sub
+#evp_eucl[[1]]
+#evp_eucl[[2]]
+rate_output[[3]]
+
+
+```
+
+## Asthma
+
+```{r}
+
+rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
+                                output_var = 'incidence_rate',
+                                filter_variable = 'asthma',
+                                title = '')
+
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Asthma Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+
+sub
+#evp_eucl[[1]]
+#evp_eucl[[2]]
+rate_output[[3]]
+
+
+```
+
+## Hypertension
+```{r}
+
+rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
+                                output_var = 'incidence_rate',
+                                filter_variable = 'hypertension',
+                                title = '')
+
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Hypertension Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+
+sub
+#evp_eucl[[1]]
+#evp_eucl[[2]]
+rate_output[[3]]
+
+
+```
+
+## Respiratory Infection
+```{r}
+
+rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
+                                output_var = 'incidence_rate',
+                                filter_variable = 'respiratory_infection',
+                                title = '')
+
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Respiratory Infection Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+
+sub
+#evp_eucl[[1]]
+#evp_eucl[[2]]
+rate_output[[3]]
+
+
+```
+
+## Emergency Visits
+```{r}
+
+rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
+                                output_var = 'incidence_rate',
+                                filter_variable = 'emergency_visits',
+                                title = '')
+
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Emergency Visits Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+
+sub
+#evp_eucl[[1]]
+#evp_eucl[[2]]
+rate_output[[3]]
+
+
+```
+
+## Emergency Visit Vitals
+```{r}
+
+
+rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
+                                output_var = 'incidence_rate',
+                                filter_variable = 'emergency_visit_vitals',
+                                title = '')
+
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Emergency Visit Vitals Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+
+sub
+#evp_eucl[[1]]
+#evp_eucl[[2]]
+rate_output[[3]]
+
+
+```
+
+## Inpatient Administrations
+```{r}
+
+
+rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
+                                output_var = 'incidence_rate',
+                                filter_variable = 'inpatient_administration',
+                                title = '')
+
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Inpatient Administrations Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+
+sub
+#evp_eucl[[1]]
+#evp_eucl[[2]]
+rate_output[[3]]
+
+
+```
+
+## Inpatient Visits
+```{r}
+
+
+rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
+                                output_var = 'incidence_rate',
+                                filter_variable = 'inpatient_visits',
+                                title = '')
+
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Inpatient Visits Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+
+sub
+#evp_eucl[[1]]
+#evp_eucl[[2]]
+rate_output[[3]]
+
+
+```
+
+## Outpatient Procedures
+```{r}
+
+
+rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
+                                output_var = 'incidence_rate',
+                                filter_variable = 'outpatient_procedure',
+                                title = '')
+
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Outpatient Procedures Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+
+sub
+#evp_eucl[[1]]
+#evp_eucl[[2]]
+rate_output[[3]]
+
+
+```
+
+## Outpatient Visits
+```{r}
+
+
+rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
+                                output_var = 'incidence_rate',
+                                filter_variable = 'outpatient_visits',
+                                title = '')
+
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Outpatient Visits Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+
+sub
+#evp_eucl[[1]]
+#evp_eucl[[2]]
+rate_output[[3]]
+
+
+```
+
+# {-}
+

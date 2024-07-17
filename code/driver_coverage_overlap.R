@@ -22,21 +22,23 @@
   #' `Combined Data Cleaning`
   
   ## Read in data from both networks
-  cvg_trinetx <- read_csv('results/coverage_trinetx.csv')
+  cvg_trinetx <- read_csv('results/coverage_trinetx.csv') %>%
+    left_join(read_csv('results/coverage_trinetx_n.csv'))
   cvg_chop <- read_csv('results/coverage_overlap_chop.csv')
   
   ## Clean data and apply common structure
   cvg_trinetx_clean <- cvg_trinetx %>%
-    pivot_longer(cols = !site_anon,
+    pivot_longer(cols = !c(site_anon, total_n),
                  names_to = 'fact_group',
                  values_to = 'pct_pts') %>%
     mutate(pct_pts = str_remove(pct_pts, '%'),
            pct_pts = as.numeric(pct_pts),
-           prop_pts = pct_pts/100) %>%
-    select(-pct_pts)
+           prop_pts = pct_pts/100,
+           n_pts_site = round(total_n * prop_pts)) %>%
+    select(-c(pct_pts, total_n))
   
   cvg_chop_clean <- cvg_chop %>%
-    select(site_anon, fact_group, prop_pts_site) %>%
+    select(site_anon, fact_group, prop_pts_site, n_pts_site) %>%
     rename(prop_pts = prop_pts_site)
   
   cvg_final <- cvg_trinetx_clean %>%

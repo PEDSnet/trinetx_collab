@@ -79,7 +79,7 @@ trinetx_anom_viz <- function(dat,
 #' @return a heat map with site along the y axis and couplet type along the x axis; the
 #'         color of each section of the heat map represents the value of output_col
 #' 
-couplets_viz <- function(process_output,
+couplets_ms_viz <- function(process_output,
                          output_col){
   
   
@@ -99,6 +99,30 @@ couplets_viz <- function(process_output,
   
 }
 
+couplets_ss_viz <- function(process_output){
+  
+  process_output %>%
+    filter(cohort %in% c('cohort_2_only', 
+                         'combined', 'cohort_1_only')) %>%
+    mutate(pct = paste0(round(prop, 2) * 100, '%')) %>%
+    ggplot(aes(y=couplet_name,x=prop,fill=factor(cohort, levels = c('cohort_2_only', 
+                                                                 'combined', 'cohort_1_only'))),
+           stat='identity') +
+    geom_col(show.legend = FALSE) +
+    geom_text(aes(label = pct), position = position_stack(vjust = 0.5), size = 2,
+              fontface = 'bold') +
+    scale_fill_manual(values = c(ssdqa_colors_standard[[2]], ssdqa_colors_standard[[4]],
+                      ssdqa_colors_standard[[11]])) +
+    theme_minimal()+
+    labs(y="Couplet",
+         x="Proportion",
+         fill = '',
+         title = 'Couplet Distributions per Site')+
+    facet_wrap(~site_anon, ncol = 2)
+  
+  
+}
+
 
 #' Case Mix Exploratory Visualization - Multi Site
 #'
@@ -108,7 +132,7 @@ couplets_viz <- function(process_output,
 #'         facetting by the ICD10CM branch. A dotted line represents the all site median
 #'         for each branch
 #' 
-case_mix_viz <- function(process_output){
+case_mix_ms_viz <- function(process_output){
   
   data_format <- process_output %>%
     mutate(text = paste0('Site: ', site_anon,
@@ -238,7 +262,7 @@ fot_raw_norm_viz <- function(process_output,
     title = "Normalized Patients")
   
   plt <- process_output %>%
-    filter(site == site_filter,
+    filter(site_anon == site_filter,
            check_desc == domain_filter) %>%
     plot_ly() %>%
     add_lines(x = ~month_end, y = ~row_pts, yaxis = 'y1', name = 'Patients') %>%
@@ -322,9 +346,9 @@ fot_euclidean_viz <- function(process_output,
     geom_line(data=allsites, linewidth=1.1) +
     geom_smooth(se=TRUE,alpha=0.1,linewidth=0.5, formula = y ~ x) +
     theme_minimal() +
-    theme(axis.text.x = element_text(angle = 30, vjust = 1, hjust=1),
-          #text = element_text(size = 25),
-          legend.position = 'none') +
+    theme(axis.text.x = element_text(angle = 30, vjust = 1, hjust=1)
+          #text = element_text(size = 25)
+          ) +
     scale_color_ssdqa() +
     labs(y = 'Proportion (Loess)',
          x = 'Time',
@@ -336,9 +360,9 @@ fot_euclidean_viz <- function(process_output,
     geom_line(data=allsites,linewidth=1.1) +
     geom_line(linewidth=0.2) +
     theme_minimal() +
-    theme(axis.text.x = element_text(angle = 30, vjust = 1, hjust=1),
-          #text = element_text(size = 25),
-          legend.position = 'none') +
+    theme(axis.text.x = element_text(angle = 30, vjust = 1, hjust=1)
+          #text = element_text(size = 25)
+          ) +
     scale_color_ssdqa() +
     labs(x = 'Time',
          y = 'Proportion',
@@ -386,7 +410,7 @@ fot_euclidean_viz <- function(process_output,
 #'         along the x axis. each dot represents a site, and the star icon
 #'         in each row represents the all site median
 #' 
-coverage_overlap_viz <- function(process_output){
+coverage_overlap_ms_viz <- function(process_output){
   
   data_format <- process_output %>%
     mutate(text = paste0('Site: ', site_anon,
@@ -409,5 +433,56 @@ coverage_overlap_viz <- function(process_output){
          subtitle = 'Star represents All-Site Median')
   
   girafe(ggobj = r)
+  
+}
+
+
+coverage_overlap_venn_viz <- function(process_output,
+                                      site_list,
+                                      output_directory){
+  
+  for(i in 1:length(site_list)){
+    
+    cvg_venn1 <- process_output %>%
+      filter(site_anon == site_list[[i]]) %>%
+      mutate(fg_venn = case_when(fact_group == 'dx' ~ 'area1',
+                                 fact_group == 'lab' ~ 'area2',
+                                 fact_group == 'med' ~ 'area3',
+                                 fact_group == 'px' ~ 'area4',
+                                 fact_group == 'dx_lab' ~ 'n12',
+                                 fact_group == 'dx_med' ~ 'n13',
+                                 fact_group == 'dx_med_lab' ~ 'n123',
+                                 fact_group == 'dx_px' ~ 'n14',
+                                 fact_group == 'dx_px_lab' ~ 'n124',
+                                 fact_group == 'dx_px_med' ~ 'n134',
+                                 fact_group == 'dx_px_med_lab' ~ 'n1234',
+                                 fact_group == 'med_lab' ~ 'n23',
+                                 fact_group == 'px_lab' ~ 'n24',
+                                 fact_group == 'px_med' ~ 'n34',
+                                 fact_group == 'px_med_lab' ~ 'n234')) %>%
+      mutate(n_pts_site = ifelse(n_pts_site < 11, 0, n_pts_site)) %>%
+      mutate(n_pts_site = prettyNum(n_pts_site, big.mark = ','),
+             prop_pts_pct = prop_pts * 100,
+             venn_display = paste0(n_pts_site, ' \n(', prop_pts_pct, '%)')) %>%
+      distinct(fg_venn, venn_display) %>%
+      pivot_wider(names_from = fg_venn, values_from = venn_display)
+    
+    png(filename = paste0(output_directory, 'venn_diagram_', site_list[[i]], '.png'),
+        height = 1000,
+        width = 1000)
+    draw.quad.venn(direct.area = TRUE,
+                   area.vector = c(cvg_venn1$area3, cvg_venn1$n34, cvg_venn1$area4, cvg_venn1$n13,
+                                   cvg_venn1$n134, cvg_venn1$n1234, cvg_venn1$n234, cvg_venn1$n24,
+                                   cvg_venn1$area1, cvg_venn1$n14, cvg_venn1$n124, cvg_venn1$n123,
+                                   cvg_venn1$n23, cvg_venn1$area2, cvg_venn1$n12),
+                   category = c('Diagnoses', 'Labs', 'Medications', 'Procedures'),
+                   fill = c('orange', 'red', 'green', 'blue'),
+                   alpha = 0.3,
+                   cex = c(2,2,2,2,2,2,2,2,2,2,2,2,2,2,2),
+                   cat.cex = c(2, 2, 2, 2))
+    dev.off()
+    
+  }
+  
   
 }
