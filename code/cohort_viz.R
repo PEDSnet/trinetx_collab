@@ -26,7 +26,7 @@ trinetx_anom_viz <- function(dat,
   dat_to_plot <- dat %>%
     mutate(text=paste("Variable: ",!!sym(grp_col),
                       "\nSite: ",site_anon,
-                      "\nProportion: ",round(!!sym(var_col),2),
+                      "\nPercent: ",round(!!sym(var_col),2),
                       "\nSeverity Score: ", round(severity_score, 4),
                       "\nSite Outlier Score: ", round(site_score,4)))
   
