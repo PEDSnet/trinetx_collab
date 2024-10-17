@@ -1,25 +1,30 @@
 
-.run <- function(){
-  
-  
   #' `Execute Function`
   
-  source(paste0(base_dir, '/code/dcon_execute.R'))
+  source(paste0(config('base_dir'), '/code/dcon_execute.R'))
   
   dcon_pts <- check_dcon(conc_tbls = dcon_pts_list,
                          check_string = 'dcon_pts')
   
   dcon_reduce <- reduce(.x = dcon_pts,
-                        .f = dplyr::union) %>% left_join(site_map)
+                        .f = dplyr::union)
   
   output_tbl(dcon_reduce, 'dcon_output')
+  
+  dcon_pp <- apply_dcon_pp(dcon_tbl = results_tbl('dcon_output'),
+                           byyr = FALSE)
+  
+  output_tbl(dcon_pp, 'dcon_output_pp')
   
   
   #' `Combined Data Cleaning`
   
   ## Read in data
-  couplets_chop <- read_csv('results/couplets_chop.csv')
-  couplets_trinetx <- read_csv('results/couplets_trinetx.csv')
+  couplets_chop <- read_csv('results/couplets_chop.csv') %>%
+    select(-site_anon) %>% inner_join(read_csv('results/site_map.csv')) %>% 
+    select(-c(site, sitenum, siteletter))
+  couplets_trinetx <- read_csv('results/couplets_trinetx_sept.csv') %>%
+    inner_join(read_csv('results/site_map.csv')) %>% select(-c(site, sitenum, siteletter))
   
   ## Clean trinetx
   trinetx_cleaned <- 
@@ -39,10 +44,13 @@
            check_desc = check_desc_new) %>% 
     mutate(tot_pats = cohort_1_only + cohort_2_only + combined) %>% 
     mutate(cohort_1_denom_prop=combined/cohort_1,
-           cohort_2_denom_prop=combined/cohort_2) %>% 
+           cohort_2_denom_prop=combined/cohort_2,
+           cohort_1_only_prop = cohort_1_only / cohort_1,
+           cohort_2_only_prop = cohort_2_only / cohort_2) %>% 
     pivot_longer(cols=c('cohort_1','cohort_1_only',
                         'combined', 'cohort_2_only',
-                        'cohort_2', 'cohort_1_denom_prop', 'cohort_2_denom_prop'),
+                        'cohort_2', 'cohort_1_denom_prop', 'cohort_2_denom_prop',
+                        'cohort_1_only_prop', 'cohort_2_only_prop'),
                  names_to = 'cohort',
                  values_to = 'value') %>% 
     mutate(prop=
@@ -63,8 +71,10 @@
     mutate(cohort_1 = cohort_1_only + combined,
            cohort_2 = cohort_2_only + combined) %>% 
     mutate(cohort_1_denom_prop=combined/cohort_1,
-           cohort_2_denom_prop=combined/cohort_2) %>% 
-    pivot_longer(cols=cohort_1_only:cohort_2_denom_prop,
+           cohort_2_denom_prop=combined/cohort_2,
+           cohort_1_only_prop = cohort_1_only / cohort_1,
+           cohort_2_only_prop = cohort_2_only / cohort_2) %>% 
+    pivot_longer(cols=cohort_1_only:cohort_2_only_prop,
                  names_to='cohort',
                  values_to='value') %>% 
     mutate(prop=
@@ -77,8 +87,5 @@
   couplets_combined <- dplyr::union(trinetx_cleaned,
                                     chop_cleaned)
   
-  write.csv(couplets_combined, file = 'results/COMBINED_couplets.csv')
+  write.csv(couplets_combined, file = 'results/COMBINED_couplets_sept.csv')
   
-  
-  
-}

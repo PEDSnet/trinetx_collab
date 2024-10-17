@@ -15,6 +15,8 @@
 #'                     if it is `dcon_visits`, the analysis will take place
 #'                     at the visit level; otherwise it will take place at the
 #'                     person level
+#' @param min_date_cutoff the minimum date cutoff for the time period of interest
+#' @param max_date_cutoff the maximum date cutoff for the time period of interest
 #'
 #' @return one dataframe with counts for the patients/visits in the first cohort, 
 #'         the patients/visits in the second cohort, and the patients/visits in both
@@ -24,7 +26,9 @@
 #'         
 #' 
 check_dcon<- function(conc_tbls,
-                      check_string='dcon_visits'){
+                      check_string='dcon_pts',
+                      min_date_cutoff = '2014-01-01',
+                      max_date_cutoff = '2023-12-31'){
   
   
   
@@ -36,18 +40,17 @@ check_dcon<- function(conc_tbls,
     c2_date <- colnames(conc_tbls[[k]][[2]]) %>% str_subset(pattern = 'date')
     
     cohort_1 <- conc_tbls[[k]][[1]] %>%
-      filter(!!sym(c1_date) >= '2014-01-01' & !!sym(c1_date) <= '2023-12-31') %>%
+      filter(!!sym(c1_date) >= min_date_cutoff & !!sym(c1_date) <= max_date_cutoff) %>%
       mutate(date1 = !!sym(c1_date))
     cohort_2 <- conc_tbls[[k]][[2]] %>%
-      filter(!!sym(c2_date) >= '2014-01-01' & !!sym(c2_date) <= '2023-12-31') %>%
+      filter(!!sym(c2_date) >= min_date_cutoff & !!sym(c2_date) <= max_date_cutoff) %>%
       mutate(date2 = !!sym(c2_date))
-    
     
     if(check_string=='dcon_visits'){
       col_nm <- sym('visit_occurrence_id')
     } else{col_nm <- sym('person_id')}
     
-    if(conc_tbls[[k]][[3]] == 'edema_dx_loop_rx'){
+    days_diff_integer <- conc_tbls[[k]][[4]]
       
       combined <- 
         cohort_1 %>% select(site, all_of(col_nm), date1) %>% 
@@ -55,27 +58,7 @@ check_dcon<- function(conc_tbls,
           select(cohort_2, site, all_of(col_nm), date2)
         ) %>%
         mutate(date_diff = abs((date1 - date2))) %>%
-        filter(date_diff <= 90)
-      
-    }else if(conc_tbls[[k]][[3]] == 'frac_dx_img_px'){
-      
-      combined <- 
-        cohort_1 %>% select(site, all_of(col_nm), date1) %>% 
-        inner_join(
-          select(cohort_2, site, all_of(col_nm), date2)
-        ) %>%
-        mutate(date_diff = abs((date1 - date2))) %>%
-        filter(date_diff <= 30)
-      
-    }else{
-      combined <- 
-        cohort_1 %>% select(site, all_of(col_nm), date1) %>% 
-        inner_join(
-          select(cohort_2, site, all_of(col_nm), date2)
-        ) %>%
-        mutate(date_diff = abs((date1 - date2)/365.25)) %>%
-        filter(date_diff <= 2) #%>% compute_new()
-    }
+        filter(date_diff <= days_diff_integer)
     
     cohort_list <- list('cohort_1' = cohort_1,
                         'cohort_2' = cohort_2,
@@ -99,8 +82,6 @@ check_dcon<- function(conc_tbls,
     final_tbls <- 
       reduce(.x=cohort_list_cts,
              .f=dplyr::union) %>% 
-      #mutate(yr=9999) %>% 
-      # add_meta(check_lib = check_string) %>%
       mutate(check_name=conc_tbls[[k]][[3]],
              check_type = check_string) %>%
       mutate(check_desc=names(conc_tbls[k]))
@@ -122,8 +103,7 @@ check_dcon<- function(conc_tbls,
 #' @return dcon_tbl with additional columns with totals and proportions for the checks
 
 apply_dcon_pp <- function(dcon_tbl,
-                          byyr,
-                          strict){
+                          byyr){
   dcon_tbl <- collect_new(dcon_tbl)
   if(byyr){
     dcon_overall <- dcon_tbl %>%
@@ -148,8 +128,7 @@ apply_dcon_pp <- function(dcon_tbl,
       summarise(value=sum(value,na.rm=TRUE))%>%
       ungroup()%>%
       mutate(site='total')
-    
-    if(!strict){
+
     dcon_tbl_pp<-dcon_tbl %>%
       bind_rows(dcon_overall) %>%
       pivot_wider(values_from = value,
@@ -163,21 +142,6 @@ apply_dcon_pp <- function(dcon_tbl,
       mutate(prop=value/tot_pats)%>%
       select(-c(cohort_1, cohort_2))%>%
       distinct()
-    }else{
-      dcon_tbl_pp<-dcon_tbl %>%
-        bind_rows(dcon_overall) %>%
-        pivot_wider(values_from = value,
-                    names_from=cohort)%>%
-        mutate(tot_pats=cohort_1+cohort_2+combined,
-               cohort_1_only=cohort_1,
-               cohort_2_only=cohort_2)%>%
-        pivot_longer(cols=c(cohort_1_only, cohort_2_only, combined),
-                     names_to="cohort",
-                     values_to="value")%>%
-        mutate(prop=value/tot_pats)%>%
-        select(-c(cohort_1, cohort_2))%>%
-        distinct()
-    }
   }
   return(dcon_tbl_pp)
 }

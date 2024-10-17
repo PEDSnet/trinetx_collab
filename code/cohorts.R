@@ -11,6 +11,97 @@
 #'
 
 
+#' Convenience wrapper function to establish argos function
+#' 
+#' @param session_name arbitrary string name for the session
+#' @param db_conn database connection information; can be a DBI connection object
+#'                or a json file with the relevant configuration details
+#' @param is_json boolean indicating whether the information provided in `db_conn` is
+#'                via a json file or not
+#' @param base_directory the header directory for the project; defaults to `getwd()`
+#' @param specs_subdirectory the subdirectory within `base_directory` where all relevant
+#'                           specification files (i.e. concept sets) are stored; defaults to `specs`
+#' @param results_subdirectory the subdirectory within `base_directory` where all result files
+#'                             should be output; defaults to `results`
+#' @param default_file_output boolean indicating whether the default behavior should be to
+#'                            output files to the results directory (vs to the database)
+#'                            defaults to FALSE
+#' @param cdm_schema the name of the database schema where the CDM data is stored
+#' @param results_schema the name of the database schema where results should be output
+#' @param vocabulary_schema the name of the database schema where vocabulary reference tables are stored
+#' @param results_tag an optional string to append to the name of results tables
+#' @param cache_enabled boolean specifying whether repeated attempts to load the same
+#'                      codeset should use a cached value rather than reloading
+#' @param retain_intermediates boolean specifying whether tables holding codesets
+#'                             or intermediate steps are retained after execution completes
+#' @param db_trace boolean specifying whether the query log should include
+#'                 detailed information about execution of SQL queries in the database
+#' 
+#' @return an established argos environment which includes the built-in convenience functions
+#'         and configs
+#'         
+initialize_session <- function(session_name,
+                               db_conn,
+                               is_json = FALSE,
+                               base_directory = getwd(),
+                               specs_subdirectory = 'specs',
+                               results_subdirectory = 'results',
+                               default_file_output = FALSE,
+                               cdm_schema = 'dcc_pedsnet',
+                               results_schema,
+                               vocabulary_schema = 'vocabulary',
+                               results_tag = NULL,
+                               cache_enabled = FALSE,
+                               retain_intermediates = FALSE,
+                               db_trace = TRUE){
+  
+  # Establish session
+  argos_session <- argos$new(session_name)
+  
+  set_argos_default(argos_session)
+  
+  # Set db_src
+  if(!is_json){
+    get_argos_default()$config('db_src', db_conn)
+  }else{
+    get_argos_default()$config('db_src', srcr(db_conn))
+  }
+  
+  # Set misc configs
+  get_argos_default()$config('cdm_schema', cdm_schema)
+  get_argos_default()$config('results_schema', results_schema)
+  get_argos_default()$config('vocabulary_schema', vocabulary_schema)
+  get_argos_default()$config('cache_enabled', cache_enabled)
+  get_argos_default()$config('retain_intermediates', retain_intermediates)
+  get_argos_default()$config('db_trace', db_trace)
+  get_argos_default()$config('can_explain', !is.na(tryCatch(db_explain(config('db_src'), 'select 1 = 1'),
+                                                            error = function(e) NA)))
+  get_argos_default()$config('results_target', ifelse(default_file_output, 'file', TRUE))
+  
+  if(is.null(results_tag)){
+    get_argos_default()$config('results_name_tag', '')
+  }else{
+    get_argos_default()$config('results_name_tag', results_tag)
+  }
+  
+  # Set working directory
+  get_argos_default()$config('base_dir', base_directory)
+  
+  # Set specs & results directories
+  ## Drop path to base directory if present
+  specs_drop_wd <- str_remove(specs_subdirectory, base_directory)
+  results_drop_wd <- str_remove(results_subdirectory, base_directory)
+  get_argos_default()$config('subdirs', list(spec_dir = specs_drop_wd,
+                                             result_dir = results_drop_wd))
+  
+  # Print session information
+  db_str <- DBI::dbGetInfo(config('db_src'))
+  cli::cli_div(theme = list(span.code = list(color = 'blue')))
+  
+  cli::cli_inform(paste0('Connected to: ', db_str$dbname, '@', db_str$host))
+  cli::cli_inform('To see environment settings, run {.code get_argos_default()}')
+}
+
 #' Add site to the cdm_tbl
 #' 
 #' @param name the name of the table, as a string

@@ -1,8 +1,5 @@
 
-## Assemble and filter codesets
-
-# nephrotic_syndrome <- load_codeset('dx_glomerular_snomed') %>%
-#   filter(codeset_category_name == 'nephrotic') %>% compute_new()
+##' Assemble and filter codesets
 
 dx_anxiety <- load_codeset('mhcc_codes_v4') %>%
   filter(cluster == 'Anxiety Disorder') %>% compute_new()
@@ -10,15 +7,17 @@ dx_anxiety <- load_codeset('mhcc_codes_v4') %>%
 dx_depression <- load_codeset('mhcc_codes_v4') %>%
   filter(cluster == 'Major Depression' | cluster == 'Minor Depression') %>% compute_new()
 
-# asthma <- cdm_tbl('condition_occurrence') %>%
-#   select(site, person_id, condition_concept_id, condition_start_date) %>%
-#   inner_join(load_codeset('dx_asthma'), by = c('condition_concept_id' = 'concept_id')) 
-# 
-# albuterol <- cdm_tbl('drug_exposure') %>%
-#   select(site, person_id, drug_concept_id, drug_exposure_start_date) %>%
-#   inner_join(load_codeset('rx_albuterol'), by = c('drug_concept_id' = 'concept_id')) 
+##' Build list of inputs for DCON function
+##' 
+##' Each element of the parent list should be a list, named after the check being applied,
+##' with the following sub-elements:
+##' 
+##' 1. The table for cohort 1; should minimally contain a person_id and date column
+##' 2. The table for cohort 2; should minimally contain a person_id and date column
+##' 3. A string identifier for the check; can be the same as the name of the list element
+##' 4. An integer indicating how many *days* should separate the two events of interest at a maximum
+##' 
 
-## primary list
 
 dcon_pts_list <- list(
    
@@ -26,7 +25,8 @@ dcon_pts_list <- list(
                               inner_join(load_codeset('dx_sickle_cell'), by = c('condition_concept_id' = 'concept_id')) ,
                             cdm_tbl('drug_exposure') %>% select(site, person_id, drug_concept_id, drug_exposure_start_date) %>%
                               inner_join(load_codeset('rx_hydroxyurea'), by = c('drug_concept_id' = 'concept_id')) ,
-                            'scd_dx_hydrox_rx'),
+                            'scd_dx_hydrox_rx',
+                            730.5),
    
   'asthma_dx_broncho_rx' = list(cdm_tbl('condition_occurrence') %>%
                                   select(site, person_id, condition_concept_id, condition_start_date) %>%
@@ -34,55 +34,41 @@ dcon_pts_list <- list(
                                 cdm_tbl('drug_exposure') %>%
                                   select(site, person_id, drug_concept_id, drug_exposure_start_date) %>%
                                   inner_join(load_codeset('rx_albuterol'), by = c('drug_concept_id' = 'concept_id')) ,
-                                'asthma_dx_broncho_rx'),
-  
-  # 'leukemia_dx_onco_spec' = list(site_cdm_tbl('condition_occurrence') %>% select(site, person_id, condition_concept_id, condition_start_date) %>%
-  #                                  inner_join(load_codeset('dx_leukemia_comb'), by = c('condition_concept_id' = 'concept_id')) %>%
-  #                                  filter(condition_start_date >= '2014-01-01' & condition_start_date <= '2023-12-31') %>%
-  #                                  rename('date1' = condition_start_date),
-  #                                site_cdm_tbl('visit_occurrence') %>% inner_join(site_cdm_tbl('provider'), by = 'provider_id') %>%
-  #                                  inner_join(load_codeset('oncology_edit'), by = c('specialty_concept_id' = 'concept_id')) %>%
-  #                                  filter(visit_start_date >= '2014-01-01' & visit_start_date <= '2023-12-31') %>%
-  #                                  rename('date2' = visit_start_date),
-  #                                'leukemia_dx_onco_spec'),
+                                'asthma_dx_broncho_rx',
+                                730.5),
 
   't2d_dx_metformin_rx' = list(cdm_tbl('condition_occurrence') %>% select(site, person_id, condition_concept_id, condition_start_date) %>%
                                   inner_join(load_codeset('T2D_SNOMED_codes'), by = c('condition_concept_id' = 'concept_id')),
                                 cdm_tbl('drug_exposure') %>% select(site, person_id, drug_concept_id, drug_exposure_start_date) %>%
                                   inner_join(load_codeset('metformin'), by = c('drug_concept_id' = 'concept_id')),
-                                't2d_dx_metformin_rx'),
+                                't2d_dx_metformin_rx',
+                               730.5),
 
   'anxiety_dx_depression_dx' = list(cdm_tbl('condition_occurrence') %>% select(site, person_id, condition_concept_id, condition_start_date) %>%
                                       inner_join(dx_anxiety, by = c('condition_concept_id' = 'concept_id')),
                                     cdm_tbl('condition_occurrence') %>% select(site, person_id, condition_concept_id, condition_start_date) %>%
                                       inner_join(dx_depression, by = c('condition_concept_id' = 'concept_id')),
-                                    'anxiety_dx_depression_dx'),
+                                    'anxiety_dx_depression_dx',
+                                    730.5),
 
   'edema_dx_loop_rx' = list(cdm_tbl('condition_occurrence') %>% select(site, person_id, condition_concept_id, condition_start_date) %>%
                               inner_join(load_codeset('dx_edema_comb'), by = c('condition_concept_id' = 'concept_id')),
                             cdm_tbl('drug_exposure') %>% select(site, person_id, drug_concept_id, drug_exposure_start_date) %>%
                               inner_join(load_codeset('rx_loop_diuretic'), by = c('drug_concept_id' = 'concept_id')),
-                            'edema_dx_loop_rx'),
-
-  # 'nephsyn_dx_neph_spec' = list(site_cdm_tbl('condition_occurrence') %>% select(site, person_id, condition_concept_id, condition_start_date) %>%
-  #                                 inner_join(nephrotic_syndrome, by = c('condition_concept_id' = 'concept_id')) %>%
-  #                                 filter(condition_start_date >= '2014-01-01' & condition_start_date <= '2023-12-31') %>%
-  #                                 rename('date1' = condition_start_date),
-  #                               site_cdm_tbl('visit_occurrence') %>% inner_join(site_cdm_tbl('provider'), by = 'provider_id') %>%
-  #                                 inner_join(load_codeset('nephrology'), by = c('specialty_concept_id' = 'concept_id')) %>%
-  #                                 filter(visit_start_date >= '2014-01-01' & visit_start_date <= '2023-12-31') %>%
-  #                                 rename('date2' = visit_start_date),
-  #                               'nephsyn_dx_neph_spec'),
+                            'edema_dx_loop_rx',
+                            90),
 
   'frac_dx_img_px' = list(cdm_tbl('condition_occurrence') %>% select(site, person_id, condition_concept_id, condition_start_date) %>%
                             inner_join(load_codeset('dx_fracture'), by = c('condition_concept_id' = 'concept_id')),
                           cdm_tbl('procedure_occurrence') %>% select(site, person_id, procedure_concept_id, procedure_date) %>%
                             inner_join(load_codeset('px_radiologic'), by = c('procedure_concept_id' = 'concept_id')),
-                          'frac_dx_img_px'),
+                          'frac_dx_img_px',
+                          30),
   
   't1d_dx_insulin_rx' = list(cdm_tbl('condition_occurrence') %>% select(site, person_id, condition_concept_id, condition_start_date) %>%
                                inner_join(load_codeset('T1D_SNOMED_codes'), by = c('condition_concept_id' = 'concept_id')),
                              cdm_tbl('drug_exposure') %>% select(site, person_id, drug_concept_id, drug_exposure_start_date) %>%
                                inner_join(load_codeset('insulin'), by = c('drug_concept_id' = 'concept_id')),
-                             't1d_dx_insulin_rx')
+                             't1d_dx_insulin_rx',
+                             730.5)
 )
