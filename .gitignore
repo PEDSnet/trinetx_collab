@@ -5,3 +5,5 @@
 .Rprofile
 results/*
 reporting/*.html
+.DS_Store
+data_upload/*
