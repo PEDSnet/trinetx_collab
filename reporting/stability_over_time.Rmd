@@ -54,9 +54,9 @@ opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
 ```{r cvg_prep}
 
-domain_list <- read_csv('../results/COMBINED_fot.csv') %>% distinct(check_desc) %>% 
+domain_list <- read_csv('../results/COMBINED_fot_sept.csv') %>% distinct(check_desc) %>% 
   filter(check_desc != 'all_visits', check_desc != 'asthma_inpatient') %>% pull()
-site_list <- read_csv('../results/COMBINED_fot.csv') %>% 
+site_list <- read_csv('../results/COMBINED_fot_sept.csv') %>% 
   filter(!is.na(site_anon), site_anon != 'all') %>% 
   distinct(site_anon) %>% pull()
 
@@ -68,7 +68,7 @@ for(i in site_list){
   
   for(k in domain_list){
     
-    dm_otpt <- fot_raw_norm_viz(process_output = read_csv('../results/COMBINED_fot.csv') %>%
+    dm_otpt <- fot_raw_norm_viz(process_output = read_csv('../results/COMBINED_fot_sept.csv') %>%
                                   filter(check_desc != 'all_visits',
                                          check_desc != 'asthma_inpatient'),
                                 site_filter = i,
@@ -88,61 +88,61 @@ for(i in site_list){
 
 ```{r}
 
-htmltools::tagList(final[[22]])
+htmltools::tagList(final[[25]])
 
 ```
 
 ## Site 2
 
 ```{r}
-htmltools::tagList(final[[15]])
+htmltools::tagList(final[[18]])
 ```
 
 ## Site 3
 
 ```{r}
-htmltools::tagList(final[[17]])
+htmltools::tagList(final[[20]])
 ```
 
 ## Site 4
 
 ```{r}
-htmltools::tagList(final[[23]])
+htmltools::tagList(final[[26]])
 ```
 
 ## Site 5
 
 ```{r}
-htmltools::tagList(final[[18]])
+htmltools::tagList(final[[21]])
 ```
 
 ## Site 6
 
 ```{r}
-htmltools::tagList(final[[14]])
+htmltools::tagList(final[[17]])
 ```
 
 ## Site 7
 
 ```{r}
-htmltools::tagList(final[[21]])
+htmltools::tagList(final[[24]])
 ```
 
 ## Site 8
 
 ```{r}
-htmltools::tagList(final[[19]])
+htmltools::tagList(final[[22]])
 ```
 
 ## Site 9
 
 ```{r}
-htmltools::tagList(final[[20]])
+htmltools::tagList(final[[23]])
 ```
 
 ## Site 10
 ```{r}
-htmltools::tagList(final[[16]])
+htmltools::tagList(final[[19]])
 ```
 
 ## HCO1
@@ -152,42 +152,42 @@ htmltools::tagList(final[[1]])
 
 ## HCO2
 ```{r}
-htmltools::tagList(final[[6]])
+htmltools::tagList(final[[9]])
 ```
 
 ## HCO3
 ```{r}
-htmltools::tagList(final[[7]])
+htmltools::tagList(final[[10]])
 ```
 
 ## HCO4
 ```{r}
-htmltools::tagList(final[[8]])
+htmltools::tagList(final[[11]])
 ```
 
 ## HCO5
 ```{r}
-htmltools::tagList(final[[9]])
+htmltools::tagList(final[[12]])
 ```
 
 ## HCO6
 ```{r}
-htmltools::tagList(final[[10]])
+htmltools::tagList(final[[13]])
 ```
 
 ## HCO7
 ```{r}
-htmltools::tagList(final[[11]])
+htmltools::tagList(final[[14]])
 ```
 
 ## HCO8
 ```{r}
-htmltools::tagList(final[[12]])
+htmltools::tagList(final[[15]])
 ```
 
 ## HCO9
 ```{r}
-htmltools::tagList(final[[13]])
+htmltools::tagList(final[[16]])
 ```
 
 ## HCO10
@@ -210,16 +210,29 @@ htmltools::tagList(final[[4]])
 htmltools::tagList(final[[5]])
 ```
 
-# {-}
+## HCO14
+```{r}
+htmltools::tagList(final[[6]])
+```
+
+## HCO15
+```{r}
+htmltools::tagList(final[[7]])
+```
+
+## HCO16
+```{r}
+htmltools::tagList(final[[8]])
+```
 
 # Multi Site Exploratory (Incidence Rate per 10,000 Patients)
 ```{r}
 
-fot_denoms <- read_csv('../results/COMBINED_fot.csv') %>% 
+fot_denoms <- read_csv('../results/COMBINED_fot_sept.csv') %>% 
   filter(check_desc == 'all_visits') %>% distinct(site_anon, month_end, row_pts) %>% 
   rename('total_pt' = row_pts)
 
-fot_tnx <- read_csv('../results/factsovertime_trinetx.csv') %>%
+fot_tnx <- read_csv('../results/factsovertime_trinetx_sept.csv') %>%
   select(site_anon, date, query, normalized_patients) %>%
   rename(check_desc = query,
          month_end = date) %>%
@@ -238,7 +251,7 @@ fot_tnx <- read_csv('../results/factsovertime_trinetx.csv') %>%
   mutate(incidence_rate = normalized_patients * 10000) %>%
   select(-normalized_patients)
 
-fot_combo_rates <- read_csv('../results/COMBINED_fot.csv') %>%
+fot_combo_rates <- read_csv('../results/COMBINED_fot_sept.csv') %>%
   mutate(new_cases = row_pts) %>%
   left_join(fot_denoms) %>%
   filter(!is.na(total_pt)) %>%
@@ -282,7 +295,7 @@ rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
                                 filter_variable = 'anxiety',
                                 title = '')
 
-sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Anxiety Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Anxiety Over Time') %>% style(showlegend = FALSE, traces = 1:27)
 
 sub
 #evp_eucl[[1]]
@@ -301,7 +314,7 @@ rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
                                 filter_variable = 'asthma',
                                 title = '')
 
-sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Asthma Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Asthma Over Time') %>% style(showlegend = FALSE, traces = 1:27)
 
 sub
 #evp_eucl[[1]]
@@ -319,7 +332,7 @@ rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
                                 filter_variable = 'hypertension',
                                 title = '')
 
-sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Hypertension Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Hypertension Over Time') %>% style(showlegend = FALSE, traces = 1:27)
 
 sub
 #evp_eucl[[1]]
@@ -337,7 +350,7 @@ rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
                                 filter_variable = 'respiratory_infection',
                                 title = '')
 
-sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Respiratory Infection Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Respiratory Infection Over Time') %>% style(showlegend = FALSE, traces = 1:27)
 
 sub
 #evp_eucl[[1]]
@@ -355,7 +368,7 @@ rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
                                 filter_variable = 'emergency_visits',
                                 title = '')
 
-sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Emergency Visits Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Emergency Visits Over Time') %>% style(showlegend = FALSE, traces = 1:27)
 
 sub
 #evp_eucl[[1]]
@@ -374,7 +387,7 @@ rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
                                 filter_variable = 'emergency_visit_vitals',
                                 title = '')
 
-sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Emergency Visit Vitals Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Emergency Visit Vitals Over Time') %>% style(showlegend = FALSE, traces = 1:27)
 
 sub
 #evp_eucl[[1]]
@@ -393,7 +406,7 @@ rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
                                 filter_variable = 'inpatient_administration',
                                 title = '')
 
-sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Inpatient Administrations Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Inpatient Administrations Over Time') %>% style(showlegend = FALSE, traces = 1:27)
 
 sub
 #evp_eucl[[1]]
@@ -412,7 +425,7 @@ rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
                                 filter_variable = 'inpatient_visits',
                                 title = '')
 
-sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Inpatient Visits Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Inpatient Visits Over Time') %>% style(showlegend = FALSE, traces = 1:27)
 
 sub
 #evp_eucl[[1]]
@@ -431,7 +444,7 @@ rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
                                 filter_variable = 'outpatient_procedure',
                                 title = '')
 
-sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Outpatient Procedures Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Outpatient Procedures Over Time') %>% style(showlegend = FALSE, traces = 1:27)
 
 sub
 #evp_eucl[[1]]
@@ -450,7 +463,7 @@ rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
                                 filter_variable = 'outpatient_visits',
                                 title = '')
 
-sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Outpatient Visits Over Time') %>% style(showlegend = FALSE, traces = 1:24)
+sub <- subplot(rate_output[[1]], rate_output[[2]]) %>% layout(title = 'Rate per 10,000 Patients for Outpatient Visits Over Time') %>% style(showlegend = FALSE, traces = 1:27)
 
 sub
 #evp_eucl[[1]]
@@ -460,5 +473,4 @@ rate_output[[3]]
 
 ```
 
-# {-}
 

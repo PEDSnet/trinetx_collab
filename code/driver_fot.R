@@ -42,7 +42,7 @@
   #' `Combined Data Cleaning`
   
   ## Read in data from both networks
-  fot_trinetx <- read_csv('results/factsovertime_trinetx.csv')
+  fot_trinetx <- read_csv('results/factsovertime_trinetx_sept.csv')
   fot_chop <- read_csv('results/factsovertime_rawcts.csv') %>%
     left_join(read_csv('results/factsovertime_normalized.csv') %>%
                 mutate(month_end = as.Date(month_end, format = '%m/%d/%y'))) #%>%
@@ -91,7 +91,7 @@
     union(fot_chop_clean) %>%
     filter(site_anon != 'All HCOs' & site_anon != 'all')
   
-  write.csv(fot_final, file = 'results/COMBINED_fot.csv')
+  write.csv(fot_final, file = 'results/COMBINED_fot_sept.csv')
   
   ##' *Euclidean Distance*
   
@@ -104,7 +104,7 @@
                                       grp_vars = c('site_anon', 'check_desc'),
                                       var_col = 'check')
   
-  write.csv(euclidean_tntx, file = 'results/euclidean_trinetx.csv')
+  write.csv(euclidean_tntx, file = 'results/euclidean_trinetx_sept.csv')
   
   euclidean_chop <- ms_anom_euclidean(fot_input_tbl = fot_final %>% mutate(time_start = month_end,
                                                                            time_increment = 'month') %>%
@@ -122,6 +122,6 @@
                                         grp_vars = c('site_anon', 'check_desc'),
                                         var_col = 'check')
   
-  write.csv(euclidean_all, file = 'results/euclidean_combined.csv')
+  write.csv(euclidean_all, file = 'results/euclidean_combined_sept.csv')
   
 }

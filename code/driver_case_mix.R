@@ -138,7 +138,7 @@
   
   #' `Combined Data Cleaning`
   
-  mix_trinetx <- read_csv('results/case_mix_trinetx.csv') %>% mutate(cohort='full')
+  mix_trinetx <- read_csv('results/case_mix_trinetx_sept.csv') %>% mutate(cohort='full')
   mix_trinetx_scd <- read_csv('results/case_mix_trinetx_scd.csv') %>% mutate(cohort='scd')
   mix_chop <- read_csv('results/case_mix_chop.csv') %>% mutate(cohort='full')
   mix_chop_scd <- read_csv('results/case_mix_chop_scd.csv') %>% 
@@ -173,7 +173,7 @@
     left_join(mix_trinetx %>% distinct(branch, description)) %>%
     mutate(description = ifelse(grepl('U', branch), 'Codes for special purposes', description))
   
-  write.csv(mix_final, file = 'results/COMBINED_case_mix.csv')
+  write.csv(mix_final, file = 'results/COMBINED_case_mix_sept.csv')
   
   
   

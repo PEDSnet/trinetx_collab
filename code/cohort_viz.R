@@ -27,28 +27,30 @@ trinetx_anom_viz <- function(dat,
     mutate(text=paste("Variable: ",!!sym(grp_col),
                       "\nSite: ",site_anon,
                       "\nPercent: ",round(!!sym(var_col),2),
+                      "\nIQR: ",round(iqr_val,2),
                       "\nSeverity Score: ", round(severity_score, 4),
                       "\nSite Outlier Score: ", round(site_score,4)))
   
   
   #mid<-(max(dat_to_plot[[comparison_col]],na.rm=TRUE)+min(dat_to_plot[[comparison_col]],na.rm=TRUE))/2
   
-  plt<-ggplot(dat_to_plot, aes(x=site_anon, y=!!sym(grp_col), tooltip=text, color=!!sym(var_col),shape = anomaly_yn))+
-    geom_point_interactive(data = dat_to_plot %>% filter(anomaly_yn == 'not outlier'), aes(size = iqr_val)) + 
-    geom_point_interactive(data = dat_to_plot %>% filter(anomaly_yn != 'not outlier'), aes(size = severity_score,
-                                                                                           tooltip = text)) + 
+  plt<-ggplot(dat_to_plot, aes(x=site_anon, y=!!sym(grp_col), tooltip=text, color=!!sym(var_col), shape = anomaly_yn))+
+    geom_point_interactive(data = dat_to_plot %>% filter(anomaly_yn == 'not outlier'), aes(size = iqr_val)) +
+    geom_point_interactive(data = dat_to_plot %>% filter(anomaly_yn == 'not outlier'), aes(size = iqr_val), shape = 1, color = 'black') +
+    geom_point_interactive(data = dat_to_plot %>% filter(anomaly_yn != 'not outlier'), aes(size = severity_score)) + 
     scale_color_ssdqa(palette = 'diverging', discrete = FALSE) +
     scale_shape_manual(values=c('upper outlier' = 24,
-                                'not outlier' = 20,
+                                'not outlier' = 19,
                                 'lower outlier' = 25))+
     #scale_y_discrete(labels = function(x) str_wrap(x, width = text_wrapping_char)) +
     theme_minimal() +
     theme(axis.text.x = element_text(angle=90, hjust = 1, vjust = 1)) +
     scale_y_discrete(labels = label_wrap_gen()) +
-    labs(title = paste0('Anomaly Detection per ', grp_col)) +
+    labs(title = paste0('Anomaly Detection per ', grp_col),
+         subtitle = 'Size of circles represents IQR \nSize of triangles represents outlier severity') +
     guides(color = guide_colorbar(title = 'Percent'),
            shape = guide_legend(title = 'Anomaly'),
-           size = 'none')
+           size = 'none') 
   
   gplot <- girafe(ggobj = plt)
   
@@ -99,13 +101,22 @@ couplets_ms_viz <- function(process_output,
   
 }
 
-couplets_ss_viz <- function(process_output){
+couplets_ss_viz <- function(process_output,
+                            facet_col = 'site_anon'){
   
-  process_output %>%
+  if(facet_col == 'site_anon'){ycol = 'couplet_name'}else{ycol = 'site_anon'}
+  
+  if(facet_col == 'couplet_name'){
+    process_output <- process_output %>%
+      mutate(tot_pats = ifelse(tot_pats < 11, '< 11', tot_pats)) %>% 
+      mutate(site_anon = paste0(site_anon, ' (N= ', format(tot_pats, big.mark = ','),')'))
+  }
+  
+  g1 <- process_output %>%
     filter(cohort %in% c('cohort_2_only', 
                          'combined', 'cohort_1_only')) %>%
     mutate(pct = paste0(round(prop, 2) * 100, '%')) %>%
-    ggplot(aes(y=couplet_name,x=prop,fill=factor(cohort, levels = c('cohort_2_only', 
+    ggplot(aes(y=!!sym(ycol),x=prop,fill=factor(cohort, levels = c('cohort_2_only', 
                                                                  'combined', 'cohort_1_only'))),
            stat='identity') +
     geom_col(show.legend = FALSE) +
@@ -118,8 +129,28 @@ couplets_ss_viz <- function(process_output){
          x="Proportion",
          fill = '',
          title = 'Couplet Distributions per Site')+
-    facet_wrap(~site_anon, ncol = 2)
+    facet_wrap((facet_col), ncol = 2)
   
+  g2 <- process_output %>%
+    filter(cohort %in% c('cohort_1_only_prop', 'cohort_1_denom_prop')) %>%
+    mutate(cohort = ifelse(cohort == 'cohort_1_only_prop', 'Cohort 1 Only', 'Cohort 2 in Cohort 1')) %>%
+    mutate(pct = paste0(round(prop, 2) * 100, '%')) %>%
+    ggplot(aes(y=!!sym(ycol),x=prop,fill=factor(cohort, levels = c('Cohort 2 in Cohort 1', 'Cohort 1 Only'))),
+           stat='identity') +
+    geom_col() +
+    geom_text(aes(label = pct), position = position_stack(vjust = 0.5), size = 2,
+              fontface = 'bold') +
+    scale_fill_manual(values = c(ssdqa_colors_standard[[4]], ssdqa_colors_standard[[11]])) +
+    theme_minimal()+
+    labs(y="Couplet",
+         x="Proportion",
+         fill = '',
+         title = 'Couplet Distributions per Site')+
+    facet_wrap((facet_col), ncol = 2)
+  
+  otpt <- list(g1, g2)
+  
+  return(otpt)
   
 }
 
@@ -156,6 +187,65 @@ case_mix_ms_viz <- function(process_output){
          subtitle = 'Dotted line represents All-Site Median')
   
   girafe(ggobj = r)
+  
+}
+
+case_mix_ms_viz2 <- function(process_output,
+                             cohort = 'Full'){
+  
+  allsite_median <- process_output %>%
+    group_by(cohort, branch) %>%
+    mutate(allsite_mean = mean(prop_pts)) %>%
+    ungroup() %>%
+    select(site_anon, cohort, branch, allsite_median) %>%
+    mutate(site_anon = 'all site median') %>%
+    rename(prop_pts = allsite_median)
+  
+  grph <- process_output %>%
+    ggplot(aes(x = branch, y = prop_pts, color = site_anon,
+               group = site_anon)) +
+    geom_line() +
+    geom_point() +
+    geom_line(data = allsite_median, linewidth = 1.1, linetype = 'dotted', color = 'black', alpha = 0.5) +
+    scale_color_ssdqa() +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    labs(x = 'ICD10CM Branch',
+         y = 'Proportion',
+         title = paste0('Patients per Branch in ', cohort, ' Cohort'),
+         subtitle = 'Dotted line is All Site Median')
+  
+  grph2 <- process_output %>%
+    ggplot(aes(x = branch, y = prop_pts)) +
+    #geom_line() +
+    geom_point(aes(color = site_anon,
+               group = site_anon)) +
+    geom_point(data = allsite_median, shape = 8, size = 3, color = 'black') +
+    scale_color_ssdqa() +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    labs(x = 'ICD10CM Branch',
+         y = 'Proportion',
+         title = paste0('Patients per Branch in ', cohort, ' Cohort'),
+         subtitle = 'Star is All Site Median')
+  
+  grph3 <- process_output %>%
+    ggplot(aes(x = branch, y = prop_pts, color = site_anon, group = site_anon)) +
+    #geom_line() +
+    geom_point() +
+    geom_line(data = allsite_median, linetype = 'dotted', linewidth = 1, color = 'black', alpha = 0.5) +
+    scale_color_ssdqa() +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    labs(x = 'ICD10CM Branch',
+         y = 'Proportion',
+         title = paste0('Patients per Branch in ', cohort, ' Cohort'),
+         subtitle = 'Dotted Line is All Site Median')
+  
+  output <- list(ggplotly(grph),
+                 ggplotly(grph2),
+                 ggplotly(grph3))
+    
   
 }
 

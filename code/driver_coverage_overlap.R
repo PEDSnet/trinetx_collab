@@ -1,4 +1,4 @@
-.run{
+.run <- function(){
   
   #' `Execute function`
   
@@ -22,8 +22,8 @@
   #' `Combined Data Cleaning`
   
   ## Read in data from both networks
-  cvg_trinetx <- read_csv('results/coverage_trinetx.csv') %>%
-    left_join(read_csv('results/coverage_trinetx_n.csv'))
+  cvg_trinetx <- read_csv('results/coverage_trinetx_sept.csv') #%>%
+    #left_join(read_csv('results/coverage_trinetx_n.csv'))
   cvg_chop <- read_csv('results/coverage_overlap_chop.csv')
   
   ## Clean data and apply common structure
@@ -43,7 +43,7 @@
   
   cvg_final <- cvg_trinetx_clean %>%
     union(cvg_chop_clean) %>%
-    filter(site_anon != 'All HCOs') %>%
+    filter(site_anon != 'all') %>%
     group_by(fact_group) %>%
     mutate(allsite_median = median(prop_pts)) %>% ungroup() %>%
     mutate(fact_long = str_replace_all(fact_group, c(dx='Diagnosis', px = 'Procedure',
@@ -52,7 +52,7 @@
                               fact_long))
   
   ## Output cleaned & combined data
-  write.csv(cvg_final, file = 'results/COMBINED_cvg_overlap.csv')
+  write.csv(cvg_final, file = 'results/COMBINED_cvg_overlap_sept.csv')
   
   
 }
