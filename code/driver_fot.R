@@ -1,5 +1,4 @@
-.run{
-  
+
   #' `Execute Function`
   
   site_list <- c('seattle', 'stanford', 'lurie', 'nemours', 'national',
@@ -9,7 +8,7 @@
     
     config('site_filter', site_list[i])
     
-    source(paste0(base_dir, '/code/fot_execute.R'))
+    source(paste0(config('base_dir'), '/code/fot_execute.R'))
     
     num_mnths <- (interval(mdy(01012013), mdy(12312023)) %/% months(1)) + 1
     
@@ -42,11 +41,13 @@
   #' `Combined Data Cleaning`
   
   ## Read in data from both networks
-  fot_trinetx <- read_csv('results/factsovertime_trinetx_sept.csv')
+  fot_trinetx <- read_csv('results/factsovertime_trinetx_sept.csv') %>%
+    inner_join(read_csv('results/site_map.csv')) %>% select(-c(site, sitenum, siteletter))
   fot_chop <- read_csv('results/factsovertime_rawcts.csv') %>%
     left_join(read_csv('results/factsovertime_normalized.csv') %>%
-                mutate(month_end = as.Date(month_end, format = '%m/%d/%y'))) #%>%
-    #left_join(read_csv('results/factsovertime_distance.csv'))
+                mutate(month_end = as.Date(month_end, format = '%m/%d/%y'))) %>%
+    select(-site_anon) %>% inner_join(read_csv('results/site_map.csv')) %>% 
+    select(-c(site, sitenum, siteletter))
   
   
   ## Clean data and apply common structure
@@ -93,35 +94,24 @@
   
   write.csv(fot_final, file = 'results/COMBINED_fot_sept.csv')
   
-  ##' *Euclidean Distance*
+  ##' `Incidence Rate Computation`
   
-  euclidean_tntx <- ms_anom_euclidean(fot_input_tbl = fot_final %>% mutate(time_start = month_end,
-                                                                           time_increment = 'month') %>%
-                                        filter(site_anon %in% c('HCO1','HCO2','HCO3',
-                                                                'HCO4','HCO5','HCO6',
-                                                                'HCO7','HCO8','HCO9',
-                                                                'HCO10','HCO11','HCO12','HCO13')),
-                                      grp_vars = c('site_anon', 'check_desc'),
-                                      var_col = 'check')
+  fot_rate_denoms <- fot_final %>% 
+    filter(check_desc == 'all_visits') %>% distinct(site_anon, month_end, row_pts) %>% 
+    rename('total_pt' = row_pts)
   
-  write.csv(euclidean_tntx, file = 'results/euclidean_trinetx_sept.csv')
+  fot_rate_tnx <- fot_trinetx_clean %>%
+    select(site_anon, month_end, check_desc, normalized_patients) %>%
+    mutate(incidence_rate = normalized_patients * 10000) %>%
+    select(-normalized_patients)
   
-  euclidean_chop <- ms_anom_euclidean(fot_input_tbl = fot_final %>% mutate(time_start = month_end,
-                                                                           time_increment = 'month') %>%
-                                        filter(! site_anon %in% c('HCO1','HCO2','HCO3',
-                                                                  'HCO4','HCO5','HCO6',
-                                                                  'HCO7','HCO8','HCO9',
-                                                                  'HCO10','HCO11','HCO12','HCO13')),
-                                      grp_vars = c('site_anon', 'check_desc'),
-                                      var_col = 'check')
+  fot_combo_rates <- fot_final %>%
+    mutate(new_cases = row_pts) %>%
+    left_join(fot_rate_denoms) %>%
+    filter(!is.na(total_pt)) %>%
+    mutate(incidence_rate = (new_cases / total_pt) * 10000) %>%
+    select(site_anon, check_desc, month_end, incidence_rate) %>%
+    union(fot_rate_tnx)
+
+  write.csv(fot_combo_rate, file = 'results/COMBINED_fot_rates_sept.csv')  
   
-  write.csv(euclidean_chop, file = 'results/euclidean_chop.csv')
-  
-  euclidean_all <- ms_anom_euclidean(fot_input_tbl = fot_final %>% mutate(time_start = month_end,
-                                                                             time_increment = 'month'),
-                                        grp_vars = c('site_anon', 'check_desc'),
-                                        var_col = 'check')
-  
-  write.csv(euclidean_all, file = 'results/euclidean_combined_sept.csv')
-  
-}

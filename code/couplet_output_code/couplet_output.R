@@ -15,8 +15,8 @@ setwd("/Users/razzaghih/one_offs/trinetx")
 
 #' Name of Files
 #' 
-couplets_chop <- read_csv('results/couplets_chop.csv')
-couplets_trinetx <- read_csv('results/couplets_trinetx.csv')
+couplets_chop <- read_csv('couplets_chop.csv')
+couplets_trinetx <- read_csv('couplets_trinetx.csv')
 
 #' Trinetx cleaning to be more standardized
 trinetx_cleaned_structure <- 
@@ -34,8 +34,8 @@ trinetx_cleaned_structure <-
   rename(couplet_name = check_desc,
          check_desc = check_desc_new) %>% 
   mutate(tot_pats = cohort_1_only + cohort_2_only + combined) %>% 
-  mutate(cohort_1_denom_prop=combined/cohort_1,
-         cohort_2_denom_prop=combined/cohort_2) %>% 
+  mutate(cohort_1_denom_prop=round(combined/cohort_1, 2),
+         cohort_2_denom_prop=round(combined/cohort_2,2)) %>% 
   pivot_longer(cols=c('cohort_1','cohort_1_only',
                       'combined', 'cohort_2_only',
                       'cohort_2', 'cohort_1_denom_prop', 'cohort_2_denom_prop'),
@@ -72,8 +72,8 @@ chop_cleaned <-
               values_from = 'value') %>% 
   mutate(cohort_1 = cohort_1_only + combined,
          cohort_2 = cohort_2_only + combined) %>% 
-  mutate(cohort_1_denom_prop=combined/cohort_1,
-         cohort_2_denom_prop=combined/cohort_2) %>% 
+  mutate(cohort_1_denom_prop=round(combined/cohort_1, 2),
+         cohort_2_denom_prop=round(combined/cohort_2,2)) %>% 
   pivot_longer(cols=cohort_1_only:cohort_2_denom_prop,
                names_to='cohort',
                values_to='value') %>% 
@@ -86,8 +86,6 @@ chop_cleaned <-
 #' Combined CHOP and Trinetx data
 couplets_combined <- dplyr::union(trinetx_cleaned,
                                   chop_cleaned)
-
-write.csv(couplets_combined, file = 'results/COMBINED_couplets.csv')
 
 #' Cohort Overlap of Both Cohorts
 couplets_prop_combined <- 
@@ -103,35 +101,17 @@ couplets_prop_cohort_1 <-
 
 
 #' Setting up for Anomaly Detection
-
-prep_tbl <- couplets_combined %>% filter(cohort=='cohort_1_denom_prop') %>% 
-  filter(! str_detect(site_anon,'all|ALL')) %>% 
-  select(site_anon,couplet_name,check_desc,prop) %>% 
-  rename(site=site_anon) %>%
-  mutate(network = ifelse(grepl('HCO', site), 'trinetx', 'pedsnet'))
-
-couplet_anomaly_cohort_1 <- compute_dist_anomalies(df_tbl=prep_tbl %>% filter(network == 'trinetx'), 
-                                                  grp_vars=c('couplet_name','check_desc', 'network'),
+couplet_anomaly_cohort_1 <- compute_dist_anomalies(df_tbl=couplets_combined %>% filter(cohort=='cohort_1_denom_prop') %>% 
+                                                      filter(! str_detect(site_anon,'all|ALL')) %>% 
+                                                      select(site_anon,couplet_name,check_desc,prop) %>% 
+                                                      rename(site=site_anon), 
+                                                  grp_vars=c('couplet_name','check_desc'),
                                                   var_col='prop')
 
 #' Detection of outliers
 couplet_anomaly_final_cohort_1 <- detect_outliers(couplet_anomaly_cohort_1,
                                                   column_analysis='prop',
                                                   column_variable = 'couplet_name')
-
-write.csv(couplet_anomaly_final_cohort_1, file = 'results/TRINETX_couplets_anom.csv')
-
-couplet_anomaly_cohort_1 <- compute_dist_anomalies(df_tbl=prep_tbl %>% filter(network == 'pedsnet'), 
-                                                   grp_vars=c('couplet_name','check_desc', 'network'),
-                                                   var_col='prop')
-
-#' Detection of outliers
-couplet_anomaly_final_cohort_1 <- detect_outliers(couplet_anomaly_cohort_1,
-                                                  column_analysis='prop',
-                                                  column_variable = 'couplet_name')
-
-write.csv(couplet_anomaly_final_cohort_1, file = 'results/PEDSNET_couplets_anom.csv')
-
 #' Visualization  
 couplet_anomaly_plot_trinetx <- ms_anom_nt(process_output=couplet_anomaly_final_cohort_1 %>% 
                                              filter(site %in% c('HCO1','HCO2','HCO3',

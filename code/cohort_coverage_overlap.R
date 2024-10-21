@@ -6,6 +6,8 @@
 #'                  table in the first position and a string label for that patient group in the second 
 #'                  position. example can be found in `coverage_overlap_execute.R`
 #' @param check_string string to identify the check type
+#' @param min_date_cutoff the minimum date cutoff for the time period of interest
+#' @param max_date_cutoff the maximum date cutoff for the time period of interest
 #'
 #' @return one dataframe that summarises the count and proportion of patients in each overlapping group from the list of
 #'         fact tables. a patient is only counted in each group ONCE.
@@ -15,7 +17,9 @@
 #'
 
 check_coverage_overlap <- function(fact_tbls,
-                                   check_string = 'cvg'){
+                                   check_string = 'cvg',
+                                   min_date_cutoff = '2014-01-01',
+                                   max_date_cutoff = '2023-12-31'){
   
   grp_list <- list()
   
@@ -25,8 +29,8 @@ check_coverage_overlap <- function(fact_tbls,
     label <- fact_tbls[[i]][[3]]
     
     tbl_meta <- fact_tbls[[i]][[1]] %>% 
-      filter(!!sym(fact_tbls[[i]][[2]]) >= '2014-01-01' & 
-               !!sym(fact_tbls[[i]][[2]]) <= '2023-12-31') %>%
+      filter(!!sym(fact_tbls[[i]][[2]]) >= min_date_cutoff & 
+               !!sym(fact_tbls[[i]][[2]]) <= max_date_cutoff) %>%
       distinct(site, person_id) %>% 
       mutate(temp = label) %>%
       rename_with(~label, temp) %>%

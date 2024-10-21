@@ -82,7 +82,7 @@ trinetx_anom_viz <- function(dat,
 #'         color of each section of the heat map represents the value of output_col
 #' 
 couplets_ms_viz <- function(process_output,
-                         output_col){
+                            output_col){
   
   
   process_output %>%

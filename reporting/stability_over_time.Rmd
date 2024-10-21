@@ -228,37 +228,9 @@ htmltools::tagList(final[[8]])
 # Multi Site Exploratory (Incidence Rate per 10,000 Patients)
 ```{r}
 
-fot_denoms <- read_csv('../results/COMBINED_fot_sept.csv') %>% 
-  filter(check_desc == 'all_visits') %>% distinct(site_anon, month_end, row_pts) %>% 
-  rename('total_pt' = row_pts)
+fot_combo_rates <- read_csv('../results/COMBINED_fot_rates_sept.csv')
 
-fot_tnx <- read_csv('../results/factsovertime_trinetx_sept.csv') %>%
-  select(site_anon, date, query, normalized_patients) %>%
-  rename(check_desc = query,
-         month_end = date) %>%
-  mutate(month_end = as.Date(month_end, format = '%m/%d/%y')) %>%
-  mutate(check_desc = case_when(grepl('anxiety', check_desc) ~ 'anxiety',
-                                grepl('asthma', check_desc) ~ 'asthma',
-                                grepl('hypertension', check_desc) ~ 'hypertension',
-                                grepl('resp', check_desc) ~ 'respiratory_infection',
-                                grepl('emergency$', check_desc) ~ 'emergency_visits',
-                                grepl('emergency vitals', check_desc) ~
-                                  'emergency_visit_vitals',
-                                grepl('inpatients', check_desc) ~ 'inpatient_visits',
-                                grepl('meds', check_desc) ~ 'inpatient_administration',
-                                grepl('outpatients', check_desc) ~ 'outpatient_visits',
-                                grepl('procedures', check_desc) ~ 'outpatient_procedure')) %>%
-  mutate(incidence_rate = normalized_patients * 10000) %>%
-  select(-normalized_patients)
-
-fot_combo_rates <- read_csv('../results/COMBINED_fot_sept.csv') %>%
-  mutate(new_cases = row_pts) %>%
-  left_join(fot_denoms) %>%
-  filter(!is.na(total_pt)) %>%
-  mutate(incidence_rate = (new_cases / total_pt) * 10000) %>%
-  select(site_anon, check_desc, month_end, incidence_rate) %>%
-  union(fot_tnx)
-
+domain_list <- fot_combo_rates %>% distinct(check_desc) %>% pull()
 
 plt_list <- list()
 

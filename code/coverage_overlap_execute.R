@@ -2,8 +2,10 @@
 #' List of table inputs for `check_coverage_overlap` function
 #' 
 #' The input list of the function should contain one list item per domain of interest. Each
-#' list item should contain the fact table of the domain of interest in the first position, and
-#' a string label for that patient group in the second position
+#' list item should contain:
+#' (1) the fact table of the domain of interest
+#' (2) the date column that should be used to filter to the relevant time period
+#' (3) a string label for that patient group
 #' 
 
 cohort_tbls <- list(

@@ -1,8 +1,5 @@
-.run <- function(){
-  
+
   #' `Execute Function`
-  
-  site_map <- read_csv(paste0(base_dir, '/results/site_mapping.csv'))
   
   site_list <- c('seattle', 'stanford', 'lurie', 'nemours', 'national',
                  'nationwide', 'chop', 'colorado', 'cchmc', 'texas')
@@ -19,7 +16,7 @@
                                          filter(condition_start_date >= '2014-01-01',
                                                 condition_start_date <= '2023-12-31'))
     
-    output_tbl_append(casemix_output %>% left_join(site_map), 'case_mix_10yr')
+    output_tbl_append(casemix_output, 'case_mix_10yr')
     
   }
   
@@ -55,7 +52,7 @@
   scd_full_reduce <- reduce(.x=scd_full,
                             .f=dplyr::union)
   
-  output_tbl(scd_full_reduce %>% left_join(site_map), 'case_mix_scd')
+  output_tbl(scd_full_reduce, 'case_mix_scd')
   
   
   ###' *SCD Cohort - P Branch Breakdown*
@@ -83,7 +80,7 @@
                                                      filter(condition_start_date >= '2014-01-01',
                                                             condition_start_date <= '2023-12-31'))
     
-    output_tbl_append(casemix_output %>% collect() %>% left_join(site_map), 'case_mix_scd_p')
+    output_tbl_append(casemix_output %>% collect(), 'case_mix_scd_p')
     
   }
 
@@ -114,7 +111,7 @@
                                          filter(condition_start_date >= '2014-01-01',
                                                 condition_start_date <= '2023-12-31'))
     
-    output_tbl_append(casemix_output %>% left_join(site_map), 'case_mix_metformin')
+    output_tbl_append(casemix_output, 'case_mix_metformin')
     
   }
   
@@ -131,21 +128,31 @@
                                                filter(condition_start_date >= '2014-01-01',
                                                       condition_start_date <= '2023-12-31'))
     
-    output_tbl_append(casemix_visits %>% left_join(site_map), 'case_mix_visits')
+    output_tbl_append(casemix_visits, 'case_mix_visits')
     
   }
   
   
   #' `Combined Data Cleaning`
   
-  mix_trinetx <- read_csv('results/case_mix_trinetx_sept.csv') %>% mutate(cohort='full')
-  mix_trinetx_scd <- read_csv('results/case_mix_trinetx_scd.csv') %>% mutate(cohort='scd')
-  mix_chop <- read_csv('results/case_mix_chop.csv') %>% mutate(cohort='full')
+  mix_trinetx <- read_csv('results/case_mix_trinetx_sept.csv') %>% mutate(cohort='full') %>%
+    inner_join(read_csv('results/site_map.csv')) %>% select(-c(site, sitenum, siteletter))
+  mix_trinetx_scd <- read_csv('results/case_mix_trinetx_scd.csv') %>% mutate(cohort='scd') %>%
+    inner_join(read_csv('results/site_map.csv')) %>% select(-c(site, sitenum, siteletter))
+  mix_chop <- read_csv('results/case_mix_chop.csv') %>% mutate(cohort='full') %>%
+    select(-site_anon) %>% inner_join(read_csv('results/site_map.csv')) %>% 
+    select(-c(site, sitenum, siteletter))
   mix_chop_scd <- read_csv('results/case_mix_chop_scd.csv') %>% 
+    select(-site_anon) %>% inner_join(read_csv('results/site_map.csv')) %>% 
+    select(-c(site, sitenum, siteletter)) %>%
     select(site_anon,icd_header,prop_pt_site) %>% mutate(cohort='scd')
   mix_chop_metformin <- read_csv('results/case_mix_chop_metformin.csv') %>% 
+    select(-site_anon) %>% inner_join(read_csv('results/site_map.csv')) %>% 
+    select(-c(site, sitenum, siteletter)) %>%
     select(site_anon,icd_header,prop_pt_site) %>% mutate(cohort='metformin')
   mix_chop_scd_p <- read_csv('results/case_mix_chop_scd_p.csv') %>% 
+    select(-site_anon) %>% inner_join(read_csv('results/site_map.csv')) %>% 
+    select(-c(site, sitenum, siteletter)) %>%
     select(site_anon,icd_header,prop_pt_site) %>% mutate(cohort='scd_p')
   
   mix_trinetx_clean <- mix_trinetx %>%
@@ -175,6 +182,3 @@
   
   write.csv(mix_final, file = 'results/COMBINED_case_mix_sept.csv')
   
-  
-  
-}

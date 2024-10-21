@@ -1,6 +1,6 @@
 
 #' `Set working directory`
-setwd('~/Desktop/collabs/TriNetX/trinetx_collab/')
+setwd(Sys.getenv('PEDSNET_DATA_REQUEST_ROOT'))
 
 #' `Source relevant files`
 source(file.path(getwd(), '/code/cohorts.R'))
@@ -16,6 +16,10 @@ library(argos)
 library(dplyr)
 library(tidyr)
 library(stringr)
+library(readr)
+library(srcr)
+library(lubridate)
+library(purrr)
 
 #' `Connect to data`
 initialize_session(session_name = 'pedsnet_trinetx_collab',
@@ -23,3 +27,13 @@ initialize_session(session_name = 'pedsnet_trinetx_collab',
                    is_json = TRUE,
                    cdm_schema = 'dcc_pedsnet',
                    results_schema = 'trinetx_collab')
+
+#' `Build anonymized site map`
+
+# site_names <- read_csv(file.path(config('base_dir'), '/results/site_names.csv'))
+# 
+# site_map <- site_anon(df = site_names) %>%
+#   mutate(siteletter = LETTERS[sitenum],
+#          site_anon = paste0('site ', siteletter))
+# 
+# write_csv(site_map, file = file.path(config('base_dir'), '/results/site_map.csv'))

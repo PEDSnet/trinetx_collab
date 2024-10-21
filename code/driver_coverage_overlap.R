@@ -1,16 +1,13 @@
-.run <- function(){
-  
+
   #' `Execute function`
-  
-  site_map <- read_csv(paste0(base_dir, '/results/site_mapping.csv'))
-  
   source(paste0(base_dir, '/code/coverage_overlap_execute.R'))
+  
   overlap_output <- check_coverage_overlap(fact_tbls = cohort_tbls)
   
-  output_tbl(overlap_output %>% left_join(site_map), 'coverage_overlap')
+  output_tbl(overlap_output, 'coverage_overlap')
   
   
-  #' `Process Raw Output`
+  #' `Process raw output`
   
   overlap_final <- trinetx_check_pp(dat = results_tbl('coverage_overlap'), group = 'fact_group') %>%
     select(site, fact_group, n_pts_site, n_pts_all, prop_pts_site, prop_pts_all,
@@ -22,9 +19,11 @@
   #' `Combined Data Cleaning`
   
   ## Read in data from both networks
-  cvg_trinetx <- read_csv('results/coverage_trinetx_sept.csv') #%>%
-    #left_join(read_csv('results/coverage_trinetx_n.csv'))
-  cvg_chop <- read_csv('results/coverage_overlap_chop.csv')
+  cvg_trinetx <- read_csv('results/coverage_trinetx_sept.csv') %>%
+    inner_join(read_csv('results/site_map.csv')) %>% select(-c(site, sitenum, siteletter))
+  cvg_chop <- read_csv('results/coverage_overlap_chop.csv') %>%
+    select(-site_anon) %>% inner_join(read_csv('results/site_map.csv')) %>% 
+    select(-c(site, sitenum, siteletter))
   
   ## Clean data and apply common structure
   cvg_trinetx_clean <- cvg_trinetx %>%
@@ -54,5 +53,3 @@
   ## Output cleaned & combined data
   write.csv(cvg_final, file = 'results/COMBINED_cvg_overlap_sept.csv')
   
-  
-}
