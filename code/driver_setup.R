@@ -30,10 +30,10 @@ initialize_session(session_name = 'pedsnet_trinetx_collab',
 
 #' `Build anonymized site map`
 
-# site_names <- read_csv(file.path(config('base_dir'), '/results/site_names.csv'))
+# site_names <- read_csv(file.path(getwd(), '/results/site_names.csv'))
 # 
 # site_map <- site_anon(df = site_names) %>%
 #   mutate(siteletter = LETTERS[sitenum],
 #          site_anon = paste0('site ', siteletter))
 # 
-# write_csv(site_map, file = file.path(config('base_dir'), '/results/site_map.csv'))
+# write_csv(site_map, file = file.path(getwd(), '/results/site_map.csv'))

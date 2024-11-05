@@ -85,6 +85,19 @@ compute_case_mix <- function(cohort = NULL,
   return(final_tbl)
 }
 
+#' Summarize Case-Mix / Signatures for P-Branch ICD10CM Conditions
+#' 
+#' @param cohort a specific cohort to join to the `dx_tbl`; defaults to NULL; 
+#'               if cohort is entire database, then default to NULL
+#' @param dx_tbl table with condition occurrences. defaults to site CDM condition_occurrence table
+#' @param vocab_tbl concept table with ICD codes and vocabulary IDs
+#' @param check_string string to identify the check type
+#'
+#' @return one dataframe that summarizes the count and proportion of rows & patients with 
+#'         diagnoses under the P branch of ICD10CM
+#'          
+#'         diagnoses are limited to ONLY ICD10CM -- other ICD flavors are excluded
+#'
 compute_case_mix_p_deep_dive <- function(cohort = NULL,
                                          dx_tbl = cdm_tbl('condition_occurrence'),
                                          vocab_tbl = vocabulary_tbl('concept'),

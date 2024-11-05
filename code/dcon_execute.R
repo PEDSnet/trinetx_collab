@@ -18,7 +18,6 @@ dx_depression <- load_codeset('mhcc_codes_v4') %>%
 ##' 4. An integer indicating how many *days* should separate the two events of interest at a maximum
 ##' 
 
-
 dcon_pts_list <- list(
    
   'scd_dx_hydrox_rx' = list(cdm_tbl('condition_occurrence') %>% select(site, person_id, condition_concept_id, condition_start_date) %>%
