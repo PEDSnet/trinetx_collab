@@ -65,7 +65,7 @@
   ## Clean CHOP
   chop_cleaned <- 
     couplets_chop %>% 
-    select(-c(prop, sitenum)) %>% 
+    select(-c(prop)) %>% 
     pivot_wider(names_from = 'cohort',
                 values_from = 'value') %>% 
     mutate(cohort_1 = cohort_1_only + combined,
@@ -87,5 +87,5 @@
   couplets_combined <- dplyr::union(trinetx_cleaned,
                                     chop_cleaned)
   
-  write.csv(couplets_combined, file = 'results/COMBINED_couplets_sept.csv')
+  write.csv(couplets_combined, file = 'results/COMBINED_couplets_newanon.csv')
   

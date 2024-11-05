@@ -10,13 +10,18 @@ output:
 
 ```{r setup, include=FALSE}
 # Default taken from R notebook behavior: when knitting, wd will always be location of notebook
-base_dir <- '..'
-Sys.setenv(PEDSNET_SKIP_REQUEST_EXECUTION=1)
-tryCatch(source('../site/run.R'),
-         error = function (e) message(e)) # May not be able to make db connection
+# base_dir <- '..'
+# Sys.setenv(PEDSNET_SKIP_REQUEST_EXECUTION=1)
+# tryCatch(source('../site/run.R'),
+#          error = function (e) message(e)) # May not be able to make db connection
+# 
+# # Set to "local" to read data from ../results, or another value to read from db
+# data_source <- if_else(config('execution_mode') == 'distribution', 'local', 'not_local')
 
-# Set to "local" to read data from ../results, or another value to read from db
-data_source <- if_else(config('execution_mode') == 'distribution', 'local', 'not_local')
+source('../code/cohort_viz.R')
+source('../code/cohort_colors.R')
+source('../code/cohort_trinetx_anom.R')
+source('../code/cohorts.R')
 
 require(tidyr)
 require(knitr)
@@ -24,6 +29,12 @@ require(kableExtra)
 require(stringr)
 require(tibble)
 require(ggplot2)
+require(dplyr)
+require(readr)
+require(ggiraph)
+require(plotly)
+require(lubridate)
+require(purrr)
 
 get_results <- function(tbl_name) {
   if (data_source == 'local') {
@@ -54,9 +65,9 @@ opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
 ```{r cvg_prep}
 
-domain_list <- read_csv('../results/COMBINED_fot_sept.csv') %>% distinct(check_desc) %>% 
+domain_list <- read_csv('../results/COMBINED_fot_newanon.csv') %>% distinct(check_desc) %>% 
   filter(check_desc != 'all_visits', check_desc != 'asthma_inpatient') %>% pull()
-site_list <- read_csv('../results/COMBINED_fot_sept.csv') %>% 
+site_list <- read_csv('../results/COMBINED_fot_newanon.csv') %>% 
   filter(!is.na(site_anon), site_anon != 'all') %>% 
   distinct(site_anon) %>% pull()
 
@@ -68,7 +79,7 @@ for(i in site_list){
   
   for(k in domain_list){
     
-    dm_otpt <- fot_raw_norm_viz(process_output = read_csv('../results/COMBINED_fot_sept.csv') %>%
+    dm_otpt <- fot_raw_norm_viz(process_output = read_csv('../results/COMBINED_fot_newanon.csv') %>%
                                   filter(check_desc != 'all_visits',
                                          check_desc != 'asthma_inpatient'),
                                 site_filter = i,
@@ -84,7 +95,7 @@ for(i in site_list){
 
 ```
 
-## Site 1
+## Site V
 
 ```{r}
 
@@ -92,135 +103,135 @@ htmltools::tagList(final[[25]])
 
 ```
 
-## Site 2
+## Site Z
 
 ```{r}
 htmltools::tagList(final[[18]])
 ```
 
-## Site 3
+## Site G
 
 ```{r}
 htmltools::tagList(final[[20]])
 ```
 
-## Site 4
+## Site J
 
 ```{r}
 htmltools::tagList(final[[26]])
 ```
 
-## Site 5
+## Site O
 
 ```{r}
 htmltools::tagList(final[[21]])
 ```
 
-## Site 6
+## Site P
 
 ```{r}
 htmltools::tagList(final[[17]])
 ```
 
-## Site 7
+## Site Y
 
 ```{r}
 htmltools::tagList(final[[24]])
 ```
 
-## Site 8
+## Site D
 
 ```{r}
 htmltools::tagList(final[[22]])
 ```
 
-## Site 9
+## Site C
 
 ```{r}
 htmltools::tagList(final[[23]])
 ```
 
-## Site 10
+## Site I
 ```{r}
 htmltools::tagList(final[[19]])
 ```
 
-## HCO1
+## Site R
 ```{r}
 htmltools::tagList(final[[1]])
 ```
 
-## HCO2
+## Site F
 ```{r}
 htmltools::tagList(final[[9]])
 ```
 
-## HCO3
+## Site N
 ```{r}
 htmltools::tagList(final[[10]])
 ```
 
-## HCO4
+## Site H
 ```{r}
 htmltools::tagList(final[[11]])
 ```
 
-## HCO5
+## Site X
 ```{r}
 htmltools::tagList(final[[12]])
 ```
 
-## HCO6
+## Site K
 ```{r}
 htmltools::tagList(final[[13]])
 ```
 
-## HCO7
+## Site U
 ```{r}
 htmltools::tagList(final[[14]])
 ```
 
-## HCO8
+## Site B
 ```{r}
 htmltools::tagList(final[[15]])
 ```
 
-## HCO9
+## Site L
 ```{r}
 htmltools::tagList(final[[16]])
 ```
 
-## HCO10
+## Site W
 ```{r}
 htmltools::tagList(final[[2]])
 ```
 
-## HCO11
+## Site E
 ```{r}
 htmltools::tagList(final[[3]])
 ```
 
-## HCO12
+## Site A
 ```{r}
 htmltools::tagList(final[[4]])
 ```
 
-## HCO13
+## Site Q
 ```{r}
 htmltools::tagList(final[[5]])
 ```
 
-## HCO14
+## Site M
 ```{r}
 htmltools::tagList(final[[6]])
 ```
 
-## HCO15
+## Site S
 ```{r}
 htmltools::tagList(final[[7]])
 ```
 
-## HCO16
+## Site T
 ```{r}
 htmltools::tagList(final[[8]])
 ```
@@ -228,7 +239,7 @@ htmltools::tagList(final[[8]])
 # Multi Site Exploratory (Incidence Rate per 10,000 Patients)
 ```{r}
 
-fot_combo_rates <- read_csv('../results/COMBINED_fot_rates_sept.csv')
+fot_combo_rates <- read_csv('../results/COMBINED_fot_rates_newanon.csv')
 
 domain_list <- fot_combo_rates %>% distinct(check_desc) %>% pull()
 

@@ -9,14 +9,18 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-# Default taken from R notebook behavior: when knitting, wd will always be location of notebook
-base_dir <- '..'
-Sys.setenv(PEDSNET_SKIP_REQUEST_EXECUTION=1)
-tryCatch(source('../site/run.R'),
-         error = function (e) message(e)) # May not be able to make db connection
+# # Default taken from R notebook behavior: when knitting, wd will always be location of notebook
+# base_dir <- '..'
+# Sys.setenv(PEDSNET_SKIP_REQUEST_EXECUTION=1)
+# tryCatch(source('../site/run.R'),
+#          error = function (e) message(e)) # May not be able to make db connection
+# 
+# # Set to "local" to read data from ../results, or another value to read from db
+# data_source <- if_else(config('execution_mode') == 'distribution', 'local', 'not_local')
 
-# Set to "local" to read data from ../results, or another value to read from db
-data_source <- if_else(config('execution_mode') == 'distribution', 'local', 'not_local')
+source('../code/cohort_viz.R')
+source('../code/cohort_colors.R')
+source('../code/cohort_trinetx_anom.R')
 
 require(tidyr)
 require(knitr)
@@ -26,6 +30,10 @@ require(tibble)
 require(ggplot2)
 require(patchwork)
 require(gt)
+require(dplyr)
+require(readr)
+require(ggiraph)
+require(plotly)
 
 get_results <- function(tbl_name) {
   if (data_source == 'local') {
@@ -45,7 +53,7 @@ prettify_kable <- function(data) {
   rslt
 }
 
-site_list <- read_csv(file = '../results/COMBINED_case_mix_sept.csv') %>% 
+site_list <- read_csv(file = '../results/COMBINED_case_mix_newanon.csv') %>% 
   distinct(site_anon) %>% pull()
 
 opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
@@ -58,19 +66,23 @@ opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 ```{r cm_ss_full, fig.height=6}
 
-case_mix_summ_viz(process_output = read_csv(file = '../results/COMBINED_case_mix_sept.csv') %>%
+case_mix_ss_viz(process_output = 
+                  read_csv(file = '../results/COMBINED_case_mix_newanon.csv') %>%
                     filter(cohort == 'full'),
                   site_filter = site_list[1:6])
 
-case_mix_summ_viz(process_output = read_csv(file = '../results/COMBINED_case_mix_sept.csv') %>%
+case_mix_ss_viz(process_output = 
+                  read_csv(file = '../results/COMBINED_case_mix_newanon.csv') %>%
                     filter(cohort == 'full'),
                   site_filter = site_list[7:12])
 
-case_mix_summ_viz(process_output = read_csv(file = '../results/COMBINED_case_mix_sept.csv') %>%
+case_mix_ss_viz(process_output = 
+                  read_csv(file = '../results/COMBINED_case_mix_newanon.csv') %>%
                     filter(cohort == 'full'),
                   site_filter = site_list[13:18])
 
-case_mix_summ_viz(process_output = read_csv(file = '../results/COMBINED_case_mix_sept.csv') %>%
+case_mix_ss_viz(process_output = 
+                  read_csv(file = '../results/COMBINED_case_mix_newanon.csv') %>%
                     filter(cohort == 'full'),
                   site_filter = site_list[19:26])
 
@@ -79,19 +91,23 @@ case_mix_summ_viz(process_output = read_csv(file = '../results/COMBINED_case_mix
 ## SCD Cohort
 ```{r cm_ss_scd, fig.height=6}
 
-case_mix_summ_viz(process_output = read_csv(file = '../results/COMBINED_case_mix_sept.csv') %>%
+case_mix_ss_viz(process_output = 
+                  read_csv(file = '../results/COMBINED_case_mix_newanon.csv') %>%
                     filter(cohort == 'scd'),
                   site_filter = site_list[1:6])
 
-case_mix_summ_viz(process_output = read_csv(file = '../results/COMBINED_case_mix_sept.csv') %>%
+case_mix_ss_viz(process_output =
+                  read_csv(file = '../results/COMBINED_case_mix_newanon.csv') %>%
                     filter(cohort == 'scd'),
                   site_filter = site_list[7:12])
 
-case_mix_summ_viz(process_output = read_csv(file = '../results/COMBINED_case_mix_sept.csv') %>%
+case_mix_ss_viz(process_output =
+                  read_csv(file = '../results/COMBINED_case_mix_newanon.csv') %>%
                     filter(cohort == 'scd'),
                   site_filter = site_list[13:18])
 
-case_mix_summ_viz(process_output = read_csv(file = '../results/COMBINED_case_mix_sept.csv') %>%
+case_mix_ss_viz(process_output =
+                  read_csv(file = '../results/COMBINED_case_mix_newanon.csv') %>%
                     filter(cohort == 'scd'),
                   site_filter = site_list[19:26])
 
@@ -100,71 +116,36 @@ case_mix_summ_viz(process_output = read_csv(file = '../results/COMBINED_case_mix
 # Multi Site Exploratory
 
 ## Full Cohort
-```{r cm_ms_full, fig.height = 9}
+```{r cm_ms_full}
 
-case_mix_ms_viz(process_output = read_csv(file = '../results/COMBINED_case_mix_sept.csv') %>%
-               filter(cohort == 'full'))
+grph <- case_mix_ms_viz(process_output = 
+                          read_csv(file = '../results/COMBINED_case_mix_newanon.csv'),
+                        cohort_nm = 'full')
 
+grph[[1]]
 
 ```
 
 ## SCD Cohort
-```{r cm_ms_scd, fig.height = 9}
+```{r cm_ms_scd}
 
-case_mix_ms_viz(process_output = read_csv(file = '../results/COMBINED_case_mix_sept.csv') %>%
-               filter(cohort == 'scd'))
+grph <- case_mix_ms_viz(process_output = 
+                          read_csv(file = '../results/COMBINED_case_mix_newanon.csv'),
+                        cohort_nm = 'scd')
 
-case_mix_ms_viz2(process_output = read_csv(file = '../results/COMBINED_case_mix_sept.csv') %>%
-               filter(cohort == 'scd'))
-
-```
-
-# Alternate Multi Site Options {.tabset .tabset-pills}
-
-## Alt 1 - Line Graph
-```{r cm_ms_alt}
-
-alt_full <- case_mix_ms_viz2(process_output = read_csv(file = '../results/COMBINED_case_mix_sept.csv') %>%
-               filter(cohort == 'full'),
-               cohort = 'Full')
-
-alt_scd <- case_mix_ms_viz2(process_output = read_csv(file = '../results/COMBINED_case_mix_sept.csv') %>%
-               filter(cohort == 'scd'), cohort = 'SCD')
-
-alt_full[[1]]
-alt_scd[[1]]
-
-```
-
-## Alt 2 - Dot Plot
-```{r cm_ms_alt2}
-
-alt_full[[2]]
-alt_scd[[2]]
-
-```
-
-## Alt 3 - Dot and Line Plot
-```{r cm_ms_alt3}
-
-alt_full[[3]]
-alt_scd[[3]]
+grph[[1]]
 
 ```
 
 # Anomaly Detection Output
-
-## Combined Networks
 ### Full Cohort
 ```{r mix_anom_full}
 
 mix_anon_combo <- trinetx_anom_detect(dat = 
-                                        read_csv(file = '../results/COMBINED_case_mix_sept.csv') %>%
+                                        read_csv(file = '../results/COMBINED_case_mix_newanon.csv') %>%
                                               filter(cohort == 'full',
                                                      !grepl('U', branch)) %>%
-                                        mutate(prop_pts = prop_pts * 100,
-                                           network = ifelse(grepl('HCO', site_anon),
-                                                            'trinetx', 'pedsnet')),
+                                        mutate(prop_pts = prop_pts * 100),
                                       var_col = 'prop_pts',
                                       grp_vars = c('branch'))
 
@@ -181,57 +162,12 @@ mix_anon_graph[[2]]
 ```{r mix_anom_scd}
 
 mix_anon_combo <- trinetx_anom_detect(dat = 
-                                        read_csv(file = '../results/COMBINED_case_mix_sept.csv') %>%
-                                        filter(cohort=='scd') %>%
-                                        mutate(prop_pts = prop_pts * 100,
-                                               network = ifelse(grepl('HCO', site_anon),
-                                                            'trinetx', 'pedsnet')),
+                                        read_csv(file = '../results/COMBINED_case_mix_newanon.csv') %>%
+                                        filter(cohort=='scd',
+                                               !grepl('U', branch)) %>%
+                                        mutate(prop_pts = prop_pts * 100),
                                       var_col = 'prop_pts',
                                       grp_vars = c('branch'))
-
-mix_anon_graph <- trinetx_anom_viz(dat = mix_anon_combo,
-                                   var_col = 'prop_pts',
-                                   grp_col = 'branch')
-
-mix_anon_graph[[1]]
-mix_anon_graph[[2]]
-
-```
-
-## Each Network Separately
-### Full Cohort
-```{r mix_anom_full2}
-
-mix_anon_combo <- trinetx_anom_detect(dat = 
-                                        read_csv(file = '../results/COMBINED_case_mix_sept.csv') %>%
-                                              filter(cohort == 'full',
-                                                     !grepl('U', branch)) %>%
-                                        mutate(prop_pts = prop_pts * 100,
-                                           network = ifelse(grepl('HCO', site_anon),
-                                                            'trinetx', 'pedsnet')),
-                                      var_col = 'prop_pts',
-                                      grp_vars = c('branch','network'))
-
-mix_anon_graph <- trinetx_anom_viz(dat = mix_anon_combo,
-                                   var_col = 'prop_pts',
-                                   grp_col = 'branch')
-
-mix_anon_graph[[1]]
-mix_anon_graph[[2]]
-
-```
-
-### SCD Cohort
-```{r mix_anom_scd2}
-
-mix_anon_combo <- trinetx_anom_detect(dat = 
-                                        read_csv(file = '../results/COMBINED_case_mix_sept.csv') %>%
-                                        filter(cohort=='scd') %>%
-                                        mutate(prop_pts = prop_pts * 100,
-                                               network = ifelse(grepl('HCO', site_anon),
-                                                            'trinetx', 'pedsnet')),
-                                      var_col = 'prop_pts',
-                                      grp_vars = c('branch','network'))
 
 mix_anon_graph <- trinetx_anom_viz(dat = mix_anon_combo,
                                    var_col = 'prop_pts',

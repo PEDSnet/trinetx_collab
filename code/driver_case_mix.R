@@ -180,5 +180,5 @@
     left_join(mix_trinetx %>% distinct(branch, description)) %>%
     mutate(description = ifelse(grepl('U', branch), 'Codes for special purposes', description))
   
-  write.csv(mix_final, file = 'results/COMBINED_case_mix_sept.csv')
+  write.csv(mix_final, file = 'results/COMBINED_case_mix_newanon.csv')
   

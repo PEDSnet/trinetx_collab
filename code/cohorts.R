@@ -1,15 +1,3 @@
-#'
-#' This file contains functions to identify cohorts in a study.  Its
-#' contents, as well as the contents of any R files whose name begins
-#' with "cohort_", will be automatically sourced when the request is
-#' executed.
-#'
-#' For simpler requests, it will often be possible to do all cohort
-#' manipulation in functions within this file.  For more complex
-#' requests, it may be more readable to separate different cohorts or
-#' operations on cohorts into logical groups in different files.
-#'
-
 
 #' Convenience wrapper function to establish argos function
 #' 
@@ -63,8 +51,10 @@ initialize_session <- function(session_name,
   # Set db_src
   if(!is_json){
     get_argos_default()$config('db_src', db_conn)
+    db_str <- DBI::dbGetInfo(db_conn)
   }else{
     get_argos_default()$config('db_src', srcr(db_conn))
+    db_str <- DBI::dbGetInfo(srcr(db_conn))
   }
   
   # Set misc configs
@@ -95,7 +85,6 @@ initialize_session <- function(session_name,
                                              result_dir = results_drop_wd))
   
   # Print session information
-  db_str <- DBI::dbGetInfo(config('db_src'))
   cli::cli_div(theme = list(span.code = list(color = 'blue')))
   
   cli::cli_inform(paste0('Connected to: ', db_str$dbname, '@', db_str$host))
@@ -112,7 +101,6 @@ initialize_session <- function(session_name,
 #' 
 #' @return the cdm_tbl name with site as a grouper
 #' 
-
 site_cdm_tbl <- function(name,
                          site_filter = config('site_filter'),
                          ...) {
@@ -138,7 +126,6 @@ site_cdm_tbl <- function(name,
 #' @return The table as it exists on the databse, with the new data
 #' appended, if the table already existts.
 #' 
-
 output_tbl_append <- function(data, name = NA, local = FALSE,
                               file = ifelse(config('execution_mode') !=
                                               'development', TRUE, FALSE),
@@ -182,7 +169,6 @@ output_tbl_append <- function(data, name = NA, local = FALSE,
 #' @return one dataframe with additional columns that compute all-site counts & proportions to
 #'         supplement site specific counts and proportions
 #' 
-
 trinetx_check_pp <- function(dat,
                              group){
   
@@ -264,24 +250,6 @@ add_meta <- function(tbl_meta,
   
   
 }
-
-#' Site Anonymization
-#'
-#' @param df data frame with a site column that contains every site
-#'           that needs to be anonymized
-#'
-#' @return a data frame with the site's original name, its anonymized name, and
-#'         the number associated with the anonymized name
-#' 
-site_anon <- function(df){
-  
-  distinct_sites <- df %>%
-    distinct(site) %>% collect()
-  site_nums <- distinct_sites[sample(1:nrow(distinct_sites)),]%>%
-    mutate(sitenum=row_number(),
-           site_anon=paste0("site ", sitenum))
-}
-
 
 
 #' Create a cross-joined master table for variable reference
@@ -492,314 +460,3 @@ compute_dist_mean_median <- function(tbl,
 
 
 
-#' Multi-Site comparison against all site median
-#' 
-#' pulled from PF check in SSDQA with some edits
-
-ms_exp_nt2 <- function(process_output,
-                       check_string = 'Branch',
-                       y_col = 'branch',
-                       descriptor_col = 'description',
-                       x_col = 'prop_pts'){
-  
-  data_format <- process_output %>%
-    mutate(text = paste0('Site: ', site_anon,
-                         '\n', check_string, ': ', !!sym(descriptor_col),
-                         '\nProportion: ', !!sym(x_col)))
-  
-  r <- ggplot(data_format, 
-              aes(y=!!sym(y_col),x=!!sym(x_col), colour=site_anon))+
-    geom_point_interactive(aes(tooltip = text), size=3)+
-    geom_point(aes(y=!!sym(y_col), x=allsite_median), shape=8, size=4, color="black")+
-    scale_color_ssdqa(discrete = TRUE) +
-    scale_y_discrete(limits=rev) +
-    #facet_wrap((facet), scales="free_x", ncol=2)+
-    theme_minimal() + 
-    labs(y = check_string,
-         x = 'Proportion Patients',
-         color = 'Site',
-         title = paste0('Proportion of Patients with Each ', check_string),
-         subtitle = 'Star represents All-Site Median')
-  
-  girafe(ggobj = r)
-  
-}
-
-ms_exp_nt2_facet <- function(process_output,
-                       check_string = 'Branch',
-                       y_col = 'branch',
-                       descriptor_col = 'description',
-                       facet_wrap_var='site_category'){
-  
-  data_format <- process_output %>%
-    mutate(text = paste0('Site: ', site_anon,
-                         '\n', check_string, ': ', !!sym(descriptor_col),
-                         '\nProportion: ', prop_pts))
-  x = sym(facet_wrap_var)
-  
-  r <- ggplot(data_format, 
-              aes(y=!!sym(y_col),x=prop_pts, colour=site_anon))+
-    geom_point_interactive(aes(tooltip = text), size=3)+
-    geom_point(aes(y=!!sym(y_col), x=allsite_median), shape=8, size=4, color="black")+
-    scale_color_ssdqa(discrete = TRUE) +
-    scale_y_discrete(limits=rev) +
-    #facet_wrap((facet), scales="free_x", ncol=2)+
-    theme_minimal() + 
-    labs(y = check_string,
-         x = 'Proportion Patients',
-         color = 'Site',
-         title = paste0('Proportion of Patients with Each ', check_string),
-         subtitle = 'Star represents All-Site Median') +
-    facet_wrap(x)
-  
-  girafe(ggobj = r)
-  
-}
-
-#' Euclidean distance function for testing
-
-euclidean_output <- function(process_output,
-                             output_var,
-                             filter_variable,
-                             title) {
-
-  if (! is.null(filter_variable)) {
-    filt_op <- process_output %>% filter(check_desc == filter_variable) %>%
-      mutate(prop_col = !!sym(output_var))
-    
-    allsites <- 
-      filt_op %>% 
-      select(time_start,check_desc,mean_allsiteprop) %>% distinct() %>% 
-      rename(prop_col=mean_allsiteprop) %>% 
-      mutate(site_anon='all site average') %>% 
-      mutate(text_smooth=paste0("Site: ", site_anon,
-                                "\n","Proportion: ",prop_col),
-             text_raw=paste0("Site: ", site_anon,
-                             "\n","Proportion: ",prop_col)) 
-    
-  } else {
-    filt_op <- process_output %>% 
-      mutate(prop_col = !!sym(output_var))
-    
-    allsites <- 
-      filt_op %>% 
-      select(time_start,mean_allsiteprop) %>% distinct() %>% 
-      rename(prop_col=mean_allsiteprop) %>% 
-      mutate(site_anon='all site average') %>% 
-      mutate(text_smooth=paste0("Site: ", site_anon,
-                                "\n","Proportion: ",prop_col),
-             text_raw=paste0("Site: ", site_anon,
-                             "\n","Proportion: ",prop_col)) 
-  }
-  
-  
-  dat_to_plot <- 
-    filt_op %>% 
-    mutate(text_smooth=paste0("Site: ", site_anon,
-                              "\n","Euclidean Distance from All-Site Mean: ",dist_eucl_mean),
-           text_raw=paste0("Site: ", site_anon,
-                           "\n","Site Proportion: ",prop_col,
-                           "\n","Site Smoothed Proportion: ",site_loess,
-                           "\n","Euclidean Distance from All-Site Mean: ",dist_eucl_mean)) 
-  
-  lvls <- stringr::str_sort(unique(dat_to_plot$site_anon), numeric = TRUE, decreasing = TRUE)
-  dat_to_plot$site_anon <- factor(dat_to_plot$site_anon, levels = lvls)
-  
-  p <- dat_to_plot %>%
-    ggplot(aes(y = prop_col, x = time_start, color = site_anon, group = site_anon, text = text_smooth)) +
-    geom_line(data=allsites, linewidth=1.1) +
-    geom_smooth(se=TRUE,alpha=0.1,linewidth=0.5, formula = y ~ x) +
-    theme_minimal() +
-    theme(axis.text.x = element_text(angle = 30, vjust = 1, hjust=1),
-          #text = element_text(size = 25),
-          legend.position = 'none') +
-    scale_color_ssdqa() +
-    labs(y = 'Proportion (Loess)',
-         x = 'Time',
-         title = title)
-  
-  q <- dat_to_plot %>%
-    ggplot(aes(y = prop_col, x = time_start, color = site_anon,
-               group=site_anon, text=text_raw)) +
-    geom_line(data=allsites,linewidth=1.1) +
-    geom_line(linewidth=0.2) +
-    theme_minimal() +
-    theme(axis.text.x = element_text(angle = 30, vjust = 1, hjust=1),
-          #text = element_text(size = 25),
-          legend.position = 'none') +
-    scale_color_ssdqa() +
-    labs(x = 'Time',
-         y = 'Proportion',
-         title = title)
-  
-  t <- dat_to_plot %>% 
-    distinct(site_anon, dist_eucl_mean, site_loess) %>% 
-    group_by(site_anon, dist_eucl_mean) %>% 
-    summarise(mean_site_loess = mean(site_loess)) %>%
-    ggplot(aes(x = site_anon, y = dist_eucl_mean, fill = mean_site_loess)) + 
-    geom_col() + 
-    # geom_text(aes(label = dist_eucl_mean), vjust = 2, size = 3,
-    #           show.legend = FALSE) +
-    coord_radial(r_axis_inside = FALSE, rotate_angle = TRUE) + 
-    guides(theta = guide_axis_theta(angle = 0)) +
-    theme_minimal() + 
-    scale_fill_ssdqa(palette = 'diverging', discrete = FALSE) +
-    theme(legend.position = 'none',
-          legend.text = element_text(angle = 45, vjust = 0.9, hjust = 1),
-          axis.text.x = element_text(face = 'bold'),
-          #text = element_text(size = 20)
-          ) + 
-    labs(y ='Euclidean Distance', 
-         x = '',
-         title = title)
-  
-  plotly_p <- ggplotly(p,tooltip="text")
-  plotly_q <- ggplotly(q,tooltip="text")
-  
-  output <- list(plotly_p,
-                 plotly_q,
-                 t)
-  
-  return(output)
-  
-}
-
-
-#' Run Anomilization for *_ss_anom_at
-#'
-#' @param fot_input_tbl table output by compute_fot where the check of interest
-#'                      is used as the check_func
-#' @param grp_vars the variables that should be preserved in the cross join
-#' @param var_col the column with the numerical statistic of interest for the euclidean
-#'                distance computation
-#' @param time_var the column with time information 
-#'
-#' @return one dataframe with all columns from the original input table
-#'         plus the columns needed for timetk output generated by the
-#'         `anomalize` function
-#'
-anomalize_ss_anom_at <- function(fot_input_tbl,
-                                 grp_vars,
-                                 time_var,
-                                 var_col){
-  
-  time_inc <- fot_input_tbl %>% ungroup() %>% filter(!is.na(time_increment)) %>%
-    distinct(time_increment) %>% pull()
-  
-  if(time_inc == 'year'){
-    
-    final_tbl <- fot_input_tbl
-    
-  }else{
-    
-    plt_tbl <- compute_at_cross_join(cj_tbl = fot_input_tbl,
-                                     cj_var_names = grp_vars,
-                                     join_type = 'full') %>%
-      filter(!is.na(!!sym(time_var)))
-    
-    anomalize_tbl <- anomalize(plt_tbl %>% group_by(!!!syms(grp_vars)),
-                               .date_var=!!sym(time_var), 
-                               .value=!!sym(var_col))
-    
-    final_tbl <- plt_tbl %>%
-      left_join(anomalize_tbl) %>%
-      ungroup()
-    
-  }
-  
-  return(final_tbl)
-  
-}
-
-
-#' *Single Site, Anomaly, Across Time*
-#' 
-#' Control chart looking at number of mappings over time
-#' 
-#' using the CHOP-developed package called `rocqi` 
-#' 
-#' @param process_output dataframe output by `csd_process`
-#' @param vocab_tbl OPTIONAL: the location of an external vocabulary table containing concept names for
-#'                  the provided codes. if not NULL, concept names will be available in either a reference
-#'                  table or in a hover tooltip
-#' @param filtered_var the variable to perform the anomaly detection for
-#' @param facet the variables by which you would like to facet the graph; defaults to NULL
-#' @param top_mapping_n integer value for the number of concepts to show mappings across time for;
-#'                      graph will be faceted by concept
-#' 
-#' @return a C control chart that highlights points in time where the number of mappings for
-#'         a particular code are anomalous; outlying points are highlighted red
-#' 
-ss_anom_at <- function(process_output,
-                       filtered_var='ibd',
-                       var_col = 'check_desc',
-                       #filter_concept=81893,
-                       facet=NULL){
-  
-  time_inc <- process_output %>% filter(!is.na(time_increment)) %>% distinct(time_increment) %>% pull()
-  
-  if(time_inc == 'year'){
-    
-    facet <- facet %>% append('concept_id') %>% unique()
-    
-    c_added <- process_output %>% filter(!!sym(var_col) == filtered_var)
-    
-    
-    c_final <- c_added %>% group_by(!!!syms(facet), time_start, ct_concept) %>%
-      unite(facet_col, !!!syms(facet), sep = '\n') 
-    
-    c_plot <- qic(data = c_final, x = time_start, y = ct_concept, chart = 'pp', facet = ~facet_col,
-                  title = 'Control Chart: Code Usage Over Time', show.grid = TRUE, n = ct_denom,
-                  ylab = 'Proportion', xlab = 'Time')
-    
-    op_dat <- c_plot$data
-    
-    new_pp <- ggplot(op_dat,aes(x,y)) +
-      geom_ribbon(aes(ymin = lcl,ymax = ucl), fill = "lightgray",alpha = 0.4) +
-      geom_line(colour = ssdqa_colors_standard[[12]], size = .5) +  
-      geom_line(aes(x,cl)) +
-      geom_point(colour = ssdqa_colors_standard[[6]] , fill = ssdqa_colors_standard[[6]], size = 1) +
-      geom_point(data = subset(op_dat, y >= ucl), color = ssdqa_colors_standard[[3]], size = 2) +
-      geom_point(data = subset(op_dat, y <= lcl), color = ssdqa_colors_standard[[3]], size = 2) +
-      facet_wrap(~facet1) +
-      ggtitle(label = 'Control Chart: Code Usage Over Time') +
-      labs(x = 'Time',
-           y = 'Proportion')+
-      theme_minimal()
-    
-    output_int <- ggplotly(new_pp)
-    
-    ref_tbl <- generate_ref_table(tbl = c_added %>% filter(variable == filtered_var,
-                                                           concept_id == filter_concept) %>% 
-                                    mutate(concept_id=as.integer(concept_id)),
-                                  id_col = 'concept_id',
-                                  denom = 'ct_concept',
-                                  name_col = 'concept_name',
-                                  #vocab_tbl = vocab_tbl,
-                                  time = TRUE)
-    
-    output <- list(output_int, ref_tbl)
-    
-  }else{
-    
-    # concept_nm <- process_output %>% 
-    #   filter(!is.na(concept_name), concept_id == filter_concept) %>% 
-    #   distinct(concept_name) %>% pull()
-    
-    anomalies <- 
-      plot_anomalies(.data=process_output %>% filter(!!sym(var_col) == filtered_var),
-                     .date_var=time_start) %>% 
-      layout(title = paste0('Anomalies for ', filtered_var))
-    
-    decomp <- 
-      plot_anomalies_decomp(.data=process_output %>% filter(!!sym(var_col) == filtered_var),
-                            .date_var=time_start) %>% 
-      layout(title = paste0('Anomalies for ', filtered_var))
-    
-    output <- list(anomalies, decomp)
-    
-  }
-  
-  return(output)
-  
-}

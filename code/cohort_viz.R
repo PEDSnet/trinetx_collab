@@ -72,7 +72,7 @@ trinetx_anom_viz <- function(dat,
 
 
 
-#' Couplets Exploratory Visualization
+#' Couplets Exploratory Visualization - MS Heat Map
 #'
 #' @param process_output the cleaned, combined output of the couplets
 #'                       check
@@ -101,6 +101,17 @@ couplets_ms_viz <- function(process_output,
   
 }
 
+#' Couplets Exploratory Visualization - Bar Plots
+#'
+#' @param process_output the cleaned, combined output from the couplets check
+#' @param facet_col the column that should be used to facet; 
+#'                  should be either `site_anon` or `couplet_name`
+#'
+#' @return a stacked bar plot showing the proportion of patients only belonging to cohort 1,
+#' only belonging to cohort 2, and belonging to both cohorts
+#' @return a stacked bar plot showing the proportion of patients only belonging to cohort 1 and
+#' the proportion of patients in cohort 2 that also belong to cohort 1
+#' 
 couplets_ss_viz <- function(process_output,
                             facet_col = 'site_anon'){
   
@@ -158,42 +169,17 @@ couplets_ss_viz <- function(process_output,
 #' Case Mix Exploratory Visualization - Multi Site
 #'
 #' @param process_output the cleaned, combined output of the case mix check
+#' @param cohort the cohort of interest for the graph
 #'
-#' @return a bar plot with site along the x axis and patient proportion along the y axis, 
-#'         facetting by the ICD10CM branch. A dotted line represents the all site median
-#'         for each branch
+#' @return a dot plot where each dot represents a site's proportion
+#' of patients belonging to a specific ICD10CM header. a dotted line passing through
+#' each category represents the overall median
 #' 
-case_mix_ms_viz <- function(process_output){
-  
-  data_format <- process_output %>%
-    mutate(text = paste0('Site: ', site_anon,
-                         '\nBranch: ', description,
-                         '\nProportion: ', prop_pts))
-  
-  r <- ggplot(data_format, aes(y=prop_pts,x=site_anon, fill=site_anon))+
-    geom_col_interactive(aes(tooltip = text))+
-    geom_hline(aes(yintercept = allsite_median), linetype = 'dotted') +
-    #geom_point(aes(y=!!sym(y_col), x=allsite_median), shape=8, size=4, color="black")+
-    scale_fill_ssdqa(discrete = TRUE) +
-    #scale_y_discrete(limits=rev) +
-    facet_wrap(~branch, #scales="free_y", 
-               ncol = 2)+
-    theme_minimal() + 
-    theme(legend.position = 'none',
-          axis.text.x = element_text(angle = 90)) +
-    labs(y = 'Proportion Patients',
-         x = 'Site',
-         title = paste0('Proportion of Patients with Each Branch'),
-         subtitle = 'Dotted line represents All-Site Median')
-  
-  girafe(ggobj = r)
-  
-}
-
-case_mix_ms_viz2 <- function(process_output,
-                             cohort = 'Full'){
+case_mix_ms_viz <- function(process_output,
+                            cohort_nm = 'Full'){
   
   allsite_median <- process_output %>%
+    filter(cohort == cohort_nm) %>%
     group_by(cohort, branch) %>%
     mutate(allsite_mean = mean(prop_pts)) %>%
     ungroup() %>%
@@ -201,35 +187,36 @@ case_mix_ms_viz2 <- function(process_output,
     mutate(site_anon = 'all site median') %>%
     rename(prop_pts = allsite_median)
   
-  grph <- process_output %>%
-    ggplot(aes(x = branch, y = prop_pts, color = site_anon,
-               group = site_anon)) +
-    geom_line() +
-    geom_point() +
-    geom_line(data = allsite_median, linewidth = 1.1, linetype = 'dotted', color = 'black', alpha = 0.5) +
-    scale_color_ssdqa() +
-    theme_minimal() +
-    theme(axis.text.x = element_text(angle = 90)) +
-    labs(x = 'ICD10CM Branch',
-         y = 'Proportion',
-         title = paste0('Patients per Branch in ', cohort, ' Cohort'),
-         subtitle = 'Dotted line is All Site Median')
-  
-  grph2 <- process_output %>%
-    ggplot(aes(x = branch, y = prop_pts)) +
-    #geom_line() +
-    geom_point(aes(color = site_anon,
-               group = site_anon)) +
-    geom_point(data = allsite_median, shape = 8, size = 3, color = 'black') +
-    scale_color_ssdqa() +
-    theme_minimal() +
-    theme(axis.text.x = element_text(angle = 90)) +
-    labs(x = 'ICD10CM Branch',
-         y = 'Proportion',
-         title = paste0('Patients per Branch in ', cohort, ' Cohort'),
-         subtitle = 'Star is All Site Median')
+  # grph <- process_output %>%
+  #   ggplot(aes(x = branch, y = prop_pts, color = site_anon,
+  #              group = site_anon)) +
+  #   geom_line() +
+  #   geom_point() +
+  #   geom_line(data = allsite_median, linewidth = 1.1, linetype = 'dotted', color = 'black', alpha = 0.5) +
+  #   scale_color_ssdqa() +
+  #   theme_minimal() +
+  #   theme(axis.text.x = element_text(angle = 90)) +
+  #   labs(x = 'ICD10CM Branch',
+  #        y = 'Proportion',
+  #        title = paste0('Patients per Branch in ', cohort, ' Cohort'),
+  #        subtitle = 'Dotted line is All Site Median')
+  # 
+  # grph2 <- process_output %>%
+  #   ggplot(aes(x = branch, y = prop_pts)) +
+  #   #geom_line() +
+  #   geom_point(aes(color = site_anon,
+  #              group = site_anon)) +
+  #   geom_point(data = allsite_median, shape = 8, size = 3, color = 'black') +
+  #   scale_color_ssdqa() +
+  #   theme_minimal() +
+  #   theme(axis.text.x = element_text(angle = 90)) +
+  #   labs(x = 'ICD10CM Branch',
+  #        y = 'Proportion',
+  #        title = paste0('Patients per Branch in ', cohort, ' Cohort'),
+  #        subtitle = 'Star is All Site Median')
   
   grph3 <- process_output %>%
+    filter(cohort == cohort_nm) %>%
     ggplot(aes(x = branch, y = prop_pts, color = site_anon, group = site_anon)) +
     #geom_line() +
     geom_point() +
@@ -239,18 +226,18 @@ case_mix_ms_viz2 <- function(process_output,
     theme(axis.text.x = element_text(angle = 90)) +
     labs(x = 'ICD10CM Branch',
          y = 'Proportion',
-         title = paste0('Patients per Branch in ', cohort, ' Cohort'),
+         title = paste0('Patients per Branch in ', cohort_nm, ' Cohort'),
          subtitle = 'Dotted Line is All Site Median')
   
-  output <- list(ggplotly(grph),
-                 ggplotly(grph2),
+  output <- list(#ggplotly(grph),
+                 #ggplotly(grph2),
                  ggplotly(grph3))
     
   
 }
 
 
-#' Case Mix Exploratory Visualization - Summary / Single Site
+#' Case Mix Exploratory Visualization - Single Site
 #'
 #' @param process_output the cleaned, combined output from the case mix
 #'                       check
@@ -261,8 +248,8 @@ case_mix_ms_viz2 <- function(process_output,
 #'         the all site mean (pink) and all site median (brown) proportion
 #'         for each ICD branch
 #' 
-case_mix_summ_viz <- function(process_output,
-                              site_filter){
+case_mix_ss_viz <- function(process_output,
+                            site_filter){
   
   dat_to_plot <- process_output %>%
     group_by(cohort, branch) %>%
@@ -491,7 +478,7 @@ fot_euclidean_viz <- function(process_output,
 }
 
 
-#' Coverage Overlap Exploratory Visualization
+#' Coverage Overlap Exploratory Visualization - Multi-Site
 #'
 #' @param process_output the cleaned, combined output from the coverage
 #'                       overlap check
@@ -527,9 +514,20 @@ coverage_overlap_ms_viz <- function(process_output){
 }
 
 
-coverage_overlap_venn_viz <- function(process_output,
-                                      site_list,
-                                      output_directory){
+#' Coverage Overlap Exploratory Visualization - Single Site
+#'
+#' @param process_output the cleaned, combined output from the coverage
+#'                       overlap check
+#' @param site_list a vector of site name(s) for which venn diagrams should be produced
+#' @param output_directory the file path to the directory where the PNG images of the 
+#'                         venn diagrams should be output
+#'
+#' @return one png file per site in site_list displaying a Venn diagram, highlighting
+#'         the overlap between the four fact domains
+#' 
+coverage_overlap_ss_viz <- function(process_output,
+                                    site_list,
+                                    output_directory){
   
   for(i in 1:length(site_list)){
     

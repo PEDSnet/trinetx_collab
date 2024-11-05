@@ -82,7 +82,7 @@
     mutate(row_visits = 0) %>%
     select(site_anon, month_end, check_desc, row_pts, row_visits, check)
   
-  ## Clean trinetx data
+  ## Clean chop data
   fot_chop_clean <- fot_chop %>%
     select(site_anon, month_end, check_desc, row_pts, row_visits, check) %>%
     mutate(month_end = as.Date(month_end, format = '%m/%d/%y'))
@@ -92,7 +92,7 @@
     union(fot_chop_clean) %>%
     filter(site_anon != 'All HCOs' & site_anon != 'all')
   
-  write.csv(fot_final, file = 'results/COMBINED_fot_sept.csv')
+  write.csv(fot_final, file = 'results/COMBINED_fot_newanon.csv')
   
   ##' `Incidence Rate Computation`
   
@@ -113,5 +113,5 @@
     select(site_anon, check_desc, month_end, incidence_rate) %>%
     union(fot_rate_tnx)
 
-  write.csv(fot_combo_rate, file = 'results/COMBINED_fot_rates_sept.csv')  
+  write.csv(fot_combo_rates, file = 'results/COMBINED_fot_rates_newanon.csv')  
   

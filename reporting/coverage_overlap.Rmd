@@ -10,13 +10,17 @@ output:
 
 ```{r setup, include=FALSE}
 # Default taken from R notebook behavior: when knitting, wd will always be location of notebook
-base_dir <- '..'
-Sys.setenv(PEDSNET_SKIP_REQUEST_EXECUTION=1)
-tryCatch(source('../site/run.R'),
-         error = function (e) message(e)) # May not be able to make db connection
+# base_dir <- '..'
+# Sys.setenv(PEDSNET_SKIP_REQUEST_EXECUTION=1)
+# tryCatch(source('../site/run.R'),
+#          error = function (e) message(e)) # May not be able to make db connection
+# 
+# # Set to "local" to read data from ../results, or another value to read from db
+# data_source <- if_else(config('execution_mode') == 'distribution', 'local', 'not_local')
 
-# Set to "local" to read data from ../results, or another value to read from db
-data_source <- if_else(config('execution_mode') == 'distribution', 'local', 'not_local')
+source('../code/cohort_viz.R')
+source('../code/cohort_colors.R')
+source('../code/cohort_trinetx_anom.R')
 
 require(tidyr)
 require(knitr)
@@ -26,6 +30,10 @@ require(tibble)
 require(ggplot2)
 require(VennDiagram)
 require(gt)
+require(ggiraph)
+require(plotly)
+require(dplyr)
+require(readr)
 
 get_results <- function(tbl_name) {
   if (data_source == 'local') {
@@ -45,7 +53,7 @@ prettify_kable <- function(data) {
   rslt
 }
 
-site_list <- read_csv(file = '../results/COMBINED_cvg_overlap_sept.csv') %>% 
+site_list <- read_csv(file = '../results/COMBINED_cvg_overlap_newanon.csv') %>% 
   distinct(site_anon) %>% pull()
 
 
@@ -57,180 +65,180 @@ opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 ```{r cvg_prep}
 
-coverage_overlap_venn_viz(process_output = 
-                            read_csv(file = '../results/COMBINED_cvg_overlap_sept.csv'),
+coverage_overlap_ss_viz(process_output = 
+                            read_csv(file = '../results/COMBINED_cvg_overlap_newanon.csv'),
                           site_list = site_list,
-                          output_directory = paste0(base_dir, '/results/'))
+                          output_directory = paste0('../results/'))
 
 
 ```
 
-## Site 1
+## Site A
 
 ```{r cvg_site_display}
 
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 1.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site A.png'))
 cat('\n')
 ```
 
-## Site 2
+## Site B
 
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 2.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site B.png'))
 cat('\n')
 ```
 
-## Site 3
+## Site C
 
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 3.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site C.png'))
 cat('\n')
 ```
 
-## Site 4
+## Site D
 
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 4.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site D.png'))
 cat('\n')
 ```
 
-## Site 5
+## Site E
 
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 5.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site E.png'))
 cat('\n')
 ```
 
-## Site 6
+## Site F
 
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 6.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site F.png'))
 cat('\n')
 ```
 
-## Site 7
+## Site G
 
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 7.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site G.png'))
 cat('\n')
 ```
 
-## Site 8
+## Site H
 
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 8.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site H.png'))
 cat('\n')
 ```
 
-## Site 9
+## Site I
 
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 9.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site I.png'))
 cat('\n')
 ```
 
-## Site 10
+## Site J
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_site 10.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site J.png'))
 cat('\n')
 ```
 
-## HCO1
+## Site K
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_HCO1.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site K.png'))
 cat('\n')
 ```
 
-## HCO2
+## Site L
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_HCO2.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site L.png'))
 cat('\n')
 ```
 
-## HCO3
+## Site M
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_HCO3.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site M.png'))
 cat('\n')
 ```
 
-## HCO4
+## Site N
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_HCO4.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site N.png'))
 cat('\n')
 ```
 
-## HCO5
+## Site O
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_HCO5.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site O.png'))
 cat('\n')
 ```
 
-## HCO6
+## Site P
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_HCO6.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site P.png'))
 cat('\n')
 ```
 
-## HCO7
+## Site Q
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_HCO7.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site Q.png'))
 cat('\n')
 ```
 
-## HCO8
+## Site R
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_HCO8.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site R.png'))
 cat('\n')
 ```
 
-## HCO9
+## Site S
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_HCO9.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site S.png'))
 cat('\n')
 ```
 
-## HCO10
+## Site T
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_HCO10.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site T.png'))
 cat('\n')
 ```
 
-## HCO11
+## Site U
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_HCO11.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site U.png'))
 cat('\n')
 ```
 
-## HCO12
+## Site V
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_HCO12.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site V.png'))
 cat('\n')
 ```
 
-## HCO13
+## Site W
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_HCO13.png'))
-cat('\n')
-
-```
-
-## HCO14
-```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_HCO14.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site W.png'))
 cat('\n')
 
 ```
 
-## HCO15
+## Site X
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_HCO15.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site X.png'))
 cat('\n')
 
 ```
 
-## HCO16
+## Site Y
 ```{r}
-knitr::include_graphics(paste0(base_dir, '/results/venn_diagram_HCO16.png'))
+knitr::include_graphics(paste0('../results/venn_diagram_site Y.png'))
+cat('\n')
+
+```
+
+## Site Z
+```{r}
+knitr::include_graphics(paste0('../results/venn_diagram_site Z.png'))
 cat('\n')
 
 ```
@@ -239,45 +247,21 @@ cat('\n')
 ```{r}
 
 coverage_overlap_ms_viz(process_output = 
-                          read_csv(file = '../results/COMBINED_cvg_overlap_sept.csv'))
+                          read_csv(file = '../results/COMBINED_cvg_overlap_newanon.csv'))
 
 
 ```
 
 # Anomaly Detection
 
-## Combined Networks
 ```{r}
 
 cvg_anom <- trinetx_anom_detect(dat = 
-                                  read_csv(file = '../results/COMBINED_cvg_overlap_sept.csv') %>%
+                                  read_csv(file = '../results/COMBINED_cvg_overlap_newanon.csv') %>%
                                   filter(site_anon != 'all') %>%
-                                  mutate(prop_pts = prop_pts * 100,
-                                           network = ifelse(grepl('HCO', site_anon),
-                                                            'trinetx', 'pedsnet')),
+                                  mutate(prop_pts = prop_pts * 100),
                                 var_col = 'prop_pts',
                                 grp_vars = c('fact_long'))
-
-cvg_anom_grph <- trinetx_anom_viz(dat = cvg_anom,
-                                  var_col = 'prop_pts',
-                                  grp_col = 'fact_long')
-
-cvg_anom_grph[[1]]
-cvg_anom_grph[[2]]
-
-```
-
-## Each Network Separately
-```{r}
-
-cvg_anom <- trinetx_anom_detect(dat = 
-                                  read_csv(file = '../results/COMBINED_cvg_overlap_sept.csv') %>%
-                                  filter(site_anon != 'all') %>%
-                                  mutate(prop_pts = prop_pts * 100,
-                                           network = ifelse(grepl('HCO', site_anon),
-                                                            'trinetx', 'pedsnet')),
-                                var_col = 'prop_pts',
-                                grp_vars = c('fact_long', 'network'))
 
 cvg_anom_grph <- trinetx_anom_viz(dat = cvg_anom,
                                   var_col = 'prop_pts',

@@ -10,13 +10,17 @@ output:
 
 ```{r setup, include=FALSE}
 # Default taken from R notebook behavior: when knitting, wd will always be location of notebook
-base_dir <- '..'
-Sys.setenv(PEDSNET_SKIP_REQUEST_EXECUTION=1)
-tryCatch(source('../site/run.R'),
-         error = function (e) message(e)) # May not be able to make db connection
+# base_dir <- '..'
+# Sys.setenv(PEDSNET_SKIP_REQUEST_EXECUTION=1)
+# tryCatch(source('../site/run.R'),
+#          error = function (e) message(e)) # May not be able to make db connection
+# 
+# # Set to "local" to read data from ../results, or another value to read from db
+# data_source <- if_else(config('execution_mode') == 'distribution', 'local', 'not_local')
 
-# Set to "local" to read data from ../results, or another value to read from db
-data_source <- if_else(config('execution_mode') == 'distribution', 'local', 'not_local')
+source('../code/cohort_viz.R')
+source('../code/cohort_colors.R')
+source('../code/cohort_trinetx_anom.R')
 
 require(tidyr)
 require(knitr)
@@ -25,6 +29,10 @@ require(stringr)
 require(tibble)
 require(ggplot2)
 require(gt)
+require(dplyr)
+require(ggiraph)
+require(plotly)
+require(readr)
 
 get_results <- function(tbl_name) {
   if (data_source == 'local') {
@@ -44,7 +52,7 @@ prettify_kable <- function(data) {
   rslt
 }
 
-site_list <- read_csv(file = '../results/COMBINED_couplets_sept.csv') %>% 
+site_list <- read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>% 
   distinct(site_anon) %>% filter(!is.na(site_anon), site_anon != 'ALL') %>% pull()
 
 opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
@@ -54,16 +62,16 @@ opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 # Single Site Exploratory
 ```{r}
 
-couplets_ss_viz(process_output = read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+couplets_ss_viz(process_output = read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(site_anon %in% site_list[1:6]))[[1]]
 
-couplets_ss_viz(process_output = read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+couplets_ss_viz(process_output = read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(site_anon %in% site_list[7:12]))[[1]]
 
-couplets_ss_viz(process_output = read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+couplets_ss_viz(process_output = read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(site_anon %in% site_list[13:18]))[[1]]
 
-couplets_ss_viz(process_output = read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+couplets_ss_viz(process_output = read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(site_anon %in% site_list[19:23]))[[1]]
 ```
 
@@ -72,7 +80,7 @@ couplets_ss_viz(process_output = read_csv(file = '../results/COMBINED_couplets_s
 ## Asthma & Bronchodilators
 ```{r, fig.height=7}
 
-x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(site_anon != 'ALL', couplet_name == 'Asthma+ Bronchodilators'),
                 facet_col = 'couplet_name')
 
@@ -83,7 +91,7 @@ x[[1]]
 ## Depression & Anxiety
 ```{r, fig.height=7}
 
-x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(site_anon != 'ALL', couplet_name == 'Depression + Anxiety'),
                 facet_col = 'couplet_name')
 
@@ -94,7 +102,7 @@ x[[1]]
 ## Edema & Loop Diuretic
 ```{r, fig.height=7}
 
-x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(site_anon != 'ALL', couplet_name == 'Edema + loop diuretic'),
                 facet_col = 'couplet_name')
 
@@ -105,7 +113,7 @@ x[[1]]
 ## Fracture & Imaging Procedure
 ```{r, fig.height=7}
 
-x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(site_anon != 'ALL', couplet_name == 'Fracture + Imaging Procedure'),
                 facet_col = 'couplet_name')
 
@@ -116,7 +124,7 @@ x[[1]]
 ## Sickle Cell & Hydroxyurea
 ```{r, fig.height=7}
 
-x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(site_anon != 'ALL', couplet_name == 'Sickle cell+ Hydroxyurea'),
                 facet_col = 'couplet_name')
 
@@ -127,7 +135,7 @@ x[[1]]
 ## T1DM & Insulin
 ```{r, fig.height=7}
 
-x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(site_anon != 'ALL', couplet_name == 'T1DM + insulin'),
                 facet_col = 'couplet_name')
 
@@ -138,7 +146,7 @@ x[[1]]
 ## T2DM & Metformin
 ```{r, fig.height=7}
 
-x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(site_anon != 'ALL', couplet_name == 'T2DM + metformin'),
                 facet_col = 'couplet_name')
 
@@ -151,7 +159,7 @@ x[[1]]
 ## Asthma & Bronchodilators
 ```{r, fig.height=7}
 
-x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(site_anon != 'ALL', couplet_name == 'Asthma+ Bronchodilators'),
                 facet_col = 'couplet_name')
 
@@ -162,7 +170,7 @@ x[[2]]
 ## Depression & Anxiety
 ```{r, fig.height=7}
 
-x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(site_anon != 'ALL', couplet_name == 'Depression + Anxiety'),
                 facet_col = 'couplet_name')
 
@@ -173,7 +181,7 @@ x[[2]]
 ## Edema & Loop Diuretic
 ```{r, fig.height=7}
 
-x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(site_anon != 'ALL', couplet_name == 'Edema + loop diuretic'),
                 facet_col = 'couplet_name')
 
@@ -184,7 +192,7 @@ x[[2]]
 ## Fracture & Imaging Procedure
 ```{r, fig.height=7}
 
-x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(site_anon != 'ALL', couplet_name == 'Fracture + Imaging Procedure'),
                 facet_col = 'couplet_name')
 
@@ -195,7 +203,7 @@ x[[2]]
 ## Sickle Cell & Hydroxyurea
 ```{r, fig.height=7}
 
-x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(site_anon != 'ALL', couplet_name == 'Sickle cell+ Hydroxyurea'),
                 facet_col = 'couplet_name')
 
@@ -206,7 +214,7 @@ x[[2]]
 ## T1DM & Insulin
 ```{r, fig.height=7}
 
-x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(site_anon != 'ALL', couplet_name == 'T1DM + insulin'),
                 facet_col = 'couplet_name')
 
@@ -217,7 +225,7 @@ x[[2]]
 ## T2DM & Metformin
 ```{r, fig.height=7}
 
-x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+x <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(site_anon != 'ALL', couplet_name == 'T2DM + metformin'),
                 facet_col = 'couplet_name')
 
@@ -228,7 +236,7 @@ x[[2]]
 # Multi Site Exploratory - Heatmap
 ```{r, fig.height=6}
 
-couplets_ms_viz(read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+couplets_ms_viz(read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                   filter(cohort=='cohort_1_denom_prop') %>% 
                   mutate(prop = round(prop, 2)) %>%
                   filter(! str_detect(site_anon,'all|ALL')), 'prop') +
@@ -238,17 +246,13 @@ couplets_ms_viz(read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
 ```
 
 # Anomaly Detection for Prop. Cohort 2 in Cohort 1
-
-## Combined Networks
 ```{r}
 
-cplt_anom <- trinetx_anom_detect(dat = read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
+cplt_anom <- trinetx_anom_detect(dat = read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
                                    filter(cohort == 'cohort_1_denom_prop') %>% 
                                    filter(! str_detect(site_anon,'all|ALL')) %>% 
                                    mutate(prop = ifelse(is.na(prop), 0, prop),
-                                          prop = prop * 100, 
-                                          network = ifelse(grepl('HCO', site_anon), 
-                                                           'trinetx', 'pedsnet')),
+                                          prop = prop * 100),
                                  var_col = 'prop',
                                  grp_vars = c('couplet_name'))
 
@@ -259,27 +263,5 @@ combo <- trinetx_anom_viz(dat = cplt_anom,
 combo[[1]]
 combo[[2]]
 
-
-```
-
-## Each Network Separately
-```{r}
-
-cplt_anom <- trinetx_anom_detect(dat = read_csv(file = '../results/COMBINED_couplets_sept.csv') %>%
-                                   filter(cohort == 'cohort_1_denom_prop') %>% 
-                                   filter(! str_detect(site_anon,'all|ALL')) %>% 
-                                   mutate(prop = ifelse(is.na(prop), 0, prop),
-                                          prop = prop * 100, 
-                                          network = ifelse(grepl('HCO', site_anon), 
-                                                           'trinetx', 'pedsnet')),
-                                 var_col = 'prop',
-                                 grp_vars = c('couplet_name', 'network'))
-
-combo <- trinetx_anom_viz(dat = cplt_anom,
-                 var_col = 'prop',
-                 grp_col = 'couplet_name')
-
-combo[[1]]
-combo[[2]]
 
 ```
