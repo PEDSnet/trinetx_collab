@@ -18,7 +18,7 @@ The first step in executing any of the checks is setting up the environment. In 
 
 The Case-Mix or Signatures check evaluates the distribution of ICD10CM headers for diagnoses within a group of patients. A specific cohort can be provided to target the analysis, but if no cohort is provided, the check will evaluate all available patients in the `condition_occurrence` table. 
 
-The execution of the check plus some additional post processing can be found in `driver_case_mix.R`. See the `Anomaly Detection Methods` section below for information on how outliers were detected.
+The execution of the check plus some additional post processing can be found in `driver_case_mix.R`. See the [Anomaly Detection Methods](https://github.com/PEDSnet/trinetx_collab/blob/main/README.md#anomaly-detection-methods) section below for information on how outliers were detected.
 
 ### Couplets
 #### Relevant files:
@@ -31,7 +31,7 @@ The execution of the check plus some additional post processing can be found in 
 The Couplets check evaluates the concordance between two user-defined cohorts. Our selected cohorts can be found in the `dcon_execute.R` file, and by following the same list structure, users can customize the inputs and include different cohort pairs. The check and subsequent post-processing will compute counts & proportions for 5 cohort member types: patients that only belong to cohort 1, patients that only belong to cohort 2, patients belonging to both cohorts, patients belonging to cohort 1 that also belong to cohort 2 (cohort 2 used as the denominator rather than the total number of patients), and patients belonging to cohort 2 that also belong to cohort 1 (cohort 1 used as the denominator rather than the total number of patients).
 
 The execution of the check plus some additional post processing can be found in `driver_couplets.R`. See the 
-Anomaly Detection Methods section below for information on how outliers were detected.
+[Anomaly Detection Methods](https://github.com/PEDSnet/trinetx_collab/blob/main/README.md#anomaly-detection-methods) section below for information on how outliers were detected.
 
 ### Stability Over Time
 #### Relevant files:
@@ -44,7 +44,7 @@ Anomaly Detection Methods section below for information on how outliers were det
 The Stability Over Time check evaluates the number of patients with a given fact for each month across a time span. Our selected fact types can be found in the `fot_execute.R` file, and by following the same list structure, users can customize the inputs and include different facts. The time span can also be adjusted as needed. 
 
 The execution of the check plus some additional post processing can be found in the `driver_fot.R` file. See the 
-Anomaly Detection Methods section below for information on how outliers were detected.
+[Anomaly Detection Methods](https://github.com/PEDSnet/trinetx_collab/blob/main/README.md#anomaly-detection-methods) section below for information on how outliers were detected.
 
 ### Coverage Overlap
 #### Relevant files:
@@ -56,7 +56,7 @@ Anomaly Detection Methods section below for information on how outliers were det
 
 The Coverage Overlap check evaluates the distribution and overlap of patient representation in each user-provided domain. Each patient is only counted one time in the appropriate intersection of fact types. Our execution (found in `coverage_overlap_execute.R`) looked at four domains (diagnoses, medications, procedures, and labs), and by following the same list structure, users can customize the inputs and include different domains.
 
-The execution of the check plus some additional post processing can be found in the `driver_coverage_overlap.R` file. See the Anomaly Detection Methods section below for information on how outliers were detected.
+The execution of the check plus some additional post processing can be found in the `driver_coverage_overlap.R` file. See the [Anomaly Detection Methods](https://github.com/PEDSnet/trinetx_collab/blob/main/README.md#anomaly-detection-methods) section below for information on how outliers were detected.
 
 ## Anomaly Detection Methods
 
