@@ -35,7 +35,7 @@ Anomaly Detection Methods section below for information on how outliers were det
 
 ### Stability Over Time
 #### Relevant files:
-- (cohort_fot.R)[https://github.com/PEDSnet/trinetx_collab/blob/main/code/cohort_fot.R]
+- [cohort_fot.R](https://github.com/PEDSnet/trinetx_collab/blob/main/code/cohort_fot.R)
 - (fot_execute.R)[https://github.com/PEDSnet/trinetx_collab/blob/main/code/fot_execute.R]
 - (driver_fot.R)[https://github.com/PEDSnet/trinetx_collab/blob/main/code/driver_fot.R]
 - (stability_over_time.Rmd)[https://github.com/PEDSnet/trinetx_collab/blob/main/reporting/stability_over_time.Rmd]
