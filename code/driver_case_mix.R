@@ -1,8 +1,7 @@
 
   #' `Execute Function`
   
-  site_list <- c('seattle', 'stanford', 'lurie', 'nemours', 'national',
-                 'nationwide', 'chop', 'colorado', 'cchmc', 'texas')
+  site_list <- c('insert site names here')
   
   ###' *All Patients*
   for(i in 1:length(site_list)){
