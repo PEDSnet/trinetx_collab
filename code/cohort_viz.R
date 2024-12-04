@@ -118,12 +118,25 @@ couplets_ss_viz <- function(process_output,
   if(facet_col == 'site_anon'){ycol = 'couplet_name'}else{ycol = 'site_anon'}
   
   if(facet_col == 'couplet_name'){
-    process_output <- process_output %>%
+    process_output1 <- process_output %>%
       mutate(tot_pats = ifelse(tot_pats < 11, '< 11', tot_pats)) %>% 
       mutate(site_anon = paste0(site_anon, ' (N= ', format(tot_pats, big.mark = ','),')'))
+    
+    process_output2_int <- process_output %>%
+      filter(cohort == 'cohort_1') %>%
+      mutate(cohort1_pats = value,
+             cohort1_pats = ifelse(cohort1_pats < 11, '< 11', cohort1_pats)) %>%
+      select(site_anon, cohort1_pats)
+    
+    process_output2 <- process_output %>%
+      left_join(process_output2_int) %>%
+      mutate(site_anon = paste0(site_anon, ' (N= ', format(cohort1_pats, big.mark = ','),')'))
+  }else{
+    process_output1 <- process_output
+    process_output2 <- process_output
   }
   
-  g1 <- process_output %>%
+  g1 <- process_output1 %>%
     filter(cohort %in% c('cohort_2_only', 
                          'combined', 'cohort_1_only')) %>%
     mutate(pct = paste0(round(prop, 2) * 100, '%')) %>%
@@ -142,7 +155,7 @@ couplets_ss_viz <- function(process_output,
          title = 'Couplet Distributions per Site')+
     facet_wrap((facet_col), ncol = 2)
   
-  g2 <- process_output %>%
+  g2 <- process_output2 %>%
     filter(cohort %in% c('cohort_1_only_prop', 'cohort_1_denom_prop')) %>%
     mutate(cohort = ifelse(cohort == 'cohort_1_only_prop', 'Cohort 1 Only', 'Cohort 2 in Cohort 1')) %>%
     mutate(pct = paste0(round(prop, 2) * 100, '%')) %>%
