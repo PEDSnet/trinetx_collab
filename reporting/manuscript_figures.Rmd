@@ -1,0 +1,390 @@
+---
+title: "Manuscript-Ready Figures"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_collapsed: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+
+source('../code/cohort_viz.R')
+source('../code/cohort_colors.R')
+source('../code/cohort_trinetx_anom.R')
+source('../code/cohorts.R')
+
+require(tidyr)
+require(knitr)
+require(VennDiagram)
+require(gt)
+require(ggiraph)
+require(plotly)
+require(dplyr)
+require(readr)
+require(figpatch)
+require(patchwork)
+require(ggplot2)
+require(lubridate)
+require(purrr)
+require(stringr)
+
+get_results <- function(tbl_name) {
+  if (data_source == 'local') {
+    rslt <- read_csv(paste0('../results/', tbl_name, '.csv'))
+  }
+  else {
+    rslt <- results_tbl(tbl_name) %>% collect()
+  }
+rslt
+}
+
+prettify_kable <- function(data) {
+  rslt <- data %>% kable(digits = 4, format.args = list(big.mark = ','))
+  if (knitr::is_html_output()) rslt <- rslt %>%
+    kable_styling(bootstrap_options = c("striped", "hover")) %>%
+    column_spec(1, bold = T, border_right = T)
+  rslt
+}
+
+site_map <- read_csv('../results/site_mapping.csv')
+
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+
+```
+
+Things we still need to do:
+
+- create a graphical abstract (required as part of submission)
+  - also make sure abstract is <= 250 words
+- add the statement of significance (to end of introduction)
+
+## Coverage Overlap (Figure 1)
+
+### A
+```{r}
+
+coverage_overlap_ss_viz(process_output = 
+                            read_csv(file = '../results/COMBINED_cvg_overlap_newanon.csv'),
+                          site_list = 'site G',
+                          output_directory = paste0('../results/'))
+
+fig('../results/venn_diagram_site G.tiff', aspect.ratio = 'default')
+```
+
+### B
+```{r}
+
+fig1b <- coverage_overlap_ms_viz(process_output = 
+                          read_csv(file = '../results/COMBINED_cvg_overlap_newanon.csv'),
+                          interactive_plot = FALSE)
+
+fig1b <- fig1b + 
+  labs(title = NULL, subtitle = NULL) #+
+  #theme(legend.position = 'none')
+
+fig1b
+
+ggsave(filename = '../results/figure1b.tiff',
+       fig1b,
+       height = 7,
+       dpi = 300)
+
+```
+
+### C
+```{r}
+
+cvg_anom <- trinetx_anom_detect(dat = 
+                                  read_csv(file = '../results/COMBINED_cvg_overlap_newanon.csv') %>%
+                                  filter(site_anon != 'all') %>%
+                                  mutate(prop_pts = prop_pts * 100),
+                                var_col = 'prop_pts',
+                                grp_vars = c('fact_long'))
+
+fig1c <- trinetx_anom_viz(dat = cvg_anom,
+                          var_col = 'prop_pts',
+                          grp_col = 'fact_long',
+                          interactive_plot = FALSE)
+
+fig1c <- fig1c[[1]] +
+  labs(title = NULL,
+       subtitle = NULL,
+       y = 'Fact Group',
+       x = NULL) +
+  theme(axis.text.x = element_text(hjust = 1, vjust = 0.5))
+
+fig1c
+
+ggsave(filename = '../results/figure1c.tiff',
+       fig1c,
+       height = 6,
+       width = 9,
+       dpi = 300)
+
+```
+
+### Combined
+```{r}
+
+img_a <- fig('../results/venn_diagram_site G.tiff')
+img_b <- fig('../results/figure1b.tiff')
+img_c <- fig('../results/figure1c.tiff')
+
+fig1_all <- wrap_plots(list(img_a, img_b, img_c)) +
+  plot_annotation(tag_levels = 'A') 
+
+fig1_all
+
+ggsave('../results/figure1.tiff',
+       fig1_all,
+       height = 3,
+       dpi = 300)
+
+```
+
+## Case-Mix (Figure 2)
+
+### A
+```{r}
+
+fig2a <- case_mix_ss_viz(process_output = 
+                           read_csv(file = '../results/COMBINED_case_mix_newanon.csv') %>% 
+                           filter(cohort == 'full'),
+                         site_filter = c('site T', 'site X'),
+                         interactive_plot = FALSE)
+
+fig2a <- fig2a + 
+  labs(title = NULL,
+       subtitle = NULL,
+       x = NULL)
+
+fig2a
+
+ggsave(filename = '../results/figure2a.tiff',
+       fig2a,
+       dpi = 300)
+
+```
+
+### B
+```{r}
+
+fig2b <- case_mix_ms_viz(process_output = 
+                          read_csv(file = '../results/COMBINED_case_mix_newanon.csv'),
+                        cohort_nm = 'full',
+                        interactive_plot = FALSE)
+
+fig2b <- fig2b +
+  labs(title = NULL,
+       subtitle = NULL,
+       x = NULL,
+       color = 'Site') #+
+  #theme(legend.position = 'none')
+
+fig2b
+
+ggsave(filename = '../results/figure2b.tiff',
+       fig2b,
+       dpi = 300)
+
+```
+
+### C
+```{r}
+
+fig2c <- case_mix_ms_viz(process_output = 
+                          read_csv(file = '../results/COMBINED_case_mix_newanon.csv'),
+                        cohort_nm = 'scd',
+                        interactive_plot = FALSE)
+
+fig2c <- fig2c +
+  labs(title = NULL,
+       subtitle = NULL,
+       x = NULL,
+       color = 'Site') #+
+  #theme(legend.position = 'none')
+
+fig2c
+
+ggsave(filename = '../results/figure2c.tiff',
+       fig2c,
+       dpi = 300)
+
+```
+
+### Combined
+```{r}
+
+img_a <- fig('../results/figure2a.tiff')
+img_b <- fig('../results/figure2b.tiff')
+img_c <- fig('../results/figure2c.tiff')
+
+fig2_all <- wrap_plots(list(img_a, img_b, img_c)) +
+  plot_annotation(tag_levels = 'A') 
+
+fig2_all
+
+ggsave('../results/figure2.tiff',
+       fig2_all,
+       height = 3,
+       dpi = 300)
+
+```
+
+## Couplets (Figure 3)
+
+## A
+```{r}
+
+fig3a <- couplets_ss_viz(read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
+                  filter(site_anon != 'ALL', couplet_name == 'T1DM + insulin'),
+                facet_col = 'couplet_name')
+
+fig3a <- fig3a[[1]] + scale_y_discrete(limits=rev) + labs(title = NULL, y = NULL)
+
+fig3a
+
+ggsave(filename = '../results/figure3a.tiff',
+       fig3a,
+       dpi = 300)
+
+```
+
+## B
+```{r}
+
+fig3b <- couplets_ms_viz(read_csv(file = '../results/COMBINED_couplets_newanon.csv') %>%
+                          filter(cohort=='cohort_1_denom_prop') %>% 
+                          mutate(prop = round(prop, 2)) %>%
+                          filter(! str_detect(site_anon,'all|ALL')), 'prop') 
+
+fig3b <- fig3b + labs(title = NULL, x = NULL, y = NULL, fill = 'Proportion') + scale_y_discrete(limits=rev)
+
+fig3b
+
+ggsave(filename = '../results/figure3b.tiff',
+       fig3b,
+       dpi = 300)
+
+```
+
+### Combined
+```{r}
+
+img_a <- fig('../results/figure3a.tiff')
+img_b <- fig('../results/figure3b.tiff')
+
+fig3_all <- wrap_plots(list(img_a, img_b)) +
+  plot_annotation(tag_levels = 'A') 
+
+fig3_all
+
+ggsave('../results/figure3.tiff',
+       fig3_all,
+       height = 3,
+       dpi = 300)
+
+```
+
+## Stability Over Time (Figure 4)
+```{r}
+
+domain_list <- 'outpatient_procedure'
+site_list <- 'site P'
+
+final <- list()
+
+for(i in site_list){
+  
+  temp <- list()
+  
+  for(k in domain_list){
+    
+    dm_otpt <- fot_raw_norm_viz(process_output = read_csv('../results/COMBINED_fot_newanon.csv') %>%
+                                  filter(check_desc != 'all_visits',
+                                         check_desc != 'asthma_inpatient'),
+                                site_filter = i,
+                                domain_filter = k)
+    
+    temp[[k]] <- dm_otpt
+  }
+  
+  final[[i]] <- temp
+  
+}
+
+```
+
+### A
+
+```{r}
+
+test <- final[[1]][[1]]
+
+test
+
+htmltools::save_html(test, '../results/figure4a.html')
+
+```
+
+### B
+```{r}
+
+fot_combo_rates <- read_csv('../results/COMBINED_fot_rates_newanon.csv')
+
+rate_euclidean <- ms_anom_euclidean(fot_input_tbl = fot_combo_rates %>% 
+                                      mutate(time_start = month_end,
+                                             time_increment = 'month'),
+                                            grp_vars = c('site_anon', 'check_desc'),
+                                            var_col = 'incidence_rate')
+
+rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
+                                output_var = 'incidence_rate',
+                                filter_variable = 'inpatient_visits',
+                                title = '',
+                                interactive_plot = FALSE)
+
+fig4b <- rate_output[[1]] +
+  labs(color = 'Site') +
+  guides(color = guide_legend(reverse = TRUE))
+
+fig4b
+
+ggsave('../results/figure4b.tiff',
+       fig4b,
+       dpi = 300)
+```
+
+### C
+
+```{r}
+
+fig4c <- rate_output[[3]] 
+
+fig4c
+
+ggsave('../results/figure4c.tiff',
+       fig4c,
+       dpi = 300)
+```
+
+### Combined
+```{r}
+
+img_a <- fig('../results/figure4a.tiff', aspect.ratio = 'free')
+img_b <- fig('../results/figure4b.tiff')
+img_c <- fig('../results/figure4c.tiff')
+
+fig4_all <- wrap_plots(list(img_a, img_b, img_c)) +
+  plot_annotation(tag_levels = 'A') 
+
+fig4_all
+
+ggsave('../results/figure4.tiff',
+       fig4_all,
+       height = 3,
+       dpi = 300)
+
+```
