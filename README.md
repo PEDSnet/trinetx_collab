@@ -39,6 +39,7 @@ The execution of the check plus some additional post processing can be found in 
 - [fot_execute.R](https://github.com/PEDSnet/trinetx_collab/blob/main/code/fot_execute.R)
 - [driver_fot.R](https://github.com/PEDSnet/trinetx_collab/blob/main/code/driver_fot.R)
 - [stability_over_time.Rmd](https://github.com/PEDSnet/trinetx_collab/blob/main/reporting/stability_over_time.Rmd)
+- [TriNetX implementation](https://github.com/PEDSnet/trinetx_collab/blob/main/code/stability_over_time_queries.sql)
 - [Visualization functions](https://github.com/PEDSnet/trinetx_collab/blob/main/code/cohort_viz.R#L321-L478)
 
 The Stability Over Time check evaluates the number of patients with a given fact for each month across a time span. Our selected fact types can be found in the `fot_execute.R` file, and by following the same list structure, users can customize the inputs and include different facts. The time span can also be adjusted as needed. 
@@ -52,6 +53,7 @@ The execution of the check plus some additional post processing can be found in 
 - [coverage_overlap_execute.R](https://github.com/PEDSnet/trinetx_collab/blob/main/code/coverage_overlap_execute.R)
 - [driver_coverage_overlap.R](https://github.com/PEDSnet/trinetx_collab/blob/main/code/driver_coverage_overlap.R)
 - [coverage_overlap.Rmd](https://github.com/PEDSnet/trinetx_collab/blob/main/reporting/coverage_overlap.Rmd)
+- [TriNetX implementation](https://github.com/PEDSnet/trinetx_collab/blob/main/code/coverage_overlap_query.sql)
 - [Visualization functions](https://github.com/PEDSnet/trinetx_collab/blob/main/code/cohort_viz.R#L481-L576)
 
 The Coverage Overlap check evaluates the distribution and overlap of patient representation in each user-provided domain. Each patient is only counted one time in the appropriate intersection of fact types. Our execution (found in `coverage_overlap_execute.R`) looked at four domains (diagnoses, medications, procedures, and labs), and by following the same list structure, users can customize the inputs and include different domains.
