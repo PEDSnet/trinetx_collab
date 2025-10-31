@@ -5,6 +5,8 @@
 #' @param var_col the target numerical column used as input to `trinetx_anom_detect`
 #' @param grp_col the grouping column used as input to `trinetx_anom_detect` that should
 #'                be used as the y axis value
+#' @param interactive_plot boolean indicating whether the plot returned by the function
+#'                         should have interactive functionality enabled
 #'
 #' @return a dot plot with the grp_col along the y axis and the site along the x axis.
 #' 
@@ -21,7 +23,8 @@
 #' 
 trinetx_anom_viz <- function(dat,
                              var_col,
-                             grp_col){
+                             grp_col,
+                             interactive_plot = TRUE){
   
   dat_to_plot <- dat %>%
     mutate(text=paste("Variable: ",!!sym(grp_col),
@@ -52,7 +55,11 @@ trinetx_anom_viz <- function(dat,
            shape = guide_legend(title = 'Anomaly'),
            size = 'none') 
   
-  gplot <- girafe(ggobj = plt)
+  if(interactive_plot){
+    gplot <- girafe(ggobj = plt)
+  }else{
+    gplot <- plt
+  }
   
   tbl <- dat %>%
     ungroup() %>%
@@ -97,7 +104,7 @@ couplets_ms_viz <- function(process_output,
     labs(title = paste0('Proportion per Couplet'),
          y = 'Site',
          x = 'Couplet') + 
-    theme(axis.text.x=element_text(angle=45,hjust=1))
+    theme(axis.text.x=element_text(angle=50,hjust=1))
   
 }
 
@@ -183,13 +190,16 @@ couplets_ss_viz <- function(process_output,
 #'
 #' @param process_output the cleaned, combined output of the case mix check
 #' @param cohort the cohort of interest for the graph
+#' @param interactive_plot boolean indicating whether the plot returned by the function
+#'                         should have interactive functionality enabled
 #'
 #' @return a dot plot where each dot represents a site's proportion
 #' of patients belonging to a specific ICD10CM header. a dotted line passing through
 #' each category represents the overall median
 #' 
 case_mix_ms_viz <- function(process_output,
-                            cohort_nm = 'Full'){
+                            cohort_nm = 'Full',
+                            interactive_plot = TRUE){
   
   allsite_median <- process_output %>%
     filter(cohort == cohort_nm) %>%
@@ -200,35 +210,7 @@ case_mix_ms_viz <- function(process_output,
     mutate(site_anon = 'all site median') %>%
     rename(prop_pts = allsite_median)
   
-  # grph <- process_output %>%
-  #   ggplot(aes(x = branch, y = prop_pts, color = site_anon,
-  #              group = site_anon)) +
-  #   geom_line() +
-  #   geom_point() +
-  #   geom_line(data = allsite_median, linewidth = 1.1, linetype = 'dotted', color = 'black', alpha = 0.5) +
-  #   scale_color_ssdqa() +
-  #   theme_minimal() +
-  #   theme(axis.text.x = element_text(angle = 90)) +
-  #   labs(x = 'ICD10CM Branch',
-  #        y = 'Proportion',
-  #        title = paste0('Patients per Branch in ', cohort, ' Cohort'),
-  #        subtitle = 'Dotted line is All Site Median')
-  # 
-  # grph2 <- process_output %>%
-  #   ggplot(aes(x = branch, y = prop_pts)) +
-  #   #geom_line() +
-  #   geom_point(aes(color = site_anon,
-  #              group = site_anon)) +
-  #   geom_point(data = allsite_median, shape = 8, size = 3, color = 'black') +
-  #   scale_color_ssdqa() +
-  #   theme_minimal() +
-  #   theme(axis.text.x = element_text(angle = 90)) +
-  #   labs(x = 'ICD10CM Branch',
-  #        y = 'Proportion',
-  #        title = paste0('Patients per Branch in ', cohort, ' Cohort'),
-  #        subtitle = 'Star is All Site Median')
-  
-  grph3 <- process_output %>%
+  grph <- process_output %>%
     filter(cohort == cohort_nm) %>%
     ggplot(aes(x = branch, y = prop_pts, color = site_anon, group = site_anon)) +
     #geom_line() +
@@ -242,11 +224,12 @@ case_mix_ms_viz <- function(process_output,
          title = paste0('Patients per Branch in ', cohort_nm, ' Cohort'),
          subtitle = 'Dotted Line is All Site Median')
   
-  output <- list(#ggplotly(grph),
-                 #ggplotly(grph2),
-                 ggplotly(grph3))
+  if(interactive_plot){
+    ggplotly(grph)
+  }else{
+    grph
+  }
     
-  
 }
 
 
@@ -255,6 +238,8 @@ case_mix_ms_viz <- function(process_output,
 #' @param process_output the cleaned, combined output from the case mix
 #'                       check
 #' @param site_filter the single site that is the target of the analysis
+#' @param interactive_plot boolean indicating whether the plot returned by the function
+#'                         should have interactive functionality enabled
 #'
 #' @return a bar graph with the ICD10CM branch along the x axis and patient 
 #'         proportion along the y axis. Two dots are placed on each bar representing
@@ -262,7 +247,8 @@ case_mix_ms_viz <- function(process_output,
 #'         for each ICD branch
 #' 
 case_mix_ss_viz <- function(process_output,
-                            site_filter){
+                            site_filter,
+                            interactive_plot = TRUE){
   
   dat_to_plot <- process_output %>%
     group_by(cohort, branch) %>%
@@ -295,7 +281,11 @@ case_mix_ss_viz <- function(process_output,
          title = paste0('Proportion of Patients per Branch'),
          subtitle = 'Dots represent all-site mean (pink) and median (brown)')
   
-  girafe(ggobj = r)
+  if(interactive_plot){
+      girafe(ggobj = r)
+  }else{
+      r
+    }
   
 }
 
@@ -374,6 +364,8 @@ fot_raw_norm_viz <- function(process_output,
 #' @param output_var the target numerical column for the analysis
 #' @param filter_variable the target domain for the analysis
 #' @param title user provided title for the graph
+#' @param interactive_plot boolean indicating whether the plot returned by the function
+#'                         should have interactive functionality enabled
 #' 
 #' @return returns 3 graphs:
 #'            
@@ -387,7 +379,8 @@ fot_raw_norm_viz <- function(process_output,
 fot_euclidean_viz <- function(process_output,
                               output_var,
                               filter_variable,
-                              title) {
+                              title,
+                              interactive_plot = TRUE) {
   
   if (! is.null(filter_variable)) {
     filt_op <- process_output %>% filter(check_desc == filter_variable) %>%
@@ -479,8 +472,13 @@ fot_euclidean_viz <- function(process_output,
          x = '',
          title = title)
   
-  plotly_p <- ggplotly(p,tooltip="text")
-  plotly_q <- ggplotly(q,tooltip="text")
+  if(interactive_plot){
+    plotly_p <- ggplotly(p,tooltip="text")
+    plotly_q <- ggplotly(q,tooltip="text")
+  }else{
+    plotly_p <- p
+    plotly_q <- q
+  }
   
   output <- list(plotly_p,
                  plotly_q,
@@ -495,12 +493,15 @@ fot_euclidean_viz <- function(process_output,
 #'
 #' @param process_output the cleaned, combined output from the coverage
 #'                       overlap check
+#' @param interactive_plot boolean indicating whether the plot returned by the function
+#'                         should have interactive functionality enabled
 #'
 #' @return a dot plot with fact group along the y axis and patient proportion
 #'         along the x axis. each dot represents a site, and the star icon
 #'         in each row represents the all site median
 #' 
-coverage_overlap_ms_viz <- function(process_output){
+coverage_overlap_ms_viz <- function(process_output,
+                                    interactive_plot = TRUE){
   
   data_format <- process_output %>%
     mutate(text = paste0('Site: ', site_anon,
@@ -522,7 +523,11 @@ coverage_overlap_ms_viz <- function(process_output){
          title = paste0('Proportion of Patients with Each Fact'),
          subtitle = 'Star represents All-Site Median')
   
-  girafe(ggobj = r)
+  if(interactive_plot){
+      girafe(ggobj = r)
+  }else{
+      r
+    }
   
 }
 
@@ -568,7 +573,7 @@ coverage_overlap_ss_viz <- function(process_output,
       distinct(fg_venn, venn_display) %>%
       pivot_wider(names_from = fg_venn, values_from = venn_display)
     
-    png(filename = paste0(output_directory, 'venn_diagram_', site_list[[i]], '.png'),
+    tiff(filename = paste0(output_directory, 'venn_diagram_', site_list[[i]], '.tiff'),
         height = 1000,
         width = 1000)
     draw.quad.venn(direct.area = TRUE,

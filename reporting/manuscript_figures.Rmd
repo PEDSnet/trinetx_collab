@@ -89,7 +89,7 @@ fig1b
 ggsave(filename = '../results/figure1b.tiff',
        fig1b,
        height = 7,
-       dpi = 300)
+       dpi = 500)
 
 ```
 
@@ -121,14 +121,14 @@ ggsave(filename = '../results/figure1c.tiff',
        fig1c,
        height = 6,
        width = 9,
-       dpi = 300)
+       dpi = 500)
 
 ```
 
 ### Combined
 ```{r}
 
-img_a <- fig('../results/venn_diagram_site G.tiff')
+img_a <- fig('../results/venn_diagram_site G.tiff') # renamed to figure1a later
 img_b <- fig('../results/figure1b.tiff')
 img_c <- fig('../results/figure1c.tiff')
 
@@ -140,7 +140,7 @@ fig1_all
 ggsave('../results/figure1.tiff',
        fig1_all,
        height = 3,
-       dpi = 300)
+       dpi = 500)
 
 ```
 
@@ -164,7 +164,7 @@ fig2a
 
 ggsave(filename = '../results/figure2a.tiff',
        fig2a,
-       dpi = 300)
+       dpi = 500)
 
 ```
 
@@ -187,7 +187,7 @@ fig2b
 
 ggsave(filename = '../results/figure2b.tiff',
        fig2b,
-       dpi = 300)
+       dpi = 500)
 
 ```
 
@@ -210,7 +210,7 @@ fig2c
 
 ggsave(filename = '../results/figure2c.tiff',
        fig2c,
-       dpi = 300)
+       dpi = 500)
 
 ```
 
@@ -229,7 +229,7 @@ fig2_all
 ggsave('../results/figure2.tiff',
        fig2_all,
        height = 3,
-       dpi = 300)
+       dpi = 500)
 
 ```
 
@@ -248,7 +248,7 @@ fig3a
 
 ggsave(filename = '../results/figure3a.tiff',
        fig3a,
-       dpi = 300)
+       dpi = 500)
 
 ```
 
@@ -266,7 +266,7 @@ fig3b
 
 ggsave(filename = '../results/figure3b.tiff',
        fig3b,
-       dpi = 300)
+       dpi = 500)
 
 ```
 
@@ -284,7 +284,7 @@ fig3_all
 ggsave('../results/figure3.tiff',
        fig3_all,
        height = 3,
-       dpi = 300)
+       dpi = 500)
 
 ```
 
@@ -354,7 +354,7 @@ fig4b
 
 ggsave('../results/figure4b.tiff',
        fig4b,
-       dpi = 300)
+       dpi = 500)
 ```
 
 ### C
@@ -367,7 +367,7 @@ fig4c
 
 ggsave('../results/figure4c.tiff',
        fig4c,
-       dpi = 300)
+       dpi = 500)
 ```
 
 ### Combined
@@ -385,6 +385,6 @@ fig4_all
 ggsave('../results/figure4.tiff',
        fig4_all,
        height = 3,
-       dpi = 300)
+       dpi = 500)
 
 ```
