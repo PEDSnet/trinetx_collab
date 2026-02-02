@@ -54,12 +54,6 @@ opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
 ```
 
-Things we still need to do:
-
-- create a graphical abstract (required as part of submission)
-  - also make sure abstract is <= 250 words
-- add the statement of significance (to end of introduction)
-
 ## Coverage Overlap (Figure 1)
 
 ### A
