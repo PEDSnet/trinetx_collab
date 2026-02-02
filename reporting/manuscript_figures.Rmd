@@ -347,7 +347,8 @@ rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
                                 interactive_plot = FALSE)
 
 fig4b <- rate_output[[1]] +
-  labs(color = 'Site') +
+  labs(color = 'Site',
+       y = 'Rate per 10,000 Patients') +
   guides(color = guide_legend(reverse = TRUE))
 
 fig4b

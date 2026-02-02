@@ -14,6 +14,7 @@ The first step in executing any of the checks is setting up the environment. In 
 - [cohort_case_mix.R](https://github.com/PEDSnet/trinetx_collab/blob/main/code/cohort_case_mix.R)
 - [driver_case_mix.R](https://github.com/PEDSnet/trinetx_collab/blob/main/code/driver_case_mix.R)
 - [case_mix_signatures.Rmd](https://github.com/PEDSnet/trinetx_collab/blob/main/reporting/case_mix_signatures.Rmd)
+- [TriNetX implementation](https://github.com/PEDSnet/trinetx_collab/blob/main/code/signatures_queries.sql)
 - [Visualization functions](https://github.com/PEDSnet/trinetx_collab/blob/main/code/cohort_viz.R#L169-L319)
 
 The Case-Mix or Signatures check evaluates the distribution of ICD10CM headers for diagnoses within a group of patients. A specific cohort can be provided to target the analysis, but if no cohort is provided, the check will evaluate all available patients in the `condition_occurrence` table. 
@@ -26,6 +27,7 @@ The execution of the check plus some additional post processing can be found in 
 - [dcon_execute.R](https://github.com/PEDSnet/trinetx_collab/blob/main/code/dcon_execute.R)
 - [driver_couplets.R](https://github.com/PEDSnet/trinetx_collab/blob/main/code/driver_couplets.R)
 - [couplets.Rmd](https://github.com/PEDSnet/trinetx_collab/blob/main/reporting/couplets.Rmd)
+- [TriNetX implementation](https://github.com/PEDSnet/trinetx_collab/blob/main/code/couplets_queries.sql)
 - [Visualization functions](https://github.com/PEDSnet/trinetx_collab/blob/main/code/cohort_viz.R#L75-L166)
 
 The Couplets check evaluates the concordance between two user-defined cohorts. Our selected cohorts can be found in the `dcon_execute.R` file, and by following the same list structure, users can customize the inputs and include different cohort pairs. The check and subsequent post-processing will compute counts & proportions for 5 cohort member types: patients that only belong to cohort 1, patients that only belong to cohort 2, patients belonging to both cohorts, patients belonging to cohort 1 that also belong to cohort 2 (cohort 2 used as the denominator rather than the total number of patients), and patients belonging to cohort 2 that also belong to cohort 1 (cohort 1 used as the denominator rather than the total number of patients).

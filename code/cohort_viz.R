@@ -143,9 +143,23 @@ couplets_ss_viz <- function(process_output,
     process_output2 <- process_output
   }
   
+  # process_output1 <- process_output1 %>%
+  #   filter(cohort %in% c('cohort_2_only', 
+  #                        'combined', 'cohort_1_only')) %>%
+  #   select(-c(tot_pats, value)) %>%
+  #   pivot_wider(names_from = 'cohort',
+  #               values_from = 'prop') %>%
+  #   mutate(combined = case_when(round(cohort_2_only + cohort_1_only + combined, 2) < 1 ~ combined + 0.01,
+  #                               round(cohort_2_only + cohort_1_only + combined, 2) > 1 ~ combined - 0.01,
+  #                               TRUE ~ combined)) %>%
+  #   pivot_longer(cols = c('cohort_2_only', 'combined', 'cohort_1_only'),
+  #                names_to = 'cohort',
+  #                values_to = 'prop')
+  
   g1 <- process_output1 %>%
-    filter(cohort %in% c('cohort_2_only', 
+    filter(cohort %in% c('cohort_2_only',
                          'combined', 'cohort_1_only')) %>%
+    mutate(prop = value / tot_pats) %>%
     mutate(pct = paste0(round(prop, 2) * 100, '%')) %>%
     ggplot(aes(y=!!sym(ycol),x=prop,fill=factor(cohort, levels = c('cohort_2_only', 
                                                                  'combined', 'cohort_1_only'))),
