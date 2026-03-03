@@ -136,6 +136,11 @@ ggsave('../results/figure1.tiff',
        height = 3,
        dpi = 500)
 
+ggsave('../results/figure1.png',
+       fig1_all,
+       height = 3,
+       dpi = 500)
+
 ```
 
 ## Case-Mix (Figure 2)
@@ -225,6 +230,11 @@ ggsave('../results/figure2.tiff',
        height = 3,
        dpi = 500)
 
+ggsave('../results/figure2.png',
+       fig2_all,
+       height = 3,
+       dpi = 500)
+
 ```
 
 ## Couplets (Figure 3)
@@ -276,6 +286,11 @@ fig3_all <- wrap_plots(list(img_a, img_b)) +
 fig3_all
 
 ggsave('../results/figure3.tiff',
+       fig3_all,
+       height = 3,
+       dpi = 500)
+
+ggsave('../results/figure3.png',
        fig3_all,
        height = 3,
        dpi = 500)
@@ -342,8 +357,8 @@ rate_output <- fot_euclidean_viz(process_output = rate_euclidean,
 
 fig4b <- rate_output[[1]] +
   labs(color = 'Site',
-       y = 'Rate per 10,000 Patients') +
-  guides(color = guide_legend(reverse = TRUE))
+       y = 'Rate per 10,000 Patients') #+
+  #guides(group = guide_legend(reverse = TRUE))
 
 fig4b
 
@@ -378,6 +393,11 @@ fig4_all <- wrap_plots(list(img_a, img_b, img_c)) +
 fig4_all
 
 ggsave('../results/figure4.tiff',
+       fig4_all,
+       height = 3,
+       dpi = 500)
+
+ggsave('../results/figure4.png',
        fig4_all,
        height = 3,
        dpi = 500)

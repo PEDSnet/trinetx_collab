@@ -435,7 +435,7 @@ fot_euclidean_viz <- function(process_output,
                            "\n","Site Smoothed Proportion: ",site_loess,
                            "\n","Euclidean Distance from All-Site Mean: ",dist_eucl_mean)) 
   
-  lvls <- stringr::str_sort(unique(dat_to_plot$site_anon), numeric = TRUE, decreasing = TRUE)
+  lvls <- stringr::str_sort(unique(dat_to_plot$site_anon), numeric = TRUE, decreasing = FALSE)
   dat_to_plot$site_anon <- factor(dat_to_plot$site_anon, levels = lvls)
   
   p <- dat_to_plot %>%
